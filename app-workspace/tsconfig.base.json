@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@hkworkspace/shared/app-authenticate": [
+        "libs/shared/app-authenticate/src/index.ts"
+      ],
+      "@app-workspace/shared/app-navigation": [
+        "libs/shared/app-navigation/src/index.ts"
+      ],
+      "@app-workspace/ui-common": ["libs/ui-common/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
