@@ -1,0 +1,187 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@nrwl/angular"
+  },
+  "version": 1,
+  "defaultProject": "hiking-ui",
+  "projects": {
+    "hiking-ui": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "apps/hiking-ui",
+      "sourceRoot": "apps/hiking-ui/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/hiking-ui",
+            "index": "apps/hiking-ui/src/index.html",
+            "main": "apps/hiking-ui/src/main.ts",
+            "polyfills": "apps/hiking-ui/src/polyfills.ts",
+            "tsConfig": "apps/hiking-ui/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/hiking-ui/src/favicon.ico",
+              "apps/hiking-ui/src/assets"
+            ],
+            "styles": [
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "globalStyles/generated/theme.base.css",
+              "globalStyles/generated/theme.additional.css",
+              "globalStyles/devextreme-overrides/dx-styles.scss",
+              "apps/hiking-ui/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/hiking-ui/src/environments/environment.ts",
+                  "with": "apps/hiking-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "hiking-ui:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "hiking-ui:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "hiking-ui:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/hiking-ui/src/test.ts",
+            "polyfills": "apps/hiking-ui/src/polyfills.ts",
+            "tsConfig": "apps/hiking-ui/tsconfig.spec.json",
+            "karmaConfig": "apps/hiking-ui/karma.conf.js",
+            "assets": [
+              "apps/hiking-ui/src/favicon.ico",
+              "apps/hiking-ui/src/assets"
+            ],
+            "styles": [
+              "apps/hiking-ui/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/hiking-ui/tsconfig.app.json",
+              "apps/hiking-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "hiking-ui:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "hiking-ui:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "hiking-ui-e2e": {
+      "root": "apps/hiking-ui-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/hiking-ui-e2e/protractor.conf.js",
+            "devServerTarget": "hiking-ui:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "hiking-ui:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/hiking-ui-e2e/tsconfig.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

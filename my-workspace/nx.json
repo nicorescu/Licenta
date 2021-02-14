@@ -1,0 +1,25 @@
+{
+  "npmScope": "hiking-ui",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "hiking-ui": {
+      "tags": []
+    },
+    "hiking-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "hiking-ui"
+      ]
+    }
+  }
+}
