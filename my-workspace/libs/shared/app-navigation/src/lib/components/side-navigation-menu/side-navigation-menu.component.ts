@@ -3,11 +3,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
 import { navItem } from '../../options/nav-item';
 
@@ -16,56 +17,52 @@ import { navItem } from '../../options/nav-item';
   templateUrl: './side-navigation-menu.component.html',
   styleUrls: ['./side-navigation-menu.component.scss'],
 })
-export class SideNavigationMenuComponent implements OnInit, AfterViewInit {
+export class SideNavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(DxTreeViewComponent, { static: true })
   menu: DxTreeViewComponent;
 
-  @Output()
-  selectedItemChanged = new EventEmitter<string>();
+  alive = true;
+  selectedItem: string;
 
   @Output()
-  openMenu = new EventEmitter<any>();
+  itemClicked = new EventEmitter();
+
+  @Input()
+  isMenuOpen: boolean;
 
   @Input() menuItems: navItem[];
-
+  
   @Input()
-  selectedItem: String = '';
-
-  @Input()
-  isCompactMode = true;
-
-  @Input()
-  get compactMode() {
-    return this.isCompactMode;
-  }
-  set compactMode(val) {
-    this.isCompactMode = val;
-
-    if (!this.menu?.instance) {
-      return;
-    }
-
-    if (val) {
+  set isMenuClosing (val : boolean) {
+    if(this.menu.instance && val){
       this.menu.instance.collapseAll();
-    } else {
+    } else if (this.menu.instance && !val){
       this.menu.instance.expandItem(this.selectedItem);
     }
   }
 
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   onItemClick(item: any) {
-    this.menu.instance.selectItem(item.itemData.path);
-    if (item.itemData.path) {
-      this.router.navigate([item.itemData.path]);
+    this.itemClicked.emit();
+    this.selectedItem = item.itemData.path;
+    if (this.isMenuOpen) {
+      this.menu.instance.selectItem(this.selectedItem);
+      if (this.selectedItem) {
+        this.router.navigate([this.selectedItem]);
+      }
     }
   }
 
   ngOnInit() {
+    this.selectedItem = location.pathname;
   }
+
+  ngOnDestroy(){
+    this.alive=false;
+  }
+
   ngAfterViewInit() {
-    this.menu.instance.selectItem(location.pathname);
+    this.menu.instance.selectItem(this.selectedItem);
   }
 }

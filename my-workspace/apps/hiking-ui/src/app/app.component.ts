@@ -1,5 +1,5 @@
-import { Component, HostBinding } from '@angular/core';
-import { AuthService, ScreenService, AppInfoService } from './shared/services';
+import { Component } from '@angular/core';
+import { AuthService, AppInfoService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,7 @@ export class AppComponent {
     private authService: AuthService,
     public appInfo: AppInfoService
   ) {}
+  title = "Hiking"
   menuItems = [
     {
       text: 'Home',
@@ -20,7 +21,6 @@ export class AppComponent {
     {
       text: 'Examples',
       icon: 'folder',
-      isExpanded: true,
       items: [
         {
           text: 'Profile',
