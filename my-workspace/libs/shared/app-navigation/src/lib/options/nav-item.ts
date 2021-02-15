@@ -3,5 +3,4 @@ export class navItem{
     icon?: string;
     path?: string;
     items?: navItem[];
-    isExpanded?: boolean;
 }

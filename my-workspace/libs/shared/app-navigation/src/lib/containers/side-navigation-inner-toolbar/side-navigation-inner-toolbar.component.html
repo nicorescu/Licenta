@@ -9,15 +9,14 @@
   [(opened)]="menuOpened">
 
   <hk-side-navigation-menu
-    [selectedItem]="selectedRoute"
     class="dx-swatch-additional"
     *dxTemplate="let dataMenu of 'panel'"
-    (selectedItemChanged)="navigationChanged($event)"
-    (openMenu)="navigationClick()"
-    [menuItems]="menuItems">
+    (itemClicked)="itemClicked()"
+    [menuItems]="menuItems"
+    [isMenuOpen]="menuOpened"
+    [isMenuClosing]="!menuOpened">
       <dx-toolbar id="navigation-header">
         <dxi-item
-          *ngIf="minMenuSize !== 0"
           location="before"
           cssClass="menu-button"
           widget="dxButton"

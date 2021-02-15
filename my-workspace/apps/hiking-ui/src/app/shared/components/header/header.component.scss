@@ -1,5 +1,4 @@
-@import "../../../../themes/generated/variables.base.scss";
-@import "../../../../dx-styles.scss";
+@import 'theme.scss';
 
 :host {
   flex: 0 0 auto;
@@ -26,8 +25,9 @@
 }
 
 ::ng-deep .header-title .dx-item-content {
-  padding: 0;
+  padding-left: 10;
   margin: 0;
+  max-width: 100px;
 }
 
 :host-context(.dx-theme-generic) {
