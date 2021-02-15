@@ -1,16 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
 import { navItem } from '../../options/nav-item';
 
 @Component({
   selector: 'hk-side-navigation-menu',
   templateUrl: './side-navigation-menu.component.html',
-  styleUrls: ['./side-navigation-menu.component.scss']
+  styleUrls: ['./side-navigation-menu.component.scss'],
 })
-export class SideNavigationMenuComponent implements OnInit {
+export class SideNavigationMenuComponent implements OnInit, AfterViewInit {
   @ViewChild(DxTreeViewComponent, { static: true })
-  menu: DxTreeViewComponent | undefined;
+  menu: DxTreeViewComponent;
 
   @Output()
   selectedItemChanged = new EventEmitter<string>();
@@ -20,13 +28,12 @@ export class SideNavigationMenuComponent implements OnInit {
 
   @Input() menuItems: navItem[];
 
-  
-
   @Input()
   selectedItem: String = '';
 
-  isCompactMode: Boolean = true;
-  
+  @Input()
+  isCompactMode = true;
+
   @Input()
   get compactMode() {
     return this.isCompactMode;
@@ -45,13 +52,20 @@ export class SideNavigationMenuComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) {}
 
-  onItemClick(item: navItem) {
+  onItemClick(item: any) {
+    this.menu.instance.selectItem(item.itemData.path);
+    if (item.itemData.path) {
+      this.router.navigate([item.itemData.path]);
+    }
   }
 
   ngOnInit() {
-    console.log(this.menuItems);
   }
-
+  ngAfterViewInit() {
+    this.menu.instance.selectItem(location.pathname);
+  }
 }

@@ -1,6 +1,7 @@
 export class navItem{
-    text?: string;
+    text: string;
     icon?: string;
     path?: string;
     items?: navItem[];
+    isExpanded?: boolean;
 }

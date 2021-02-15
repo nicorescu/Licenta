@@ -1,39 +1,42 @@
-@import '../../../../../../../globalStyles/theme.scss';
+@import 'theme.scss';
 
 :host {
-    width: 100%;
-  }
-  
-  .container {
-    height: 100%;
-    flex-direction: column;
-    display: flex;
-  }
-  
-  .layout-body {
-    flex: 1;
-    min-height: 0;
-  }
-  
-  .content {
-    flex-grow: 1;
-  }
-  
-  #navigation-header {
-    background-color: $base-accent;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  
-    ::ng-deep .menu-button .dx-icon {
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+.layout-body {
+  flex: 1;
+  min-height: 0;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+#navigation-header {
+  background-color: $base-accent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  ::ng-deep .dx-toolbar-before {
+    padding: 11px;
+
+    .menu-button .dx-icon {
       color: $base-text-color;
     }
-  
-    :host-context(.screen-x-small) & {
-      padding-left: 20px;
-    }
-      
-    :host-context(.dx-theme-generic) & {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
   }
-  
+
+  :host-context(.screen-x-small) & {
+    padding-left: 20px;
+  }
+
+  :host-context(.dx-theme-generic) & {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

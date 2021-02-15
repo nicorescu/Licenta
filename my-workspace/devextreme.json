@@ -6,7 +6,7 @@
         "command": "build-theme",
         "options": {
           "inputFile": "metadata.base.json",
-          "outputFile": "globalStyless/generated/theme.base.css"
+          "outputFile": "globalStyles/generated/theme.base.css"
         }
       },      {
         "command": "build-theme",

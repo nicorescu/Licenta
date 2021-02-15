@@ -59,12 +59,21 @@
             "styles": [
               "node_modules/devextreme/dist/css/dx.common.css",
               "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "globalStyles/generated/theme.base.css",
               "globalStyles/generated/theme.additional.css",
               "globalStyles/devextreme-overrides/dx-styles.scss",
               "apps/hiking-ui/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["apps/hiking-ui/src/themes"]
+            },
+            "allowedCommonJsDependencies": [
+              "devextreme",
+              "devextreme-angular",
+              "devextreme-aspnet-data-nojquery"
+            ]
           },
           "configurations": {
             "production": {
