@@ -34,8 +34,10 @@
       </dx-toolbar>
   </hk-side-navigation-menu>
 
-  <div class="container">
-    <div>dada</div>
+  <div class="content-container">
+    <div>
+      <ng-content select="hk-header"></ng-content>
+    </div>
 
     <dx-scroll-view class="layout-body with-footer">
       <div class="content">

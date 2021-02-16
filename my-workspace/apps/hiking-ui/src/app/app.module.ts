@@ -7,9 +7,9 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import {SharedAppNavigationFeatureModule} from '../../../../libs/shared/app-navigation/feature/src/lib/shared-app-navigation-feature.module';
-
+import {SharedAppNavigationFeatureModule} from '@hkworkspace/shared/app-navigation/feature';
 import { DxDataGridModule } from 'devextreme-angular';
+import {HikingUiUiCommonFeatureModule} from '@hkworkspace/hiking-ui/ui-common/feature';
 @NgModule({
   declarations: [
     AppComponent
@@ -27,7 +27,8 @@ import { DxDataGridModule } from 'devextreme-angular';
     UnauthenticatedContentModule,
     AppRoutingModule,
     SharedAppNavigationFeatureModule,
-    DxDataGridModule
+    DxDataGridModule,
+    HikingUiUiCommonFeatureModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]
