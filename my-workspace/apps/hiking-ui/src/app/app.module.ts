@@ -7,7 +7,8 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import {SharedAppNavigationModule} from '../../../../libs/shared/app-navigation/src/lib/shared-app-navigation.module';
+import {SharedAppNavigationFeatureModule} from '../../../../libs/shared/app-navigation/feature/src/lib/shared-app-navigation-feature.module';
+
 import { DxDataGridModule } from 'devextreme-angular';
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { DxDataGridModule } from 'devextreme-angular';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    SharedAppNavigationModule,
+    SharedAppNavigationFeatureModule,
     DxDataGridModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],

@@ -1,32 +1,52 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {},
-    "rootDir": "."
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@hkworkspace/shared/app-navigation/data-access": [
+        "libs/shared/app-navigation/data-access/src/index.ts"
+      ],
+      "@hkworkspace/shared/app-navigation/feature": [
+        "libs/shared/app-navigation/feature/src/index.ts"
+      ],
+      "@hkworkspace/shared/app-authentication/data-access": [
+        "libs/shared/app-authentication/data-access/src/index.ts"
+      ],
+      "@hkworkspacehiking-ui/home-planning-trending/feature": [
+        "libs/hiking-ui/home-planning-trending/feature/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/home-planning-trending/data-access": [
+        "libs/hiking-ui/home-planning-trending/data-access/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/hotels/data-access": [
+        "libs/hiking-ui/hotels/data-access/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/hotels/feature": [
+        "libs/hiking-ui/hotels/feature/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/ui-common/ui": [
+        "libs/hiking-ui/ui-common/ui/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/ui-common/data-access": [
+        "libs/hiking-ui/ui-common/data-access/src/index.ts"
+      ],
+      "@hkworkspace/hiking-ui/ui-common/feature": [
+        "libs/hiking-ui/ui-common/feature/src/index.ts"
+      ]
+    }
   },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "strictPropertyInitialization": false
-  }
+  "exclude": ["node_modules", "tmp"]
 }

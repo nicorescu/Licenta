@@ -17,9 +17,37 @@
     },
     "hiking-ui-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "hiking-ui"
-      ]
+      "implicitDependencies": ["hiking-ui"]
+    },
+    "shared-app-navigation-data-access": {
+      "tags": []
+    },
+    "shared-app-navigation-feature": {
+      "tags": []
+    },
+    "shared-app-authentication-data-access": {
+      "tags": []
+    },
+    "hiking-ui-home-planning-trending-feature": {
+      "tags": []
+    },
+    "hiking-ui-home-planning-trending-data-access": {
+      "tags": []
+    },
+    "hiking-ui-hotels-data-access": {
+      "tags": []
+    },
+    "hiking-ui-hotels-feature": {
+      "tags": []
+    },
+    "hiking-ui-ui-common-ui": {
+      "tags": []
+    },
+    "hiking-ui-ui-common-data-access": {
+      "tags": []
+    },
+    "hiking-ui-ui-common-feature": {
+      "tags": []
     }
   }
 }

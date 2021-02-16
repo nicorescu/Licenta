@@ -133,9 +133,7 @@
               "apps/hiking-ui/src/favicon.ico",
               "apps/hiking-ui/src/assets"
             ],
-            "styles": [
-              "apps/hiking-ui/src/styles.scss"
-            ],
+            "styles": ["apps/hiking-ui/src/styles.scss"],
             "scripts": []
           }
         },
@@ -146,9 +144,7 @@
               "apps/hiking-ui/tsconfig.app.json",
               "apps/hiking-ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -185,12 +181,275 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/hiking-ui-e2e/tsconfig.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
+    },
+    "shared-app-navigation-data-access": {
+      "projectType": "library",
+      "root": "libs/shared/app-navigation/data-access",
+      "sourceRoot": "libs/shared/app-navigation/data-access/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/app-navigation/data-access/src/**/*.ts",
+              "libs/shared/app-navigation/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/app-navigation/data-access/src/test.ts",
+            "tsConfig": "libs/shared/app-navigation/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/app-navigation/data-access/karma.conf.js"
+          }
+        }
+      }
+    },
+    "shared-app-navigation-feature": {
+      "projectType": "library",
+      "root": "libs/shared/app-navigation/feature",
+      "sourceRoot": "libs/shared/app-navigation/feature/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/app-navigation/feature/src/**/*.ts",
+              "libs/shared/app-navigation/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/app-navigation/feature/src/test.ts",
+            "tsConfig": "libs/shared/app-navigation/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/app-navigation/feature/karma.conf.js"
+          }
+        }
+      }
+    },
+    "shared-app-authentication-data-access": {
+      "projectType": "library",
+      "root": "libs/shared/app-authentication/data-access",
+      "sourceRoot": "libs/shared/app-authentication/data-access/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/app-authentication/data-access/src/**/*.ts",
+              "libs/shared/app-authentication/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/app-authentication/data-access/src/test.ts",
+            "tsConfig": "libs/shared/app-authentication/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/app-authentication/data-access/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-home-planning-trending-feature": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/home-planning-trending/feature",
+      "sourceRoot": "libs/hiking-ui/home-planning-trending/feature/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/home-planning-trending/feature/src/**/*.ts",
+              "libs/hiking-ui/home-planning-trending/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/home-planning-trending/feature/src/test.ts",
+            "tsConfig": "libs/hiking-ui/home-planning-trending/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/home-planning-trending/feature/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-home-planning-trending-data-access": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/home-planning-trending/data-access",
+      "sourceRoot": "libs/hiking-ui/home-planning-trending/data-access/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/home-planning-trending/data-access/src/**/*.ts",
+              "libs/hiking-ui/home-planning-trending/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/home-planning-trending/data-access/src/test.ts",
+            "tsConfig": "libs/hiking-ui/home-planning-trending/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/home-planning-trending/data-access/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-hotels-data-access": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/hotels/data-access",
+      "sourceRoot": "libs/hiking-ui/hotels/data-access/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/hotels/data-access/src/**/*.ts",
+              "libs/hiking-ui/hotels/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/hotels/data-access/src/test.ts",
+            "tsConfig": "libs/hiking-ui/hotels/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/hotels/data-access/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-hotels-feature": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/hotels/feature",
+      "sourceRoot": "libs/hiking-ui/hotels/feature/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/hotels/feature/src/**/*.ts",
+              "libs/hiking-ui/hotels/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/hotels/feature/src/test.ts",
+            "tsConfig": "libs/hiking-ui/hotels/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/hotels/feature/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-ui-common-ui": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/ui-common/ui",
+      "sourceRoot": "libs/hiking-ui/ui-common/ui/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/ui-common/ui/src/**/*.ts",
+              "libs/hiking-ui/ui-common/ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/ui-common/ui/src/test.ts",
+            "tsConfig": "libs/hiking-ui/ui-common/ui/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/ui-common/ui/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-ui-common-data-access": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/ui-common/data-access",
+      "sourceRoot": "libs/hiking-ui/ui-common/data-access/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/ui-common/data-access/src/**/*.ts",
+              "libs/hiking-ui/ui-common/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/ui-common/data-access/src/test.ts",
+            "tsConfig": "libs/hiking-ui/ui-common/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/ui-common/data-access/karma.conf.js"
+          }
+        }
+      }
+    },
+    "hiking-ui-ui-common-feature": {
+      "projectType": "library",
+      "root": "libs/hiking-ui/ui-common/feature",
+      "sourceRoot": "libs/hiking-ui/ui-common/feature/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hiking-ui/ui-common/feature/src/**/*.ts",
+              "libs/hiking-ui/ui-common/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/hiking-ui/ui-common/feature/src/test.ts",
+            "tsConfig": "libs/hiking-ui/ui-common/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/ui-common/feature/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
