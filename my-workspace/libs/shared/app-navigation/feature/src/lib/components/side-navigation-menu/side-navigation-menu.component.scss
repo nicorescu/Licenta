@@ -69,7 +69,7 @@
           }
 
           &.dx-state-selected > .dx-treeview-item * {
-            color: $base-accent;
+            color: $col_blue_selected;
           }
 
           &:not(.dx-state-focused)>.dx-treeview-item.dx-state-hover {

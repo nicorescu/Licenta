@@ -1,24 +1,19 @@
 <header>
-    <dx-toolbar class="header-toolbar">
-      <dxi-item
-        location="after"
-        locateInMenu="auto"
-        menuItemTemplate="menuItem">
-        <div *dxTemplate="let data of 'item'">
-          <dx-button
-            class="user-button authorization"
-            width="210px"
-            height="100%"
-            stylingMode="text">
-            <div *dxTemplate="let data of 'content'">
-              <app-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="context"></app-user-panel>
-            </div>
-          </dx-button>
+  <mat-toolbar class="header-toolbar">
+      <mat-toolbar-row class="toolbar-elements" *ngIf="authenticated">
+        <button mat-button class="btn-toggle-user-menu">
+          <div class="user-image"></div>
+          <div class="user-info">
+            Email
+          </div>
+        </button>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row class="toolbar-elements" *ngIf="!authenticated">
+        <div class="authentication-buttons">
+          <button class="btn btn-primary">Sign in</button>
+          <button class="btn btn-secondary">Sign up</button>
         </div>
-      </dxi-item>
-      <div *dxTemplate="let data of 'menuItem'">
-        <hk-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="list"></hk-user-panel>
-      </div>
-    </dx-toolbar>
-  </header>
-  
+      </mat-toolbar-row>
+  </mat-toolbar>
+</header>

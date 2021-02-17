@@ -6,13 +6,18 @@ import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule 
 import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangePasswordFormModule, LoginFormModule } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
+
 import { AppRoutingModule } from './app-routing.module';
-import {SharedAppNavigationFeatureModule} from '@hkworkspace/shared/app-navigation/feature';
 import { DxDataGridModule } from 'devextreme-angular';
+
+import {SharedAppNavigationFeatureModule} from '@hkworkspace/shared/app-navigation/feature';
 import {HikingUiUiCommonFeatureModule} from '@hkworkspace/hiking-ui/ui-common/feature';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import {HikingUiUiCommonFeatureModule} from '@hkworkspace/hiking-ui/ui-common/fe
     AppRoutingModule,
     SharedAppNavigationFeatureModule,
     DxDataGridModule,
-    HikingUiUiCommonFeatureModule
+    HikingUiUiCommonFeatureModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

@@ -6,27 +6,27 @@
         "command": "build-theme",
         "options": {
           "inputFile": "metadata.base.json",
-          "outputFile": "globalStyles/generated/theme.base.css"
+          "outputFile": "globalStyles/devextreme-overrides/generated/theme.base.css"
         }
       },      {
         "command": "build-theme",
         "options": {
           "inputFile": "metadata.additional.json",
-          "outputFile": "globalStyles/generated/theme.additional.css"
+          "outputFile": "globalStyles/devextreme-overrides/generated/theme.additional.css"
         }
       },
       {
         "command": "export-theme-vars",
         "options": {
           "inputFile": "metadata.base.json",
-          "outputFile": "globalStyles/generated/variables.base.scss"
+          "outputFile": "globalStyles/devextreme-overrides/generated/variables.base.scss"
         }
       },
       {
         "command": "export-theme-vars",
         "options": {
           "inputFile": "metadata.additional.json",
-          "outputFile": "globalStyles/generated/variables.additional.scss"
+          "outputFile": "globalStyles/devextreme-overrides/generated/variables.additional.scss"
         }
       }
     ]

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'hk-header',
@@ -8,33 +7,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output()
-  menuToggle = new EventEmitter<boolean>();
+  authenticated = true;
+  user: {email: 'Nicorescu@gmail.com'};
 
-  @Input()
-  menuToggleEnabled = false;
-
-  @Input()
-  title: string;
-
-  user = { email: 'Nicorescu@email.com' };
-
-  userMenuItems = [{
-    text: 'Profile',
-    icon: 'user',
-    onClick: () => {
-      this.router.navigate(['/profile']);
-    }
-  },
-  {
-    text: 'Logout',
-    icon: 'runner',
-    onClick: () => {
-      
-    }
-  }];
-
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }

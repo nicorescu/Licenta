@@ -5,16 +5,21 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   imports: [
     CommonModule,
     DxListModule,
     DxContextMenuModule,
     DxButtonModule,
-    DxToolbarModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
-  declarations: [HeaderComponent, UserPanelComponent],
+  declarations: [HeaderComponent, UserPanelComponent, ],
   exports: [HeaderComponent],
 })
 export class HikingUiUiCommonFeatureModule {}
