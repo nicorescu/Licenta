@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import { TripPlanningComponent } from 'libs/hiking-ui/trip-planning/feature/src/lib/container/trip-planning/trip-planning.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,8 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [ AuthGuardService ]
+    path: 'trip-planning',
+    component: TripPlanningComponent
   },
   {
     path: 'login-form',
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'trip-planning'
   }
 ];
 

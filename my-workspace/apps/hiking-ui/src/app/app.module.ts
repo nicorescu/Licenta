@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
@@ -7,14 +9,14 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 
+import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { AppRoutingModule } from './app-routing.module';
-import { DxDataGridModule } from 'devextreme-angular';
 
 import {SharedAppNavigationFeatureModule} from '@hkworkspace/shared/app-navigation/feature';
 import {HikingUiUiCommonFeatureModule} from '@hkworkspace/hiking-ui/ui-common/feature';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco/transloco-root.module';
+import {HikingUiTripPlanningFeatureModule} from '@hkworkspace/hiking-ui/trip-planning/feature'
+
+
 
 @NgModule({
   declarations: [
@@ -34,11 +36,11 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
     UnauthenticatedContentModule,
     AppRoutingModule,
     SharedAppNavigationFeatureModule,
-    DxDataGridModule,
     HikingUiUiCommonFeatureModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    HikingUiTripPlanningFeatureModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]
