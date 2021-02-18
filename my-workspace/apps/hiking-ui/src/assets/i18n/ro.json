@@ -1,0 +1,11 @@
+{
+    "navigation": {
+        "home": "Acasa",
+        "profile": "Profil"
+    },
+
+    "header":{
+        "signIn": "Autentifica-te",
+        "signUp": "Inregistreaza-te"
+    }
+}

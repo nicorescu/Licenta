@@ -11,6 +11,8 @@ import { DxTreeViewModule} from 'devextreme-angular/ui/tree-view';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { ScreenService } from './options/screen.service';
+import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { ScreenService } from './options/screen.service';
     DxToolbarModule,
     DxListModule,
     DxLoadIndicatorModule,
-    DxContextMenuModule
+    DxContextMenuModule,
+    TranslocoModule,
+    TranslocoLocaleModule.init()
   ],
   providers: [
     ScreenService

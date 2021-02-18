@@ -10,7 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "libs/hiking-ui/home-planning-trending/data-access/tsconfig.*?.json"
+          "libs/hiking-ui/trip-planning/data-access/tsconfig.*?.json"
         ]
       },
       "rules": {

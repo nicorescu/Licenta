@@ -262,52 +262,52 @@
         }
       }
     },
-    "hiking-ui-home-planning-trending-feature": {
+    "hiking-ui-trip-planning-feature": {
       "projectType": "library",
-      "root": "libs/hiking-ui/home-planning-trending/feature",
-      "sourceRoot": "libs/hiking-ui/home-planning-trending/feature/src",
+      "root": "libs/hiking-ui/trip-planning/feature",
+      "sourceRoot": "libs/hiking-ui/trip-planning/feature/src",
       "prefix": "hkworkspace",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/hiking-ui/home-planning-trending/feature/src/**/*.ts",
-              "libs/hiking-ui/home-planning-trending/feature/src/**/*.html"
+              "libs/hiking-ui/trip-planning/feature/src/**/*.ts",
+              "libs/hiking-ui/trip-planning/feature/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/hiking-ui/home-planning-trending/feature/src/test.ts",
-            "tsConfig": "libs/hiking-ui/home-planning-trending/feature/tsconfig.spec.json",
-            "karmaConfig": "libs/hiking-ui/home-planning-trending/feature/karma.conf.js"
+            "main": "libs/hiking-ui/trip-planning/feature/src/test.ts",
+            "tsConfig": "libs/hiking-ui/trip-planning/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/trip-planning/feature/karma.conf.js"
           }
         }
       }
     },
-    "hiking-ui-home-planning-trending-data-access": {
+    "hiking-ui-trip-planning-data-access": {
       "projectType": "library",
-      "root": "libs/hiking-ui/home-planning-trending/data-access",
-      "sourceRoot": "libs/hiking-ui/home-planning-trending/data-access/src",
+      "root": "libs/hiking-ui/trip-planning/data-access",
+      "sourceRoot": "libs/hiking-ui/trip-planning/data-access/src",
       "prefix": "hkworkspace",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/hiking-ui/home-planning-trending/data-access/src/**/*.ts",
-              "libs/hiking-ui/home-planning-trending/data-access/src/**/*.html"
+              "libs/hiking-ui/trip-planning/data-access/src/**/*.ts",
+              "libs/hiking-ui/trip-planning/data-access/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/hiking-ui/home-planning-trending/data-access/src/test.ts",
-            "tsConfig": "libs/hiking-ui/home-planning-trending/data-access/tsconfig.spec.json",
-            "karmaConfig": "libs/hiking-ui/home-planning-trending/data-access/karma.conf.js"
+            "main": "libs/hiking-ui/trip-planning/data-access/src/test.ts",
+            "tsConfig": "libs/hiking-ui/trip-planning/data-access/tsconfig.spec.json",
+            "karmaConfig": "libs/hiking-ui/trip-planning/data-access/karma.conf.js"
           }
         }
       }

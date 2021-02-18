@@ -1,0 +1,11 @@
+{
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile"
+  },
+
+  "header": {
+    "signIn": "Sign in",
+    "signUp": "Sign up"
+  }
+}

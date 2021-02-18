@@ -25,11 +25,11 @@
       "@hkworkspace/shared/app-authentication/data-access": [
         "libs/shared/app-authentication/data-access/src/index.ts"
       ],
-      "@hkworkspacehiking-ui/home-planning-trending/feature": [
-        "libs/hiking-ui/home-planning-trending/feature/src/index.ts"
+      "@hkworkspacehiking-ui/trip-planning/feature": [
+        "libs/hiking-ui/trip-planning/feature/src/index.ts"
       ],
-      "@hkworkspace/hiking-ui/home-planning-trending/data-access": [
-        "libs/hiking-ui/home-planning-trending/data-access/src/index.ts"
+      "@hkworkspace/hiking-ui/trip-planning/data-access": [
+        "libs/hiking-ui/trip-planning/data-access/src/index.ts"
       ],
       "@hkworkspace/hiking-ui/hotels/data-access": [
         "libs/hiking-ui/hotels/data-access/src/index.ts"

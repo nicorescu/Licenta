@@ -28,10 +28,10 @@
     "shared-app-authentication-data-access": {
       "tags": []
     },
-    "hiking-ui-home-planning-trending-feature": {
+    "hiking-ui-trip-planning-feature": {
       "tags": []
     },
-    "hiking-ui-home-planning-trending-data-access": {
+    "hiking-ui-trip-planning-data-access": {
       "tags": []
     },
     "hiking-ui-hotels-data-access": {

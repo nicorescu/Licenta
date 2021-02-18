@@ -12,7 +12,7 @@ module.exports = function (config) {
       ...baseConfig.coverageIstanbulReporter,
       dir: join(
         __dirname,
-        '../../../../coverage/libs/hiking-ui/home-planning-trending/data-access'
+        '../../../../coverage/libs/hiking-ui/trip-planning/feature'
       ),
     },
   });

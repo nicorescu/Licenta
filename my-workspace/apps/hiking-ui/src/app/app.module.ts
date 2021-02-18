@@ -13,6 +13,8 @@ import { DxDataGridModule } from 'devextreme-angular';
 import {SharedAppNavigationFeatureModule} from '@hkworkspace/shared/app-navigation/feature';
 import {HikingUiUiCommonFeatureModule} from '@hkworkspace/hiking-ui/ui-common/feature';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslocoRootModule } from './transloco/transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedAppNavigationFeatureModule,
     DxDataGridModule,
     HikingUiUiCommonFeatureModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    TranslocoRootModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

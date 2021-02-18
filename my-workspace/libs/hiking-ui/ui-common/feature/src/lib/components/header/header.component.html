@@ -1,4 +1,4 @@
-<header>
+<ng-container *transloco="let t; read: 'header'">
   <mat-toolbar class="header-toolbar">
       <mat-toolbar-row class="toolbar-elements" *ngIf="authenticated">
         <button mat-button class="btn-toggle-user-menu">
@@ -11,9 +11,9 @@
 
       <mat-toolbar-row class="toolbar-elements" *ngIf="!authenticated">
         <div class="authentication-buttons">
-          <button class="btn btn-primary">Sign in</button>
-          <button class="btn btn-secondary">Sign up</button>
+          <button class="btn btn-primary">{{t('signIn')}}</button>
+          <button class="btn btn-secondary">{{t('signUp')}}</button>
         </div>
       </mat-toolbar-row>
   </mat-toolbar>
-</header>
+</ng-container>

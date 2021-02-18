@@ -7,7 +7,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  authenticated = true;
+  @Input()
+  authenticated: boolean;
+  
   user: {email: 'Nicorescu@gmail.com'};
 
   constructor() { }

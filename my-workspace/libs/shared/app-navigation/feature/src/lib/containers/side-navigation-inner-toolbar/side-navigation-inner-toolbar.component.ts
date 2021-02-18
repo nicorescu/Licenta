@@ -47,7 +47,6 @@ export class SideNavigationInnerToolbarComponent implements OnInit, OnDestroy {
     const isLarge = this.screen.sizes['screen-large'];
 
     this.menuMode = isLarge ? 'shrink' : 'overlap';
-    this.menuRevealMode = isXSmall ? 'slide' : 'expand';
     this.shaderEnabled = !isLarge;
   }
 

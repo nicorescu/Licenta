@@ -8,6 +8,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {TranslocoModule} from '@ngneat/transloco';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatButtonModule} from '@angular/material/button';
     DxButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslocoModule
   ],
   declarations: [HeaderComponent, UserPanelComponent, ],
   exports: [HeaderComponent],
