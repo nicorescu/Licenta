@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { SearchTripModel } from '../../models/search-trip.model';
 
 @Component({
   selector: 'hk-search-trip',
@@ -11,17 +13,19 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 export class SearchTripComponent implements OnInit {
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
 
-  options={
-    componentRestrictions : {
-      country: ['Ro']
-    }
-  }
+  searchTripForm: FormGroup;
+  searchTrip: SearchTripModel;
+
+  currentDate = new Date();
 
   public handleAddressChange(address: Address) {
-    console.log(address.adr_address);
+    console.log(this.searchTrip.startDate);
+    console.log(this.searchTrip.endDate);
+    console.log(this.searchTrip.friendsOnly);
   }
 
-  constructor() {}
-
+  constructor() {
+    this.searchTrip = new SearchTripModel();
+  }
   ngOnInit(): void {}
 }

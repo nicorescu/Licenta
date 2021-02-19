@@ -1,3 +1,8 @@
-<div id="tripPlanning">
+<div class="container" id="tripPlanning" *transloco="let t; read:'tripPlanning'">
+    <div class="text-center h2">
+        {{t('findTrip')}}
+    </div>
+  <div id="searchTrip">
     <hk-search-trip></hk-search-trip>
+  </div>
 </div>

@@ -1,0 +1,20 @@
+@import 'theme.scss';
+
+::ng-deep .search-trip-container {
+  .google-input {
+    height: 50px;
+    font-size: 17px;
+  }
+
+  .mat-form-field-outline {
+    background-color: white;
+  }
+
+  #datePickersContainer{
+      margin-top: 5px;
+  }
+
+  #startDateField{
+      margin-right: 5px;
+  }
+}

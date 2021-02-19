@@ -1,6 +1,10 @@
-export class SearchTripModel{
-    country: string;
-    startDate: Date;
-    endDate: Date
-    friendsOnly: boolean;
+export class SearchTripModel {
+  locality: string;
+  country: string;
+  startDate: Date;
+  endDate: Date;
+  friendsOnly: boolean;
+
+  public constructor() {
+  }
 }

@@ -7,5 +7,17 @@
   "header": {
     "signIn": "Sign in",
     "signUp": "Sign up"
+  },
+
+  "tripPlanning": {
+    "findTrip": "Find a trip",
+    "searchTrip": {
+      "enterLocation": "Enter a location (country, region or city)",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "friendsOnly": "Friends only",
+      "seeTrips": "See your trips"
+    }
+    
   }
 }

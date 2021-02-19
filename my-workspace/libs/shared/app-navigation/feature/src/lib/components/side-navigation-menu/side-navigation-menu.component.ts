@@ -61,10 +61,6 @@ export class SideNavigationMenuComponent
   }
 
   ngOnInit() {
-    this.translocoService.load('en').subscribe();
-    this.translocoService.events$.pipe(filter(event => event.type === 'translationLoadSuccess')).subscribe(() => {
-      console.log(this.translocoService.translate('navigation.home'));
-    })
     this.selectedItem = location.pathname;
     
   }

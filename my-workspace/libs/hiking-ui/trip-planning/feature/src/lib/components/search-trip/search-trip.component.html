@@ -1,3 +1,71 @@
-<div class="container">
-    <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" class="form-control"/>
+<div
+  class="search-trip-container"
+  *transloco="let t; read: 'tripPlanning.searchTrip'"
+>
+  <form>
+    <input
+      ngx-google-places-autocomplete
+      [options]="options"
+      #placesRef="ngx-places"
+      (onAddressChange)="handleAddressChange($event)"
+      class="form-control google-input"
+      placeholder="{{ t('enterLocation') }}"
+      name="address"
+      required
+    />
+    <div class="row text-center" id="datePickersContainer">
+      <div class="col">
+        <mat-form-field appearance="outline" id="startDateField">
+          <mat-label>{{ t('startDate') }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            (keydown)="(false)"
+            (click)="startDatePicker.open()"
+            [(ngModel)]="searchTrip.startDate"
+            name="startDate"
+            required
+            [min]="currentDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="startDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ t('endDate') }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endDatePicker"
+            (keydown)="(false)"
+            (click)="endDatePicker.open()"
+            [(ngModel)]="searchTrip.endDate"
+            name="endDate"
+            required
+            [min]="searchTrip.startDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="text-center">
+      <div class="col-12 mb-4">
+        <mat-slide-toggle
+          [(ngModel)]="searchTrip.friendsOnly"
+          name="friendsOnly"
+          color="primary"
+        >
+          {{ t('friendsOnly') }}
+        </mat-slide-toggle>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary w-75">{{t('seeTrips')}}</button>
+      </div>
+    </div>
+  </form>
 </div>

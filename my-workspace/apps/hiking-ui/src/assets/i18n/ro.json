@@ -1,11 +1,22 @@
 {
-    "navigation": {
-        "home": "Acasa",
-        "profile": "Profil"
-    },
+  "navigation": {
+    "home": "Acasa",
+    "profile": "Profil"
+  },
 
-    "header":{
-        "signIn": "Autentifica-te",
-        "signUp": "Inregistreaza-te"
+  "header": {
+    "signIn": "Autentifica-te",
+    "signUp": "Inregistreaza-te"
+  },
+
+  "tripPlanning": {
+    "findTrip": "Gaseste o excursie",
+    "searchTrip": {
+      "enterLocation": "Introdu o locatie (tara, regiune sau oras)",
+      "startDate": "Data de inceput",
+      "endDate": "Data de incheiere",
+      "friendsOnly": "Doar prieteni",
+      "seeTrips": "Vezi excursiile"
     }
+  }
 }
