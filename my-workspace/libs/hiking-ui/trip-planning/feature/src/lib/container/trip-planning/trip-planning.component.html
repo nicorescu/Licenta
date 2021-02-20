@@ -1,8 +1,13 @@
-<div class="container" id="tripPlanning" *transloco="let t; read:'tripPlanning'">
+<div class="container">
+  <div class="tripPlanning" *transloco="let t; read: 'tripPlanning'">
     <div class="text-center h2">
-        {{t('findTrip')}}
+      {{ t('findTrip') }}
     </div>
-  <div id="searchTrip">
-    <hk-search-trip></hk-search-trip>
+    <div id="searchTrip">
+      <hk-search-trip></hk-search-trip>
+    </div>
+  </div>
+  <div>
+    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=ATtYBwJxtQ_hhHocSQocvUo7EivLKYJ8hkYlgYonobKCfhUk9eFCfExl83FUKB0xX3HjrV9WvwlGmQkHZdH7rpTUAzRXDSyd7G4b68GwhzpBb7PTbvFrBVtBIjmxg4j--FdyxjoFPZEyCSiqZjEAUt3_XvuzDwpC1J8pw6ysniE9lFz0YV7A&key=AIzaSyBRjcx1SlMYyd2y3l0_gVP8g4-4pQBeAW0">
   </div>
 </div>

@@ -1,7 +1,10 @@
-#tripPlanning{
+:host .container {
+  justify-content: center;
+  .tripPlanning {
     min-width: 400px;
-    width: 31%;
-    height: 100%;
+    width: 40%;
     justify-content: center;
     align-items: center;
+    margin: auto;
+  }
 }

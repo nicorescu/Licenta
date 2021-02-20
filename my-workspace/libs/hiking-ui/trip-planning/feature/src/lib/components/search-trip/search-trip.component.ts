@@ -7,6 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
@@ -24,13 +26,16 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   rendererListener: () => void;
   currentDate = new Date();
-  invalidEndDate = false;
   searchTrip: SearchTripModel;
   isInvalidLocation = true;
   submittedOnce = false;
   location: string;
 
-  constructor(private renderer: Renderer2) {
+  constructor(
+    private translocoService: TranslocoService,
+    private renderer: Renderer2,
+    private dateAdapter: DateAdapter<any>
+  ) {
     this.searchTrip = new SearchTripModel();
     this.rendererListener = this.renderer.listen(
       'window',
@@ -44,6 +49,8 @@ export class SearchTripComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.dateAdapter.setLocale(this.translocoService.getActiveLang);
   }
 
   ngOnInit(): void {}
@@ -52,16 +59,19 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     this.rendererListener();
   }
 
+  //NU: id/reviews/html_attributions/permanently_closed/price_level/rating
   public handleAddressChange(address: Address) {
-    this.isInvalidLocation = false;
-    this.setSearchModelFields(address);
+    try {
+      this.setSearchModelFields(address);
+      this.isInvalidLocation = false;
+      console.log(address.place_id)
+    } catch {
+      this.isInvalidLocation = true;
+    }
   }
 
   onSubmit() {
     this.submittedOnce = true;
-    if (this.searchTrip.endDate < this.searchTrip.startDate) {
-      this.invalidEndDate = true;
-    }
     console.log(this.searchTrip);
   }
 
@@ -77,13 +87,20 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   setSearchModelFields(address: Address) {
+    this.searchTrip.clearAddress();
     address.address_components.forEach((comp) => {
       switch (comp.types[0]) {
         case 'locality':
-          this.searchTrip.locality=comp.long_name;
+          this.searchTrip.locality = comp.long_name;
+          break;
+        case 'administrative_area_level_2':
+          this.searchTrip.areaLevelTwo = comp.long_name;
+          break;
+        case 'administrative_area_level_1':
+          this.searchTrip.areaLevelOne = comp.long_name;
           break;
         case 'country':
-          this.searchTrip.country=comp.long_name;
+          this.searchTrip.country = comp.long_name;
           break;
         default:
           break;

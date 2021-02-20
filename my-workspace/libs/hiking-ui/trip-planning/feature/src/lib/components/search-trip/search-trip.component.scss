@@ -13,12 +13,13 @@
     margin-top: 5px;
   }
 
-  #startDateField {
-    margin-right: 5px;
-  }
-
   #googleInputField {
     width: 100%;
+  }
+
+  #dateRange {
+    min-width: 300px;
+    width: 60%;
   }
 
   .invalid-field {

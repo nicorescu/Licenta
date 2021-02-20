@@ -15,12 +15,11 @@
       "enterLocation": "Introdu o locatie (tara, regiune sau oras)",
       "startDate": "Data de inceput",
       "endDate": "Data de incheiere",
+      "enterDateRange": "Selecteaza un interval",
       "friendsOnly": "Doar prieteni",
       "seeTrips": "Vezi excursiile",
       "selectLocationError": "Trebuie sa selectezi o locatie din lista",
-      "startDateRequiredError": "Trebuie sa introduci data de inceput",
-      "endDateRequiredError": "Trebuie sa introduci data de incheiere",
-      "endDateMinError": "Data de incheiere nu poate fi mai devreme de data de inceput"
+      "selectAValidRangeError": "Selecteaza un interval valid"
     }
   }
 }
