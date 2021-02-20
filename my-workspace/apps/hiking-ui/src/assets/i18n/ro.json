@@ -16,7 +16,11 @@
       "startDate": "Data de inceput",
       "endDate": "Data de incheiere",
       "friendsOnly": "Doar prieteni",
-      "seeTrips": "Vezi excursiile"
+      "seeTrips": "Vezi excursiile",
+      "selectLocationError": "Trebuie sa selectezi o locatie din lista",
+      "startDateRequiredError": "Trebuie sa introduci data de inceput",
+      "endDateRequiredError": "Trebuie sa introduci data de incheiere",
+      "endDateMinError": "Data de incheiere nu poate fi mai devreme de data de inceput"
     }
   }
 }

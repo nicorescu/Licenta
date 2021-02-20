@@ -2,22 +2,48 @@
   class="search-trip-container"
   *transloco="let t; read: 'tripPlanning.searchTrip'"
 >
-  <form>
-    <input
-      ngx-google-places-autocomplete
-      [options]="options"
-      #placesRef="ngx-places"
-      (onAddressChange)="handleAddressChange($event)"
-      class="form-control google-input"
-      placeholder="{{ t('enterLocation') }}"
-      name="address"
-      required
-    />
+  <form #searchTripForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field
+        [ngClass]="{
+          'invalid-field': isInvalidLocation && submittedOnce,
+          'valid-field': !(isInvalidLocation && submittedOnce)
+        }"
+        id="googleInputField"
+        appearance="outline"
+      >
+        <mat-label>{{ t('enterLocation') }}</mat-label>
+        <input
+          #googlePlacesInput
+          matInput
+          ngx-google-places-autocomplete
+          [options]="options"
+          #placesRef="ngx-places"
+          (onAddressChange)="handleAddressChange($event)"
+          class="google-input"
+          name="address"
+          (keydown)="onKey()"
+          required
+          [(ngModel)]="location"
+        />
+        <mat-error *ngIf="isInvalidLocation && submittedOnce">{{
+          t('selectLocationError')
+        }}</mat-error>
+      </mat-form-field>
+    </div>
     <div class="row text-center" id="datePickersContainer">
       <div class="col">
-        <mat-form-field appearance="outline" id="startDateField">
+        <mat-form-field
+          [ngClass]="{
+            'invalid-field': startDate.errors && submittedOnce,
+            'valid-field': !(startDate.errors && submittedOnce)
+          }"
+          appearance="outline"
+          id="startDateField"
+        >
           <mat-label>{{ t('startDate') }}</mat-label>
           <input
+            #startDate="ngModel"
             matInput
             [matDatepicker]="startDatePicker"
             (keydown)="(false)"
@@ -26,16 +52,27 @@
             name="startDate"
             required
             [min]="currentDate"
+            readonly
           />
           <mat-datepicker-toggle
             matSuffix
             [for]="startDatePicker"
           ></mat-datepicker-toggle>
           <mat-datepicker #startDatePicker></mat-datepicker>
+          <mat-error *ngIf="startDate.errors?.required && submittedOnce">{{
+            t('startDateRequiredError')
+          }}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{
+            'invalid-field': endDate.errors && submittedOnce,
+            'valid-field': !(endDate.errors && submittedOnce)
+          }"
+        >
           <mat-label>{{ t('endDate') }}</mat-label>
           <input
+            #endDate="ngModel"
             matInput
             [matDatepicker]="endDatePicker"
             (keydown)="(false)"
@@ -50,11 +87,17 @@
             [for]="endDatePicker"
           ></mat-datepicker-toggle>
           <mat-datepicker #endDatePicker></mat-datepicker>
+          <mat-error *ngIf="endDate.errors?.required && submittedOnce">{{
+            t('endDateRequiredError')
+          }}</mat-error>
+          <mat-error *ngIf="invalidEndDate && submittedOnce">{{
+            t('endDateMinError')
+          }}</mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="text-center">
-      <div class="col-12 mb-4">
+      <div class="col-12 mb-4 mt-2">
         <mat-slide-toggle
           [(ngModel)]="searchTrip.friendsOnly"
           name="friendsOnly"
@@ -64,7 +107,9 @@
         </mat-slide-toggle>
       </div>
       <div class="col-12">
-        <button class="btn btn-primary w-75">{{t('seeTrips')}}</button>
+        <button type="submit" class="btn btn-primary w-75">
+          {{ t('seeTrips') }}
+        </button>
       </div>
     </div>
   </form>

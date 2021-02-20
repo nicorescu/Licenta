@@ -6,5 +6,6 @@ export class SearchTripModel {
   friendsOnly: boolean;
 
   public constructor() {
+    this.friendsOnly=false;
   }
 }

@@ -5,10 +5,10 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -27,7 +27,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     MatFormFieldModule,
     MatNativeDateModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [TripPlanningComponent, SearchTripComponent],
 })

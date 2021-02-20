@@ -2,7 +2,6 @@
 
 ::ng-deep .search-trip-container {
   .google-input {
-    height: 50px;
     font-size: 17px;
   }
 
@@ -10,11 +9,35 @@
     background-color: white;
   }
 
-  #datePickersContainer{
-      margin-top: 5px;
+  #datePickersContainer {
+    margin-top: 5px;
   }
 
-  #startDateField{
-      margin-right: 5px;
+  #startDateField {
+    margin-right: 5px;
+  }
+
+  #googleInputField {
+    width: 100%;
+  }
+
+  .invalid-field {
+    &.mat-form-field-appearance-outline .mat-form-field-outline {
+      color: red;
+    }
+
+    mat-label {
+      color: red;
+    }
+  }
+
+  .valid-field {
+    &.mat-form-field-appearance-outline .mat-form-field-outline {
+      color: $input_outline_gray;
+    }
+
+    mat-label {
+      color: #7e827f;
+    }
   }
 }

@@ -16,8 +16,11 @@
       "startDate": "Start date",
       "endDate": "End date",
       "friendsOnly": "Friends only",
-      "seeTrips": "See your trips"
+      "seeTrips": "See your trips",
+      "selectLocationError": "You need to select a location from the list",
+      "startDateRequiredError": "Start date is required",
+      "endDateRequiredError": "End date is required",
+      "endDateMinError": "End date can't be earlier than start date"
     }
-    
   }
 }
