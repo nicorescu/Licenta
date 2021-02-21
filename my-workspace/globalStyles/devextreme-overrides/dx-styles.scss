@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+::ng-deep .dx-scrollable-scroll-content {
+  background-color: #a79d9d;
+}
+
 .content {
   line-height: 1.5;
 

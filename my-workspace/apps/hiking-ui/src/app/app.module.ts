@@ -23,7 +23,7 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SharedAppNavigationFeatureModule } from '@hkworkspace/shared/app-navigation/feature';
-import { HikingUiUiCommonFeatureModule } from '@hkworkspace/hiking-ui/ui-common/feature';
+import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-planning/feature';
 
 @NgModule({
@@ -41,7 +41,7 @@ import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-p
     UnauthenticatedContentModule,
     AppRoutingModule,
     SharedAppNavigationFeatureModule,
-    HikingUiUiCommonFeatureModule,
+    HikingUiUiCommonUiModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslocoRootModule,

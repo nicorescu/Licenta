@@ -1,18 +1,18 @@
 import {
-  ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   OnDestroy,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import { TranslocoService } from '@ngneat/transloco';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { SearchTripModel } from '../../models/search-trip.model';
+import {GooglePlacesService} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+
 
 @Component({
   selector: 'hk-search-trip',
@@ -24,18 +24,19 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('searchTripForm') searchTripForm;
   @ViewChild('googlePlacesInput') locationsInput;
 
+  @Output() photosUrlEmitter = new EventEmitter<string[]>();
+
   rendererListener: () => void;
   currentDate = new Date();
   searchTrip: SearchTripModel;
   isInvalidLocation = true;
   submittedOnce = false;
   location: string;
-
+  photoReferences: string[] = [];
+  googlePlace: any;
   constructor(
-    private translocoService: TranslocoService,
     private renderer: Renderer2,
-    private dateAdapter: DateAdapter<any>
-  ) {
+    private googlePlacesService: GooglePlacesService) {
     this.searchTrip = new SearchTripModel();
     this.rendererListener = this.renderer.listen(
       'window',
@@ -49,8 +50,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
         }
       }
     );
-
-    this.dateAdapter.setLocale(this.translocoService.getActiveLang);
   }
 
   ngOnInit(): void {}
@@ -61,10 +60,16 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   //NU: id/reviews/html_attributions/permanently_closed/price_level/rating
   public handleAddressChange(address: Address) {
+    address.photos.forEach(photo => {
+      this.photoReferences.push(photo.getUrl({maxWidth: 400,
+        maxHeight: 400}))
+    });
+    this.photosUrlEmitter.emit(this.photoReferences);
     try {
       this.setSearchModelFields(address);
       this.isInvalidLocation = false;
-      console.log(address.place_id)
+      // this.googlePlacesService.getLocationDetails(address.place_id).subscribe( (details) => {
+      // })
     } catch {
       this.isInvalidLocation = true;
     }

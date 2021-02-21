@@ -15,6 +15,9 @@ import { SearchTripComponent } from './components/search-trip/search-trip.compon
 
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
+import {HikingUiUiCommonUiModule} from '@hkworkspace/hiking-ui/ui-common/ui';
+import {HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +31,10 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     MatNativeDateModule,
     MatSlideToggleModule,
     FormsModule,
+    HikingUiUiCommonUiModule,
+    HikingUiTripPlanningDataAccessModule
   ],
   declarations: [TripPlanningComponent, SearchTripComponent],
 })
-export class HikingUiTripPlanningFeatureModule {}
+export class HikingUiTripPlanningFeatureModule {
+}
