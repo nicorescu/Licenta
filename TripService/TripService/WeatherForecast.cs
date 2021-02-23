@@ -1,6 +1,6 @@
 using System;
 
-namespace HikingService
+namespace TripService
 {
     public class WeatherForecast
     {
