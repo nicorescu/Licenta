@@ -11,8 +11,7 @@ import {
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { SearchTripModel } from '../../models/search-trip.model';
-import {GooglePlacesService} from '@hkworkspace/hiking-ui/trip-planning/data-access';
-
+import { GooglePlacesService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Component({
   selector: 'hk-search-trip',
@@ -21,8 +20,11 @@ import {GooglePlacesService} from '@hkworkspace/hiking-ui/trip-planning/data-acc
 })
 export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
-  @ViewChild('searchTripForm') searchTripForm;
   @ViewChild('googlePlacesInput') locationsInput;
+
+  options={
+    types: ['(cities)']
+  }
 
   @Output() photosUrlEmitter = new EventEmitter<string[]>();
 
@@ -33,10 +35,11 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   submittedOnce = false;
   location: string;
   photoReferences: string[] = [];
-  googlePlace: any;
+
   constructor(
     private renderer: Renderer2,
-    private googlePlacesService: GooglePlacesService) {
+    private googlePlacesService: GooglePlacesService
+  ) {
     this.searchTrip = new SearchTripModel();
     this.rendererListener = this.renderer.listen(
       'window',
@@ -60,16 +63,11 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   //NU: id/reviews/html_attributions/permanently_closed/price_level/rating
   public handleAddressChange(address: Address) {
-    address.photos.forEach(photo => {
-      this.photoReferences.push(photo.getUrl({maxWidth: 400,
-        maxHeight: 400}))
-    });
+    console.log(address);
     this.photosUrlEmitter.emit(this.photoReferences);
     try {
       this.setSearchModelFields(address);
       this.isInvalidLocation = false;
-      // this.googlePlacesService.getLocationDetails(address.place_id).subscribe( (details) => {
-      // })
     } catch {
       this.isInvalidLocation = true;
     }
@@ -92,24 +90,20 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   setSearchModelFields(address: Address) {
-    this.searchTrip.clearAddress();
-    address.address_components.forEach((comp) => {
-      switch (comp.types[0]) {
-        case 'locality':
-          this.searchTrip.locality = comp.long_name;
-          break;
-        case 'administrative_area_level_2':
-          this.searchTrip.areaLevelTwo = comp.long_name;
-          break;
-        case 'administrative_area_level_1':
-          this.searchTrip.areaLevelOne = comp.long_name;
-          break;
-        case 'country':
-          this.searchTrip.country = comp.long_name;
-          break;
-        default:
-          break;
-      }
-    });
+    this.searchTrip.country = address.address_components.find(
+      (i) => i.types[0] === 'country'
+    ).long_name;
+
+    this.searchTrip.areaLevelOne = address.address_components.find(
+      (i) => i.types[0] === 'administrative_area_level_1'
+    ).long_name;
+
+    this.searchTrip.areaLevelTwo = address.address_components.find(
+      (i) => i.types[0] === 'administrative_area_level_2'
+    ).long_name;
+
+    this.searchTrip.locality = address.address_components.find(
+      (i) => i.types[0] === 'locality'
+    ).long_name;
   }
 }

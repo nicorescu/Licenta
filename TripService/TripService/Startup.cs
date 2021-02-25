@@ -10,6 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
+using TripService.Models.Mapping;
+using TripService.Setup;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson;
 
 namespace TripService
 {
@@ -26,6 +31,19 @@ namespace TripService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IMongoClient, MongoClient>(services =>
+            {
+                var uri = services.GetRequiredService<IConfiguration>()["MongoUri"];
+                return new MongoClient(uri);
+            });
+
+            ServiceCollectionSetup.AddAutomapper(services);
+            ServiceCollectionSetup.AddCors(services);
+            ServiceCollectionSetup.AddSwagger(services);
+            ServiceCollectionSetup.TryAddAllServices(services);
+            ServiceCollectionSetup.TryAddMongoConnection(services);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +63,14 @@ namespace TripService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Demo API");
+                options.RoutePrefix = "";
             });
         }
     }
