@@ -17,7 +17,6 @@ namespace TripService.Models.Dtos
         public string Password { get; set; }
         public DateTime Birthday { get; set; }
         public string Country { get; set; }
-        public string Role { get; set; }
         public List<UserDto> friends { get; set; }
 
     }

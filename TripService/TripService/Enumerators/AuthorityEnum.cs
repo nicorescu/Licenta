@@ -11,9 +11,7 @@ namespace TripService.Enumerators
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AuthorityEnum
     {
-        [EnumMember(Value = "User")]
         User,
-        [EnumMember(Value = "Admin")]
         Admin
     }
 }
