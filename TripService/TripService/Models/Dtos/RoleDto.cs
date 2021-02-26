@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TripService.Enumerators;
 
-namespace TripService.Models.ApiModels
+namespace TripService.Models.Dtos
 {
-    public class Authority
+    public class RoleDto
     {
         public Guid Id { get; set; }
-        public string role { get; set; }
+        public string Authority { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace TripService.Resources
         public const string DatabaseName = "trip_planning";
         public const string userCollectionName = "User";
         public const string tripCollectionName = "Trip";
+        public const string roleCollectionName = "Role";
     }
 }

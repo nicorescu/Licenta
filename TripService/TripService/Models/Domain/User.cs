@@ -12,15 +12,16 @@ namespace TripService.Models.Domain
     public class User
     {
         [BsonRepresentation(BsonType.String)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email {get;set;}
         public string Password { get; set; }
         public DateTime Birthday { get; set; }
         public string Country { get; set; }
-        [BsonRepresentation(BsonType.String)]
-        public AuthorityEnum authority { get; set; } = AuthorityEnum.User;
+        public Role role { get; set; }
         public List<User> friends { get; set; }
+
+
     }
 }

@@ -87,23 +87,12 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   clearInputValue() {
     this.locationsInput.nativeElement.value = '';
     this.location = '';
+    this.searchTrip.clearSearch();
   }
 
   setSearchModelFields(address: Address) {
-    this.searchTrip.country = address.address_components.find(
-      (i) => i.types[0] === 'country'
-    ).long_name;
-
-    this.searchTrip.areaLevelOne = address.address_components.find(
-      (i) => i.types[0] === 'administrative_area_level_1'
-    ).long_name;
-
-    this.searchTrip.areaLevelTwo = address.address_components.find(
-      (i) => i.types[0] === 'administrative_area_level_2'
-    ).long_name;
-
-    this.searchTrip.locality = address.address_components.find(
-      (i) => i.types[0] === 'locality'
-    ).long_name;
+    address.address_components.forEach(comp => {
+      this.searchTrip.keywords.push(comp.long_name);
+    })
   }
 }

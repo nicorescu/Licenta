@@ -30,9 +30,31 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<List<Trip>> GetBestTripMatches(SearchTripModel searchModel)
+        public async Task<List<Trip>> GetBestTripMatches()
         {
-            return null; 
+            try
+            {
+
+
+                var filter = Builders<Trip>.Filter.And(
+                        Builders<Trip>.Filter.Gte(c => c.StartDate, new DateTime(2021 - 02 - 26)),
+                        /*Builders<Trip>.Filter.Lte(c => c.EndDate, new DateTime(2021 - 02 - 28)),*/
+                        Builders<Trip>.Filter.Or(
+                            Builders<Trip>.Filter.Eq(c => c.Locality, "Sacele"),
+                            Builders<Trip>.Filter.Eq(c => c.AreaLevelOne, "Brasov"),
+                            Builders<Trip>.Filter.Eq(c => c.Country, "Romania")
+                    )
+                    );
+
+                var result = _collection.Aggregate().Match(filter);
+
+                return result.ToList();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                return null;
+            }
         }
         public async Task<Trip> GetTripById(Guid tripId)
         {
@@ -61,6 +83,22 @@ namespace TripService.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> UpdateTrip(Guid tripId, Trip trip)
+        {
+            try
+            {
+                trip.Id = tripId;
+                ReplaceOneResult result = await _collection.ReplaceOneAsync(trip => trip.Id == tripId, trip);
+                return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Exceptieeee: " + exception.ToString());
+                return false;
+            }
+        }
+
         public async Task<bool> DeleteTrip(Guid tripId)
         {
             try

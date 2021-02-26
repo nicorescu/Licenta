@@ -25,7 +25,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpGet]
+        [HttpGet("/users")]
         public async Task<IActionResult> GetAllUsers()
         {
             List<UserDto> result = await _userProcessor.GetAllUsers();
@@ -38,12 +38,28 @@ namespace TripService.Controllers
             return Ok(result);
         }
 
-        
         [ProducesResponseType(typeof(List<UserDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserById(Guid userId)
+        {
+            UserDto result = await _userProcessor.GetUserById(userId);
+
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+            return Ok(result);
+        }
+
+        [ProducesResponseType(typeof(List<UserDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [HttpPost("/users")]
         public async Task<IActionResult> InsertUser([FromBody] UserDto user)
         {
             bool result = await _userProcessor.InsertNewUser(user);
@@ -51,6 +67,40 @@ namespace TripService.Controllers
             if (!result)
             {
                 return BadRequest("Couldn't insert user");
+            }
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(typeof(List<UserDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser([FromRoute] Guid userId, [FromBody] UserDto user)
+        {
+            bool result = await _userProcessor.UpdateUser(userId,user);
+
+            if (!result)
+            {
+                return BadRequest("Couldn't update user");
+            }
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(typeof(List<UserDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(Guid userId)
+        {
+            bool result = await _userProcessor.DeleteUser(userId);
+
+            if (!result)
+            {
+                return BadRequest("User couldn't be deleted");
             }
 
             return Ok(result);

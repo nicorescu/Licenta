@@ -18,9 +18,13 @@ namespace TripService.Models.Mapping
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()));
 
+            CreateMap<Role, RoleDto>();
+
             CreateMap<UserDto, User>();
 
             CreateMap<TripDto, Trip>();
+
+            CreateMap<RoleDto, Role>();
         }
     }
 }

@@ -2,12 +2,17 @@ export class SearchTripModel {
   startDate: Date;
   endDate: Date;
   friendsOnly: boolean;
-  locality: string;
-  areaLevelTwo: string;
-  areaLevelOne: string;
-  country: string;
+  keywords: string[];
 
   public constructor() {
     this.friendsOnly = false;
+    this.keywords = [];
+  }
+
+  clearSearch() {
+    this.startDate = null;
+    this.endDate = null;
+    this.friendsOnly = false;
+    this.keywords = [];
   }
 }

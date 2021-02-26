@@ -11,9 +11,9 @@ namespace TripService.Models.Dtos
     {
         public Guid Id { get; set; }
         public string Locality { get; set; }
-        public string AreaLevelTwo { get; set; }
         public string AreaLevelOne { get; set; }
         public string Country { get; set; }
+        public string Location { get; set;}
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public UserDto Organizer { get; set; }

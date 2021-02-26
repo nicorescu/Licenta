@@ -72,6 +72,8 @@ namespace TripService
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Demo API");
                 options.RoutePrefix = "";
             });
+
+            app.UseDeveloperExceptionPage();
         }
     }
 }

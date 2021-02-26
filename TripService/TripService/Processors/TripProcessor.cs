@@ -25,9 +25,10 @@ namespace TripService.Processors
 
             return _mapper.Map<List<TripDto>>(result);
         }
-        public async Task<List<TripDto>> GetBestTripMatches(SearchTripModel searchModel)
+        public async Task<List<TripDto>> GetBestTripMatches()
         {
-            return null;
+            List<Trip> result = await _tripRepository.GetBestTripMatches();
+            return _mapper.Map<List<TripDto>>(result);
         }
         public async Task<TripDto> GetTripById(Guid tripId)
         {
@@ -41,6 +42,13 @@ namespace TripService.Processors
             Trip trip = _mapper.Map<Trip>(tripDto);
             return await _tripRepository.InsertNewTrip(trip);
         }
+
+        public async Task<bool> UpdateTrip(Guid tripId, TripDto tripDto)
+        {
+            Trip trip = _mapper.Map<Trip>(tripDto);
+            return await _tripRepository.UpdateTrip(tripId, trip);
+        }
+
         public async Task<bool> DeleteTrip(Guid tripId)
         {
             return await _tripRepository.DeleteTrip(tripId);

@@ -50,6 +50,7 @@ namespace TripService.Repositories
         {
             try
             {
+                user.Id = Guid.NewGuid();
                 await _collection.InsertOneAsync(user);
                 return true;
             }
@@ -60,13 +61,28 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> UpdateUser(Guid userId, User user)
+        {
+            try
+            {
+                ReplaceOneResult result = await _collection.ReplaceOneAsync(user => user.Id == userId, user);
+                return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Exceptieeee: " + exception.ToString());
+                return false;
+            }
+        }
+
+
         public async Task<bool> DeleteUser(Guid userId)
         {
             try
             {
                 DeleteResult result = await _collection.DeleteOneAsync(user => user.Id == userId);
 
-                return (result.IsAcknowledged && result.DeletedCount > 0) ? true : false;
+                return (result.IsAcknowledged || result.DeletedCount > 0) ? true : false;
             }
             catch (Exception exception)
             {

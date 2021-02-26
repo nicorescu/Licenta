@@ -17,6 +17,7 @@ namespace TripService.Setup
         {
             services.TryAddSingleton<IUserRepository, UserRepository>();
             services.TryAddSingleton<ITripRepository, TripRepository>();
+            services.TryAddSingleton<IRoleRepository, RoleRepository>();
         }
 
         public static void AddAutomapper(IServiceCollection services)
@@ -28,6 +29,7 @@ namespace TripService.Setup
         {
             services.TryAddScoped<ITripProcessor, TripProcessor>();
             services.TryAddScoped<IUserProcessor, UserProcessor>();
+            services.TryAddScoped<IRoleProcessor, RoleProcessor>();
         }
 
         public static void AddCors(IServiceCollection services)

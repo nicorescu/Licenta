@@ -22,20 +22,26 @@ namespace TripService.Processors
         {
             List<User> result = await _userRepository.GetAllUsers();
 
-            return _mapper.Map<List<User>,List <UserDto>>(result);
+            return _mapper.Map<List<UserDto>>(result);
         }
 
         public async Task<UserDto> GetUserById(Guid userId)
         {
             User result = await _userRepository.GetUserById(userId);
 
-            return _mapper.Map<User,UserDto>(result);
+            return _mapper.Map<UserDto>(result);
         }
         public async Task<bool> InsertNewUser(UserDto userDto)
         {
-            User user = _mapper.Map<UserDto,User>(userDto);
+            User user = _mapper.Map<User>(userDto);
             return await _userRepository.InsertNewUser(user);
         }
+        public async Task<bool> UpdateUser(Guid id, UserDto userDto)
+        {
+            User user = _mapper.Map<User>(userDto);
+            return await _userRepository.UpdateUser(id,user);
+        }
+
         public async Task<bool> DeleteUser(Guid userId)
         {
             return await _userRepository.DeleteUser(userId);

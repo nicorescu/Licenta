@@ -12,6 +12,7 @@ namespace TripService.Processors
 
         Task<UserDto> GetUserById(Guid userId);
         Task<bool> InsertNewUser(UserDto user);
+        Task<bool> UpdateUser(Guid id, UserDto user);
         Task<bool> DeleteUser(Guid userId);
     }
 }
