@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Extensions;
 using TripService.Models.ApiModels;
 using TripService.Models.Domain;
 using TripService.Resources;
@@ -30,23 +31,17 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<List<Trip>> GetBestTripMatches()
+        public async Task<List<Trip>> GetBestTripMatches(SearchTripModel searchTrip)
         {
             try
             {
+                string[] keywords = { "Sacele", "Sacele", "Brasov County", "Romania" };
+                var startDate = Convert.ToDateTime("2021-02-20T18:28:52.726+00:00");
+                var endDate = Convert.ToDateTime("2021-02-27T18:28:52.726+00:00");
 
-
-                var filter = Builders<Trip>.Filter.And(
-                        Builders<Trip>.Filter.Gte(c => c.StartDate, new DateTime(2021 - 02 - 26)),
-                        /*Builders<Trip>.Filter.Lte(c => c.EndDate, new DateTime(2021 - 02 - 28)),*/
-                        Builders<Trip>.Filter.Or(
-                            Builders<Trip>.Filter.Eq(c => c.Locality, "Sacele"),
-                            Builders<Trip>.Filter.Eq(c => c.AreaLevelOne, "Brasov"),
-                            Builders<Trip>.Filter.Eq(c => c.Country, "Romania")
-                    )
-                    );
-
-                var result = _collection.Aggregate().Match(filter);
+                var result = _collection.Aggregate()
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(startDate, endDate));
 
                 return result.ToList();
             }

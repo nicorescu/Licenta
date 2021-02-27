@@ -23,7 +23,8 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('googlePlacesInput') locationsInput;
 
   options={
-    types: ['(cities)']
+    strictBounds: false,
+  types: ["(regions)"],
   }
 
   @Output() photosUrlEmitter = new EventEmitter<string[]>();

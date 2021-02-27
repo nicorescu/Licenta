@@ -10,7 +10,7 @@ namespace TripService.Processors
     public interface ITripProcessor
     {
         Task<List<TripDto>> GetAllTrips();
-        Task<List<TripDto>> GetBestTripMatches();
+        Task<List<TripDto>> GetBestTripMatches(SearchTripModel searchTrip);
         Task<TripDto> GetTripById(Guid tripId);
 
         Task<bool> InsertNewTrip(TripDto trip);

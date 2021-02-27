@@ -45,9 +45,9 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [HttpGet("/trips/search")]
-        public async Task<IActionResult> GetMatchingTrips()
+        public async Task<IActionResult> GetMatchingTrips([FromRoute] SearchTripModel searchTrip)
         {
-            List<TripDto> result = await _tripProcessor.GetBestTripMatches();
+            List<TripDto> result = await _tripProcessor.GetBestTripMatches(searchTrip);
 
             if (result.Count == 0)
             {

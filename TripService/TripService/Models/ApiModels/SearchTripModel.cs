@@ -9,9 +9,7 @@ namespace TripService.Models.ApiModels
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Locality { get; set; }
-        public string AreaLevelOne { get; set; }
-        public string Country { get; set; }
+        public string[] Keywords { get; set; }
         public bool FriendsOnly { get; set; }
     }
 }

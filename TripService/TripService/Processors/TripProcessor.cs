@@ -25,9 +25,9 @@ namespace TripService.Processors
 
             return _mapper.Map<List<TripDto>>(result);
         }
-        public async Task<List<TripDto>> GetBestTripMatches()
+        public async Task<List<TripDto>> GetBestTripMatches(SearchTripModel searchTrip)
         {
-            List<Trip> result = await _tripRepository.GetBestTripMatches();
+            List<Trip> result = await _tripRepository.GetBestTripMatches(searchTrip);
             return _mapper.Map<List<TripDto>>(result);
         }
         public async Task<TripDto> GetTripById(Guid tripId)
