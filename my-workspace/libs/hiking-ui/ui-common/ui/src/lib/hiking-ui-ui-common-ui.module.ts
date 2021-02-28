@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslocoModule } from '@ngneat/transloco';
+import {RouterModule} from '@angular/router';
 
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
@@ -23,6 +24,7 @@ import { LinkImageComponent } from './components/link-image/link-image.component
     MatIconModule,
     MatButtonModule,
     TranslocoModule,
+    RouterModule
   ],
   declarations: [HeaderComponent, UserPanelComponent, LinkImageComponent],
   exports: [HeaderComponent, LinkImageComponent],

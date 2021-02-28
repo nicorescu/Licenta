@@ -14,7 +14,7 @@ namespace TripService.Repositories
 
         public UserRepository(IMongoClient mongoClient)
         {
-            _collection = mongoClient.GetDatabase("trip_planning").GetCollection<User>(StringResources.userCollectionName);
+            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<User>(StringResources.userCollectionName);
         }
         public async Task<List<User>> GetAllUsers()
         {
@@ -51,7 +51,7 @@ namespace TripService.Repositories
             try
             {
                 user.Id = Guid.NewGuid();
-                await _collection.InsertOneAsync(user);
+                 await _collection.InsertOneAsync(user);
                 return true;
             }
             catch (Exception exception)

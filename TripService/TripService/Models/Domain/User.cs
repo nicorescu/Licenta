@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Identity;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,10 @@ namespace TripService.Models.Domain
         public string LastName { get; set; }
         public string Email {get;set;}
         public string Password { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
         public string Country { get; set; }
-        public Role role { get; set; }
+        public RoleEnum Role { get; set; }
         public List<User> friends { get; set; }
-
-
     }
 }

@@ -6,7 +6,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
-import { TripPlanningComponent } from 'libs/hiking-ui/trip-planning/feature/src/lib/container/trip-planning/trip-planning.component';
+import { TripPlanningComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
+import {SignUpComponent} from '@hkworkspace/shared/app-authentication/feature';
 
 const routes: Routes = [
   {
@@ -29,23 +30,8 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'reset-password',
-    component: ResetPasswordFormComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-account',
-    component: CreateAccountFormComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'change-password/:recoveryCode',
-    component: ChangePasswordFormComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: '**',
-    redirectTo: 'trip-planning'
+    path: 'signup',
+    component: SignUpComponent
   }
 ];
 

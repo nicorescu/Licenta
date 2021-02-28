@@ -23,7 +23,7 @@ export class AppComponent {
         this.menuItems = [
           {
             text: this.translocoService.translate('navigation.home'),
-            path: '/home',
+            path: '/trip-planning',
             icon: 'home',
           },
           {

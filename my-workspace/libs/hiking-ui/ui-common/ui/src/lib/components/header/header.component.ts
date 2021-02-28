@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'hk-header',
@@ -12,9 +13,13 @@ export class HeaderComponent implements OnInit {
   
   user: {email: 'Nicorescu@gmail.com'};
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  SignUp() {
+    this.router.navigate(['/signup']);
   }
 
 }

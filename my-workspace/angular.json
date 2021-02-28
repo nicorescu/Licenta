@@ -134,7 +134,10 @@
               "apps/hiking-ui/src/favicon.ico",
               "apps/hiking-ui/src/assets"
             ],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/hiking-ui/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/hiking-ui/src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -433,6 +436,31 @@
             "main": "libs/hiking-ui/ui-common/feature/src/test.ts",
             "tsConfig": "libs/hiking-ui/ui-common/feature/tsconfig.spec.json",
             "karmaConfig": "libs/hiking-ui/ui-common/feature/karma.conf.js"
+          }
+        }
+      }
+    },
+    "shared-app-authentication-feature": {
+      "projectType": "library",
+      "root": "libs/shared/app-authentication/feature",
+      "sourceRoot": "libs/shared/app-authentication/feature/src",
+      "prefix": "hkworkspace",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/app-authentication/feature/src/**/*.ts",
+              "libs/shared/app-authentication/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/app-authentication/feature/src/test.ts",
+            "tsConfig": "libs/shared/app-authentication/feature/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/app-authentication/feature/karma.conf.js"
           }
         }
       }

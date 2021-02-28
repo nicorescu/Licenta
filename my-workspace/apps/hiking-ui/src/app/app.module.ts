@@ -17,7 +17,6 @@ import {
   LoginFormModule,
 } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
-import { UnauthenticatedContentModule } from './unauthenticated-content';
 
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedAppNavigationFeatureModule } from '@hkworkspace/shared/app-navigation/feature';
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-planning/feature';
+import {SharedAppAuthenticationFeatureModule} from '@hkworkspace/shared/app-authentication/feature';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +38,6 @@ import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-p
     CreateAccountFormModule,
     ChangePasswordFormModule,
     LoginFormModule,
-    UnauthenticatedContentModule,
     AppRoutingModule,
     SharedAppNavigationFeatureModule,
     HikingUiUiCommonUiModule,
@@ -46,6 +45,7 @@ import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-p
     HttpClientModule,
     TranslocoRootModule,
     HikingUiTripPlanningFeatureModule,
+    SharedAppAuthenticationFeatureModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent],

@@ -25,6 +25,9 @@
       "@hkworkspace/shared/app-authentication/data-access": [
         "libs/shared/app-authentication/data-access/src/index.ts"
       ],
+      "@hkworkspace/shared/app-authentication/feature": [
+        "libs/shared/app-authentication/feature/src/index.ts"
+      ],
       "@hkworkspace/hiking-ui/trip-planning/feature": [
         "libs/hiking-ui/trip-planning/feature/src/index.ts"
       ],

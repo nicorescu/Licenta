@@ -4,6 +4,19 @@
     "profile": "Profile"
   },
 
+  "authentication":{
+    "createAccount": "Create account",
+    "signIn": "Sign-in",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "phoneNumber": "Phone number",
+    "birthday": "Birthday",
+    "country": "Country"
+  },
+
   "header": {
     "signIn": "Sign in",
     "signUp": "Sign up"

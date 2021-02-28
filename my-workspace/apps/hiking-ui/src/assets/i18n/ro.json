@@ -4,6 +4,19 @@
     "profile": "Profil"
   },
 
+  "authentication":{
+    "createAccount": "Create account",
+    "signIn": "Sign-in",
+    "firstName": "Prenume",
+    "lastName": "Nume de familie",
+    "email": "Email",
+    "password": "Parola",
+    "repeatPassword": "Repeta parola",
+    "phoneNumber": "Numar de telefon",
+    "birthday": "Data nasterii",
+    "country": "Tara"
+  },
+
   "header": {
     "signIn": "Autentifica-te",
     "signUp": "Inregistreaza-te"

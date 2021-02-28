@@ -37,11 +37,45 @@
       href="//fonts.googleapis.com/css?family=Lobster"
     />
 
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArPwWq2P6AeqMApw2IzZKjaj5Ep1W7CBg&libraries=places&language=en"></script>
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArPwWq2P6AeqMApw2IzZKjaj5Ep1W7CBg&libraries=places&language=en"
+    ></script>
     <script
       src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '466744474513060',
+          cookie: true,
+          xfbml: true,
+          version: 'v10.0',
+        });
+
+        FB.AppEvents.logPageView();
+      };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, 'script', 'facebook-jssdk');
+
+      function checkLoginState() {
+        FB.getLoginStatus(function (response) {
+          statusChangeCallback(response);
+        });
+      }
+    </script> -->
   </head>
   <body class="dx-viewport">
     <app-root></app-root>

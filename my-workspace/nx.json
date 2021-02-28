@@ -48,6 +48,9 @@
     },
     "hiking-ui-ui-common-feature": {
       "tags": []
+    },
+    "shared-app-authentication-feature": {
+      "tags": []
     }
   }
 }
