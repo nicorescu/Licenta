@@ -28,7 +28,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [AllowAnonymous]
         [HttpGet("/trips")]
         public async Task<IActionResult> GetAllTrips()
         {
@@ -46,7 +45,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [AllowAnonymous]
         [HttpGet("/trips/search")]
         public async Task<IActionResult> GetMatchingTrips([FromRoute] SearchTripModel searchTrip)
         {
@@ -65,7 +63,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [AllowAnonymous]
         [HttpGet("{tripId}")]
         public async Task<IActionResult> GetTripById(Guid tripId)
         {
@@ -82,7 +79,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [Authorize]
         [HttpPost("/trips")]
         public async Task<IActionResult> AddTrip([FromBody] TripDto trip)
         {
@@ -100,7 +96,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [Authorize]
         [HttpPut("{tripId}")]
         public async Task<IActionResult> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripDto trip)
         {
@@ -118,7 +113,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [Authorize]
         [HttpDelete("{tripId}")]
         public async Task<IActionResult> DeleteTrip(Guid tripId)
         {

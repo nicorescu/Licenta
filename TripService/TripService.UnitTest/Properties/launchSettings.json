@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TripService.UnitTest": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

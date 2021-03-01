@@ -1,2 +1,2 @@
 export * from './lib/shared-app-authentication-feature.module';
-export * from './lib/components/sign-up/sign-up.component';
+export * from './lib/container/sign-up-container/sign-up-container.component';

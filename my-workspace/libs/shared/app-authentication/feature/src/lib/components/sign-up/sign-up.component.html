@@ -1,8 +1,8 @@
-<div class="container" *transloco="let t; read: 'authentication'">
-  <div class="text-center h2">{{ t('createAccount') }}</div>
+<div class="sign-up-container" *transloco="let t; read: 'authentication'">
   <form>
-    <div>
-      <mat-form-field appearance="outline">
+    <div class="text-center">
+      <mat-form-field appearance="outline" class="w-50">
+        <mat-icon matPrefix>home</mat-icon>
         <mat-label>{{ t('firstName') }}</mat-label>
         <input
           #firstName="ngModel"
@@ -13,4 +13,4 @@
       </mat-form-field>
     </div>
   </form>
-</div>
+</div> 
