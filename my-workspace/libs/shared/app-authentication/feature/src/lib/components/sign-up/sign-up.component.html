@@ -1,8 +1,7 @@
-<div class="sign-up-container" *transloco="let t; read: 'authentication'">
+<div class="signup-container" *transloco="let t; read: 'authentication'">
   <form>
-    <div class="text-center">
-      <mat-form-field appearance="outline" class="w-50">
-        <mat-icon matPrefix>home</mat-icon>
+    <div class="form-fields">
+      <mat-form-field appearance="outline">
         <mat-label>{{ t('firstName') }}</mat-label>
         <input
           #firstName="ngModel"
@@ -11,6 +10,57 @@
           name="firstName"
         />
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('lastName') }}</mat-label>
+        <input
+          #lastName="ngModel"
+          matInput
+          [(ngModel)]="user.lastName"
+          name="lastName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('email') }}</mat-label>
+        <input
+          #email="ngModel"
+          matInput
+          [(ngModel)]="user.email"
+          name="email"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('password') }}</mat-label>
+        <input
+          #password="ngModel"
+          matInput
+          [(ngModel)]="user.password"
+          name="password"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('repeatPassword') }}</mat-label>
+        <input matInput name="repeatPassword" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-50">
+        <mat-label>{{t('birthday')}}</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+        ></mat-datepicker>
+      </mat-form-field>
+
+      <div>
+        <ngx-intl-tel-input matInput [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+          [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+          [searchCountryField]="[searchCountryField.Iso2, searchCountryField.Name]" [selectFirstCountry]="false"
+          [selectedCountryISO]="countryISO.Romania" [maxLength]="15" [tooltipField]="tooltipLabel.Name"
+          [phoneValidation]="true" [separateDialCode]="true"
+          [numberFormat]="phoneNumberFormat.National" name="phone">
+        </ngx-intl-tel-input>
+      </div>
     </div>
   </form>
-</div> 
+</div>

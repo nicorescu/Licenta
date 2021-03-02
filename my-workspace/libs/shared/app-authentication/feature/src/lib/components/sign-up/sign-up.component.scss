@@ -1,5 +1,26 @@
-.signup-container{
+@import 'theme.scss';
+
+::ng-deep .signup-container{
     justify-content: center;
     align-items: center;
     width: 100%;
+
+    .form-fields{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+        mat-form-field{
+            width: 80%;
+            
+            .mat-form-field-label{
+                font-size: 15px;
+                color: rgb(100, 98, 98);
+            }
+
+            .mat-form-field-outline{
+                color: #9a9595;;
+            }
+        }
+    }
 }

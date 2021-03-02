@@ -57,10 +57,13 @@
               "apps/hiking-ui/src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/devextreme/dist/css/dx.common.css",
               "node_modules/devextreme/dist/css/dx.light.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "globalStyles/devextreme-overrides/generated/theme.base.css",
               "globalStyles/devextreme-overrides/generated/theme.additional.css",
               "globalStyles/devextreme-overrides/dx-styles.scss",
@@ -68,7 +71,9 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/hiking-ui/src/themes"]
+              "includePaths": [
+                "apps/hiking-ui/src/themes"
+              ]
             },
             "allowedCommonJsDependencies": [
               "devextreme",
@@ -135,6 +140,8 @@
               "apps/hiking-ui/src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "apps/hiking-ui/src/styles.scss"
             ],
@@ -148,7 +155,9 @@
               "apps/hiking-ui/tsconfig.app.json",
               "apps/hiking-ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -185,7 +194,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/hiking-ui-e2e/tsconfig.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

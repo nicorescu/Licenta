@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripService", "TripService\TripService.csproj", "{4C9E277F-A056-4C03-AEC9-BEDF7ADFD4B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripService.UnitTest", "TripService.UnitTest\TripService.UnitTest.csproj", "{A1B190B4-0807-4B61-A628-791691DBFE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripService.UnitTest", "TripService.UnitTest\TripService.UnitTest.csproj", "{A1B190B4-0807-4B61-A628-791691DBFE4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripService.IntegrationTest", "TripService.IntegrationTest\TripService.IntegrationTest.csproj", "{A3AA6272-A137-42C2-AD2D-C7E687DA056E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A1B190B4-0807-4B61-A628-791691DBFE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1B190B4-0807-4B61-A628-791691DBFE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B190B4-0807-4B61-A628-791691DBFE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3AA6272-A137-42C2-AD2D-C7E687DA056E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AA6272-A137-42C2-AD2D-C7E687DA056E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AA6272-A137-42C2-AD2D-C7E687DA056E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AA6272-A137-42C2-AD2D-C7E687DA056E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

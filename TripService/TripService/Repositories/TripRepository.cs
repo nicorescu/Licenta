@@ -35,13 +35,10 @@ namespace TripService.Repositories
         {
             try
             {
-                string[] keywords = { "Sacele", "Sacele", "Brasov County", "Romania" };
-                var startDate = Convert.ToDateTime("2021-02-01T09:04:42.428+00:00");
-                var endDate = Convert.ToDateTime("2021-03-09T09:04:42.428+00:00");
 
                 var result = await _collection.Aggregate()
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(startDate, endDate)).ToListAsync();
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchTrip.Keywords))
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchTrip.StartDate, searchTrip.EndDate)).ToListAsync();
 
                 return result;
             }
