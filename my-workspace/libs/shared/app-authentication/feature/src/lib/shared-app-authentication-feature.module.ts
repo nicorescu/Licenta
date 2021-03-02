@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import {HttpClientModule} from '@angular/common/http';
 
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -22,7 +24,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     FormsModule,
     MatIconModule,
     MatDatepickerModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    HttpClientModule,
+    MatSelectCountryModule.forRoot('en')
   ],
   declarations: [SignUpComponent, SignUpContainerComponent],
 })

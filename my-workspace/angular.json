@@ -54,7 +54,12 @@
             "aot": true,
             "assets": [
               "apps/hiking-ui/src/favicon.ico",
-              "apps/hiking-ui/src/assets"
+              "apps/hiking-ui/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svg-country-flags/svg",
+                "output": "assets/svg-country-flags/svg"
+              }
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -71,9 +76,7 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "apps/hiking-ui/src/themes"
-              ]
+              "includePaths": ["apps/hiking-ui/src/themes"]
             },
             "allowedCommonJsDependencies": [
               "devextreme",
@@ -155,9 +158,7 @@
               "apps/hiking-ui/tsconfig.app.json",
               "apps/hiking-ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -194,9 +195,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/hiking-ui-e2e/tsconfig.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

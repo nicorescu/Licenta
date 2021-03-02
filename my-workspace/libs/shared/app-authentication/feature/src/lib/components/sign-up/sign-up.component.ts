@@ -11,6 +11,7 @@ export class SignUpComponent implements OnInit {
 
   user: User;
   repeatPassword: string;
+  country = null;
 
 	searchCountryField = SearchCountryField;
 	tooltipLabel = TooltipLabel;
@@ -24,5 +25,8 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
+  onCountrySelected(country){
+    console.log(country);
+  }
 }

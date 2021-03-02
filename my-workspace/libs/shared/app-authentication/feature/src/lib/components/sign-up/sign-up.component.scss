@@ -1,26 +1,51 @@
 @import 'theme.scss';
 
-::ng-deep .signup-container{
-    justify-content: center;
+::ng-deep .signup-container {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .form-fields {
     align-items: center;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    mat-form-field {
+      width: 80%;
 
-    .form-fields{
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        padding-top: 10px;
-        mat-form-field{
-            width: 80%;
-            
-            .mat-form-field-label{
-                font-size: 15px;
-                color: rgb(100, 98, 98);
-            }
+      .mat-form-field-label {
+        font-size: 15px;
+        color: rgb(100, 98, 98);
+      }
 
-            .mat-form-field-outline{
-                color: #9a9595;;
-            }
-        }
+      .mat-form-field-outline {
+        color: #9a9595;
+      }
     }
+  }
+
+  #phoneNumberInputContainer {
+    height: 50px;
+
+    ngx-intl-tel-input {
+      height: 100%;
+
+      .separate-dial-code {
+        height: 100%;
+
+        .iti_flag-container {
+          height: 100%;
+        }
+        .phone-number {
+          height: 100%;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .country-dropdown{
+        margin-left: -100%;
+    }
+  }
 }

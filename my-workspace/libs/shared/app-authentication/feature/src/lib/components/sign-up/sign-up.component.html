@@ -44,21 +44,42 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-50">
-        <mat-label>{{t('birthday')}}</mat-label>
+        <mat-label>{{ t('birthday') }}</mat-label>
         <input matInput [matDatepicker]="picker" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker
-          #picker
-        ></mat-datepicker>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <div>
-        <ngx-intl-tel-input matInput [cssClass]="'custom'" [preferredCountries]="preferredCountries"
-          [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
-          [searchCountryField]="[searchCountryField.Iso2, searchCountryField.Name]" [selectFirstCountry]="false"
-          [selectedCountryISO]="countryISO.Romania" [maxLength]="15" [tooltipField]="tooltipLabel.Name"
-          [phoneValidation]="true" [separateDialCode]="true"
-          [numberFormat]="phoneNumberFormat.National" name="phone">
+      <div id="countrySelect">
+        <mat-select-country
+          label="Country"
+          (onCountrySelected)="onCountrySelected($event)"
+          [loadingDB]="true"
+        >
+        </mat-select-country>
+      </div>
+      
+      <div id="phoneNumberInputContainer">
+        <ngx-intl-tel-input
+          matInput
+          [cssClass]="'phone-number'"
+          [preferredCountries]="preferredCountries"
+          [enableAutoCountrySelect]="true"
+          [enablePlaceholder]="true"
+          [searchCountryFlag]="true"
+          [searchCountryField]="[
+            searchCountryField.Iso2,
+            searchCountryField.Name
+          ]"
+          [selectFirstCountry]="false"
+          [selectedCountryISO]="countryISO.Romania"
+          [maxLength]="15"
+          [tooltipField]="tooltipLabel.Iso2"
+          [phoneValidation]="true"
+          [separateDialCode]="true"
+          [numberFormat]="phoneNumberFormat.National"
+          name="phone"
+        >
         </ngx-intl-tel-input>
       </div>
     </div>
