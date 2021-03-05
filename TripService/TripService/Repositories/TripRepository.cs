@@ -15,8 +15,8 @@ namespace TripService.Repositories
         private readonly IMongoCollection<Trip> _collection;
         public TripRepository(IMongoClient mongoClient)
         {
-            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Trip>(StringResources.tripCollectionName);
 
+            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Trip>(StringResources.tripCollectionName);
         }
         public async Task<List<Trip>> GetAllTrips()
         {
@@ -35,7 +35,6 @@ namespace TripService.Repositories
         {
             try
             {
-
                 var result = await _collection.Aggregate()
                     .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchTrip.Keywords))
                     .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchTrip.StartDate, searchTrip.EndDate)).ToListAsync();

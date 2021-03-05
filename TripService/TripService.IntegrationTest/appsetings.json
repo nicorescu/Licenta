@@ -1,4 +1,4 @@
-{
+﻿{
   "Logging": {
     "LogLevel": {
       "Default": "Information",
@@ -7,5 +7,5 @@
     }
   },
   "AllowedHosts": "*",
-  "MongoUri": "mongodb+srv://teodor:123456qwe@cluster0.q0qsc.mongodb.net/Trip_planning"
+  "MongoUri": "mongodb+srv://teodor:123456qwe@cluster0.q0qsc.mongodb.net"
 }

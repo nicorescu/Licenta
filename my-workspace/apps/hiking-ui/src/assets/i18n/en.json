@@ -14,7 +14,8 @@
     "repeatPassword": "Repeat password",
     "phoneNumber": "Phone number",
     "birthday": "Birthday",
-    "country": "Country"
+    "country": "Country",
+    "searchCountry": "Search country"
   },
 
   "header": {

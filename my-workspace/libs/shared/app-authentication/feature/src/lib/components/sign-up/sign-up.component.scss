@@ -1,6 +1,6 @@
 @import 'theme.scss';
 
-::ng-deep .signup-container {
+:host ::ng-deep .signup-container {
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -26,26 +26,46 @@
   }
 
   #phoneNumberInputContainer {
-    height: 50px;
+    height: 55px;
+    width: 80%;
+    margin-bottom: 18px;
 
     ngx-intl-tel-input {
       height: 100%;
 
       .separate-dial-code {
         height: 100%;
+        width: 100%;
 
-        .iti_flag-container {
+        .iti__flag-container {
           height: 100%;
+          width: 100%;
         }
         .phone-number {
           height: 100%;
           font-size: 16px;
+          width: 100%;
+          border-radius: 5px;
+          outline-color: #9a9595;
+          border-width: thin;
+          &:focus {
+            outline-width: 1px;
+            outline-color: #9a9595;
+          }
+          
         }
       }
     }
 
-    .country-dropdown{
-        margin-left: -100%;
+    .country-dropdown {
+      width: 100%;
+    }
+  }
+
+  #countrySelect {
+    width: 250px;
+    mat-form-field {
+      width: 100%;
     }
   }
 }

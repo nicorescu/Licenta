@@ -5,8 +5,8 @@
   },
 
   "authentication":{
-    "createAccount": "Create account",
-    "signIn": "Sign-in",
+    "createAccount": "Creeaza cont",
+    "signIn": "Autentifica-te",
     "firstName": "Prenume",
     "lastName": "Nume de familie",
     "email": "Email",
@@ -14,7 +14,8 @@
     "repeatPassword": "Repeta parola",
     "phoneNumber": "Numar de telefon",
     "birthday": "Data nasterii",
-    "country": "Tara"
+    "country": "Țară",
+    "searchCountry": "Caută țara"
   },
 
   "header": {

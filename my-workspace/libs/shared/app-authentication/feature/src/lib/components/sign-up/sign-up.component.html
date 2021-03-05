@@ -1,67 +1,42 @@
 <div class="signup-container" *transloco="let t; read: 'authentication'">
-  <form>
+  <form *ngIf="signupForm" [formGroup]="signupForm">
     <div class="form-fields">
       <mat-form-field appearance="outline">
         <mat-label>{{ t('firstName') }}</mat-label>
-        <input
-          #firstName="ngModel"
-          matInput
-          [(ngModel)]="user.firstName"
-          name="firstName"
-        />
+        <input matInput formControlName="firstName" />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>{{ t('lastName') }}</mat-label>
-        <input
-          #lastName="ngModel"
-          matInput
-          [(ngModel)]="user.lastName"
-          name="lastName"
-        />
+        <input matInput formControlName="lastName" />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>{{ t('email') }}</mat-label>
-        <input
-          #email="ngModel"
-          matInput
-          [(ngModel)]="user.email"
-          name="email"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>{{ t('password') }}</mat-label>
-        <input
-          #password="ngModel"
-          matInput
-          [(ngModel)]="user.password"
-          name="password"
-        />
+        <input matInput formControlName="email" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>{{ t('repeatPassword') }}</mat-label>
-        <input matInput name="repeatPassword" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="w-50">
         <mat-label>{{ t('birthday') }}</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input matInput [matDatepicker]="picker" formControlName="birthday" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <div id="countrySelect">
+      <div id="countrySelect" #countrySelect>
         <mat-select-country
-          label="Country"
+        id="sel"
+          label="{{ t('country') }}"
           (onCountrySelected)="onCountrySelected($event)"
-          [loadingDB]="true"
+          (keydown)="keydown()"
+          formControlName="country"
         >
         </mat-select-country>
       </div>
-      
+
       <div id="phoneNumberInputContainer">
         <ngx-intl-tel-input
-          matInput
+          #phoneInput
+          id="phoneInput"
+          formControlName="phone"
           [cssClass]="'phone-number'"
           [preferredCountries]="preferredCountries"
           [enableAutoCountrySelect]="true"
@@ -78,10 +53,21 @@
           [phoneValidation]="true"
           [separateDialCode]="true"
           [numberFormat]="phoneNumberFormat.National"
-          name="phone"
+          formControlName="phoneNumber"
+          type="text"
         >
         </ngx-intl-tel-input>
       </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('password') }}</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('repeatPassword') }}</mat-label>
+        <input matInput type="password" formControlName="repeatPassword" />
+      </mat-form-field>
     </div>
   </form>
 </div>
