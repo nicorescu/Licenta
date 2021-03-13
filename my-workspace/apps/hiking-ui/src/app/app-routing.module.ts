@@ -12,7 +12,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { TripPlanningComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
-import { SignUpContainerComponent } from '@hkworkspace/shared/app-authentication/feature';
+import { SignInContainerComponent, SignUpContainerComponent } from '@hkworkspace/shared/app-authentication/feature';
 
 const routes: Routes = [
   {
@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpContainerComponent,
+  },
+  {
+    path: 'signin',
+    component: SignInContainerComponent,
   },
 ];
 

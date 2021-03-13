@@ -25,6 +25,8 @@ import { SharedAppNavigationFeatureModule } from '@hkworkspace/shared/app-naviga
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningFeatureModule } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import {SharedAppAuthenticationFeatureModule} from '@hkworkspace/shared/app-authentication/feature';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +47,9 @@ import {SharedAppAuthenticationFeatureModule} from '@hkworkspace/shared/app-auth
     HttpClientModule,
     TranslocoRootModule,
     HikingUiTripPlanningFeatureModule,
-    SharedAppAuthenticationFeatureModule
+    SharedAppAuthenticationFeatureModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([])
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent],

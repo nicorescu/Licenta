@@ -7,6 +7,13 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
@@ -22,24 +29,22 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
   @ViewChild('googlePlacesInput') locationsInput;
 
-  options={
+  options = {
     strictBounds: false,
-  types: ["(regions)"],
-  }
-
-  @Output() photosUrlEmitter = new EventEmitter<string[]>();
+    types: ['(regions)'],
+  };
 
   rendererListener: () => void;
+  searchForm: FormGroup;
   currentDate = new Date();
   searchTrip: SearchTripModel;
   isInvalidLocation = true;
-  submittedOnce = false;
-  location: string;
-  photoReferences: string[] = [];
+  isSubmittedOnce = false;
 
   constructor(
     private renderer: Renderer2,
-    private googlePlacesService: GooglePlacesService
+    private googlePlacesService: GooglePlacesService,
+    private formBuilder: FormBuilder
   ) {
     this.searchTrip = new SearchTripModel();
     this.rendererListener = this.renderer.listen(
@@ -56,7 +61,22 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchForm = this.formBuilder.group({
+      location: new FormControl(null, [Validators.required]),
+      startDate: new FormControl(null, [Validators.required]),
+      endDate: new FormControl(null, [Validators.required]),
+      friendsOnly: new FormControl(false),
+    });
+  }
+
+  public get startDate() {
+    return this.searchForm.controls['startDate'];
+  }
+
+  public get endDate() {
+    return this.searchForm.controls['endDate'];
+  }
 
   ngOnDestroy(): void {
     this.rendererListener();
@@ -64,10 +84,10 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   //NU: id/reviews/html_attributions/permanently_closed/price_level/rating
   public handleAddressChange(address: Address) {
-    console.log(address);
-    this.photosUrlEmitter.emit(this.photoReferences);
+    console.log(address.geometry.location.lat());
+    console.log(address.geometry.location.lng());
     try {
-      this.setSearchModelFields(address);
+      this.setSearchKeywords(address);
       this.isInvalidLocation = false;
     } catch {
       this.isInvalidLocation = true;
@@ -75,7 +95,8 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.submittedOnce = true;
+    this.isSubmittedOnce = true;
+    this.setSearchModelProps();
     console.log(this.searchTrip);
   }
 
@@ -85,15 +106,27 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     }
   }
 
+  setSearchModelProps() {
+    this.searchTrip.startDate = (new DatePipe('en-us').transform(
+      this.searchForm.value.startDate,
+      'dd/MM/yyyy'
+    ) as unknown) as Date;
+    this.searchTrip.endDate = (new DatePipe('en-us').transform(
+      this.searchForm.value.endDate,
+      'dd/MM/yyyy'
+    ) as unknown) as Date;
+    this.searchTrip.friendsOnly = this.searchForm.value.friendsOnly;
+  }
+
   clearInputValue() {
-    this.locationsInput.nativeElement.value = '';
-    this.location = '';
+    this.locationsInput.nativeElement.value = null;
+    this.searchForm.value.location='';
     this.searchTrip.clearSearch();
   }
 
-  setSearchModelFields(address: Address) {
-    address.address_components.forEach(comp => {
+  setSearchKeywords(address: Address) {
+    address.address_components.forEach((comp) => {
       this.searchTrip.keywords.push(comp.long_name);
-    })
+    });
   }
 }

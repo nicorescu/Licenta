@@ -11,7 +11,7 @@
 
       <mat-toolbar-row class="toolbar-elements" *ngIf="!authenticated">
         <div class="authentication-buttons">
-          <button class="btn btn-primary">{{t('signIn')}}</button>
+          <button class="btn btn-primary" [routerLink]="['/signin']">{{t('signIn')}}</button>
           <button class="btn btn-secondary" [routerLink]="['/signup']">{{t('signUp')}}</button>
         </div>
       </mat-toolbar-row>

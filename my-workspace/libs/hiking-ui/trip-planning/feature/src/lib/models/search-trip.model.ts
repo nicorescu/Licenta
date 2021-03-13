@@ -14,5 +14,6 @@ export class SearchTripModel {
     this.endDate = null;
     this.friendsOnly = false;
     this.keywords = [];
+    console.log("apelat");
   }
 }

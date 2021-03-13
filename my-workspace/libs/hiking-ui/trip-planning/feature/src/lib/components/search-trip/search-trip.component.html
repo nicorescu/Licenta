@@ -2,18 +2,23 @@
   class="search-trip-container"
   *transloco="let t; read: 'tripPlanning.searchTrip'"
 >
-  <form #searchTripForm="ngForm" (ngSubmit)="onSubmit()">
+  <form
+    #searchTripForm="ngForm"
+    [formGroup]="searchForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div>
       <mat-form-field
         [ngClass]="{
-          'invalid-field': isInvalidLocation && submittedOnce,
-          'valid-field': !(isInvalidLocation && submittedOnce)
+          'theme-invalid-mat-form-field': isInvalidLocation && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(isInvalidLocation && isSubmittedOnce)
         }"
         id="googleInputField"
         appearance="outline"
       >
         <mat-label>{{ t('enterLocation') }}</mat-label>
         <input
+          id="locationInput"
           #googlePlacesInput
           matInput
           ngx-google-places-autocomplete
@@ -21,13 +26,12 @@
           #placesRef="ngx-places"
           (onAddressChange)="handleAddressChange($event)"
           class="google-input theme-input"
-          name="address"
           (keydown)="onKey()"
-          (keydown.enter)="false"
+          (keydown.enter)="(false)"
           required
-          [(ngModel)]="location"
+          formControlName="location"
         />
-        <mat-error *ngIf="isInvalidLocation && submittedOnce">{{
+        <mat-error *ngIf="isInvalidLocation && isSubmittedOnce">{{
           t('selectLocationError')
         }}</mat-error>
       </mat-form-field>
@@ -36,11 +40,11 @@
       <div class="col-12">
         <mat-form-field
           [ngClass]="{
-            'invalid-field':
-              (startDate.errors || endDate.errors) && submittedOnce,
-            'valid-field': !(
+            'theme-invalid-mat-form-field':
+              (startDate.errors || endDate.errors) && isSubmittedOnce,
+            'theme-valid-mat-form-field': !(
               (startDate.errors || endDate.errors) &&
-              submittedOnce
+              isSubmittedOnce
             )
           }"
           appearance="outline"
@@ -50,24 +54,18 @@
           <mat-date-range-input (click)="picker.open()" [rangePicker]="picker">
             <input
               class="theme-input"
-              #startDate="ngModel"
               matInput
               matStartDate
+              formControlName="startDate"
               [placeholder]="t('startDate')"
-              name="startDate"
-              [(ngModel)]="searchTrip.startDate"
-              required
               readonly
             />
             <input
               class="theme-input"
-              #endDate="ngModel"
               matInput
               matEndDate
-              name="endDate"
+              formControlName="endDate"
               [placeholder]="t('endDate')"
-              [(ngModel)]="searchTrip.endDate"
-              required
               readonly
             />
           </mat-date-range-input>
@@ -76,17 +74,16 @@
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
-          <mat-error
-            *ngIf="(startDate.errors || endDate.errors) && submittedOnce"
-            >{{ t('selectAValidRangeError') }}</mat-error
-          >
+          <mat-error *ngIf="isSubmittedOnce">{{
+            t('selectAValidRangeError')
+          }}</mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="text-center">
       <div class="col-12 mb-4 mt-2">
         <mat-slide-toggle
-          [(ngModel)]="searchTrip.friendsOnly"
+          formControlName="friendsOnly"
           name="friendsOnly"
           color="primary"
         >

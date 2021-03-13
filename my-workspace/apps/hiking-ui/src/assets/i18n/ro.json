@@ -6,16 +6,36 @@
 
   "authentication":{
     "createAccount": "Creeaza cont",
-    "signIn": "Autentifica-te",
-    "firstName": "Prenume",
-    "lastName": "Nume de familie",
-    "email": "Email",
-    "password": "Parola",
-    "repeatPassword": "Repeta parola",
-    "phoneNumber": "Numar de telefon",
-    "birthday": "Data nasterii",
-    "country": "Țară",
-    "searchCountry": "Caută țara"
+
+    "signup": {
+      "createYourAccount": "Creeaza-ti contul",
+      "firstName": "Prenume",
+      "lastName": "Nume de familie",
+      "email": "Email",
+      "password": "Parola",
+      "repeatPassword": "Repeta parola",
+      "phoneNumber": "Numar de telefon",
+      "birthday": "Data nasterii",
+      "country": "Țară",
+      "searchCountry": "Caută țara",
+      "alreadyHaveAccount": "Ai deja un cont?",
+      "signIn": "Autentifica-te",
+
+      "errors": {
+        "firstNameIsRequired": "Prenumele este necesar.",
+        "lastNameIsRequired": "Numele de familie este necesar.",
+        "emailIsRequired": "Email-ul este necesar.",
+        "birthdayIsRequired": "Data nasterii este necesara.",
+        "passwordIsRequired": "Parola este necesara.",
+        "passwordMinLength": "Parola trebuie sa contina minim 8 caractere",
+        "repeatPasswordIsRequired": "Trebuie sa repeti parola.",
+        "repeatPasswordDoesntMatch": "Parolele nu se potrivesc"
+      }
+    },
+    "signin": {
+      "signIn": "Autentifica-te"
+    }
+    
   },
 
   "header": {

@@ -1,5 +1,33 @@
-.theme-input{
-    &::placeholder{
-        font-size: 14px;
-    }
+@import './variables.scss';
+
+::ng-deep {
+    .theme-input {
+        &::placeholder {
+          font-size: 14px;
+        }
+      }
+
+    .theme-invalid-mat-form-field {
+        width: 80%;
+        &.mat-form-field-appearance-outline .mat-form-field-outline {
+          color: red;
+        }
+      
+        mat-label {
+          color: red;
+          font-size: 15px;
+        }
+      }
+      
+      .theme-valid-mat-form-field {
+        width: 80%;
+        &.mat-form-field-appearance-outline .mat-form-field-outline {
+          color: $input_outline_gray;
+        }
+      
+        mat-label {
+          color: #7e827f;
+          font-size: 15px;
+        }
+      }  
 }

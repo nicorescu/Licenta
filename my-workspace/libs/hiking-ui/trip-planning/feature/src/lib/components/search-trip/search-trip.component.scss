@@ -21,24 +21,4 @@
     min-width: 300px;
     width: 60%;
   }
-
-  .invalid-field {
-    &.mat-form-field-appearance-outline .mat-form-field-outline {
-      color: red;
-    }
-
-    mat-label {
-      color: red;
-    }
-  }
-
-  .valid-field {
-    &.mat-form-field-appearance-outline .mat-form-field-outline {
-      color: $input_outline_gray;
-    }
-
-    mat-label {
-      color: #7e827f;
-    }
-  }
 }

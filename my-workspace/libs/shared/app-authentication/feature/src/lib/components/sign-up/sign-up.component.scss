@@ -4,25 +4,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 10px;
 
   .form-fields {
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    mat-form-field {
-      width: 80%;
-
-      .mat-form-field-label {
-        font-size: 15px;
-        color: rgb(100, 98, 98);
-      }
-
-      .mat-form-field-outline {
-        color: #9a9595;
-      }
-    }
+    padding: 15px;
   }
 
   #phoneNumberInputContainer {
@@ -46,11 +34,15 @@
           font-size: 16px;
           width: 100%;
           border-radius: 5px;
-          outline-color: #9a9595;
+          border-color: $input_outline_gray;
           border-width: thin;
           &:focus {
-            outline-width: 1px;
-            outline-color: #9a9595;
+            border-width: 2px;
+            border-color: $input_outline_gray;
+            outline-color: $input_outline_gray;
+          }
+          &:hover{
+            border-width: 2px;
           }
           
         }
@@ -66,6 +58,18 @@
     width: 250px;
     mat-form-field {
       width: 100%;
+    }
+  }
+
+  .signIn-message{
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    
+    a{
+      color: $col_blue_main;
+      margin-left: 5px;
     }
   }
 }

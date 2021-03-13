@@ -4,18 +4,38 @@
     "profile": "Profile"
   },
 
-  "authentication":{
+  "authentication": {
     "createAccount": "Create account",
-    "signIn": "Sign-in",
-    "firstName": "First name",
-    "lastName": "Last name",
-    "email": "Email",
-    "password": "Password",
-    "repeatPassword": "Repeat password",
-    "phoneNumber": "Phone number",
-    "birthday": "Birthday",
-    "country": "Country",
-    "searchCountry": "Search country"
+
+    "signup": {
+      "createYourAccount": "Create your account",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "repeatPassword": "Repeat password",
+      "phoneNumber": "Phone number",
+      "birthday": "Birthday",
+      "country": "Country",
+      "searchCountry": "Search country",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign-in",
+
+      "errors": {
+        "firstNameIsRequired": "First name is required.",
+        "lastNameIsRequired": "Last name is required.",
+        "emailIsRequired": "Last name is required.",
+        "birthdayIsRequired": "Last name is required.",
+        "passwordIsRequired": "Password is required.",
+        "passwordMinLength": "Password should have at least 8 characters",
+        "repeatPasswordIsRequired": "Repeating password is required.",
+        "repeatPasswordDoesntMatch": "Passwords don't match"
+      }
+    },
+
+    "signin": {
+      "signIn": "Sign-in"
+    }  
   },
 
   "header": {

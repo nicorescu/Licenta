@@ -1,27 +1,68 @@
-<div class="signup-container" *transloco="let t; read: 'authentication'">
-  <form *ngIf="signupForm" [formGroup]="signupForm">
+<div class="signup-container" *transloco="let t; read: 'authentication.signup'">
+  <form *ngIf="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="form-fields">
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('firstName') }}</mat-label>
-        <input matInput formControlName="firstName" />
+        <input matInput formControlName="firstName" required />
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.firstNameIsRequired')
+        }}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('lastName') }}</mat-label>
-        <input matInput formControlName="lastName" />
+        <input matInput formControlName="lastName" required />
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.lastNameIsRequired')
+        }}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('email') }}</mat-label>
-        <input matInput formControlName="email" />
+        <input matInput formControlName="email" required />
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.emailIsRequired')
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('birthday') }}</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="birthday" />
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="birthday"
+          required
+        />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.birthdayIsRequired')
+        }}</mat-error>
       </mat-form-field>
 
-      <div id="countrySelect" #countrySelect>
+      <!-- <div id="countrySelect" #countrySelect>
         <mat-select-country
         id="sel"
           label="{{ t('country') }}"
@@ -30,7 +71,7 @@
           formControlName="country"
         >
         </mat-select-country>
-      </div>
+      </div> -->
 
       <div id="phoneNumberInputContainer">
         <ngx-intl-tel-input
@@ -57,17 +98,48 @@
           type="text"
         >
         </ngx-intl-tel-input>
+        <div>eroare</div>
       </div>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('password') }}</mat-label>
-        <input matInput type="password" formControlName="password" />
+        <input matInput type="password" formControlName="password" required />
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.passwordIsRequired')
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        [ngClass]="{
+          'theme-invalid-mat-form-field': !signupForm.valid && isSubmittedOnce,
+          'theme-valid-mat-form-field': !(!signupForm.valid && isSubmittedOnce)
+        }"
+      >
         <mat-label>{{ t('repeatPassword') }}</mat-label>
-        <input matInput type="password" formControlName="repeatPassword" />
+        <input
+          matInput
+          type="password"
+          formControlName="repeatPassword"
+          required
+        />
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.repeatPasswordIsRequired')
+        }}</mat-error>
       </mat-form-field>
+      <button type="submit" class="btn btn-primary" style="width: 80%">
+        {{ t('createYourAccount') }}
+      </button>
     </div>
   </form>
+  <div class="signIn-message">
+    <div class="h6">{{ t('alreadyHaveAccount') }}</div>
+    <a [routerLink]="'/signin'">{{ t('signIn') }}</a>
+  </div>
 </div>

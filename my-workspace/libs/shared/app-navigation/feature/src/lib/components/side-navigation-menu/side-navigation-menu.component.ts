@@ -8,11 +8,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslocoService } from '@ngneat/transloco';
+import { NavigationEnd, Router } from '@angular/router';
 import { DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
-import { filter } from 'rxjs/operators';
 import { navItem } from '../../options/nav-item';
+import { filter, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'hk-side-navigation-menu',
@@ -44,25 +43,33 @@ export class SideNavigationMenuComponent
     }
   }
 
-  constructor(
-    private router: Router,
-    private translocoService: TranslocoService
-  ) {}
+  constructor(private router: Router) {
+    router.events
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((event) => event instanceof NavigationEnd)
+      )
+      .subscribe((navEvent: NavigationEnd) => {
+        if (navEvent.url != this.selectedItem) {
+          this.menu.instance.unselectAll();
+        }
+      });
+  }
 
   onItemClick(item: any) {
     this.selectedItem = item.itemData.path;
     this.itemClicked.emit(this.selectedItem);
     if (this.isMenuOpen) {
-      this.menu.instance.selectItem(this.selectedItem);
       if (this.selectedItem) {
+        this.menu.instance.selectItem(this.selectedItem);
         this.router.navigate([this.selectedItem]);
+        console.log('in functie');
       }
     }
   }
 
   ngOnInit() {
     this.selectedItem = location.pathname;
-    
   }
 
   ngOnDestroy() {

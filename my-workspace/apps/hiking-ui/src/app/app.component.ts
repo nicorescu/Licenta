@@ -36,7 +36,7 @@ export class AppComponent {
               },
               {
                 text: 'Tasks',
-                path: '/gagasga',
+                path: '/tasks',
               },
             ],
           },

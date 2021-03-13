@@ -32,6 +32,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   repeatPassword: string;
   isInvalidCountry = true;
   signupForm: FormGroup;
+  isSubmittedOnce = false;
   rendererListener: () => void;
 
   searchCountryField = SearchCountryField;
@@ -74,7 +75,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    this.phoneInput.searchCountryPlaceholder = this.translocoService.translate('authentication.searchCountry');
+    this.phoneInput.searchCountryPlaceholder = this.translocoService.translate('authentication.signup.searchCountry');
   }
 
   onCountrySelected(country: Country) {
@@ -84,5 +85,9 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   keydown() {
     this.isInvalidCountry = true;
+  }
+
+  onSubmit(){
+    this.isSubmittedOnce = true;
   }
 }
