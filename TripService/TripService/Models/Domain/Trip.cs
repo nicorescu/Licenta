@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Enumerators;
 
 namespace TripService.Models.Domain
 {
@@ -19,5 +20,9 @@ namespace TripService.Models.Domain
         public DateTime EndDate { get; set; }
         public User Organizer { get; set; }
         public List<User> Participants { get; set; }
+        public TripPrivacy Privacy { get; set; }
+        public TripState State { get; set; }
+        public List<Review> Reviews { get; set; }
+
     }
 }

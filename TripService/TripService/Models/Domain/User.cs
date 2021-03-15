@@ -20,8 +20,8 @@ namespace TripService.Models.Domain
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
-        public string Country { get; set; }
         public RoleEnum Role { get; set; }
         public List<User> friends { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }

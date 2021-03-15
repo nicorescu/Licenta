@@ -15,11 +15,12 @@ namespace TripService.Models.Dtos
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
-        public string Country { get; set; }
         public RoleEnum Role { get; set; }
-        public List<UserDto> Friends { get; set; }
-        public string ProfilePic { get; set; }
+        public List<UserDto> friends { get; set; }
+        public List<ReviewDto> Reviews { get; set; }
+        public double ReviewAverage { get; set; }
 
     }
 }

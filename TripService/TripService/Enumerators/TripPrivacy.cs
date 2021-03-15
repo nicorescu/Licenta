@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace TripService.Enumerators
 {
-    public class TripPrivacy
+    public enum TripPrivacy
     {
+        Private,
+        FriendsOnly,
+        Public
     }
 }

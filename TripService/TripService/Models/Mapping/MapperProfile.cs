@@ -16,7 +16,8 @@ namespace TripService.Models.Mapping
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()));
 
             CreateMap<Trip, TripDto>()
-                .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()));
+                .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Average(review => review.Stars)));
 
             CreateMap<Role, RoleDto>();
 

@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace TripService.Enumerators
 {
-    public class TripState
+    public enum TripState
     {
+        Planning,
+        InProgress,
+        Finished
     }
 }
