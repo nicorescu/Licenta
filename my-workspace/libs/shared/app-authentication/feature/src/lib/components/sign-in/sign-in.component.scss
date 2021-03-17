@@ -1,0 +1,23 @@
+@import 'theme.scss';
+
+:host ::ng-deep .signin-container {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+
+  .form-fields {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    mat-form-field{
+        width: 80%;
+    }
+  }
+
+  .divider{
+    
+  }
+}

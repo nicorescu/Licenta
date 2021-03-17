@@ -1,8 +1,24 @@
 @import './variables.scss';
 
-.btn-primary{
+:host ::ng-deep {
+  .btn-primary {
     background-color: $col_blue_main;
-}
-button{
+    border-color: $col_blue_selected;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+      &:hover {
+        background-color: $col_button_active;
+        box-shadow: $col_blue_selected;
+      }
+    }
+  }
+
+  button {
     font-size: 17px;
+  }
 }

@@ -11,7 +11,7 @@ namespace TripService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RolesController : Controller
+    public class RolesController : ControllerBase
     {
         private IRoleProcessor _roleProcessor;
 

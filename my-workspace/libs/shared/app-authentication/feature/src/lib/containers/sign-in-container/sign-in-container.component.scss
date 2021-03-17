@@ -1,0 +1,37 @@
+@import 'theme.scss';
+
+#signInContainer {
+  width: 50%;
+  min-width: 405px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  .sign-in {
+    width: 100%;
+    background-color: white;
+  }
+
+  .divider {
+    display: flex;
+    margin-top: 40px;
+
+    mat-divider {
+      width: 47%;
+    }
+
+    .mid-text {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -12px;
+      font-size: 15px;
+    }
+  }
+
+  .additional-signin-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

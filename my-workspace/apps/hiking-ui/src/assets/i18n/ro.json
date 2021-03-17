@@ -7,8 +7,9 @@
   "authentication":{
     "createAccount": "Creeaza cont",
 
-    "signup": {
+    "signUp": {
       "createYourAccount": "Creeaza-ti contul",
+      "createAccount": "Creeaza cont",
       "firstName": "Prenume",
       "lastName": "Nume de familie",
       "email": "Email",
@@ -32,8 +33,10 @@
         "repeatPasswordDoesntMatch": "Parolele nu se potrivesc"
       }
     },
-    "signin": {
-      "signIn": "Autentifica-te"
+    "signIn": {
+      "signIn": "Autentifica-te",
+      "email": "Email",
+      "password": "Parola"
     }
     
   },

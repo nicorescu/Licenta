@@ -9,6 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router'
+import {MatDividerModule} from '@angular/material/divider';
 
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -17,6 +18,7 @@ import { SignUpContainerComponent } from './containers/sign-up-container/sign-up
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignInContainerComponent } from './containers/sign-in-container/sign-in-container.component';
+import {JwtModule} from '@auth0/angular-jwt';
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import { SignInContainerComponent } from './containers/sign-in-container/sign-in
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
+    MatDividerModule,
+    JwtModule,
     MatSelectCountryModule.forRoot('en')
   ],
   declarations: [SignUpComponent, SignUpContainerComponent, SignInComponent, SignInContainerComponent]

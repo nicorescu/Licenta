@@ -11,10 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using TripService.Models.Mapping;
 using TripService.Setup;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson;
 
 namespace TripService
 {
@@ -38,12 +35,15 @@ namespace TripService
                 return new MongoClient(uri);
             });
 
+            
+
             ServiceCollectionSetup.AddAutomapper(services);
             ServiceCollectionSetup.AddCors(services);
             ServiceCollectionSetup.AddSwagger(services);
             ServiceCollectionSetup.TryAddAllServices(services);
             ServiceCollectionSetup.TryAddMongoConnection(services);
-
+            ServiceCollectionSetup.AddAuthentication(services);
+            ServiceCollectionSetup.AddCors(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,11 +54,16 @@ namespace TripService
                 app.UseDeveloperExceptionPage();
             }
 
+
+
             app.UseHttpsRedirection();
+
+            app.UseCors("EnableCORS");
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

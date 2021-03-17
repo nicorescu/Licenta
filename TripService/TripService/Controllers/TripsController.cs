@@ -14,7 +14,7 @@ namespace TripService.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class TripsController : Controller
+    public class TripsController : ControllerBase
     {
         private ITripProcessor _tripProcessor;
 
@@ -64,6 +64,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [HttpGet("{tripId}")]
+        [Authorize]
         public async Task<IActionResult> GetTripById(Guid tripId)
         {
             TripDto result = await _tripProcessor.GetTripById(tripId);

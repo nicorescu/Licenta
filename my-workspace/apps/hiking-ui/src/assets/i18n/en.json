@@ -7,8 +7,9 @@
   "authentication": {
     "createAccount": "Create account",
 
-    "signup": {
+    "signUp": {
       "createYourAccount": "Create your account",
+      "createAccount": "Create account",
       "firstName": "First name",
       "lastName": "Last name",
       "email": "Email",
@@ -33,8 +34,10 @@
       }
     },
 
-    "signin": {
-      "signIn": "Sign-in"
+    "signIn": {
+      "signIn": "Sign-in",
+      "email": "Email",
+      "password": "Password"
     }  
   },
 

@@ -1,1 +1,18 @@
-<p>sign-in works!</p>
+<div class="signin-container" *transloco="let t; read: 'authentication.signIn'">
+  <form *ngIf="signInForm" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <div class="form-fields">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('email') }}</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ t('password') }}</mat-label>
+        <input matInput formControlName="password" />
+      </mat-form-field>
+      <button type="submit" class="btn btn-primary" style="width: 80%">
+        {{ t('signIn') }}
+      </button>
+    </div>
+  </form>
+  
+</div>

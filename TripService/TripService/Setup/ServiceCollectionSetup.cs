@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MongoDB.Driver;
 using System;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 using TripService.Models.Mapping;
 using TripService.Processors;
 using TripService.Repositories;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TripService.Setup
 {
@@ -32,17 +35,6 @@ namespace TripService.Setup
             services.TryAddScoped<IRoleProcessor, RoleProcessor>();
         }
 
-        public static void AddCors(IServiceCollection services)
-        {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
-        }
-
         public static void AddSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
@@ -52,6 +44,41 @@ namespace TripService.Setup
                     Title = "Swagger Demo API",
                     Description = "Demo API for showing Swagger",
                     Version = "v1"
+                });
+            });
+        }
+
+        public static void AddAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "http://localhost:44357",
+                    ValidAudience = "http://localhost:44357",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                };
+            });
+        }
+
+        public static void AddCors(IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
             });
         }

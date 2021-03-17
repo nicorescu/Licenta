@@ -1,7 +1,21 @@
-<div class="container" *transloco="let t; read: 'authentication'">
-    <div class="text-center h2">{{ t('signIn') }}</div>
-    <div id="signInContainer">
+<div class="container" *transloco="let t; read: 'authentication.signIn'">
+  <div class="text-center h2">{{ t('signIn') }}</div>
+  <div id="signInContainer">
+    <div class="sign-in">
       <hk-sign-in></hk-sign-in>
     </div>
+    <div class="divider">
+      <mat-divider></mat-divider>
+      <div class="mid-text text-muted">Or</div>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="additional-signin-options">
+      <button class="btn btn-primary" style="margin: 10px;">
+        Sign in with google
+      </button>
+      <button class="btn btn-primary">
+        Sign in with Facebook
+      </button>
+    </div>
   </div>
-  
+</div>
