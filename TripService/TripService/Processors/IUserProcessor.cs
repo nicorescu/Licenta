@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,11 +9,11 @@ namespace TripService.Processors
 {
     public interface IUserProcessor
     {
-        Task<List<UserDto>> GetAllUsers();
+        Task<ActionResult<List<UserDto>>> GetAllUsers();
 
-        Task<UserDto> GetUserById(Guid userId);
-        Task<bool> InsertNewUser(UserDto user);
-        Task<bool> UpdateUser(Guid id, UserDto user);
-        Task<bool> DeleteUser(Guid userId);
+        Task<ActionResult<UserDto>> GetUserById(Guid userId);
+        Task<ActionResult<bool>> InsertNewUser(UserDto user);
+        Task<ActionResult<bool>> UpdateUser(Guid id, UserDto user);
+        Task<ActionResult<bool>> DeleteUser(Guid userId);
     }
 }

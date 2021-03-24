@@ -43,7 +43,7 @@ namespace TripService.Extensions
             };
         }
 
-        public static  BsonArray SetSearchCriterias(string[] keywords)
+        public static BsonArray SetSearchCriterias(string[] keywords)
         {
             BsonArray criterias = new BsonArray();
             foreach (string key in keywords)

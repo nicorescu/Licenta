@@ -14,7 +14,7 @@ namespace TripService.Repositories
 
         public UserRepository(IMongoClient mongoClient)
         {
-            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<User>(StringResources.userCollectionName);
+            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<User>(StringResources.UserCollectionName);
         }
         public async Task<List<User>> GetAllUsers()
         {

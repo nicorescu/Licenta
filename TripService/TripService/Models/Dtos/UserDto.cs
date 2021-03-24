@@ -16,8 +16,9 @@ namespace TripService.Models.Dtos
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
+        public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
-        public RoleEnum Role { get; set; }
+        public RoleDto Role { get; set; }
         public List<UserDto> friends { get; set; }
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }

@@ -13,7 +13,7 @@ namespace TripService.Repositories
         private readonly IMongoCollection<Role> _collection;
         public RoleRepository(IMongoClient mongoClient)
         {
-            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Role>(StringResources.roleCollectionName);
+            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Role>(StringResources.RoleCollectionName);
 
         }
         public async Task<List<Role>> GetAllRoles()

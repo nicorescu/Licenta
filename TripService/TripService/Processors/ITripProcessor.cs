@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,12 +10,13 @@ namespace TripService.Processors
 {
     public interface ITripProcessor
     {
-        Task<List<TripDto>> GetAllTrips();
-        Task<List<TripDto>> GetBestTripMatches(SearchTripModel searchTrip);
-        Task<TripDto> GetTripById(Guid tripId);
+        Task<ActionResult<List<TripDto>>> GetAllTrips();
+        Task<ActionResult<List<TripDto>>> GetBestTripMatches(SearchTripModel searchTrip);
+        Task<ActionResult<TripDto>> GetTripById(Guid tripId);
 
-        Task<bool> InsertNewTrip(TripDto trip);
-        Task<bool> UpdateTrip(Guid tripId, TripDto trip);
-        Task<bool> DeleteTrip(Guid tripId);
+        Task<ActionResult<bool>> InsertNewTrip(TripDto trip);
+        Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId);
+        Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto trip);
+        Task<ActionResult<bool>> DeleteTrip(Guid tripId);
     }
 }

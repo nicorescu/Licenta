@@ -23,108 +23,91 @@ namespace TripService.Controllers
             _tripProcessor = tripProcessor;
         }
 
-
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [HttpGet]
+        [Route("/trips")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpGet("/trips")]
-        public async Task<IActionResult> GetAllTrips()
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetAllTrips()
         {
-            List<TripDto> result = await _tripProcessor.GetAllTrips();
-
-            if (result.Count == 0)
-            {
-                return NotFound("No trip found");
-            }
-
-            return Ok(result);
+            return await _tripProcessor.GetAllTrips();
         }
 
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [HttpGet("/trips/search")]
-        public async Task<IActionResult> GetMatchingTrips([FromQuery] SearchTripModel searchTrip)
-        {
-            List<TripDto> result = await _tripProcessor.GetBestTripMatches(searchTrip);
-
-            if (result.Count == 0)
-            {
-                return NotFound("No trip found");
-            }
-
-            return Ok(result);
-        }
-
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
+        [Route("/trips/search")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [HttpGet("{tripId}")]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetMatchingTrips([FromQuery] SearchTripModel searchTrip)
+        {
+            return await _tripProcessor.GetBestTripMatches(searchTrip);
+        }
+
+        [HttpGet]
+        [Route("{tripId}")]
         [Authorize]
-        public async Task<IActionResult> GetTripById(Guid tripId)
-        {
-            TripDto result = await _tripProcessor.GetTripById(tripId);
-
-            if (result == null)
-            {
-                return NotFound(result);
-            }
-            return Ok(result);
-        }
-
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpPost("/trips")]
-        public async Task<IActionResult> AddTrip([FromBody] TripDto trip)
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<TripDto>> GetTripById(Guid tripId)
         {
-            bool result = await _tripProcessor.InsertNewTrip(trip);
-
-            if (!result)
-            {
-                return BadRequest("Couldn't insert trip");
-            }
-
-            return Ok(result);
+            return await _tripProcessor.GetTripById(tripId);
         }
 
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
+        [HttpPost]
+        [Route("/trips")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpPut("{tripId}")]
-        public async Task<IActionResult> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripDto trip)
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> AddTrip([FromBody] TripDto trip)
         {
-            bool result = await _tripProcessor.UpdateTrip(tripId, trip);
-
-            if (!result)
-            {
-                return BadRequest("Couldn't update trip");
-            }
-
-            return Ok(result);
+            return await _tripProcessor.InsertNewTrip(trip);
         }
 
-        [ProducesResponseType(typeof(List<TripDto>), (int)HttpStatusCode.OK)]
+
+        [HttpPut]
+        [Route("{tripId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpDelete("{tripId}")]
-        public async Task<IActionResult> DeleteTrip(Guid tripId)
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripDto trip)
         {
-            bool result = await _tripProcessor.DeleteTrip(tripId);
+            return  await _tripProcessor.UpdateTrip(tripId, trip);
+        }
 
-            if (!result)
-            {
-                return BadRequest("User couldn't be deleted");
-            }
+        [HttpPut]
+        [Route("{tripId}/cancel")]
+        [Authorize(Roles = "Administrator, Moderator")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId)
+        {
+            return await _tripProcessor.CancelTripByAuthority(tripId);
+        }
 
-            return Ok(result);
+        [HttpDelete]
+        [Route("{tripId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> DeleteTrip(Guid tripId)
+        {
+            return await _tripProcessor.DeleteTrip(tripId);
         }
     }
 }

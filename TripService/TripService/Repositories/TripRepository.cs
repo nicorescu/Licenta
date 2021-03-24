@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Enumerators;
 using TripService.Extensions;
 using TripService.Models.ApiModels;
 using TripService.Models.Domain;
@@ -16,7 +17,7 @@ namespace TripService.Repositories
         public TripRepository(IMongoClient mongoClient)
         {
 
-            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Trip>(StringResources.tripCollectionName);
+            _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Trip>(StringResources.TripCollectionName);
         }
         public async Task<List<Trip>> GetAllTrips()
         {
@@ -75,6 +76,23 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> CancelTripByAuthority(Guid tripId)
+        {
+            try
+            {
+                var tripFilter = Builders<Trip>.Filter.Eq(trip => trip.Id, tripId);
+                var tripUpdate = Builders<Trip>.Update.Set(trip => trip.State, TripState.CanceledByAuthority);
+
+                var result = await _collection.UpdateOneAsync(tripFilter,tripUpdate);
+                return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                return false;
+            }
+        }
+        
         public async Task<bool> UpdateTrip(Guid tripId, Trip trip)
         {
             try
@@ -85,7 +103,7 @@ namespace TripService.Repositories
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Exceptieeee: " + exception.ToString());
+                Console.WriteLine(exception.ToString());
                 return false;
             }
         }

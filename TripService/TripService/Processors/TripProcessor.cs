@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,44 +15,95 @@ namespace TripService.Processors
     {
         private readonly ITripRepository _tripRepository;
         private readonly IMapper _mapper;
-        public TripProcessor(ITripRepository TripDtoRepository, IMapper mapper)
+        public TripProcessor(ITripRepository tripRepository, IMapper mapper)
         {
-            _tripRepository = TripDtoRepository;
+            _tripRepository = tripRepository;
             _mapper = mapper;
         }
-        public async Task<List<TripDto>> GetAllTrips()
+        public async Task<ActionResult<List<TripDto>>> GetAllTrips()
         {
             List<Trip> result = await _tripRepository.GetAllTrips();
 
-            return _mapper.Map<List<TripDto>>(result);
+            if(result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
         }
-        public async Task<List<TripDto>> GetBestTripMatches(SearchTripModel searchTrip)
+        public async Task<ActionResult<List<TripDto>>> GetBestTripMatches(SearchTripModel searchTrip)
         {
             List<Trip> result = await _tripRepository.GetBestTripMatches(searchTrip);
-            return _mapper.Map<List<TripDto>>(result);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
         }
-        public async Task<TripDto> GetTripById(Guid tripId)
+        public async Task<ActionResult<TripDto>> GetTripById(Guid tripId)
         {
             Trip result = await _tripRepository.GetTripById(tripId);
 
-            return _mapper.Map<TripDto>(result);
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
         }
 
-        public async Task<bool> InsertNewTrip(TripDto tripDto)
+        public async Task<ActionResult<bool>> InsertNewTrip(TripDto tripDto)
         {
             Trip trip = _mapper.Map<Trip>(tripDto);
-            return await _tripRepository.InsertNewTrip(trip);
+            var result = await _tripRepository.InsertNewTrip(trip);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
 
-        public async Task<bool> UpdateTrip(Guid tripId, TripDto tripDto)
+        public async Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId)
+        {
+            
+            var result = await _tripRepository.CancelTripByAuthority(tripId);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
+
+        public async Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto tripDto)
         {
             Trip trip = _mapper.Map<Trip>(tripDto);
-            return await _tripRepository.UpdateTrip(tripId, trip);
+            var result = await _tripRepository.UpdateTrip(tripId, trip);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
 
-        public async Task<bool> DeleteTrip(Guid tripId)
+        public async Task<ActionResult<bool>> DeleteTrip(Guid tripId)
         {
-            return await _tripRepository.DeleteTrip(tripId);
+            var result = await _tripRepository.DeleteTrip(tripId);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
     }
 }

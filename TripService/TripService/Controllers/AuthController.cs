@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using TripService.Models.ApiModels;
 using TripService.Models.Dtos;
+using TripService.Processors;
 
 namespace TripService.Controllers
 {
@@ -16,32 +19,34 @@ namespace TripService.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        [HttpPost, Route("login")]
-        public IActionResult Login([FromBody] UserDto user)
+        private IAuthProcessor _authProcessor;
+        public AuthController(IAuthProcessor authProcessor)
         {
-            if(user == null)
-            {
-                return BadRequest("Invalid request");
-            }
-            if(user.Email == "email@email.com" && user.Password == "123456qwe")
-            {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
-                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                
-                var tokenOptions = new JwtSecurityToken(
-                    issuer: " ",
-                    audience: "http://localhost:44357",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signingCredentials
-                    );
+            _authProcessor = authProcessor;
+        }
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        [HttpPost]
+        [Route("login")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<string>> Login([FromBody] CredentialsModel credentials)
+        {
+            return await _authProcessor.Login(credentials);
+        }
 
-                return Ok(new { Token = tokenString });
-            }
-
-            return Unauthorized();
+        [HttpPost]
+        [Route("signup")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<string>> Signup([FromBody] UserDto userDto)
+        {
+            return await _authProcessor.Signup(userDto);
         }
     }
 }

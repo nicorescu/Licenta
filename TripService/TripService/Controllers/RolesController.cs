@@ -21,11 +21,12 @@ namespace TripService.Controllers
         }
 
 
-        [ProducesResponseType(typeof(List<RoleDto>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpGet]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetAllRoles()
         {
             List<RoleDto> result = await _roleProcessor.GetAllRoles();
@@ -38,11 +39,12 @@ namespace TripService.Controllers
             return Ok(result);
         }
 
-        [ProducesResponseType(typeof(List<UserDto>), (int)HttpStatusCode.OK)]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [HttpPost]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> InsertRole([FromBody] RoleDto role)
         {
             bool result = await _roleProcessor.InsertNewRole(role);

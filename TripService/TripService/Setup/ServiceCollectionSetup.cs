@@ -21,6 +21,7 @@ namespace TripService.Setup
             services.TryAddSingleton<IUserRepository, UserRepository>();
             services.TryAddSingleton<ITripRepository, TripRepository>();
             services.TryAddSingleton<IRoleRepository, RoleRepository>();
+            services.TryAddSingleton<IAuthRepository, AuthRepository>();
         }
 
         public static void AddAutomapper(IServiceCollection services)
@@ -33,6 +34,7 @@ namespace TripService.Setup
             services.TryAddScoped<ITripProcessor, TripProcessor>();
             services.TryAddScoped<IUserProcessor, UserProcessor>();
             services.TryAddScoped<IRoleProcessor, RoleProcessor>();
+            services.TryAddScoped<IAuthProcessor, AuthProcessor>();
         }
 
         public static void AddSwagger(IServiceCollection services)

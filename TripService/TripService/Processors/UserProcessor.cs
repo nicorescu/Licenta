@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,33 +19,66 @@ namespace TripService.Processors
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<ActionResult<List<UserDto>>> GetAllUsers()
         {
             List<User> result = await _userRepository.GetAllUsers();
 
-            return _mapper.Map<List<UserDto>>(result);
+            if(result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
         }
 
-        public async Task<UserDto> GetUserById(Guid userId)
+        public async Task<ActionResult<UserDto>> GetUserById(Guid userId)
         {
             User result = await _userRepository.GetUserById(userId);
 
-            return _mapper.Map<UserDto>(result);
+            if(result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<UserDto>(result));
         }
-        public async Task<bool> InsertNewUser(UserDto userDto)
+        public async Task<ActionResult<bool>> InsertNewUser(UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
-            return await _userRepository.InsertNewUser(user);
+
+            var result = await _userRepository.InsertNewUser(user);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
-        public async Task<bool> UpdateUser(Guid id, UserDto userDto)
+        public async Task<ActionResult<bool>> UpdateUser(Guid id, UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
-            return await _userRepository.UpdateUser(id,user);
+            var result = await _userRepository.UpdateUser(id,user);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
 
-        public async Task<bool> DeleteUser(Guid userId)
+        public async Task<ActionResult<bool>> DeleteUser(Guid userId)
         {
-            return await _userRepository.DeleteUser(userId);
+
+            var result = await _userRepository.DeleteUser(userId);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
         }
     }
 }

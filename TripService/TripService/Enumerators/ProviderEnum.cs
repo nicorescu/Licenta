@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace TripService.Enumerators
 {
-    public enum TripState
+    public enum ProviderEnum
     {
-        Planning,
-        InProgress,
-        Finished,
-        Canceled,
-        CanceledByAuthority
+        Google,
+        Facebook
     }
 }

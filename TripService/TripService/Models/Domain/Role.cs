@@ -11,6 +11,6 @@ namespace TripService.Models.Domain
     {
         [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
-        public string Authority { get; set; }
+        public string RoleName { get; set; }
     }
 }

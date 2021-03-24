@@ -16,11 +16,12 @@ namespace TripService.Models.Domain
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email {get;set;}
+        public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
+        public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
-        public RoleEnum Role { get; set; }
+        public Role Role { get; set; }
         public List<User> friends { get; set; }
         public List<Review> Reviews { get; set; }
     }

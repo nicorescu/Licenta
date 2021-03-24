@@ -8,8 +8,9 @@ namespace TripService.Resources
     public static class StringResources
     {
         public const string DatabaseName = "trip_planning";
-        public const string userCollectionName = "User";
-        public const string tripCollectionName = "Trip";
-        public const string roleCollectionName = "Role";
+        public const string UserCollectionName = "User";
+        public const string TripCollectionName = "Trip";
+        public const string RoleCollectionName = "Role";
+        public const string AccessTokenSecret = "Random_Access_Token_Secret@2021";
     }
 }
