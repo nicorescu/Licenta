@@ -87,7 +87,7 @@ namespace TripService.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPut]
-        [Route("/cancel/{tripId}")]
+        [Route("/trips/cancel/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

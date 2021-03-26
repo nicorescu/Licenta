@@ -22,6 +22,7 @@ namespace TripService.Controllers
 
 
         [HttpGet]
+        [Route("/roles")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
