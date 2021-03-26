@@ -7,6 +7,7 @@ namespace TripService.Enumerators
 {
     public enum ProviderEnum
     {
+        TripPlanning,
         Google,
         Facebook
     }

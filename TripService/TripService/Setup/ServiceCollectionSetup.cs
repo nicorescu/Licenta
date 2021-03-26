@@ -11,6 +11,7 @@ using TripService.Processors;
 using TripService.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TripService.Resources;
 
 namespace TripService.Setup
 {
@@ -64,11 +65,13 @@ namespace TripService.Setup
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-
+                    ClockSkew = TimeSpan.Zero,
                     ValidIssuer = "http://localhost:44357",
                     ValidAudience = "http://localhost:44357",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(StringResources.AccessTokenSecret))
                 };
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
             });
         }
 

@@ -15,7 +15,7 @@ using TripService.Processors;
 
 namespace TripService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace TripService.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("/login")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -38,7 +38,7 @@ namespace TripService.Controllers
         }
 
         [HttpPost]
-        [Route("signup")]
+        [Route("/signup")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

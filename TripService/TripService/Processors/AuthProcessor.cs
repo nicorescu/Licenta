@@ -41,6 +41,11 @@ namespace TripService.Processors
                 return new StatusCodeResult(500);
             }
 
+            if(result == "existing")
+            {
+                return new StatusCodeResult(409);
+            }
+
             return new OkObjectResult(result);
         }
     }

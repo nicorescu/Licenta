@@ -14,18 +14,18 @@ namespace TripService.Models.Mapping
         {
             CreateMap<User, UserDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()));
+            CreateMap<UserDto, User>();
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))
                 .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Average(review => review.Stars)));
-
-            CreateMap<Role, RoleDto>();
-
-            CreateMap<UserDto, User>();
-
             CreateMap<TripDto, Trip>();
 
+            CreateMap<Role, RoleDto>();
             CreateMap<RoleDto, Role>();
+
+            CreateMap<Review, ReviewDto>();
+            CreateMap<ReviewDto, Review>();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        [HttpGet("{userId}")]
+        [HttpGet("/users/{userId}")]
         public async Task<ActionResult<UserDto>> GetUserById(Guid userId)
         {
             return await _userProcessor.GetUserById(userId);
@@ -59,7 +59,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        [HttpPut("{userId}")]
+        [HttpPut("/users/{userId}")]
         public async Task<ActionResult<bool>> UpdateUser([FromRoute] Guid userId, [FromBody] UserDto user)
         {
             return await _userProcessor.UpdateUser(userId, user);
@@ -70,7 +70,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        [HttpDelete("{userId}")]
+        [HttpDelete("/users/{userId}")]
         public async Task<ActionResult<bool>> DeleteUser(Guid userId)
         {
             return await _userProcessor.DeleteUser(userId);

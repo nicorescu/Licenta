@@ -35,27 +35,8 @@ namespace TripService.Repositories
             }
             if (result != null)
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(StringResources.AccessTokenSecret));
-                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var claims = new[]
-                {
-                        new Claim("Id", result.Id.ToString()),
-                        new Claim("Email", result.Email),
-                        new Claim("Provider", result.AccountProvider.ToString()),
-                        new Claim("Role", result.Role.ToString())
-                    };
 
-                var tokenOptions = new JwtSecurityToken(
-                issuer: " ",
-                audience: "http://localhost:44357",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
-                signingCredentials: signingCredentials
-                );
-
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-                return tokenString;
+                return AuthResources.GenerateToken(result); ;
             }
 
             return null;
@@ -66,45 +47,29 @@ namespace TripService.Repositories
             User result;
             if (user.Password != null)
             {
-                result = await _collection.FindAsync(u => u.Email == user.Email && u.Password == user.Password).Result.FirstOrDefaultAsync();
+                result = await _collection.FindAsync(u => u.Email == user.Email).Result.FirstOrDefaultAsync();
             }
             else
             {
                 result = await _collection.FindAsync(u => u.Email == user.Email && u.AccountProvider == user.AccountProvider).Result.FirstOrDefaultAsync();
             }
 
-            if (result != null)
+            if (result == null)
             {
                 try
                 {
                     await _collection.InsertOneAsync(user);
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(StringResources.AccessTokenSecret));
-                    var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                    var claims = new[]
-                    {
-                        new Claim("Id", result.Id.ToString()),
-                        new Claim(ClaimTypes.Email, result.Email),
-                        new Claim("Provider", result.AccountProvider.ToString()),
-                        new Claim(ClaimTypes.Role, result.Role.RoleName)
-                    };
-
-                    var tokenOptions = new JwtSecurityToken(
-                    issuer: " ",
-                    audience: "http://localhost:44357",
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signingCredentials
-                    );
-
-                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-                    return tokenString;
+                    return AuthResources.GenerateToken(user);
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception);
                     return null;
                 }
+            }
+            else
+            {
+                return "existing";
             }
 
             return null;

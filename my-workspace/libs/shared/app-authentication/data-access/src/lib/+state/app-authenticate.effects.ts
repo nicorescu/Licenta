@@ -9,18 +9,18 @@ import * as AppAuthenticateActions from './app-authenticate.actions';
 export class AppAuthenticateEffects {
   init$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AppAuthenticateActions.init),
+      ofType(AppAuthenticateActions.authenticate),
       fetch({
         run: (action) => {
           // Your custom service 'load' logic goes here. For now just return a success action...
-          return AppAuthenticateActions.loadAppAuthenticateSuccess({
-            appAuthenticate: [],
+          return AppAuthenticateActions.authenticateSuccess({
+            sessionToken: null
           });
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return AppAuthenticateActions.loadAppAuthenticateFailure({ error });
+          return AppAuthenticateActions.authenticateFail({ error });
         },
       })
     )

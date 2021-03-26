@@ -35,7 +35,7 @@ namespace TripService.Controllers
             return await _tripProcessor.GetAllTrips();
         }
 
-        [HttpGet("/trips/search")]
+        [HttpGet]
         [Route("/trips/search")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -48,7 +48,7 @@ namespace TripService.Controllers
         }
 
         [HttpGet]
-        [Route("{tripId}")]
+        [Route("/trips/{tripId}")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -74,7 +74,7 @@ namespace TripService.Controllers
 
 
         [HttpPut]
-        [Route("{tripId}")]
+        [Route("/trips/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -85,9 +85,9 @@ namespace TripService.Controllers
             return  await _tripProcessor.UpdateTrip(tripId, trip);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut]
-        [Route("{tripId}/cancel")]
-        [Authorize(Roles = "Administrator, Moderator")]
+        [Route("/cancel/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -99,7 +99,7 @@ namespace TripService.Controllers
         }
 
         [HttpDelete]
-        [Route("{tripId}")]
+        [Route("/trips/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

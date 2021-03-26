@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromAppAuthenticate from './+state/app-authenticate.reducer';
 import { AppAuthenticateEffects } from './+state/app-authenticate.effects';
 import { AppAuthenticateFacade } from './+state/app-authenticate.facade';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AppAuthenticateFacade } from './+state/app-authenticate.facade';
       fromAppAuthenticate.reducer
     ),
     EffectsModule.forFeature([AppAuthenticateEffects]),
+    HttpClientModule
   ],
   providers: [AppAuthenticateFacade],
 })

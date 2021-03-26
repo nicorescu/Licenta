@@ -75,7 +75,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    this.phoneInput.searchCountryPlaceholder = this.translocoService.translate('authentication.signup.searchCountry');
+    this.phoneInput.searchCountryPlaceholder = this.translocoService.translate('authentication.signUp.searchCountry');
   }
 
   onCountrySelected(country: Country) {

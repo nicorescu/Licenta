@@ -35,14 +35,13 @@ namespace TripService
                 return new MongoClient(uri);
             });
 
-            
 
+            ServiceCollectionSetup.AddAuthentication(services);
             ServiceCollectionSetup.AddAutomapper(services);
             ServiceCollectionSetup.AddCors(services);
             ServiceCollectionSetup.AddSwagger(services);
             ServiceCollectionSetup.TryAddAllServices(services);
             ServiceCollectionSetup.TryAddMongoConnection(services);
-            ServiceCollectionSetup.AddAuthentication(services);
             ServiceCollectionSetup.AddCors(services);
         }
 
