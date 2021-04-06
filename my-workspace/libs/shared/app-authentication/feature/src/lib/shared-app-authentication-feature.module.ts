@@ -19,6 +19,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignInContainerComponent } from './containers/sign-in-container/sign-in-container.component';
 import {JwtModule} from '@auth0/angular-jwt';
+import {DatePipe} from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 @NgModule({
   imports: [
@@ -35,8 +37,10 @@ import {JwtModule} from '@auth0/angular-jwt';
     RouterModule,
     MatDividerModule,
     JwtModule,
+    MatProgressSpinnerModule,
     MatSelectCountryModule.forRoot('en')
   ],
-  declarations: [SignUpComponent, SignUpContainerComponent, SignInComponent, SignInContainerComponent]
+  declarations: [SignUpComponent, SignUpContainerComponent, SignInComponent, SignInContainerComponent],
+  providers: [DatePipe]
 })
 export class SharedAppAuthenticationFeatureModule {}

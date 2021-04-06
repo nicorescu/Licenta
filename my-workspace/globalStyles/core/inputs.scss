@@ -1,6 +1,6 @@
 @import './variables.scss';
 
-::ng-deep {
+:host ::ng-deep {
     .theme-input {
         &::placeholder {
           font-size: 14px;

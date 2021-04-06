@@ -1,22 +1,18 @@
-<div class="user-panel">
-  <div class="user-info">
-    <div class="image-container">
-      <div class="user-image"></div>
-    </div>
-    <div class="user-name">{{user.email}}</div>
-  </div>
-  <dx-context-menu
-    *ngIf="menuMode === 'context'"
-    [items]="menuItems"
-    target=".user-button"
-    showEvent="dxclick"
-    width="210px"
-    [position]="{ my: 'top center', at: 'bottom center' }"
-    cssClass="user-menu">
-  </dx-context-menu>
-  <dx-list
-    *ngIf="menuMode === 'list'"
-    class="dx-toolbar-menu-action"
-    [items]="menuItems">
-  </dx-list>
-</div>
+<ng-container *transloco="let t; read: 'header.userPanel'">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <div class="user-image"></div>
+    {{ firstName }}
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/my-account">
+      <mat-icon>account_circle</mat-icon>
+      {{ t('myAccount') }}
+    </button>
+    <button mat-menu-item (click)="logoutClicked()">
+      <mat-icon>logout</mat-icon>
+      {{ t('logout') }}
+    </button>
+    <span class="iconify" data-icon="mdi-facebook-messenger" data-inline="false" ></span>
+  </mat-menu>
+</ng-container>

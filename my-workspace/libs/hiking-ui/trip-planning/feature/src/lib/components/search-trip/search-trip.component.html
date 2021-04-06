@@ -31,8 +31,8 @@
           required
           formControlName="location"
         />
-        <mat-error *ngIf="isInvalidLocation && isSubmittedOnce">{{
-          t('selectLocationError')
+        <mat-error *ngIf="isSubmittedOnce">{{
+          t('errors.selectLocationError')
         }}</mat-error>
       </mat-form-field>
     </div>
@@ -75,7 +75,7 @@
           ></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
           <mat-error *ngIf="isSubmittedOnce">{{
-            t('selectAValidRangeError')
+            t('errors.selectAValidRangeError')
           }}</mat-error>
         </mat-form-field>
       </div>

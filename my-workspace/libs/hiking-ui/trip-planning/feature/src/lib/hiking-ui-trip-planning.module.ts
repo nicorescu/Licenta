@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -17,6 +18,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 import {HikingUiUiCommonUiModule} from '@hkworkspace/hiking-ui/ui-common/ui';
 import {HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 @NgModule({
   imports: [
@@ -32,9 +35,10 @@ import {HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-
     MatSlideToggleModule,
     FormsModule,
     HikingUiUiCommonUiModule,
-    HikingUiTripPlanningDataAccessModule
+    HikingUiTripPlanningDataAccessModule,
+    MatDividerModule
   ],
-  declarations: [TripPlanningComponent, SearchTripComponent],
+  declarations: [TripPlanningComponent, SearchTripComponent, NotificationsComponent, MyAccountComponent],
 })
 export class HikingUiTripPlanningFeatureModule {
 }

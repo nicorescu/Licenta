@@ -1,6 +1,6 @@
 import { RoleEnum } from "./roleEnum.model";
 
-export class User {
+export interface User {
     id: string;
     firstName: string;
     lastName: string;
@@ -11,6 +11,4 @@ export class User {
     country: string;
     role: RoleEnum;
     friends: User[];
-    
-    constructor(){}
 }

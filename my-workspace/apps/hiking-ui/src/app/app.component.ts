@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { navItem } from 'libs/shared/app-navigation/feature/src/lib/options/nav-item';
 import { filter, take } from 'rxjs/operators';
+import {
+  AppAuthenticateFacade,
+  AuthService,
+} from '@hkworkspace/shared/app-authentication/data-access';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +15,12 @@ import { filter, take } from 'rxjs/operators';
 export class AppComponent {
   menuItems: navItem[];
 
-  constructor(private translocoService: TranslocoService) {
+  constructor(
+    private translocoService: TranslocoService,
+    private authFacade: AppAuthenticateFacade,
+    private authService: AuthService
+  ) {
+    this.authFacade.setSessionToken(this.authService.getSessionToken());
     const activeLang = translocoService.getActiveLang();
     this.translocoService.load(activeLang).pipe(take(1)).subscribe();
     this.translocoService.events$
@@ -43,6 +52,5 @@ export class AppComponent {
         ];
       });
   }
-
   title = 'Hiking';
 }

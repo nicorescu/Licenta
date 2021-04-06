@@ -1,15 +1,22 @@
-<div class="container">
-  <div class="tripPlanning" *transloco="let t; read: 'tripPlanning'">
+<div class="container" *transloco="let t; read: 'tripPlanning'">
+  <div class="tripPlanning">
     <div class="text-center h2">
       {{ t('findTrip') }}
     </div>
     <div id="searchTrip">
-      <hk-search-trip (photosUrlEmitter)="getEmittedPhotos($event)"></hk-search-trip>
+      <hk-search-trip
+        (photosUrlEmitter)="getEmittedPhotos($event)"
+      ></hk-search-trip>
     </div>
-  </div>
-  <div>
-    <p *ngFor="let url of urls">
-      <img [src]="url">
-    </p>
+    <div class="divider">
+      <mat-divider></mat-divider>
+      <div class="mid-text text-muted">{{ t('or') }}</div>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="col-12" style="display: flex; justify-content: center;">
+      <button class="btn btn-primary w-75">
+        {{ t('createTrip') }}
+      </button>
+    </div>
   </div>
 </div>

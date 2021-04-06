@@ -11,7 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
-import { TripPlanningComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
+import { MyAccountComponent, NotificationsComponent, TripPlanningComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import { SignInContainerComponent, SignUpContainerComponent } from '@hkworkspace/shared/app-authentication/feature';
 
 const routes: Routes = [
@@ -47,6 +47,14 @@ const routes: Routes = [
     path: 'signin',
     component: SignInContainerComponent,
   },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
+  },
+  {
+    path: 'my-account',
+    component: MyAccountComponent,
+  }
 ];
 
 @NgModule({

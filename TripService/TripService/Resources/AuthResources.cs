@@ -29,7 +29,7 @@ namespace TripService.Resources
                 issuer: "http://localhost:44357",
                 audience: "http://localhost:44357",
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(20),
+                expires: DateTime.Now.AddHours(2),
                 signingCredentials: signingCredentials
             );
         }
@@ -39,9 +39,11 @@ namespace TripService.Resources
             return new List<Claim>
             {
                 new Claim("Id", user.Id.ToString()),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim("Provider", user.AccountProvider.ToString()),
-                        new Claim(ClaimTypes.Role, user.Role.RoleName)
+                new Claim("Email",user.Email),
+                new Claim("FirstName", user.FirstName),
+                new Claim("LastName", user.LastName),
+                new Claim("Provider", user.AccountProvider.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.RoleName)
             };
         }
 

@@ -1,6 +1,6 @@
 import { AppAuthenticateEntity } from './app-authenticate.models';
 import * as AppAuthenticateActions from './app-authenticate.actions';
-import { State, initialState, reducer } from './app-authenticate.reducer';
+import { AuthState, initialState, reducer } from './app-authenticate.reducer';
 
 describe('AppAuthenticate Reducer', () => {
   const createAppAuthenticateEntity = (id: string, name = '') =>
@@ -11,22 +11,7 @@ describe('AppAuthenticate Reducer', () => {
 
   beforeEach(() => {});
 
-  describe('valid AppAuthenticate actions', () => {
-    it('loadAppAuthenticateSuccess should return set the list of known AppAuthenticate', () => {
-      const appAuthenticate = [
-        createAppAuthenticateEntity('PRODUCT-AAA'),
-        createAppAuthenticateEntity('PRODUCT-zzz'),
-      ];
-      const action = AppAuthenticateActions.loadAppAuthenticateSuccess({
-        appAuthenticate,
-      });
-
-      const result: State = reducer(initialState, action);
-
-      expect(result.loaded).toBe(true);
-      expect(result.ids.length).toBe(2);
-    });
-  });
+  describe('valid AppAuthenticate actions', () => {});
 
   describe('unknown action', () => {
     it('should return the previous state', () => {

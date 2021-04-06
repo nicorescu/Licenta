@@ -44,15 +44,7 @@ namespace TripService.Repositories
 
         public async Task<string> Signup(User user)
         {
-            User result;
-            if (user.Password != null)
-            {
-                result = await _collection.FindAsync(u => u.Email == user.Email).Result.FirstOrDefaultAsync();
-            }
-            else
-            {
-                result = await _collection.FindAsync(u => u.Email == user.Email && u.AccountProvider == user.AccountProvider).Result.FirstOrDefaultAsync();
-            }
+            User result = await _collection.FindAsync(u => u.Email == user.Email).Result.FirstOrDefaultAsync();
 
             if (result == null)
             {
@@ -67,12 +59,7 @@ namespace TripService.Repositories
                     return null;
                 }
             }
-            else
-            {
-                return "existing";
-            }
-
-            return null;
+            return "existing";
         }
     }
 }

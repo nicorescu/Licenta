@@ -63,7 +63,6 @@ export class SideNavigationMenuComponent
       if (this.selectedItem) {
         this.menu.instance.selectItem(this.selectedItem);
         this.router.navigate([this.selectedItem]);
-        console.log('in functie');
       }
     }
   }

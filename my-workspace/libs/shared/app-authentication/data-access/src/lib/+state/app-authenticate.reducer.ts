@@ -1,23 +1,20 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as AppAuthenticateActions from './app-authenticate.actions';
-import { AppAuthenticateEntity } from './app-authenticate.models';
 import { SessionToken } from '../models/session-token.model';
 
 export const APPAUTHENTICATE_FEATURE_KEY = 'appAuthenticate';
 
 export interface AuthState {
-  error: string,
-  isLoading: boolean,
-  sessionToken: SessionToken
+  error: string;
+  isLoading: boolean;
+  sessionToken: SessionToken;
 }
 
-export const initialState: AuthState{
-  accessToken= null,
-  error=null,
-  isLoading = false,
-  loggedInId = null
+export const initialState: AuthState = {
+  error: null,
+  isLoading: false,
+  sessionToken: null,
 };
 
 const appAuthenticateReducer = createReducer(
@@ -25,29 +22,43 @@ const appAuthenticateReducer = createReducer(
   on(AppAuthenticateActions.authenticate, (state) => ({
     ...state,
     isLoading: true,
-    error: null,
   })),
-  on(
-    AppAuthenticateActions.authenticateSuccess,
-    (state, { sessionToken}) => ({
- 
-        ...state,
-        sessionToken: sessionToken,
-        isLoading: false
-    })
-  ),
-  
-  on(
-    AppAuthenticateActions.authenticateFail,
-    (state, { error}) => ({
- 
-        ...state,
-        accessToken: null,
-        error: error
-    })
-  ),
+  on(AppAuthenticateActions.authenticateSuccess, (state, { sessionToken }) => ({
+    ...state,
+    sessionToken: sessionToken,
+    isLoading: false,
+    error: null
+  })),
+  on(AppAuthenticateActions.authenticateFail, (state, { error }) => ({
+    ...state,
+    sessionToken: null,
+    isLoading: false,
+    error: error,
+  })),
+  on(AppAuthenticateActions.signup, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(AppAuthenticateActions.signupSuccess, (state, { sessionToken }) => ({
+    ...state,
+    sessionToken: sessionToken,
+    isLoading: false,
+    error: null
+  })),
+
+  on(AppAuthenticateActions.signupFail, (state, { error }) => ({
+    ...state,
+    sessionToken: null,
+    isLoading: false,
+    error: error,
+  })),
+  on(AppAuthenticateActions.logout, (state) => ({
+    ...state,
+    sessionToken: null,
+    error: null
+  }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: AuthState | undefined, action: Action) {
   return appAuthenticateReducer(state, action);
 }

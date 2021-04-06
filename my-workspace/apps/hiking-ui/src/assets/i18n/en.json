@@ -25,25 +25,42 @@
       "errors": {
         "firstNameIsRequired": "First name is required.",
         "lastNameIsRequired": "Last name is required.",
-        "emailIsRequired": "Last name is required.",
-        "birthdayIsRequired": "Last name is required.",
+        "emailIsRequired": "Email is required.",
+        "birthdayIsRequired": "Birthday is required.",
         "passwordIsRequired": "Password is required.",
         "passwordMinLength": "Password should have at least 8 characters",
         "repeatPasswordIsRequired": "Repeating password is required.",
-        "repeatPasswordDoesntMatch": "Passwords don't match"
+        "passwordsMustMatch": "Passwords must match",
+        "emailAlreadyExists": "The email you entered already exists",
+        "emailIsNotValid": "Please provide a valid email!"
       }
     },
 
     "signIn": {
       "signIn": "Sign-in",
       "email": "Email",
-      "password": "Password"
-    }  
+      "password": "Password",
+      "signUp": "Sign-up",
+      "dontHaveAnAccount": "You don't have an account?",
+      "or": "Or",
+
+      "errors": {
+        "wrongCredentials": "Email and password don't match",
+        "anErrorOccured": "An error has occured, try again later!",
+        "emailRequired": "Please provide your email",
+        "emailIsNotValid": "Please provide a valid email!",
+        "passwordRequired": "Please provide your password"
+      }
+    }
   },
 
   "header": {
     "signIn": "Sign in",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "userPanel": {
+      "myAccount": "My account",
+      "logout": "Log Out"
+    }
   },
 
   "tripPlanning": {
@@ -55,8 +72,13 @@
       "enterDateRange": "Enter a date range",
       "friendsOnly": "Friends only",
       "seeTrips": "See your trips",
-      "selectLocationError": "You need to select a location from the list",
-      "selectAValidRangeError": "Select a valid date range"
-    }
+
+      "errors": {
+        "selectLocationError": "You need to select a location from the list",
+        "selectAValidRangeError": "Select a valid date range"
+      } 
+    },
+    "or": "Or",
+    "createTrip": "Create a trip"
   }
 }

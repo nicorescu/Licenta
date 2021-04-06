@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -25,8 +26,9 @@ namespace TripService.Controllers
             _authProcessor = authProcessor;
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        [Route("/login")]
+        [Route("/signin")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -37,6 +39,7 @@ namespace TripService.Controllers
             return await _authProcessor.Login(credentials);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("/signup")]
         [ProducesResponseType((int)HttpStatusCode.OK)]

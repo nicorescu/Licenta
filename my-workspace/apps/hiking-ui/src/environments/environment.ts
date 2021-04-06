@@ -3,8 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUri: 'https://localhost:44357',
+  accessTokenKey: 'Trip_Auth_Access_Token_Secret_Key',
+  roleClaim: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
+  redirectUrl: '/trip-planning',
+  logoutUrl: '/trip-planning'
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

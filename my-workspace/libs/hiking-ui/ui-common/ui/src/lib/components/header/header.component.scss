@@ -14,7 +14,6 @@
   margin-bottom: 10px;
 
   .toolbar-elements {
-    justify-content: flex-end;
     height: 100%;
     width: 100%;
 
@@ -23,6 +22,41 @@
 
       .btn-secondary {
         margin-left: 10px;
+      }
+    }
+    mat-divider {
+      height: 100%;
+      margin: 10px;
+    }
+
+    .flex-end {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .flex-start {
+      height: 100%;
+      width: auto;
+      justify-content: flex-start;
+      display: flex;
+      align-items: center;
+
+      a {
+        width: 130px;
+        height: 130px;
+        display: flex;
+        justify-content: flex-start;
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          margin: -10px;
+          margin-left: -50px;
+        }
       }
     }
   }

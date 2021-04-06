@@ -15,13 +15,13 @@ import * as AppAuthenticateSelectors from './app-authenticate.selectors';
 import * as AppAuthenticateActions from './app-authenticate.actions';
 import {
   APPAUTHENTICATE_FEATURE_KEY,
-  State,
+  AuthState,
   initialState,
   reducer,
 } from './app-authenticate.reducer';
 
 interface TestSchema {
-  appAuthenticate: State;
+  appAuthenticate: AuthState;
 }
 
 describe('AppAuthenticateFacade', () => {
@@ -59,63 +59,6 @@ describe('AppAuthenticateFacade', () => {
 
       store = TestBed.inject(Store);
       facade = TestBed.inject(AppAuthenticateFacade);
-    });
-
-    /**
-     * The initially generated facade::loadAll() returns empty array
-     */
-    it('loadAll() should return empty list with loaded == true', async (done) => {
-      try {
-        let list = await readFirst(facade.allAppAuthenticate$);
-        let isLoaded = await readFirst(facade.loaded$);
-
-        expect(list.length).toBe(0);
-        expect(isLoaded).toBe(false);
-
-        facade.init();
-
-        list = await readFirst(facade.allAppAuthenticate$);
-        isLoaded = await readFirst(facade.loaded$);
-
-        expect(list.length).toBe(0);
-        expect(isLoaded).toBe(true);
-
-        done();
-      } catch (err) {
-        done.fail(err);
-      }
-    });
-
-    /**
-     * Use `loadAppAuthenticateSuccess` to manually update list
-     */
-    it('allAppAuthenticate$ should return the loaded list; and loaded flag == true', async (done) => {
-      try {
-        let list = await readFirst(facade.allAppAuthenticate$);
-        let isLoaded = await readFirst(facade.loaded$);
-
-        expect(list.length).toBe(0);
-        expect(isLoaded).toBe(false);
-
-        store.dispatch(
-          AppAuthenticateActions.loadAppAuthenticateSuccess({
-            appAuthenticate: [
-              createAppAuthenticateEntity('AAA'),
-              createAppAuthenticateEntity('BBB'),
-            ],
-          })
-        );
-
-        list = await readFirst(facade.allAppAuthenticate$);
-        isLoaded = await readFirst(facade.loaded$);
-
-        expect(list.length).toBe(2);
-        expect(isLoaded).toBe(true);
-
-        done();
-      } catch (err) {
-        done.fail(err);
-      }
     });
   });
 });

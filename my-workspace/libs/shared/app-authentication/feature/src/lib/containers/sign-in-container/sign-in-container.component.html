@@ -2,20 +2,18 @@
   <div class="text-center h2">{{ t('signIn') }}</div>
   <div id="signInContainer">
     <div class="sign-in">
-      <hk-sign-in></hk-sign-in>
+      <hk-sign-in (signInSubmitted)="onSubmit($event)"></hk-sign-in>
     </div>
     <div class="divider">
       <mat-divider></mat-divider>
-      <div class="mid-text text-muted">Or</div>
+      <div class="mid-text text-muted">{{t('or')}}</div>
       <mat-divider></mat-divider>
     </div>
     <div class="additional-signin-options">
-      <button class="btn btn-primary" style="margin: 10px;">
+      <button class="btn btn-primary" style="margin: 10px">
         Sign in with google
       </button>
-      <button class="btn btn-primary">
-        Sign in with Facebook
-      </button>
+      <button class="btn btn-primary">Sign in with Facebook</button>
     </div>
   </div>
 </div>

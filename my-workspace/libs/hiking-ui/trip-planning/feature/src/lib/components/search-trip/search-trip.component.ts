@@ -43,7 +43,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   constructor(
     private renderer: Renderer2,
-    private googlePlacesService: GooglePlacesService,
     private formBuilder: FormBuilder
   ) {
     this.searchTrip = new SearchTripModel();
@@ -56,6 +55,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
           this.isInvalidLocation
         ) {
           this.clearInputValue();
+          this.searchForm.controls['location'].setErrors({invalid: true});
         }
       }
     );
@@ -63,10 +63,10 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
-      location: new FormControl(null, [Validators.required]),
-      startDate: new FormControl(null, [Validators.required]),
-      endDate: new FormControl(null, [Validators.required]),
-      friendsOnly: new FormControl(false),
+      location: [null, [Validators.required]],
+      startDate: [null, [Validators.required]],
+      endDate: [null, [Validators.required]],
+      friendsOnly: [false],
     });
   }
 

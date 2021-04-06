@@ -29,17 +29,5 @@ describe('AppAuthenticateEffects', () => {
     effects = TestBed.inject(AppAuthenticateEffects);
   });
 
-  describe('init$', () => {
-    it('should work', () => {
-      actions = hot('-a-|', { a: AppAuthenticateActions.init() });
-
-      const expected = hot('-a-|', {
-        a: AppAuthenticateActions.loadAppAuthenticateSuccess({
-          appAuthenticate: [],
-        }),
-      });
-
-      expect(effects.init$).toBeObservable(expected);
-    });
-  });
+  describe('init$', () => {});
 });

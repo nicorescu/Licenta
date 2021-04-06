@@ -17,7 +17,21 @@
     }
   }
 
-  .divider{
+  .spinner-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .signup-message{
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    margin: auto;
     
+    a{
+      color: $col_blue_main;
+      margin-left: 5px;
+    }
   }
 }

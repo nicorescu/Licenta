@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using TripService.Setup;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace TripService
 {
@@ -27,14 +30,23 @@ namespace TripService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options => 
+            {
+                options.OutputFormatters.RemoveType<StringOutputFormatter>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.UseCamelCasing(true);
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+
+
 
             services.AddSingleton<IMongoClient, MongoClient>(services =>
             {
                 var uri = services.GetRequiredService<IConfiguration>()["MongoUri"];
                 return new MongoClient(uri);
             });
-
 
             ServiceCollectionSetup.AddAuthentication(services);
             ServiceCollectionSetup.AddAutomapper(services);

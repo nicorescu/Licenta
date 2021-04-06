@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'hk-user-panel',
@@ -7,18 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserPanelComponent implements OnInit {
 
-  @Input()
-  menuItems: any;
-
-  @Input()
-  menuMode: string;
-
-  @Input()
-  user: any;
+  @Input() firstName;
+  @Output() logout = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {
   }
 
+  logoutClicked(){
+    this.logout.emit(true);
+  }
 }

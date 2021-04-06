@@ -1,18 +1,35 @@
 <div class="signin-container" *transloco="let t; read: 'authentication.signIn'">
+  <div class="spinner-container">
+    <mat-spinner *ngIf="isLoading$ | async" [diameter]="50"></mat-spinner>
+  </div>
   <form *ngIf="signInForm" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
     <div class="form-fields">
       <mat-form-field appearance="outline">
         <mat-label>{{ t('email') }}</mat-label>
         <input matInput formControlName="email" />
+        <mat-error *ngIf="email.errors?.required">{{
+          t('errors.emailRequired')
+        }}</mat-error>
+        <mat-error *ngIf="email.errors?.pattern">{{
+          t('errors.emailIsNotValid')
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>{{ t('password') }}</mat-label>
         <input matInput formControlName="password" />
+        <mat-error *ngIf="password.errors?.required">{{
+          t('errors.passwordRequired')
+        }}</mat-error>
       </mat-form-field>
+      <div class="error text-danger text-center mb-2">{{ error$ | async }}</div>
+
       <button type="submit" class="btn btn-primary" style="width: 80%">
         {{ t('signIn') }}
       </button>
     </div>
   </form>
-  
+  <div class="signup-message">
+    <div class="h6">{{ t('dontHaveAnAccount') }}</div>
+    <a [routerLink]="'/signup'">{{ t('signUp') }}</a>
+  </div>
 </div>

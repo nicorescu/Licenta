@@ -13,3 +13,13 @@ export const getAuthError = createSelector(
   getAppAuthenticateState,
   (state: AuthState) => state.error
 );
+
+export const getSessionToken = createSelector(
+  getAppAuthenticateState,
+  (state: AuthState) => state.sessionToken
+);
+
+export const getisLoading = createSelector(
+  getAppAuthenticateState,
+  (state: AuthState) => state.isLoading
+);

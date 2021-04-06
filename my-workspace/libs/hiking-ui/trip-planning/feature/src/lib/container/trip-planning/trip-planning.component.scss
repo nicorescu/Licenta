@@ -7,4 +7,22 @@
     align-items: center;
     margin: auto;
   }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+
+    mat-divider {
+      width: 35%;
+    }
+
+    .mid-text {
+      margin-top: -12px;
+      font-size: 15px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+
 }
