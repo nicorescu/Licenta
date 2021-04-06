@@ -31,8 +31,9 @@
         "passwordMinLength": "Password should have at least 8 characters",
         "repeatPasswordIsRequired": "Repeating password is required.",
         "passwordsMustMatch": "Passwords must match",
-        "emailAlreadyExists": "The email you entered already exists",
-        "emailIsNotValid": "Please provide a valid email!"
+        "emailAlreadyExists": "The email you provided already exists",
+        "emailIsNotValid": "Please provide a valid email!",
+        "anErrorOccured": "An error has occured, try again later!"
       }
     },
 

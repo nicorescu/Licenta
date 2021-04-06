@@ -35,7 +35,6 @@ namespace TripService.Repositories
             }
             if (result != null)
             {
-
                 return AuthResources.GenerateToken(result); ;
             }
 
@@ -44,7 +43,7 @@ namespace TripService.Repositories
 
         public async Task<string> Signup(User user)
         {
-            User result = await _collection.FindAsync(u => u.Email == user.Email).Result.FirstOrDefaultAsync();
+            User result = await _collection.FindAsync(u => u.Email == user.Email && u.AccountProvider == user.AccountProvider).Result.FirstOrDefaultAsync();
 
             if (result == null)
             {

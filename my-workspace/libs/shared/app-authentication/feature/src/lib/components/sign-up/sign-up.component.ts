@@ -6,7 +6,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { User } from '../../models/user.model';
+import {
+  AccountProvider,
+  User,
+} from '@hkworkspace/shared/app-authentication/data-access';
 
 import {
   SearchCountryField,
@@ -18,10 +21,12 @@ import {
 import { Country } from '@angular-material-extensions/select-country';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-  
-  import { TranslocoService,getBrowserCultureLang } from '@ngneat/transloco';
-import { RoleEnum } from '../../models/roleEnum.model';
+
+import { TranslocoService } from '@ngneat/transloco';
+import { Role } from '@hkworkspace/shared/app-authentication/data-access';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { AppAuthenticateFacade } from '@hkworkspace/shared/app-authentication/data-access';
 
 @Component({
   selector: 'hk-sign-up',
@@ -30,44 +35,50 @@ import { DatePipe } from '@angular/common';
 })
 export class SignUpComponent implements OnInit, AfterViewInit {
   @ViewChild('countrySelect') countrySelect;
-  @ViewChild('phoneInput')
-  phoneInput: NgxIntlTelInputComponent;
 
   @Output() signUpSubmitted = new EventEmitter();
+  error$: Observable<string>;
+  isLoading$: Observable<boolean>;
 
   user: User = {
-    id: null,
+    id: undefined,
     firstName: '',
     lastName: '',
     email: '',
+    accountProvider: AccountProvider.TripPlanning,
     password: '',
     phoneNumber: '',
     birthday: null,
     country: '',
-    role: null,
-    friends: null,
+    role: Role.User,
+    friends: [],
+    reviews: [],
+    reviewAverage: 0,
   };
   isInvalidCountry = true;
   signupForm: FormGroup;
   rendererListener: () => void;
 
-  searchCountryField = SearchCountryField;
-  tooltipLabel = TooltipLabel;
-  countryISO = CountryISO;
-  phoneNumberFormat = PhoneNumberFormat;
-  preferredCountries: CountryISO[] = [
-    CountryISO.Romania,
-    CountryISO.UnitedStates,
-    CountryISO.UnitedKingdom,
-  ];
+  // searchCountryField = SearchCountryField;
+  // tooltipLabel = TooltipLabel;
+  // countryISO = CountryISO;
+  // phoneNumberFormat = PhoneNumberFormat;
+  // preferredCountries: CountryISO[] = [
+  //   CountryISO.Romania,
+  //   CountryISO.UnitedStates,
+  //   CountryISO.UnitedKingdom,
+  // ];
 
   constructor(
     private formBuilder: FormBuilder,
-    private translocoService: TranslocoService,
-    private datePipe: DatePipe
+    private authFacade: AppAuthenticateFacade
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.init();
+    this.error$ = this.authFacade.error$;
+    this.isLoading$ = this.authFacade.isLoading$;
+
     this.signupForm = this.formBuilder.group({
       firstName: [this.user.firstName, [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -80,18 +91,11 @@ export class SignUpComponent implements OnInit, AfterViewInit {
       ],
       password: ['', [Validators.required, Validators.minLength(8)]],
       repeatPassword: [''],
-      phoneNumber: [this.user.phoneNumber],
       birthday: [this.user.birthday, [Validators.required]],
-      country: [''],
     });
-
   }
 
-  ngAfterViewInit() {
-    this.phoneInput.searchCountryPlaceholder = this.translocoService.translate(
-      'authentication.signUp.searchCountry'
-    );
-  }
+  ngAfterViewInit() {}
 
   onCountrySelected(country: Country) {
     this.user.country = country.name;
@@ -103,7 +107,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.setUserProps();
     if (this.password.value != this.repeatPassword.value) {
       this.markInvalidRepeatPassword();
       return;
@@ -111,22 +114,19 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     if (this.signupForm.invalid) {
       return;
     }
-
+    this.setUserProps();
+    console.log(this.user);
     this.signUpSubmitted.emit(this.user);
   }
 
   setUserProps() {
     this.user = {
-      id: null,
+      ...this.user,
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       email: this.email.value,
       password: this.password.value,
-      phoneNumber: null,
-      birthday: this.datePipe.transform(this.birthday.value, 'dd-MM-yyyy') as unknown as Date,
-      country: null,
-      role: RoleEnum.User,
-      friends: null,
+      birthday: this.birthday.value,
     };
   }
 

@@ -10,7 +10,7 @@ namespace TripService.Models.Dtos
 {
     public class UserDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -18,7 +18,7 @@ namespace TripService.Models.Dtos
         public string PhoneNumber { get; set; }
         public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
-        public RoleDto Role { get; set; }
+        public RoleEnum Role { get; set; }
         public List<UserDto> friends { get; set; }
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }

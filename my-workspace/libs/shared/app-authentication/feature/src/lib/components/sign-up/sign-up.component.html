@@ -1,4 +1,7 @@
 <div class="signup-container" *transloco="let t; read: 'authentication.signUp'">
+  <div class="spinner-container">
+    <mat-spinner *ngIf="isLoading$ | async" [diameter]="50"></mat-spinner>
+  </div>
   <form *ngIf="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="form-fields">
       <mat-form-field appearance="outline">
@@ -54,7 +57,7 @@
         </mat-select-country>
       </div> -->
 
-      <div id="phoneNumberInputContainer">
+      <!-- <div id="phoneNumberInputContainer">
         <ngx-intl-tel-input
           #phoneInput
           id="phoneInput"
@@ -79,8 +82,7 @@
           type="text"
         >
         </ngx-intl-tel-input>
-        <div>eroare</div>
-      </div>
+      </div> -->
 
       <mat-form-field appearance="outline">
         <mat-label>{{ t('password') }}</mat-label>
@@ -98,6 +100,9 @@
         <input matInput type="password" formControlName="repeatPassword" />
         <mat-error>{{ t('errors.passwordsMustMatch') }}</mat-error>
       </mat-form-field>
+
+      <div class="error text-danger text-center mb-2">{{ error$ | async }}</div>
+      
       <button type="submit" class="btn btn-primary" style="width: 80%">
         {{ t('createYourAccount') }}
       </button>

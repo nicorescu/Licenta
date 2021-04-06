@@ -3,6 +3,10 @@ import { Credentials } from '../models/credentials.model';
 import { SessionToken } from '../models/session-token.model';
 import { User } from '../models/user.model';
 
+export const init = createAction(
+  '[AppAuthenticate] init'
+);
+
 export const authenticate = createAction(
   '[AppAuthenticate] Authenticate',
   props<{ credentials: Credentials }>()

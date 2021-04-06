@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 import { Credentials } from '../models/credentials.model';
 import { SessionToken } from '../models/session-token.model';
+import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 
 import * as AppAuthenticateActions from './app-authenticate.actions';
@@ -19,6 +20,11 @@ export class AppAuthenticateFacade {
 
   constructor(private store: Store, private authService: AuthService) {}
 
+
+  init(){
+    this.store.dispatch(AppAuthenticateActions.init());
+  }
+
   authenticate(credentials: Credentials) {
     this.store.dispatch(AppAuthenticateActions.authenticate({ credentials }));
   }
@@ -31,5 +37,9 @@ export class AppAuthenticateFacade {
 
   logout() {
     this.store.dispatch(AppAuthenticateActions.logout());
+  }
+
+  signup(user: User){
+    this.store.dispatch(AppAuthenticateActions.signup({user: user}));
   }
 }

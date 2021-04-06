@@ -32,7 +32,8 @@
         "repeatPasswordIsRequired": "Trebuie sa repeti parola.",
         "passwordsMustMatch": "Parolele trebuie sa se potriveasca",
         "emailAlreadyExists": "Email-ul pe care l-ai introdus este deja folosit",
-        "emailIsNotValid": "Te rugam sa introduci un email valid!"
+        "emailIsNotValid": "Te rugam sa introduci un email valid!",
+        "anErrorOccured": "S-a produs o eroare, incearca din nou mai tarziu!"
       }
     },
     "signIn": {

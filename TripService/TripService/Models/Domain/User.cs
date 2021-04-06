@@ -21,7 +21,7 @@ namespace TripService.Models.Domain
         public string PhoneNumber { get; set; }
         public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
-        public Role Role { get; set; }
+        public RoleEnum Role { get; set; }
         public List<User> friends { get; set; }
         public List<Review> Reviews { get; set; }
     }

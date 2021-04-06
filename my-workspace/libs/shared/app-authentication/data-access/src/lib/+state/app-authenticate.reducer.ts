@@ -19,6 +19,11 @@ export const initialState: AuthState = {
 
 const appAuthenticateReducer = createReducer(
   initialState,
+  on(AppAuthenticateActions.init, (state) => ({
+    ...state,
+    isLoading: false,
+    error: null
+  })),
   on(AppAuthenticateActions.authenticate, (state) => ({
     ...state,
     isLoading: true,

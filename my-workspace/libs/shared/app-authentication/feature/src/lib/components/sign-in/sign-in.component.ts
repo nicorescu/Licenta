@@ -33,6 +33,7 @@ export class SignInComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.authFacade.init();
     this.error$ = this.authFacade.error$;
     this.isLoading$ = this.authFacade.isLoading$;
 

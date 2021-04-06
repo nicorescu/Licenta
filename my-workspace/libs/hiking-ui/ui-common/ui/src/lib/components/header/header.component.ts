@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.sessionToken$ = this.authFacade.sessionToken$;
+    this.authFacade.sessionToken$.subscribe(res => console.log(res))
   }
 
   logoutClicked() {

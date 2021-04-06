@@ -41,10 +41,9 @@
             border-color: $input_outline_gray;
             outline-color: $input_outline_gray;
           }
-          &:hover{
+          &:hover {
             border-width: 2px;
           }
-          
         }
       }
     }
@@ -61,19 +60,24 @@
     }
   }
 
-  .signIn-message{
+  .signIn-message {
     justify-content: center;
     width: 100%;
     display: flex;
     margin: auto;
-    
-    a{
+
+    a {
       color: $col_blue_main;
       margin-left: 5px;
     }
   }
 
-  mat-form-field{
+  mat-form-field {
     width: 80%;
+  }
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
