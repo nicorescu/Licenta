@@ -23,6 +23,7 @@ namespace TripService.Models.Domain
         public DateTime Birthday { get; set; }
         public RoleEnum Role { get; set; }
         public List<User> friends { get; set; }
+        public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
     }
 }

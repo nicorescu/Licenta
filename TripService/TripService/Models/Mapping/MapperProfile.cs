@@ -13,7 +13,8 @@ namespace TripService.Models.Mapping
         public MapperProfile()
         {
             CreateMap<User, UserDto>()
-                .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()));
+                .ForMember(dto => dto.Age, opt => opt.MapFrom(domain => DateTime.Today.Year - domain.Birthday.Year))
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => Math.Round(domain.Reviews.Select(r => r.Stars).Average(), 2)));
             CreateMap<UserDto, User>();
 
             CreateMap<Trip, TripDto>()
@@ -26,6 +27,9 @@ namespace TripService.Models.Mapping
 
             CreateMap<Review, ReviewDto>();
             CreateMap<ReviewDto, Review>();
+
+            CreateMap<Conversation, ConversationDto>();
+            CreateMap<ConversationDto, Conversation>();
         }
     }
 }
