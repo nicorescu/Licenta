@@ -61,6 +61,14 @@
       "myAccount": "Contul meu",
       "notifications": "Notificari",
       "logout": "Deconecteaza-te"
+    },
+    "chatPanel": {
+      "noContentMessage": "Nu ai nicio conversatie",
+      "viewAllConversations": "Vezi toate conversatiile"
+    },
+    "notificationsPanel": {
+      "noContentMessage": "Nu ai nicio notificare",
+      "viewAllNotifications": "Vezi toate notificarile"
     }
   },
 

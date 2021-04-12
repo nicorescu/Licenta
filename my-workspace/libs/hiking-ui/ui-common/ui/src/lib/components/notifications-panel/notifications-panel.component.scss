@@ -1,0 +1,22 @@
+@import 'theme.scss';
+
+::ng-deep .mat-menu-panel {
+  height: auto;
+  overflow: unset !important;
+  .mat-menu-content {
+    height: 100%;
+  }
+}
+
+.view-all-message-box {
+  padding: 4px;
+}
+
+.panel-content {
+  overflow-y: scroll;
+  max-height: calc(100% - 34px);
+}
+
+.no-content-message {
+  padding: 10px 5px 0px 5px;
+}

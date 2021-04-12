@@ -12,6 +12,22 @@ export class NotificationsPanelComponent implements OnInit {
     this.data = [
       { id: 1, string: 's' },
       { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
+      { id: 1, string: 's' },
+      { id: 2, string: '3' },
     ];
   }
 }

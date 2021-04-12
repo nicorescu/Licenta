@@ -13,3 +13,5 @@ export * from './lib/models/user.model';
 export * from './lib/models/account-provider.model';
 export * from './lib/models/session-token.model';
 export * from './lib/models/role.model';
+export * from './lib/guards/auth.guard';
+export * from './lib/guards/login.guard';

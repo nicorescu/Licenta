@@ -18,8 +18,9 @@ namespace TripService.Models.Domain
         public string Country { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public User Organizer { get; set; }
-        public List<User> Participants { get; set; }
+        public Guid OrganizerId { get; set; }
+        public int SlotsNumber { get; set; }
+        public List<Guid> ParticipantsIds { get; set; }
         public TripPrivacy Privacy { get; set; }
         public TripState State { get; set; }
         public List<Review> Reviews { get; set; }

@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  LoginFormComponent,
-  ResetPasswordFormComponent,
-  CreateAccountFormComponent,
-  ChangePasswordFormComponent,
-} from './shared/components';
+
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
-import { MyAccountComponent, NotificationsComponent, TripPlanningComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
+
+import { MyAccountComponent, NotificationsComponent, TripPlanningComponent,ConversationsComponent , CreateTripComponent} from '@hkworkspace/hiking-ui/trip-planning/feature';
 import { SignInContainerComponent, SignUpContainerComponent } from '@hkworkspace/shared/app-authentication/feature';
+import {AuthGuard, LoginGuard} from '@hkworkspace/shared/app-authentication/data-access';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'trip-planning',
-    pathMatch: 'full',
-  },
+
   {
     path: 'trip-planning',
     component: TripPlanningComponent,
+  },
+  {
+    path: 'create-trip',
+    component: CreateTripComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'tasks',
@@ -35,25 +33,33 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'login-form',
-    component: LoginFormComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
     path: 'signup',
     component: SignUpContainerComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'signin',
     component: SignInContainerComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'conversations',
+    component: ConversationsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'my-account',
     component: MyAccountComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'trip-planning'
   }
 ];
 

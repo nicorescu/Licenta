@@ -86,7 +86,8 @@
             "allowedCommonJsDependencies": [
               "devextreme",
               "devextreme-angular",
-              "devextreme-aspnet-data-nojquery"
+              "devextreme-aspnet-data-nojquery",
+              "ngx-google-places-autocomplete"
             ]
           },
           "configurations": {

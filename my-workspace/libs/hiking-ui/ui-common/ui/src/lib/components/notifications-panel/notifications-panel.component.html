@@ -1,10 +1,23 @@
-<ng-container>
+<ng-container *transloco="let t; read: 'header.notificationsPanel'">
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>notifications</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <ng-container *ngFor="let item of data">
-      <div mat-menu-item>{{ item.id + item.string }}</div>
+    <ng-container *ngIf="data.length > 0">
+      <div class="panel-content">
+        <div mat-menu-item *ngFor="let item of data">
+          {{ item.id + item.string }}
+        </div>
+      </div>
+      <mat-divider class="mb-2"></mat-divider>
+      <div class="view-all-message-box">
+        <a routerLink="/notifications">{{ t('viewAllNotifications') }}</a>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="data.length == 0">
+      <div class="no-content-message">
+        <p>{{ t('noContentMessage') }}</p>
+      </div>
     </ng-container>
   </mat-menu>
 </ng-container>

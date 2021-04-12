@@ -5,9 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromAppAuthenticate from './+state/app-authenticate.reducer';
 import { AppAuthenticateEffects } from './+state/app-authenticate.effects';
 import { AppAuthenticateFacade } from './+state/app-authenticate.facade';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Config } from './config/config';
-import {TranslocoModule} from '@ngneat/transloco';
+import { TranslocoModule } from '@ngneat/transloco';
 import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter() {
@@ -27,19 +27,20 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:44357"],
-        disallowedRoutes:[]
-      }
-    })
+        allowedDomains: ['localhost:44357'],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   providers: [AppAuthenticateFacade],
 })
 export class SharedAppAuthenticationDataAccessModule {
-  
-  static forRoot(config: Config): ModuleWithProviders<SharedAppAuthenticationDataAccessModule> {
+  static forRoot(
+    config: Config
+  ): ModuleWithProviders<SharedAppAuthenticationDataAccessModule> {
     return {
       ngModule: SharedAppAuthenticationDataAccessModule,
-      providers: [{ provide: Config, useValue: config }]
+      providers: [{ provide: Config, useValue: config }],
     };
   }
 }

@@ -45,7 +45,7 @@ export class AppAuthenticateEffects {
               error = this.translocoService.translate(
                 'authentication.signIn.errors.wrongCredentials'
               );
-              this.config.logoutUrl = '/login';
+              this.config.logoutUrl = '/signin';
               this.authFacade.logout();
             }
             return of(

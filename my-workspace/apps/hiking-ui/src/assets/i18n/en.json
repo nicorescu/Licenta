@@ -61,7 +61,16 @@
     "userPanel": {
       "myAccount": "My account",
       "logout": "Log Out"
+    },
+    "chatPanel": {
+      "noContentMessage": "You don't have any conversation",
+      "viewAllConversations": "View all conversations"
+    },
+    "notificationsPanel": {
+      "noContentMessage": "You don't have any notification",
+      "viewAllNotifications": "View all notifications"
     }
+    
   },
 
   "tripPlanning": {
