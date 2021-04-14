@@ -38,7 +38,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   currentDate = new Date();
   searchTrip: SearchTripModel;
-  isInvalidLocation = true;
+  isInvalidLocation = false;
   isSubmittedOnce = false;
 
   constructor(
@@ -82,7 +82,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     this.rendererListener();
   }
 
-  //NU: id/reviews/html_attributions/permanently_closed/price_level/rating
   public handleAddressChange(address: Address) {
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());

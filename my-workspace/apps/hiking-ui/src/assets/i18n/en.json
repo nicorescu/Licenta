@@ -70,11 +70,11 @@
       "noContentMessage": "You don't have any notification",
       "viewAllNotifications": "View all notifications"
     }
-    
   },
 
   "tripPlanning": {
     "findTrip": "Find a trip",
+    "or": "Or",
     "searchTrip": {
       "enterLocation": "Enter a location (country, region or city)",
       "startDate": "Start date",
@@ -82,13 +82,34 @@
       "enterDateRange": "Enter a date range",
       "friendsOnly": "Friends only",
       "seeTrips": "See your trips",
+      "createTrip": "Create a trip",
 
       "errors": {
         "selectLocationError": "You need to select a location from the list",
         "selectAValidRangeError": "Select a valid date range"
-      } 
+      }
     },
-    "or": "Or",
-    "createTrip": "Create a trip"
+    "createTrip": {
+      "enterLocation": "Enter the location (country, region or city)",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "enterDateRange": "Enter a date range",
+      "createTrip": "Create a trip",
+      "numberOfSlots": "Number of slots",
+      "tripPrivacy": "Trip privacy",
+      "create": "Create now",
+      "hints": {
+        "privateTripHint": "Only the people you invite will be able to join",
+        "friendsOnlyTripHint": "Only people from your friends list will be able to join",
+        "publicTripHint": "Everyone will be able to join",
+        "locationDetailsHint": "After you select a location, you can view several details about it below"
+      },
+      "errors": {
+        "selectLocation": "You need to provide the location",
+        "provideStartDate": "Please, provide the start date",
+        "provideEndDate": "Pleasem provide the end date",
+        "invalidNumber": "The number should be at least 1"
+      }
+    }
   }
 }

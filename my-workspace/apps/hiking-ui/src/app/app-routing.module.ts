@@ -7,20 +7,31 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 
-import { MyAccountComponent, NotificationsComponent, TripPlanningComponent,ConversationsComponent , CreateTripComponent} from '@hkworkspace/hiking-ui/trip-planning/feature';
-import { SignInContainerComponent, SignUpContainerComponent } from '@hkworkspace/shared/app-authentication/feature';
-import {AuthGuard, LoginGuard} from '@hkworkspace/shared/app-authentication/data-access';
+import {
+  MyAccountComponent,
+  NotificationsComponent,
+  TripPlanningComponent,
+  ConversationsComponent,
+  CreateAndPreviewTripComponent,
+} from '@hkworkspace/hiking-ui/trip-planning/feature';
+import {
+  SignInContainerComponent,
+  SignUpContainerComponent,
+} from '@hkworkspace/shared/app-authentication/feature';
+import {
+  AuthGuard,
+  LoginGuard,
+} from '@hkworkspace/shared/app-authentication/data-access';
 
 const routes: Routes = [
-
   {
     path: 'trip-planning',
     component: TripPlanningComponent,
   },
   {
     path: 'create-trip',
-    component: CreateTripComponent,
-    canActivate: [AuthGuard]
+    component: CreateAndPreviewTripComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'tasks',
@@ -35,32 +46,32 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpContainerComponent,
-    canActivate: [LoginGuard]
+    canActivate: [LoginGuard],
   },
   {
     path: 'signin',
     component: SignInContainerComponent,
-    canActivate: [LoginGuard]
+    canActivate: [LoginGuard],
   },
   {
     path: 'notifications',
     component: NotificationsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'conversations',
     component: ConversationsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'my-account',
     component: MyAccountComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
-    redirectTo: 'trip-planning'
-  }
+    redirectTo: 'trip-planning',
+  },
 ];
 
 @NgModule({

@@ -81,12 +81,34 @@
       "enterDateRange": "Selecteaza un interval",
       "friendsOnly": "Doar prieteni",
       "seeTrips": "Vezi excursiile",
+      "createTrip": "Creeaza o excursie",
       "errors": {
         "selectLocationError": "Trebuie sa selectezi o locatie din lista",
         "selectAValidRangeError": "Selecteaza un interval valid"
       }
     },
     "or": "Sau",
-    "createTrip": "Creeaza o excursie"
+    "createTrip": {
+      "enterLocation": "Introdu locatia (tara, regiune sau oras)",
+      "startDate": "Data de inceput",
+      "endDate": "Data de incheiere",
+      "enterDateRange": "Selecteaza un interval",
+      "createTrip": "Creeaza o excursie",
+      "numberOfSlots": "Numar de locuri",
+      "tripPrivacy": "Accesibilitatea excursiei",
+      "create": "Creeaza acum",
+      "hints": {
+        "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
+        "friendsOnlyTripHint": "Doar prietenii se vor putea alatura",
+        "publicTripHint": "Oricine se poate alatura",
+        "locationDetailsHint": "Dupa ce selectezi o locatie, poti vedea mai multe detalii despre aceasta mai jos"
+      },
+      "errors": {
+        "selectLocation": "Trebuie sa selectezi locatia",
+        "provideStartDate": "Te rugam sa selectezi data de inceput",
+        "provideEndDate": "Te rugam sa selectezi data de incheiere",
+        "invalidNumber": "Trebuie sa fie cel putin 1 loc"
+      }
+    }
   }
 }

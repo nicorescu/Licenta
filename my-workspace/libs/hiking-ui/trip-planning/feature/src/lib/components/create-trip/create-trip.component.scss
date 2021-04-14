@@ -1,0 +1,30 @@
+@import 'theme.scss';
+
+::ng-deep .create-trip-container {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px 0px 0px;
+
+  form {
+    width: 50%;
+    min-width: 350px;
+  }
+
+  .google-input {
+    font-size: 17px;
+  }
+
+  #googleInputField {
+    width: 100%;
+  }
+
+  .submit-container{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px 15px 0px;
+  }
+
+}

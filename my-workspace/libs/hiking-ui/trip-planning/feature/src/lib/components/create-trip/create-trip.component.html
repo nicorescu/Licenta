@@ -1,1 +1,91 @@
-<p>create-trip works!</p>
+<div
+  class="create-trip-container"
+  *transloco="let t; read: 'tripPlanning.createTrip'"
+>
+  <form [formGroup]="createTripForm">
+    <mat-form-field id="googleInputField" appearance="outline">
+      <mat-label>{{ t('enterLocation') }}</mat-label>
+      <input
+        id="locationInput"
+        #googlePlacesInput
+        matInput
+        ngx-google-places-autocomplete
+        [options]="options"
+        #placesRef="ngx-places"
+        (onAddressChange)="handleAddressChange($event)"
+        class="google-input theme-input"
+        (keydown)="onKey()"
+        (keydown.enter)="(false)"
+        required
+        formControlName="location"
+      />
+      <mat-hint>{{ t('hints.locationDetailsHint') }}</mat-hint>
+      <mat-error>{{ t('errors.selectLocation') }}</mat-error>
+    </mat-form-field>
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>{{ t('startDate') }}</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          (click)="startPicker.open()"
+          formControlName="startDate"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+        <mat-error>{{ t('errors.provideStartDate') }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>{{ t('endDate') }}</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          (click)="endPicker.open()"
+          formControlName="endDate"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+        <mat-error>{{ t('errors.provideEndDate') }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>{{ t('numberOfSlots') }}</mat-label>
+        <input
+          matInput
+          formControlName="slotsNumber"
+          type="number"
+          (keydown)="keyDownSlotsNumber($event)"
+        />
+        <mat-error>{{ t('errors.invalidNumber') }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>{{ t('tripPrivacy') }}</mat-label>
+        <mat-select formControlName="privacy">
+          <mat-option
+            *ngFor="let item of tripPrivacy | enumToArray"
+            [value]="item.value"
+          >
+            {{ item | enumToString }}</mat-option
+          >
+        </mat-select>
+        <mat-hint *ngIf="privacy === 0">{{
+          t('hints.privateTripHint')
+        }}</mat-hint>
+        <mat-hint *ngIf="privacy === 1">{{
+          t('hints.friendsOnlyTripHint')
+        }}</mat-hint>
+        <mat-hint *ngIf="privacy === 2">{{
+          t('hints.publicTripHint')
+        }}</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="submit-container">
+      <button type="submit" class="btn btn-primary">
+        {{ t('create') }}
+      </button>
+    </div>
+  </form>
+</div>
