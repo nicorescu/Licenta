@@ -1,5 +1,12 @@
-@import "theme.scss";
+@import 'theme.scss';
 
-.btn-user-panel{
+.btn-user-panel {
   text-transform: capitalize;
+
+  #userProfileImage {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    margin-right: 5px;
+  }
 }

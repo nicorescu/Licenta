@@ -5,6 +5,10 @@
         <a routerLink="/trip-planning">
           <img src="/images/travel_logo.svg" />
         </a>
+
+        <button class="btn btn-primary" routerLink="/create-trip">
+          {{ t('createTrip') }}
+        </button>
       </div>
       <div class="flex-end">
         <ng-container *ngIf="!!(sessionToken$ | async)">

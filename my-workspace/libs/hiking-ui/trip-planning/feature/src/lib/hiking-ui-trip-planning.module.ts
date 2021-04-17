@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button'
+import {MatIconModule} from '@angular/material/icon';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -26,6 +28,7 @@ import { CreateTripComponent } from './components/create-trip/create-trip.compon
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { CreateAndPreviewTripComponent } from './container/create-and-preview-trip/create-and-preview-trip.component';
+import { TripPreviewComponent } from './components/trip-preview/trip-preview.component';
 
 
 
@@ -47,6 +50,8 @@ import { CreateAndPreviewTripComponent } from './container/create-and-preview-tr
     MatDividerModule,
     RouterModule,
     MatSelectModule,
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [
     TripPlanningComponent,
@@ -56,6 +61,7 @@ import { CreateAndPreviewTripComponent } from './container/create-and-preview-tr
     ConversationsComponent,
     CreateTripComponent,
     CreateAndPreviewTripComponent,
+    TripPreviewComponent,
   ],
 })
 export class HikingUiTripPlanningFeatureModule {}

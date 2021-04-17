@@ -7,6 +7,7 @@
       <mat-form-field appearance="outline">
         <mat-label>{{ t('email') }}</mat-label>
         <input matInput formControlName="email" />
+        <mat-icon matSuffix>perm_identity</mat-icon>
         <mat-error *ngIf="email.errors?.required">{{
           t('errors.emailRequired')
         }}</mat-error>
@@ -16,7 +17,8 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>{{ t('password') }}</mat-label>
-        <input matInput formControlName="password" />
+        <input matInput formControlName="password" type="password"/>
+        <mat-icon matSuffix>lock</mat-icon>
         <mat-error *ngIf="password.errors?.required">{{
           t('errors.passwordRequired')
         }}</mat-error>

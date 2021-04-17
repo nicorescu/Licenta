@@ -40,18 +40,19 @@
     .flex-start {
       height: 100%;
       width: auto;
-      justify-content: flex-start;
+      min-width: 275px;
+      justify-content: space-between;
       display: flex;
       align-items: center;
 
       a {
-        width: 130px;
+        width: 65px;
         height: 130px;
         display: flex;
         justify-content: flex-start;
 
         img {
-          width: 100%;
+          width: 200%;
           height: 100%;
           display: flex;
           margin: -10px;

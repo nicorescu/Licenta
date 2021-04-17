@@ -54,7 +54,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
           e.target !== this.locationsInput.nativeElement &&
           this.isInvalidLocation
         ) {
-          this.clearInputValue();
+          this.clearSearchInput();
           this.searchForm.controls['location'].setErrors({invalid: true});
         }
       }
@@ -117,7 +117,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     this.searchTrip.friendsOnly = this.searchForm.value.friendsOnly;
   }
 
-  clearInputValue() {
+  clearSearchInput() {
     this.locationsInput.nativeElement.value = null;
     this.searchForm.value.location='';
     this.searchTrip.clearSearch();

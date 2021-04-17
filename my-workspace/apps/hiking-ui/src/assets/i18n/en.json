@@ -58,6 +58,7 @@
   "header": {
     "signIn": "Sign in",
     "signUp": "Sign up",
+    "createTrip": "Create a trip",
     "userPanel": {
       "myAccount": "My account",
       "logout": "Log Out"

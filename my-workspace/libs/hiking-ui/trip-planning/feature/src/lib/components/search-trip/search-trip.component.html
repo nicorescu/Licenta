@@ -34,6 +34,9 @@
         <mat-error *ngIf="isSubmittedOnce">{{
           t('errors.selectLocationError')
         }}</mat-error>
+        <button mat-icon-button matSuffix (click)="clearSearchInput()">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
     </div>
     <div class="row text-center" id="datePickersContainer">

@@ -57,6 +57,7 @@
   "header": {
     "signIn": "Autentifica-te",
     "signUp": "Inregistreaza-te",
+    "createTrip": "Planifica o excursie",
     "userPanel": {
       "myAccount": "Contul meu",
       "notifications": "Notificari",
