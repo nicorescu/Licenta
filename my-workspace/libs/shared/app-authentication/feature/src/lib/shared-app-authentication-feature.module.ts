@@ -21,9 +21,12 @@ import { SignInContainerComponent } from './containers/sign-in-container/sign-in
 import {JwtModule} from '@auth0/angular-jwt';
 import {DatePipe} from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     TranslocoModule,
     MatFormFieldModule,

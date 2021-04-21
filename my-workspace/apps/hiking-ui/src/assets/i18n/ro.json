@@ -98,6 +98,7 @@
       "numberOfSlots": "Numar de locuri",
       "tripPrivacy": "Accesibilitatea excursiei",
       "create": "Creeaza acum",
+      "previewTrip":"Previzualizeaza excursia",
       "hints": {
         "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
         "friendsOnlyTripHint": "Doar prietenii se vor putea alatura",
@@ -111,5 +112,8 @@
         "invalidNumber": "Trebuie sa fie cel putin 1 loc"
       }
     }
+  },
+  "toast": {
+    "signInRequired": "Trebuie sa te autentifici"
   }
 }

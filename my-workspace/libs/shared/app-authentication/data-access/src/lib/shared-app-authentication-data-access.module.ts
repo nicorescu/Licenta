@@ -6,9 +6,10 @@ import * as fromAppAuthenticate from './+state/app-authenticate.reducer';
 import { AppAuthenticateEffects } from './+state/app-authenticate.effects';
 import { AppAuthenticateFacade } from './+state/app-authenticate.facade';
 import { HttpClientModule } from '@angular/common/http';
-import { Config } from './config/config';
+import { Config } from '@hkworkspace/utils';
 import { TranslocoModule } from '@ngneat/transloco';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BrowserModule } from '@angular/platform-browser';
 
 export function tokenGetter() {
   return localStorage.getItem('Trip_Auth_Access_Token_Secret_Key');
@@ -16,6 +17,7 @@ export function tokenGetter() {
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     StoreModule.forFeature(
       fromAppAuthenticate.APPAUTHENTICATE_FEATURE_KEY,

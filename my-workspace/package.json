@@ -30,6 +30,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^3.0.0-beta.0",
     "@angular-material-extensions/select-country": "^4.0.3",
     "@angular/animations": "~11.1.0",
     "@angular/cdk": "^11.2.1",
@@ -68,6 +69,7 @@
     "ngx-bootstrap": "^6.2.0",
     "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-intl-tel-input": "^3.0.5",
+    "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "svg-country-flags": "^1.2.10",
     "tslib": "^2.0.0",

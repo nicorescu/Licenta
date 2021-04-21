@@ -48,7 +48,8 @@
       ],
       "@hkworkspace/hiking-ui/ui-common/feature": [
         "libs/hiking-ui/ui-common/feature/src/index.ts"
-      ]
+      ],
+      "@hkworkspace/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -99,6 +99,7 @@
       "numberOfSlots": "Number of slots",
       "tripPrivacy": "Trip privacy",
       "create": "Create now",
+      "previewTrip":"Preview your trip",
       "hints": {
         "privateTripHint": "Only the people you invite will be able to join",
         "friendsOnlyTripHint": "Only people from your friends list will be able to join",
@@ -112,5 +113,8 @@
         "invalidNumber": "The number should be at least 1"
       }
     }
+  },
+  "toast": {
+    "signInRequired": "You need to sign-in first"
   }
 }

@@ -34,6 +34,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { config } from './module-configs/config';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UtilsModule } from '@hkworkspace/utils';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HikingUiTripPlanningFeatureModule,
     SharedAppAuthenticationFeatureModule,
     SharedAppAuthenticationDataAccessModule.forRoot(config),
+    UtilsModule.forRoot(config),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     FontAwesomeModule,

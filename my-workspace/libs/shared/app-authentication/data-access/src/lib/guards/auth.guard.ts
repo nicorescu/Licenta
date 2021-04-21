@@ -9,8 +9,9 @@ import {
 import { Observable, of } from 'rxjs';
 import { AppAuthenticateFacade } from '../+state/app-authenticate.facade';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, switchMap } from 'rxjs/operators';
-import { Config } from '../config/config';
+import { switchMap } from 'rxjs/operators';
+import { Config,ToastService } from '@hkworkspace/utils';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,9 @@ export class AuthGuard implements CanActivate {
     @Inject(Config) private config: Config,
     private authFacade: AppAuthenticateFacade,
     private jwtHelper: JwtHelperService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService,
+    private translocoService: TranslocoService
   ) {}
 
   canActivate(
@@ -37,7 +40,10 @@ export class AuthGuard implements CanActivate {
           return of(true);
         }
         this.config.redirectUrl = state.url;
-        return of(this.router.createUrlTree(['/signin']));
+        this.toastService.info(
+          this.translocoService.translate('toast.signInRequired')
+        );
+        return of(this.router.createUrlTree(['/sign-in']));
       })
     );
   }

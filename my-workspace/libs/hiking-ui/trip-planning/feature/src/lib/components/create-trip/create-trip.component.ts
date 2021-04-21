@@ -7,7 +7,12 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { TripPrivacy } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import {
+  PlanningFacade,
+  TripPrivacy,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { SelectedLocation } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Component({
   selector: 'hk-create-trip',
@@ -16,19 +21,24 @@ import { TripPrivacy } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 })
 export class CreateTripComponent implements OnInit, OnDestroy {
   @ViewChild('googlePlacesInput') locationsInput;
+  @ViewChild('placesRef') googlePlacesInput: GooglePlaceDirective;
 
   isInvalidLocation = false;
   isSubmittedOnce = false;
   createTripForm: FormGroup;
   tripPrivacy = TripPrivacy;
-
+  selectedLocation: SelectedLocation;
   options = {
     strictBounds: false,
     types: ['(regions)'],
   };
   rendererListener: () => void;
 
-  constructor(private formBuilder: FormBuilder, private renderer: Renderer2) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private renderer: Renderer2,
+    private planningFacade: PlanningFacade
+  ) {
     this.rendererListener = this.renderer.listen(
       'window',
       'click',
@@ -53,9 +63,18 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   }
 
   handleAddressChange(address: Address) {
-    console.log(address.geometry.location.lat());
-    console.log(address.geometry.location.lng());
+    console.log('address:', address);
+    this.setLocation(address);
+    this.planningFacade.selectLocation(this.selectedLocation);
     this.isInvalidLocation = false;
+  }
+
+  setLocation(address: Address) {
+    this.selectedLocation = {
+      placeId: address.place_id,
+      lat: address.geometry.location.lat(),
+      lng: address.geometry.location.lng(),
+    };
   }
 
   buildForm() {

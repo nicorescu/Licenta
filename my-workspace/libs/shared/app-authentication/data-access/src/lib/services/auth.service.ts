@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Config } from '../config/config';
+import { Config } from '@hkworkspace/utils';
 import { Credentials } from '../models/credentials.model';
 import { User } from '../models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';

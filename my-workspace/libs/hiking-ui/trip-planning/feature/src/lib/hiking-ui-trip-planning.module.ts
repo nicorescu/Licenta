@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
@@ -23,17 +24,20 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { ConversationsComponent } from './components/conversations/conversations.component';
 import { CreateTripComponent } from './components/create-trip/create-trip.component';
-
+import { TripPreviewComponent } from './components/trip-preview/trip-preview.component';
+import { GoogleMapComponent } from './components/google-map/google-map.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+
 import { CreateAndPreviewTripComponent } from './container/create-and-preview-trip/create-and-preview-trip.component';
-import { TripPreviewComponent } from './components/trip-preview/trip-preview.component';
 
 
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     ReactiveFormsModule,
     GooglePlaceModule,
@@ -51,7 +55,11 @@ import { TripPreviewComponent } from './components/trip-preview/trip-preview.com
     RouterModule,
     MatSelectModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
+      libraries:['places']
+    })
   ],
   declarations: [
     TripPlanningComponent,
@@ -62,6 +70,7 @@ import { TripPreviewComponent } from './components/trip-preview/trip-preview.com
     CreateTripComponent,
     CreateAndPreviewTripComponent,
     TripPreviewComponent,
+    GoogleMapComponent,
   ],
 })
 export class HikingUiTripPlanningFeatureModule {}

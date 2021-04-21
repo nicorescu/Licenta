@@ -2,7 +2,7 @@
   <mat-toolbar class="header-toolbar">
     <mat-toolbar-row class="toolbar-elements">
       <div class="flex-start">
-        <a routerLink="/trip-planning">
+        <a routerLink="/trip-planning" class="logo-link">
           <img src="/images/travel_logo.svg" />
         </a>
 
@@ -25,14 +25,18 @@
           ></hk-user-panel>
         </ng-container>
 
-        <div class="authentication-buttons" *ngIf="!(sessionToken$ | async)">
-          <button class="btn btn-primary" [routerLink]="['/signin']">
+        <ng-container *ngIf="!(sessionToken$ | async)">
+          <a class="auth-btn" [routerLink]="['/sign-in']">
             {{ t('signIn') }}
-          </button>
-          <button class="btn btn-secondary" [routerLink]="['/signup']">
+          </a>
+          <mat-divider
+            vertical
+            style="height: 100%; margin: 10px"
+          ></mat-divider>
+          <a class="auth-btn" [routerLink]="['/signup']">
             {{ t('signUp') }}
-          </button>
-        </div>
+          </a>
+        </ng-container>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

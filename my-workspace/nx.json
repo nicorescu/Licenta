@@ -51,6 +51,9 @@
     },
     "shared-app-authentication-feature": {
       "tags": []
+    },
+    "utils": {
+      "tags": []
     }
   }
 }

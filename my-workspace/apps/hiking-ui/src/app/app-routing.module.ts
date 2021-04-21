@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
-    path: 'signin',
+    path: 'sign-in',
     component: SignInContainerComponent,
     canActivate: [LoginGuard],
   },

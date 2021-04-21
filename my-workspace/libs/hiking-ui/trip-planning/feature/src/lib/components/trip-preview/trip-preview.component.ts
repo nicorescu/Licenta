@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-trip-preview',
+  selector: 'hk-trip-preview',
   templateUrl: './trip-preview.component.html',
   styleUrls: ['./trip-preview.component.scss']
 })

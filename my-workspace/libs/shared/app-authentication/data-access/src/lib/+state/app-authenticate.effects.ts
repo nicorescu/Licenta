@@ -9,7 +9,7 @@ import jwt_decode from 'jwt-decode';
 import { SessionToken } from '../models/session-token.model';
 import { TranslocoService } from '@ngneat/transloco';
 import { of } from 'rxjs';
-import { Config } from '../config/config';
+import { Config } from '@hkworkspace/utils';
 import { AccountProvider } from '../models/account-provider.model';
 import { Router } from '@angular/router';
 import { AppAuthenticateFacade } from './app-authenticate.facade';
@@ -45,7 +45,7 @@ export class AppAuthenticateEffects {
               error = this.translocoService.translate(
                 'authentication.signIn.errors.wrongCredentials'
               );
-              this.config.logoutUrl = '/signin';
+              this.config.logoutUrl = '/sign-in';
               this.authFacade.logout();
             }
             return of(

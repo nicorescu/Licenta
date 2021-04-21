@@ -17,7 +17,7 @@ import { DatePipe } from '@angular/common';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { SearchTripModel } from '../../models/search-trip.model';
+import { TripFilter } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { GooglePlacesService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Component({
@@ -37,15 +37,12 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   rendererListener: () => void;
   searchForm: FormGroup;
   currentDate = new Date();
-  searchTrip: SearchTripModel;
+  tripFilter: TripFilter;
   isInvalidLocation = false;
   isSubmittedOnce = false;
 
-  constructor(
-    private renderer: Renderer2,
-    private formBuilder: FormBuilder
-  ) {
-    this.searchTrip = new SearchTripModel();
+  constructor(private renderer: Renderer2, private formBuilder: FormBuilder) {
+    this.tripFilter = new TripFilter();
     this.rendererListener = this.renderer.listen(
       'window',
       'click',
@@ -55,7 +52,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
           this.isInvalidLocation
         ) {
           this.clearSearchInput();
-          this.searchForm.controls['location'].setErrors({invalid: true});
+          this.searchForm.controls['location'].setErrors({ invalid: true });
         }
       }
     );
@@ -68,6 +65,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
       endDate: [null, [Validators.required]],
       friendsOnly: [false],
     });
+    console.log(this.placesRef);
   }
 
   public get startDate() {
@@ -96,7 +94,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isSubmittedOnce = true;
     this.setSearchModelProps();
-    console.log(this.searchTrip);
+    console.log(this.tripFilter);
   }
 
   onKey() {
@@ -106,26 +104,26 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   setSearchModelProps() {
-    this.searchTrip.startDate = (new DatePipe('en-us').transform(
+    this.tripFilter.startDate = (new DatePipe('en-us').transform(
       this.searchForm.value.startDate,
       'dd/MM/yyyy'
     ) as unknown) as Date;
-    this.searchTrip.endDate = (new DatePipe('en-us').transform(
+    this.tripFilter.endDate = (new DatePipe('en-us').transform(
       this.searchForm.value.endDate,
       'dd/MM/yyyy'
     ) as unknown) as Date;
-    this.searchTrip.friendsOnly = this.searchForm.value.friendsOnly;
+    this.tripFilter.friendsOnly = this.searchForm.value.friendsOnly;
   }
 
   clearSearchInput() {
     this.locationsInput.nativeElement.value = null;
-    this.searchForm.value.location='';
-    this.searchTrip.clearSearch();
+    this.searchForm.value.location = '';
+    this.tripFilter.clearSearch();
   }
 
   setSearchKeywords(address: Address) {
     address.address_components.forEach((comp) => {
-      this.searchTrip.keywords.push(comp.long_name);
+      this.tripFilter.keywords.push(comp.long_name);
     });
   }
 }

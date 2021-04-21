@@ -17,13 +17,10 @@
     height: 100%;
     width: 100%;
 
-    .authentication-buttons {
-      justify-content: space-between;
-
-      .btn-secondary {
-        margin-left: 10px;
-      }
+    .auth-btn{
+      font-size: smaller;
     }
+
     mat-divider {
       height: 100%;
       margin: 10px;
@@ -45,7 +42,7 @@
       display: flex;
       align-items: center;
 
-      a {
+      .logo-link {
         width: 65px;
         height: 130px;
         display: flex;

@@ -1,4 +1,4 @@
-export class SearchTripModel {
+export class TripFilter {
   startDate: Date;
   endDate: Date;
   friendsOnly: boolean;
