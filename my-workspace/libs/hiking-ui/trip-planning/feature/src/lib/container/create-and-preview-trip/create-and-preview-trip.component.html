@@ -7,7 +7,7 @@
       {{ t('createTrip') }}
     </div>
     <div id="createTrip" class="shadow-container">
-      <hk-create-trip></hk-create-trip>
+      <hk-create-trip (submitEmitter)="onSubmit($event)"></hk-create-trip>
     </div>
     <div id="googleMap">
       <hk-google-map

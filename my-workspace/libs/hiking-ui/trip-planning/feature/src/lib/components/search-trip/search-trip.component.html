@@ -3,42 +3,39 @@
   *transloco="let t; read: 'tripPlanning.searchTrip'"
 >
   <form
-    #searchTripForm="ngForm"
     [formGroup]="searchForm"
     (ngSubmit)="onSubmit()"
   >
-    <div>
-      <mat-form-field
-        [ngClass]="{
-          'theme-invalid-mat-form-field': isInvalidLocation && isSubmittedOnce,
-          'theme-valid-mat-form-field': !(isInvalidLocation && isSubmittedOnce)
-        }"
-        id="googleInputField"
-        appearance="outline"
-      >
-        <mat-label>{{ t('enterLocation') }}</mat-label>
-        <input
-          id="locationInput"
-          #googlePlacesInput
-          matInput
-          ngx-google-places-autocomplete
-          [options]="options"
-          #placesRef="ngx-places"
-          (onAddressChange)="handleAddressChange($event)"
-          class="google-input theme-input"
-          (keydown)="onKey()"
-          (keydown.enter)="(false)"
-          required
-          formControlName="location"
-        />
-        <mat-error *ngIf="isSubmittedOnce">{{
-          t('errors.selectLocationError')
-        }}</mat-error>
-        <button mat-icon-button matSuffix (click)="clearSearchInput()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
+    <mat-form-field
+      [ngClass]="{
+        'theme-invalid-mat-form-field': isInvalidLocation && isSubmittedOnce,
+        'theme-valid-mat-form-field': !(isInvalidLocation && isSubmittedOnce)
+      }"
+      id="googleInputField"
+      appearance="outline"
+    >
+      <mat-label>{{ t('enterLocation') }}</mat-label>
+      <input
+        id="locationInput"
+        #googlePlacesInput
+        matInput
+        ngx-google-places-autocomplete
+        [options]="options"
+        #placesRef="ngx-places"
+        (onAddressChange)="handleAddressChange($event)"
+        class="google-input theme-input"
+        (keydown)="onKey()"
+        (keydown.enter)="(false)"
+        required
+        formControlName="location"
+      />
+      <mat-error *ngIf="isSubmittedOnce">{{
+        t('errors.selectLocationError')
+      }}</mat-error>
+      <button type="button" mat-icon-button matSuffix (click)="clearSearchInput()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
     <div class="row text-center" id="datePickersContainer">
       <div class="col-12">
         <mat-form-field

@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   PlanningFacade,
-  SelectedLocation,
+  Trip,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -31,5 +29,9 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.alive = false;
+  }
+
+  onSubmit(trip: Trip) {
+    this.planningFacade.previewTrip(trip);
   }
 }

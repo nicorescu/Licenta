@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import {SelectedLocation} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import {SelectedLocation} from '../models/selected-location.model';
+import {Trip} from '../models/trip.model';
 
 export const selectLocation = createAction(
   'Select Location',
@@ -9,4 +10,9 @@ export const selectLocation = createAction(
 export const loadTripFailure = createAction(
   '[Create Trip] Load Trip Failure',
   props<{ error: any }>()
+);
+
+export const previewTrip = createAction(
+  '[Create Trip] Preview Trip',
+  props<{ trip: Trip }>()
 );

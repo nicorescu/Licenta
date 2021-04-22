@@ -10,8 +10,6 @@ export class TripFilter {
   }
 
   clearSearch() {
-    this.startDate = null;
-    this.endDate = null;
     this.friendsOnly = false;
     this.keywords = [];
   }

@@ -18,7 +18,6 @@ import { DatePipe } from '@angular/common';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { TripFilter } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { GooglePlacesService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Component({
   selector: 'hk-search-trip',
@@ -38,7 +37,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   currentDate = new Date();
   tripFilter: TripFilter;
-  isInvalidLocation = false;
+  isInvalidLocation = true;
   isSubmittedOnce = false;
 
   constructor(private renderer: Renderer2, private formBuilder: FormBuilder) {
@@ -83,6 +82,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   public handleAddressChange(address: Address) {
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
+    console.log('address: ', address);
     try {
       this.setSearchKeywords(address);
       this.isInvalidLocation = false;
@@ -94,7 +94,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isSubmittedOnce = true;
     this.setSearchModelProps();
-    console.log(this.tripFilter);
   }
 
   onKey() {
@@ -119,6 +118,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     this.locationsInput.nativeElement.value = null;
     this.searchForm.value.location = '';
     this.tripFilter.clearSearch();
+    this.isInvalidLocation = true;
   }
 
   setSearchKeywords(address: Address) {

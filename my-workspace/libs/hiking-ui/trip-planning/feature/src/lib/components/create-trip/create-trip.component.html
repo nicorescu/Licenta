@@ -2,8 +2,8 @@
   class="create-trip-container"
   *transloco="let t; read: 'tripPlanning.createTrip'"
 >
-  <form [formGroup]="createTripForm">
-    <mat-form-field id="googleInputField" appearance="outline">
+  <form *ngIf="createTripForm" [formGroup]="createTripForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" id="googleInputField" appearance="outline">
       <mat-label>{{ t('enterLocation') }}</mat-label>
       <input
         id="locationInput"
@@ -21,9 +21,12 @@
       />
       <mat-hint>{{ t('hints.locationDetailsHint') }}</mat-hint>
       <mat-error>{{ t('errors.selectLocation') }}</mat-error>
+      <button type="button" mat-icon-button matSuffix (click)="clearLocation()">
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
-    <div class="row">
-      <mat-form-field class="col-6">
+    <div class="row mb-1">
+      <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ t('startDate') }}</mat-label>
         <input
           matInput
@@ -32,11 +35,11 @@
           formControlName="startDate"
           readonly
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
         <mat-error>{{ t('errors.provideStartDate') }}</mat-error>
       </mat-form-field>
-      <mat-form-field class="col-6">
+      <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ t('endDate') }}</mat-label>
         <input
           matInput
@@ -45,13 +48,13 @@
           formControlName="endDate"
           readonly
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
         <mat-error>{{ t('errors.provideEndDate') }}</mat-error>
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field class="col-6">
+      <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ t('numberOfSlots') }}</mat-label>
         <input
           matInput
@@ -61,7 +64,7 @@
         />
         <mat-error>{{ t('errors.invalidNumber') }}</mat-error>
       </mat-form-field>
-      <mat-form-field class="col-6">
+      <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ t('tripPrivacy') }}</mat-label>
         <mat-select formControlName="privacy">
           <mat-option

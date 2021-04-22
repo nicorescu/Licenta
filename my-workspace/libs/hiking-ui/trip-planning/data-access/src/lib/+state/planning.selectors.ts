@@ -13,3 +13,9 @@ export const getisLoading = createSelector(
   getTripState,
   (state: PlanningState) => state.isLoading
 );
+
+export const getPlanningTrip = createSelector(
+  getTripState,
+  (state: PlanningState) => state.planningTrip
+);
+
