@@ -14,6 +14,7 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
   alive = true;
   lat: number = 51.678418;
   lng: number = 7.809007;
+  showMarker = false;
   constructor(private planningFacade: PlanningFacade) {}
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
         if (location) {
           this.lat = location.lat;
           this.lng = location.lng;
+          this.showMarker = true;
         }
       });
   }

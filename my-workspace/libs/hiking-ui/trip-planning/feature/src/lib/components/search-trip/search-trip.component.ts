@@ -29,8 +29,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('googlePlacesInput') locationsInput;
 
   options = {
-    strictBounds: false,
-    types: ['(regions)'],
+    types:['(cities)']
   };
 
   rendererListener: () => void;
