@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { TripFilter } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { PhotoRequest } from 'ngx-google-places-autocomplete/objects/photo';
 
 @Component({
   selector: 'hk-search-trip',
@@ -29,7 +30,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('googlePlacesInput') locationsInput;
 
   options = {
-    types:['(cities)']
+    types: ['(cities)'],
   };
 
   rendererListener: () => void;
@@ -77,8 +78,11 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.rendererListener();
   }
-
+  photoUrls: string[];
   public handleAddressChange(address: Address) {
+    this.photoUrls = address.photos.map((photo) => {
+      return photo.getUrl({ maxWidth: 500, maxHeight: 375});
+    });
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
     console.log('address: ', address);

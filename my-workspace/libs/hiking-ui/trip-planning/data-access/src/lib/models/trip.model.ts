@@ -1,12 +1,14 @@
 import { TripPrivacy } from './trip-privacy.model';
 import { TripState } from './trip-state.model';
 import { Review } from './review.model';
+import { Geometry } from './geometry.model';
 
 export interface Trip {
   id: string;
   locationName: string;
   address: string;
   country: string;
+  placeId: string;
   startDate: Date;
   endDate: Date;
   organizerId: string;
@@ -16,4 +18,5 @@ export interface Trip {
   tripState: TripState;
   reviews: Review[];
   reviewAverage: number;
+  geometry: Geometry;
 }

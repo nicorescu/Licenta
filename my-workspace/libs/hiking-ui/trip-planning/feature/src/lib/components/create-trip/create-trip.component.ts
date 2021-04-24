@@ -36,9 +36,9 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   tripPrivacy = TripPrivacy;
   selectedLocation: SelectedLocation;
   options = {
-    strictBounds: false,
-    types: ['(regions)'],
+    types:['(cities)']
   };
+
   trip: Trip;
   selectedAddress: Address;
   rendererListener: () => void;
@@ -93,6 +93,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
         locationName: address.name,
         address: address.formatted_address,
         country: null,
+        placeId: address.place_id,
         startDate: this.startDate,
         endDate: this.endDate,
         organizerId: token.loggedInId,
@@ -102,6 +103,10 @@ export class CreateTripComponent implements OnInit, OnDestroy {
         tripState: TripState.Planning,
         reviews: null,
         reviewAverage: null,
+        geometry: {
+          lat: address.geometry.location.lat(),
+          lng: address.geometry.location.lng()
+        }
       };
     });
   }

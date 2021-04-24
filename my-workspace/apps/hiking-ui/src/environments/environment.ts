@@ -8,7 +8,8 @@ export const environment = {
   accessTokenKey: 'Trip_Auth_Access_Token_Secret_Key',
   roleClaim: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
   redirectUrl: '/trip-planning',
-  logoutUrl: '/trip-planning'
+  logoutUrl: '/trip-planning',
+  googleApiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q'
 };
 
 

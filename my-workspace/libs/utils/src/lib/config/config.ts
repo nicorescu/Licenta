@@ -7,4 +7,5 @@ export class Config {
   roleClaim: string;
   redirectUrl: string;
   logoutUrl: string;
+  googleApiKey: string;
 }

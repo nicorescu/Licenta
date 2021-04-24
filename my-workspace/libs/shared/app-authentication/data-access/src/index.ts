@@ -4,7 +4,6 @@ export * from './lib/+state/app-authenticate.selectors';
 export * from './lib/+state/app-authenticate.models';
 export * from './lib/+state/app-authenticate.facade';
 export * from './lib/shared-app-authentication-data-access.module';
-export * from './lib/config/config';
 export * from './lib/services/token-interceptor';
 export * from './lib/services/auth.service';
 

@@ -1,10 +1,11 @@
 import { environment } from "../../environments/environment";
-import { Config } from "@hkworkspace/shared/app-authentication/data-access";
+import { Config } from "@hkworkspace/utils";
 
 export const config: Config = {
   apiURI: environment.apiUri,
   accessTokenKey: environment.accessTokenKey,
   roleClaim: environment.roleClaim,
   redirectUrl: environment.redirectUrl,
-  logoutUrl: environment.logoutUrl
+  logoutUrl: environment.logoutUrl,
+  googleApiKey: environment.googleApiKey
 }
