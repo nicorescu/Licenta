@@ -36,7 +36,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   tripPrivacy = TripPrivacy;
   selectedLocation: SelectedLocation;
   options = {
-    types:['(cities)']
+    types: ['(cities)'],
   };
 
   trip: Trip;
@@ -82,7 +82,9 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     if (this.createTripForm.invalid) {
       return;
     }
-    this.setTrip(this.selectedAddress);
+    if (this.selectedAddress) {
+      this.setTrip(this.selectedAddress);
+    }
     this.submitEmitter.emit(this.trip);
   }
 
@@ -105,8 +107,8 @@ export class CreateTripComponent implements OnInit, OnDestroy {
         reviewAverage: null,
         geometry: {
           lat: address.geometry.location.lat(),
-          lng: address.geometry.location.lng()
-        }
+          lng: address.geometry.location.lng(),
+        },
       };
     });
   }

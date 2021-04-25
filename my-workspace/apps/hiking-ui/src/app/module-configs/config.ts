@@ -7,5 +7,6 @@ export const config: Config = {
   roleClaim: environment.roleClaim,
   redirectUrl: environment.redirectUrl,
   logoutUrl: environment.logoutUrl,
-  googleApiKey: environment.googleApiKey
+  googleApiKey: environment.googleApiKey,
+  pixabayApiKey: environment.pixabayApiKey
 }

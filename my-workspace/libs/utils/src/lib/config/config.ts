@@ -8,4 +8,5 @@ export class Config {
   redirectUrl: string;
   logoutUrl: string;
   googleApiKey: string;
+  pixabayApiKey: string;
 }

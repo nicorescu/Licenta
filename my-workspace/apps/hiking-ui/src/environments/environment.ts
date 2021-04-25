@@ -9,10 +9,9 @@ export const environment = {
   roleClaim: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
   redirectUrl: '/trip-planning',
   logoutUrl: '/trip-planning',
-  googleApiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q'
+  googleApiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
+  pixabayApiKey: '21324810-8c4b7a10637519665fb72e279'
 };
-
-
 
 /*
  * For easier debugging in development mode, you can import the following file

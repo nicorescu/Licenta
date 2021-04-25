@@ -13,3 +13,6 @@ export * from './lib/models/selected-location.model';
 export * from './lib/models/review.model';
 export * from './lib/models/trip.model';
 export * from './lib/models/trip-filter.model';
+export * from './lib/services/pixabay.service';
+export * from './lib/models/pixabay-result.model';
+export * from './lib/models/pixabay-hit.model';

@@ -4,5 +4,11 @@
     "secure": true,
     "pathRewrite": { "^/placesApi": "" },
     "changeOrigin": true
+  },
+  "/pixabayApi": {
+    "target": "https://pixabay.com",
+    "secure": true,
+    "pathRewrite": { "^/pixabayApi": "" },
+    "changeOrigin": true
   }
 }

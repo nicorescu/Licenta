@@ -70,6 +70,7 @@
     "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-intl-tel-input": "^3.0.5",
     "ngx-toastr": "^13.2.1",
+    "pixabay-api": "^1.0.4",
     "rxjs": "~6.6.0",
     "svg-country-flags": "^1.2.10",
     "tslib": "^2.0.0",

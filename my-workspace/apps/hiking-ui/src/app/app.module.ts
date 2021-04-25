@@ -17,6 +17,8 @@ import {
   LoginFormModule,
 } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
+import { config } from './module-configs/config';
+import { environment } from '../environments/environment';
 
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,12 +31,13 @@ import {
   SharedAppAuthenticationDataAccessModule,
   TokenInterceptor,
 } from '@hkworkspace/shared/app-authentication/data-access';
+import { UtilsModule } from '@hkworkspace/utils';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { config } from './module-configs/config';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UtilsModule } from '@hkworkspace/utils';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,6 +62,7 @@ import { UtilsModule } from '@hkworkspace/utils';
     SharedAppAuthenticationDataAccessModule.forRoot(config),
     UtilsModule.forRoot(config),
     StoreModule.forRoot({}, {}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     FontAwesomeModule,
   ],

@@ -14,6 +14,7 @@ import { AccountProvider } from '../models/account-provider.model';
 import { Router } from '@angular/router';
 import { AppAuthenticateFacade } from './app-authenticate.facade';
 import { Role } from '../models/role.model';
+import { PlanningFacade } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Injectable()
 export class AppAuthenticateEffects {
@@ -63,6 +64,7 @@ export class AppAuthenticateEffects {
         ofType(AppAuthenticateActions.logout),
         tap(() => {
           this.authService.logout();
+          this.planningFacade.clearState();
           this.router.navigate([this.config.logoutUrl]);
         })
       ),
@@ -112,6 +114,7 @@ export class AppAuthenticateEffects {
     private translocoService: TranslocoService,
     private router: Router,
     private authFacade: AppAuthenticateFacade,
+    private planningFacade: PlanningFacade,
     @Inject(Config) private config: Config
   ) {}
 
