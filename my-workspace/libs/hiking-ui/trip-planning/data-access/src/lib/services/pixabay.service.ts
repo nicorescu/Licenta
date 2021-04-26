@@ -15,7 +15,7 @@ export class PixabayService {
   ) {}
 
   public getPlacesImages(location: string) {
-    return searchImages(this.config.pixabayApiKey,location,{category: 'places', image_type: 'photo', order: 'latest'});
+    return searchImages(this.config.pixabayApiKey,`travel+${location}`,{image_type: 'photo', order: 'latest'});
     // return this.httpClient.get<PixabayResult>(
     //   `/pixabayApi/api/?key=${this.config.pixabayApiKey}&q=${location}&category=places&image_type=photo&order=latest&lang=en`
     // );

@@ -14,9 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button'
-import {MatIconModule} from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -26,14 +26,16 @@ import { ConversationsComponent } from './components/conversations/conversations
 import { CreateTripComponent } from './components/create-trip/create-trip.component';
 import { TripPreviewComponent } from './components/trip-preview/trip-preview.component';
 import { GoogleMapComponent } from './components/google-map/google-map.component';
+import { PhotosComponent } from './components/photos/photos.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
-import { HikingUiTripPlanningDataAccessModule} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 import { CreateAndPreviewTripComponent } from './container/create-and-preview-trip/create-and-preview-trip.component';
 
-
 import { AgmCoreModule } from '@agm/core';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import {Ng2ImgMaxModule} from 'ng2-img-max';
 
 @NgModule({
   imports: [
@@ -56,10 +58,11 @@ import { AgmCoreModule } from '@agm/core';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    Ng2ImgMaxModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
-      libraries:['places']
-    })
+      apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
+      libraries: ['places'],
+    }),
   ],
   declarations: [
     TripPlanningComponent,
@@ -71,6 +74,8 @@ import { AgmCoreModule } from '@agm/core';
     CreateAndPreviewTripComponent,
     TripPreviewComponent,
     GoogleMapComponent,
+    PhotosComponent,
   ],
+  providers: [NgxImageCompressService],
 })
 export class HikingUiTripPlanningFeatureModule {}

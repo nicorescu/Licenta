@@ -10,5 +10,11 @@
     "secure": true,
     "pathRewrite": { "^/pixabayApi": "" },
     "changeOrigin": true
+  },
+  "/googleUserContent": {
+    "target": "https://lh3.googleusercontent.com",
+    "secure": true,
+    "pathRewrite": { "^/googleUserContent": "" },
+    "changeOrigin": true
   }
 }

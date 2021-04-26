@@ -1,17 +1,8 @@
 <div *transloco="let t; read: 'tripPreview'">
   <div class="container">
     <div class="trip-preview-container">
-      <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <div id="mainPhoto" *ngFor="let photo of (photos$ | async)">
-            <img [src]="photo" />
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div id="mainPhoto" >
-            <button (click)="print()">blabla</button>
-          </div>
-        </div>
+      <div class="photos-container">
+        <hk-photos [photos]="photos$ | async"></hk-photos>
       </div>
     </div>
   </div>

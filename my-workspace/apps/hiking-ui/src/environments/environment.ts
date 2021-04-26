@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUri: 'https://localhost:44357',
+  apiUri: 'https://localhost:5001',
   accessTokenKey: 'Trip_Auth_Access_Token_Secret_Key',
   roleClaim: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
   redirectUrl: '/trip-planning',

@@ -100,5 +100,7 @@
     </div>
   </form>
 
-  <img [src]="photoUrl">
+  <div *ngFor="let url of photoUrls">
+    <img [src]="url" />
+  </div>
 </div>

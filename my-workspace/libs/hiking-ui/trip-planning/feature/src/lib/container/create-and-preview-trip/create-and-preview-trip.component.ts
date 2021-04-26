@@ -33,7 +33,7 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
-  onSubmit(trip: Trip) {
-    this.planningFacade.previewTrip(trip);
+  onSubmit(obj) {
+    this.planningFacade.previewTrip(obj.trip, obj.photos);
   }
 }

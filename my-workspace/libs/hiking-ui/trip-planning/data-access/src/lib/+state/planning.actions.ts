@@ -14,7 +14,7 @@ export const loadTripFailure = createAction(
 
 export const previewTrip = createAction(
   '[Create Trip] Preview Trip',
-  props<{ trip: Trip }>()
+  props<{ trip: Trip, photos: string[] }>()
 );
 
 export const loadPhotosSuccess = createAction(

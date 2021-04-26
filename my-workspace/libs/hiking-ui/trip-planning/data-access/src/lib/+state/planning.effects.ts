@@ -5,6 +5,7 @@ import * as TripActions from './planning.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { PixabayService } from '../services/pixabay.service';
 import { of } from 'rxjs';
+import { GooglePlacesService } from '../services/google-places.service';
 
 @Injectable()
 export class PlanningEffects {
@@ -12,28 +13,16 @@ export class PlanningEffects {
     () =>
       this.actions$.pipe(
         ofType(TripActions.previewTrip),
-        switchMap((action) => {
-          const locationName = action.trip.locationName
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(' ', '+');
-          return this.pixabayService
-            .getPlacesImages(locationName)
-            .then((result) => {
-              const photoUrls = result.hits.map((x) => x.webformatURL);
-              this.router.navigate(['/preview-trip']);
-              return TripActions.loadPhotosSuccess({ photos: photoUrls });
-            })
-            .catch((err) => {
-              console.log('in planning effects', err);
-              return TripActions.loadPhotosFailure({ error: '' });
-            });
+        tap(() => {
+          this.router.navigate(['/preview-trip']);
         })
-      )
+      ),
+    { dispatch: false }
   );
 
   constructor(
     private pixabayService: PixabayService,
+    private googleService: GooglePlacesService,
     private actions$: Actions,
     private router: Router
   ) {}

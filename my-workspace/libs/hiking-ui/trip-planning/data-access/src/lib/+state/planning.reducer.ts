@@ -28,9 +28,10 @@ const PlanningReducer = createReducer(
     selectedLocation: location,
     isLoading: false,
   })),
-  on(PlanningActions.previewTrip, (state, { trip }) => ({
+  on(PlanningActions.previewTrip, (state, { trip, photos}) => ({
     ...state,
     isLoading: true,
+    photos: photos,
     planningTrip: trip,
   })),
   on(PlanningActions.loadPhotosSuccess, (state, { photos }) => ({

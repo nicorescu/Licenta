@@ -23,8 +23,8 @@ export class PlanningFacade {
     this.store.dispatch(TripActions.selectLocation({ location: location }));
   }
 
-  previewTrip(trip: Trip) {
-    this.store.dispatch(TripActions.previewTrip({ trip: trip }));
+  previewTrip(trip: Trip, photos: string[]) {
+    this.store.dispatch(TripActions.previewTrip({ trip: trip, photos: photos }));
   }
 
   clearState() {

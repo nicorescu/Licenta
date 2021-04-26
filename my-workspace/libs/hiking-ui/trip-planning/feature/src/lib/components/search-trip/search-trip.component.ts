@@ -1,24 +1,23 @@
 import {
   Component,
-  EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormControl,
   Validators,
 } from '@angular/forms';
-import { DatePipe } from '@angular/common';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { TripFilter } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { PhotoRequest } from 'ngx-google-places-autocomplete/objects/photo';
+import {
+  GooglePlacesService,
+  TripFilter,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'hk-search-trip',
@@ -28,7 +27,6 @@ import { PhotoRequest } from 'ngx-google-places-autocomplete/objects/photo';
 export class SearchTripComponent implements OnInit, OnDestroy {
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
   @ViewChild('googlePlacesInput') locationsInput;
-
   options = {
     types: ['(cities)'],
   };
@@ -40,7 +38,12 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   isInvalidLocation = true;
   isSubmittedOnce = false;
 
-  constructor(private renderer: Renderer2, private formBuilder: FormBuilder) {
+  constructor(
+    private renderer: Renderer2,
+    private formBuilder: FormBuilder,
+    private googleService: GooglePlacesService,
+    private http: HttpClient
+  ) {
     this.tripFilter = new TripFilter();
     this.rendererListener = this.renderer.listen(
       'window',
@@ -80,9 +83,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
   photoUrls: string[];
   public handleAddressChange(address: Address) {
-    this.photoUrls = address.photos.map((photo) => {
-      return photo.getUrl({ maxWidth: 500, maxHeight: 375});
-    });
+    this.photoUrls = this.getPhotoUrls(address);
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
     console.log('address: ', address);
@@ -92,6 +93,14 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     } catch {
       this.isInvalidLocation = true;
     }
+  }
+
+  getPhotoUrls(address: Address): string[] {
+    return address.photos.map((photo) =>
+      photo
+        .getUrl({ maxHeight: 500, maxWidth: 500 })
+        .replace('https://lh3.googleusercontent.com', '/googleUserContent')
+    );
   }
 
   onSubmit() {
@@ -106,14 +115,8 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   setSearchModelProps() {
-    this.tripFilter.startDate = (new DatePipe('en-us').transform(
-      this.searchForm.value.startDate,
-      'dd/MM/yyyy'
-    ) as unknown) as Date;
-    this.tripFilter.endDate = (new DatePipe('en-us').transform(
-      this.searchForm.value.endDate,
-      'dd/MM/yyyy'
-    ) as unknown) as Date;
+    this.tripFilter.startDate = this.searchForm.value.startDate;
+    this.tripFilter.endDate = this.searchForm.value.endDate;
     this.tripFilter.friendsOnly = this.searchForm.value.friendsOnly;
   }
 

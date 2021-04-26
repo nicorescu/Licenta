@@ -58,24 +58,9 @@ export class TripPreviewComponent implements OnInit {
     //     }
     //   }
     // );
+    this.planningFacade.planningTrip$.subscribe((trip) => {
+      this.planningTrip = trip;
+    });
     this.photos$ = this.planningFacade.photos$;
-    this.planningFacade.photos$.subscribe((data) => {
-      console.log(data);
-    });
-  }
-  print() {
-    this.photos$.pipe(take(1)).subscribe((data) => {
-      console.log(data);
-    });
-  }
-  sortByReviewComparator(a, b): number {
-    if (a.rating < b.rating) {
-      return 1;
-    } else if (a.rating > b.rating) {
-      return -1;
-    } else if (a.user_ratings_total < b.user_ratings_total) {
-      return 1;
-    }
-    return 0;
   }
 }

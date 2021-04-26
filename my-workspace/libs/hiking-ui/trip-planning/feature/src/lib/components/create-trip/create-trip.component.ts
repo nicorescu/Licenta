@@ -40,6 +40,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   };
 
   trip: Trip;
+  photos: string[];
   selectedAddress: Address;
   rendererListener: () => void;
 
@@ -85,7 +86,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     if (this.selectedAddress) {
       this.setTrip(this.selectedAddress);
     }
-    this.submitEmitter.emit(this.trip);
+    this.submitEmitter.emit({ trip: this.trip, photos: this.photos });
   }
 
   setTrip(address: Address) {
@@ -114,6 +115,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   }
 
   handleAddressChange(address: Address) {
+    this.photos = this.getPhotoUrls(address);
     this.selectedAddress = address;
     console.log('address:', address);
     this.setLocation(address);
@@ -161,6 +163,14 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     this.createTripForm.value.location = '';
     this.isInvalidLocation = true;
     this.selectedAddress = null;
+    this.photos = [];
+  }
+
+  getPhotoUrls(address: Address): string[] {
+    return address.photos.map((photo) =>
+      photo
+        .getUrl({ maxWidth: 500, maxHeight: 500 })
+    );
   }
 
   get privacy() {
