@@ -2,7 +2,7 @@
   class="create-trip-container"
   *transloco="let t; read: 'tripPlanning.createTrip'"
 >
-  <form *ngIf="createTripForm" [formGroup]="createTripForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createTripForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" id="googleInputField" appearance="outline">
       <mat-label>{{ t('enterLocation') }}</mat-label>
       <input
@@ -34,6 +34,7 @@
           (click)="startPicker.open()"
           formControlName="startDate"
           readonly
+          [min]="today"
         />
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
@@ -47,10 +48,12 @@
           (click)="endPicker.open()"
           formControlName="endDate"
           readonly
+          [min]="startDate.value"
         />
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
-        <mat-error>{{ t('errors.provideEndDate') }}</mat-error>
+        <mat-error *ngIf="endDate.errors?.minDate">{{t('errors.endDateMinError')}}</mat-error>
+        <mat-error *ngIf="endDate.errors?.required">{{ t('errors.provideEndDate') }}</mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -71,7 +74,7 @@
             *ngFor="let item of tripPrivacy | enumToArray"
             [value]="item.value"
           >
-            {{ item | enumToString }}</mat-option
+            {{ t(item.name) }}</mat-option
           >
         </mat-select>
         <mat-hint *ngIf="privacy === 0">{{

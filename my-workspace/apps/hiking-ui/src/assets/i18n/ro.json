@@ -98,7 +98,10 @@
       "numberOfSlots": "Numar de locuri",
       "tripPrivacy": "Accesibilitatea excursiei",
       "create": "Creeaza acum",
-      "previewTrip":"Previzualizeaza excursia",
+      "previewTrip": "Previzualizeaza excursia",
+      "Private": "Privat",
+      "FriendsOnly": "Doar pentru prieteni",
+      "Public": "Public",
       "hints": {
         "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
         "friendsOnlyTripHint": "Doar prietenii se vor putea alatura",
@@ -109,8 +112,20 @@
         "selectLocation": "Trebuie sa selectezi locatia",
         "provideStartDate": "Te rugam sa selectezi data de inceput",
         "provideEndDate": "Te rugam sa selectezi data de incheiere",
+        "endDateMinError": "Data de incheiere nu poate fi mai devreme de data de inceput",
         "invalidNumber": "Trebuie sa fie cel putin 1 loc"
       }
+    },
+    "tripPreview": {
+      "days": "zile",
+      "day" : "zi",
+      "slots": "locuri",
+      "Private": "Privat",
+      "FriendsOnly": "Doar pentru prieteni",
+      "Public": "Public",
+      "thingsToDo": "Activitati recomandate",
+      "finalize": "Finalizeaza",
+      "edit": "Editeaza"
     }
   },
   "toast": {

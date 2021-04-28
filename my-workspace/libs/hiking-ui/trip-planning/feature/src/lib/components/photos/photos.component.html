@@ -1,17 +1,5 @@
-<div class="container-fluid photos-container">
-  <div class="row">
-    <div id="photosList" class="col-md-6 col-sm-12">
-      <div class="row">
-        <div class="col-md-4 small-photo" *ngFor="let photo of photos">
-          <img [src]="photo" class="img"/>
-        </div>
-      </div>
-    </div>
-    <div id="selectedPhoto" class="col-md-6 col-sm-12">
-      <img [src]="selectedPhoto" id="selPhoto"/>
-    </div>
-    <div class="row">
-        <canvas></canvas>
-    </div>
+<div class="photo-preview-container">
+  <div id="photosList" style="width: 500px; height: 500px;">
+    <!-- <ks-modal-gallery [id]="0" [modalImages]="images"></ks-modal-gallery> -->
   </div>
 </div>

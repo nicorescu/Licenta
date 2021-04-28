@@ -14,8 +14,8 @@ export class PlanningFacade {
     select(TripSelectors.getSelectedLocation)
   );
   planningTrip$ = this.store.pipe(select(TripSelectors.getPlanningTrip));
-  photos$ = this.store.pipe(select(TripSelectors.getPhotos));
   error$ = this.store.pipe(select(TripSelectors.getError));
+  attractions$ = this.store.pipe(select(TripSelectors.getAttractions));
 
   constructor(private store: Store) {}
 
@@ -23,8 +23,8 @@ export class PlanningFacade {
     this.store.dispatch(TripActions.selectLocation({ location: location }));
   }
 
-  previewTrip(trip: Trip, photos: string[]) {
-    this.store.dispatch(TripActions.previewTrip({ trip: trip, photos: photos }));
+  previewTrip(trip: Trip) {
+    this.store.dispatch(TripActions.previewTrip({ trip: trip}));
   }
 
   clearState() {

@@ -38,6 +38,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GalleryModule } from '@ks89/angular-modal-gallery';
 
 @NgModule({
   declarations: [AppComponent],
@@ -64,6 +65,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StoreModule.forRoot({}, {}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
+    GalleryModule.forRoot(),
     FontAwesomeModule,
   ],
   providers: [

@@ -35,7 +35,12 @@ import { CreateAndPreviewTripComponent } from './container/create-and-preview-tr
 
 import { AgmCoreModule } from '@agm/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import {Ng2ImgMaxModule} from 'ng2-img-max';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
+import { GalleryModule } from '@ks89/angular-modal-gallery';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import 'hammerjs';
+import 'mousetrap';
 
 @NgModule({
   imports: [
@@ -59,6 +64,9 @@ import {Ng2ImgMaxModule} from 'ng2-img-max';
     MatButtonModule,
     MatIconModule,
     Ng2ImgMaxModule,
+    NgxImageGalleryModule,
+    GalleryModule,
+    RxReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],

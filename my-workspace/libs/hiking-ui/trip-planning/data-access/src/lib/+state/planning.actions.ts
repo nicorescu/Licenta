@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
 import { Trip } from '../models/trip.model';
 
@@ -7,25 +8,23 @@ export const selectLocation = createAction(
   props<{ location: SelectedLocation }>()
 );
 
+
+
+export const previewTrip = createAction(
+  '[Create Trip] Preview Trip',
+  props<{trip: Trip}>()
+);
+
+export const loadTripSuccess = createAction(
+  '[Preview Trip] Load trip success',
+  props<{attractions: Place[]}>()
+);
+
 export const loadTripFailure = createAction(
   '[Create Trip] Load Trip Failure',
   props<{ error: any }>()
 );
 
-export const previewTrip = createAction(
-  '[Create Trip] Preview Trip',
-  props<{ trip: Trip, photos: string[] }>()
-);
-
-export const loadPhotosSuccess = createAction(
-  '[Preview Trip] Load Images success',
-  props<{ photos: string[] }>()
-);
-
-export const loadPhotosFailure = createAction(
-  '[Preview Trip] Load Images failure',
-  props<{ error: string }>()
-);
 
 export const clearState = createAction(
   '[Clear state]'

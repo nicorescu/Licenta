@@ -1,6 +1,65 @@
+@import 'theme.scss';
+
 .trip-preview-container {
-  width: 100%;
+  .background-shape {
+    border-radius: 35px;
+    background: $col_blue_main;
+    padding: 10px;
+    color: white;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 10px;
+
+    .title {
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .dates {
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 17px;
+    }
+  }
+
+  .line {
+    width: 15px;
+    height: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: white;
+  }
+
+  .trip-attractions {
+    width: 100%;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
+    border-radius: 2px;
+  }
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   height: 100%;
-  background-color: white;
-  box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
+  padding: 20px;
+  font-size: 18px;
+  .flex-start {
+    .edit-button {
+      width: 130px;
+    }
+  }
+
+  .flex-end {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+
+    .finalize-button {
+      width: 135px;
+    }
+  }
 }

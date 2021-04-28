@@ -6,6 +6,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { PixabayService } from '../services/pixabay.service';
 import { of } from 'rxjs';
 import { GooglePlacesService } from '../services/google-places.service';
+import { Place } from '../models/place.model';
 
 @Injectable()
 export class PlanningEffects {
@@ -13,6 +14,24 @@ export class PlanningEffects {
     () =>
       this.actions$.pipe(
         ofType(TripActions.previewTrip),
+        switchMap((action) => {
+          return this.googleService
+            .getDetailsByQuery(action.trip.locationName, 'tourist_attraction')
+            .pipe(
+              map((res: any) => {
+                const places: Place[] = res.results;
+                console.log("finally yessssssssssssssssss")
+                return TripActions.loadTripSuccess({ attractions: places });
+              }),
+              catchError((err) => {
+                return of(
+                  TripActions.loadTripFailure({
+                    error: 'error loading attractions',
+                  })
+                );
+              })
+            );
+        }),
         tap(() => {
           this.router.navigate(['/preview-trip']);
         })

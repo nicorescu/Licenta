@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
   GooglePlacesService,
-  PixabayService,
+  Place,
   PlanningFacade,
   Trip,
+  TripPrivacy,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 @Component({
   selector: 'hk-trip-preview',
   templateUrl: './trip-preview.component.html',
@@ -16,51 +16,45 @@ import { take } from 'rxjs/operators';
 export class TripPreviewComponent implements OnInit {
   constructor(
     private planningFacade: PlanningFacade,
-    private googleService: GooglePlacesService,
-    private pixabayService: PixabayService
+    private googleService: GooglePlacesService
   ) {}
 
   planningTrip: Trip;
-  photoUrls: string[];
-  mainPhotoUrl: string;
-  photos$: Observable<string[]>;
-
+  attractions$: Observable<Place[]>;
+  numberOfDays: number;
+  tripPrivacy = TripPrivacy;
   ngOnInit(): void {
-    // this.planningFacade.planningTrip$.pipe(take(1)).subscribe(
-    //   (trip) => {
-    //     this.planningTrip = trip;
-    //   },
-    //   () => {},
-    //   () => {
-    //     if (this.planningTrip) {
-    //       this.googleService
-    //         .getDetailsByQuery(
-    //           this.planningTrip.locationName,
-    //           'tourist_attraction'
-    //         )
-    //         .pipe(take(1))
-    //         .subscribe((data: any) => {
-    //           console.log('data:', data);
-    //           console.log(data.results.sort(this.sortByReviewComparator)[0]);
-    //           const sortedData = data.results.sort(this.sortByReviewComparator);
-
-    //           console.log(this.googleService.getPhotoUrl(
-    //             sortedData.find((x) => x['photos'] !== undefined).photos[0]
-    //               .photo_reference,
-    //             500
-    //           ))
-    //           this.mainPhotoUrl = this.googleService.getPhotoUrl(
-    //             sortedData.find((x) => x['photos'] !== undefined).photos[0]
-    //               .photo_reference,
-    //             500
-    //           );
-    //         });
-    //     }
-    //   }
-    // );
-    this.planningFacade.planningTrip$.subscribe((trip) => {
-      this.planningTrip = trip;
+    this.attractions$ = this.planningFacade.attractions$;
+    this.planningTrip = {
+      id: undefined,
+      locationName: 'Brasov',
+      address: 'Brasov, Romania',
+      country: null,
+      placeId: 'ChIJ8RSiKoZbs0ARDx45VO_y9Ww',
+      startDate: new Date('2021/4/15'),
+      endDate: new Date('2021/4/26'),
+      reviewAverage: null,
+      reviews: [],
+      slotsNumber: 4,
+      tripPrivacy: 1,
+      tripState: 0,
+      organizerId: '2d08507e-5539-4275-bfdf-c6e6d4d5549b',
+      participantsIds: [],
+      geometry: { lat: 45.6426802, lng: 25.5887252 },
+    };
+    this.numberOfDays =
+      (this.planningTrip.endDate.getTime() -
+        this.planningTrip.startDate.getTime()) /
+      (1000 * 3600 * 24);
+    this.planningFacade.planningTrip$.pipe(take(1)).subscribe((trip) => {
+      if (trip) {
+        console.log('trip', trip);
+        this.planningTrip = trip;
+        this.numberOfDays =
+          (this.planningTrip.endDate.getTime() -
+            this.planningTrip.startDate.getTime()) /
+          (1000 * 3600 * 24) +1;
+      }
     });
-    this.photos$ = this.planningFacade.photos$;
   }
 }

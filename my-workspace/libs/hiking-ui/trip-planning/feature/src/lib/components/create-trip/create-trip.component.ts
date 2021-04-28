@@ -7,7 +7,12 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import {
   PlanningFacade,
@@ -19,7 +24,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { SelectedLocation } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { AppAuthenticateFacade } from '@hkworkspace/shared/app-authentication/data-access';
 import { take } from 'rxjs/operators';
-
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 @Component({
   selector: 'hk-create-trip',
   templateUrl: './create-trip.component.html',
@@ -38,6 +43,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
   options = {
     types: ['(cities)'],
   };
+  today = new Date();
 
   trip: Trip;
   photos: string[];
@@ -79,37 +85,60 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     this.rendererListener();
   }
 
+  buildForm() {
+    this.createTripForm = this.formBuilder.group({
+      location: [this.trip?.address, [Validators.required]],
+      startDate: [this.trip?.startDate, [Validators.required]],
+      endDate: [this.trip?.endDate, [Validators.required]],
+      slotsNumber: [
+        this.trip?.slotsNumber,
+        [Validators.required, Validators.pattern('^[1-9]\\d*$')],
+      ],
+      privacy: [this.trip ? this.trip.tripPrivacy : TripPrivacy.Public],
+    });
+
+    this.endDate.setValidators(RxwebValidators.minDate(this.startDate));
+  }
+
   onSubmit() {
     if (this.createTripForm.invalid) {
       return;
     }
+    this.setTrip();
     if (this.selectedAddress) {
-      this.setTrip(this.selectedAddress);
+      this.setAddress(this.selectedAddress);
     }
-    this.submitEmitter.emit({ trip: this.trip, photos: this.photos });
+    this.submitEmitter.emit(this.trip);
   }
 
-  setTrip(address: Address) {
+  setAddress(address: Address) {
+    this.trip = {
+      ...this.trip,
+      address: address.formatted_address,
+      locationName: address.name,
+      placeId: address.place_id,
+      geometry: {
+        lat: address.geometry.location.lat(),
+        lng: address.geometry.location.lng(),
+      },
+    };
+  }
+
+  setTrip() {
     this.authFacade.sessionToken$.pipe(take(1)).subscribe((token) => {
       this.trip = {
+        ...this.trip,
         id: undefined,
-        locationName: address.name,
-        address: address.formatted_address,
         country: null,
-        placeId: address.place_id,
-        startDate: this.startDate,
-        endDate: this.endDate,
+        startDate: this.startDate.value,
+        endDate: this.endDate.value,
         organizerId: token.loggedInId,
-        slotsNumber: this.slotsNumber,
+        slotsNumber: this.slotsNumber.value,
         participantsIds: null,
-        tripPrivacy: this.privacy,
+        tripPrivacy: this.privacy.value,
         tripState: TripState.Planning,
         reviews: null,
         reviewAverage: null,
-        geometry: {
-          lat: address.geometry.location.lat(),
-          lng: address.geometry.location.lng(),
-        },
       };
     });
   }
@@ -129,19 +158,6 @@ export class CreateTripComponent implements OnInit, OnDestroy {
       lat: address.geometry.location.lat(),
       lng: address.geometry.location.lng(),
     };
-  }
-
-  buildForm() {
-    this.createTripForm = this.formBuilder.group({
-      location: [this.trip?.address, [Validators.required]],
-      startDate: [this.trip?.startDate, [Validators.required]],
-      endDate: [this.trip?.endDate, [Validators.required]],
-      slotsNumber: [
-        this.trip?.slotsNumber,
-        [Validators.required, Validators.pattern('^[1-9]\\d*$')],
-      ],
-      privacy: [this.trip ? this.trip.tripPrivacy : TripPrivacy.Public],
-    });
   }
 
   onKey() {
@@ -168,24 +184,29 @@ export class CreateTripComponent implements OnInit, OnDestroy {
 
   getPhotoUrls(address: Address): string[] {
     return address.photos.map((photo) =>
-      photo
-        .getUrl({ maxWidth: 500, maxHeight: 500 })
+      photo.getUrl({ maxWidth: 1024, maxHeight: 0 })
     );
   }
 
+  minEndDateValidator(control: AbstractControl) {
+    const isEarlierThanStart = control.value < this.startDate;
+
+    return isEarlierThanStart ? { invalidEndDate: true } : null;
+  }
+
   get privacy() {
-    return this.createTripForm.get('privacy').value;
+    return this.createTripForm.controls['privacy'];
   }
 
   get startDate() {
-    return this.createTripForm.get('startDate').value;
+    return this.createTripForm.controls['startDate'];
   }
 
   get endDate() {
-    return this.createTripForm.get('endDate').value;
+    return this.createTripForm.controls['endDate'];
   }
 
   get slotsNumber() {
-    return this.createTripForm.get('slotsNumber').value;
+    return this.createTripForm.controls['slotsNumber'];
   }
 }

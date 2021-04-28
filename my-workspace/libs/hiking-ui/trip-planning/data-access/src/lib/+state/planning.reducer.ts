@@ -1,4 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
+import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
 import { Trip } from '../models/trip.model';
 import * as PlanningActions from './planning.actions';
@@ -9,16 +10,16 @@ export interface PlanningState {
   selectedLocation: SelectedLocation;
   isLoading: boolean;
   planningTrip: Trip;
-  photos: string[];
   error: string;
+  attractions: Place[];
 }
 
 export const initialState: PlanningState = {
   selectedLocation: null,
   isLoading: false,
   planningTrip: null,
-  photos: [],
   error: null,
+  attractions: []
 };
 
 const PlanningReducer = createReducer(
@@ -28,29 +29,28 @@ const PlanningReducer = createReducer(
     selectedLocation: location,
     isLoading: false,
   })),
-  on(PlanningActions.previewTrip, (state, { trip, photos}) => ({
+  on(PlanningActions.previewTrip, (state, { trip}) => ({
     ...state,
     isLoading: true,
-    photos: photos,
     planningTrip: trip,
   })),
-  on(PlanningActions.loadPhotosSuccess, (state, { photos }) => ({
+  on(PlanningActions.loadTripSuccess, (state, { attractions}) => ({
     ...state,
     isLoading: false,
     error: null,
-    photos: photos,
+    attractions: attractions
   })),
-  on(PlanningActions.loadPhotosFailure, (state, { error }) => ({
+  on(PlanningActions.loadTripFailure, (state, { error}) => ({
     ...state,
     isLoading: false,
     error: error,
+    attractions: []
   })),
   on(PlanningActions.clearState, (state) => ({
     ...state,
     isLoading: false,
     error: null,
     planningTrip: null,
-    photos: null,
     selectedLocation: null,
   }))
 );

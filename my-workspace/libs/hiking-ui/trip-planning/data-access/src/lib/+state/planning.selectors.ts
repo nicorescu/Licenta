@@ -21,12 +21,12 @@ export const getPlanningTrip = createSelector(
   (state: PlanningState) => state.planningTrip
 );
 
-export const getPhotos = createSelector(
-  getTripState,
-  (state: PlanningState) => state.photos
-);
-
 export const getError = createSelector(
   getTripState,
   (state: PlanningState) => state.error
+);
+
+export const getAttractions = createSelector(
+  getTripState,
+  (state: PlanningState) => state.attractions
 );

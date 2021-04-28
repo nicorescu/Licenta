@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Ng2ImgMaxService } from 'ng2-img-max';
-import { DOC_ORIENTATION, NgxImageCompressService } from 'ngx-image-compress';
+import { Image } from '@ks89/angular-modal-gallery';
 
 @Component({
   selector: 'hk-photos',
@@ -10,11 +9,14 @@ import { DOC_ORIENTATION, NgxImageCompressService } from 'ngx-image-compress';
 export class PhotosComponent implements OnInit {
   @Input()
   photos: string[];
-  selectedPhoto: string;
-  img: string;
-  constructor(private imageService: NgxImageCompressService) {}
+  images: Image[];
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.selectedPhoto = this.photos[0];
+    // this.images = this.photos.map((x, index) => {
+    //   return new Image(index, { img: x, extUrl: 'http://wwww.google.com' });
+    // });
+    // console.log(this.photos[0])
   }
 }

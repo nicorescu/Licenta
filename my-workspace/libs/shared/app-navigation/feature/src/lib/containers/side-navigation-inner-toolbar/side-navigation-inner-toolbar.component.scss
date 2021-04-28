@@ -16,13 +16,13 @@
 
 .content-container{
   height: 100%;
-  padding-bottom: 85px;
+  padding-bottom: 75px;
 }
 
 ::ng-deep #navigation-header {
   background-color: $col_blue_main;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-
+height: 64px;
    .dx-toolbar-before {
 
     .menu-button .dx-icon {

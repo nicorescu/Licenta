@@ -16,3 +16,4 @@ export * from './lib/models/trip-filter.model';
 export * from './lib/services/pixabay.service';
 export * from './lib/models/pixabay-result.model';
 export * from './lib/models/pixabay-hit.model';
+export * from './lib/models/place.model';

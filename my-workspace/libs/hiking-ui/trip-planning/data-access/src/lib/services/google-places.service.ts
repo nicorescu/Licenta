@@ -30,11 +30,8 @@ export class GooglePlacesService {
 
   public getDetailsByQuery(location: string, types: string) {
     location = location.replace(' ', '+');
-    //location = location.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    location = location.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     types = types.replace('_', '+').replace(',', '+');
-    console.log(
-      `/placesApi/maps/api/place/textsearch/json?query=${location}+${types}&language=en&key=${this.config.googleApiKey}`
-    );
     return this.httpCLient.get(
       `/placesApi/maps/api/place/textsearch/json?query=${location}+${types}&language=en&key=${this.config.googleApiKey}`
     );
