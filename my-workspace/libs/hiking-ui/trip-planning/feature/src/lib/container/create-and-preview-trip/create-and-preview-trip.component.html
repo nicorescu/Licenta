@@ -1,12 +1,16 @@
 <div
   class="container-fluid"
   *transloco="let t; read: 'tripPlanning.createTrip'"
+  style="margin-top: -15px"
 >
   <div class="container">
     <div class="text-center h2">
       {{ t('createTrip') }}
     </div>
     <div id="createTrip" class="shadow-container">
+      <div class="spinner-container">
+        <mat-spinner *ngIf="isLoading$ | async" [diameter]="50"></mat-spinner>
+      </div>
       <hk-create-trip (submitEmitter)="onSubmit($event)"></hk-create-trip>
     </div>
     <div id="googleMap">

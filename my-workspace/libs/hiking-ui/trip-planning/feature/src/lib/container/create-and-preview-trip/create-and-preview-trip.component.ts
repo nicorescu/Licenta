@@ -3,6 +3,7 @@ import {
   PlanningFacade,
   Trip,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -15,6 +16,7 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
   lat: number = 51.678418;
   lng: number = 7.809007;
   showMarker = false;
+  isLoading$: Observable<boolean>;
   constructor(private planningFacade: PlanningFacade) {}
 
   ngOnInit(): void {
@@ -27,6 +29,8 @@ export class CreateAndPreviewTripComponent implements OnInit, OnDestroy {
           this.showMarker = true;
         }
       });
+
+    this.isLoading$ = this.planningFacade.isLoading$;
   }
 
   ngOnDestroy(): void {

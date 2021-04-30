@@ -126,7 +126,10 @@
       "Public": "Public",
       "thingsToDo": "Things to do",
       "finalize": "Finalize",
-      "edit": "Edit"
+      "edit": "Edit",
+      "errors": {
+        "errorLoadingAttractions": "Failed loading tourist attractions, please try again later"
+      }
     }
   },
   "toast": {

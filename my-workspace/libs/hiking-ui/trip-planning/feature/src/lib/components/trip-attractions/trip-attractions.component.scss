@@ -1,0 +1,25 @@
+.trip-attractions {
+  min-height: 400px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  height: auto;
+
+  .attraction-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .left-arrow,
+    .right-arrow {
+      display: flex;
+      align-items: center;
+      width: 60px;
+      button {
+        height: 60px;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 @import 'theme.scss';
 
-.trip-preview-container {
+.trip-details {
   .background-shape {
     border-radius: 35px;
     background: $col_blue_main;
@@ -30,36 +30,5 @@
     margin-left: 5px;
     margin-right: 5px;
     background-color: white;
-  }
-
-  .trip-attractions {
-    width: 100%;
-    background-color: white;
-    box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
-    border-radius: 2px;
-  }
-}
-
-.footer-content {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-  padding: 20px;
-  font-size: 18px;
-  .flex-start {
-    .edit-button {
-      width: 130px;
-    }
-  }
-
-  .flex-end {
-    width: 100%;
-    justify-content: flex-end;
-    display: flex;
-
-    .finalize-button {
-      width: 135px;
-    }
   }
 }

@@ -1,0 +1,20 @@
+<div class="image-container" *ngIf="selectedAttraction">
+  <img
+    [src]="photoUrl"
+    class="image img-fluid responsive"
+    [alt]="selectedAttraction.name"
+  />
+  <div class="image-overlay">
+    <div class="image-title">{{ selectedAttraction.name }}</div>
+    <p class="image-rating">
+      <star-rating
+        value="5"
+        totalstars="5"
+        checkedcolor="yellow"
+        uncheckedcolor="white"
+        size="24px"
+        readonly="true"
+      ></star-rating>
+    </p>
+  </div>
+</div>

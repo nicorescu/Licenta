@@ -6,32 +6,31 @@
   [revealMode]="menuRevealMode"
   [minSize]="minMenuSize"
   [shading]="shaderEnabled"
-  [(opened)]="menuOpened">
-
+  [(opened)]="menuOpened"
+>
   <hk-side-navigation-menu
     class="dx-swatch-additional"
     *dxTemplate="let dataMenu of 'panel'"
     (itemClicked)="itemClicked($event)"
     [menuItems]="menuItems"
     [isMenuOpen]="menuOpened"
-    [isMenuClosing]="!menuOpened">
-      <dx-toolbar id="navigation-header">
-        <dxi-item
-          location="before"
-          cssClass="menu-button"
-          widget="dxButton"
-          [options]="{
-            icon: 'menu',
-            stylingMode: 'text',
-            onClick: toggleMenu
-          }">
-        </dxi-item>
-        <dxi-item
-          location="before"
-          cssClass="header-title"
-          [text]="title">
-        </dxi-item>
-      </dx-toolbar>
+    [isMenuClosing]="!menuOpened"
+  >
+    <dx-toolbar id="navigation-header">
+      <dxi-item
+        location="before"
+        cssClass="menu-button"
+        widget="dxButton"
+        [options]="{
+          icon: 'menu',
+          stylingMode: 'text',
+          onClick: toggleMenu
+        }"
+      >
+      </dxi-item>
+      <dxi-item location="before" cssClass="header-title" [text]="title">
+      </dxi-item>
+    </dx-toolbar>
   </hk-side-navigation-menu>
 
   <div class="content-container">
@@ -44,8 +43,16 @@
         <ng-content></ng-content>
       </div>
 
-      <div class="content-block">
-        <ng-content select="hk-footer"></ng-content>
+      <div
+        style="height: 55px; width: 100%; bottom: 0px; position: sticky"
+        *ngIf="showFooter"
+      >
+        <hk-footer
+        style="height: 100%; width: 100%;"
+          [routerLink]="'/create-trip'"
+          [leftText]="'edit'"
+          [rightText]="'finalize'"
+        ></hk-footer>
       </div>
     </dx-scroll-view>
   </div>

@@ -125,7 +125,10 @@
       "Public": "Public",
       "thingsToDo": "Activitati recomandate",
       "finalize": "Finalizeaza",
-      "edit": "Editeaza"
+      "edit": "Editeaza",
+      "errors": {
+        "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice, incearca, din nou, mai tarziu"
+      }
     }
   },
   "toast": {

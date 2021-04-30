@@ -1,30 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  GooglePlacesService,
-  Place,
-  PlanningFacade,
-  Trip,
-  TripPrivacy,
-} from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { PlanningFacade, Trip, TripPrivacy } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { take } from 'rxjs/operators';
+
 @Component({
-  selector: 'hk-trip-preview',
-  templateUrl: './trip-preview.component.html',
-  styleUrls: ['./trip-preview.component.scss'],
+  selector: 'hk-trip-details',
+  templateUrl: './trip-details.component.html',
+  styleUrls: ['./trip-details.component.scss'],
 })
-export class TripPreviewComponent implements OnInit {
-  constructor(
-    private planningFacade: PlanningFacade,
-    private googleService: GooglePlacesService
-  ) {}
+export class TripDetailsComponent implements OnInit {
 
   planningTrip: Trip;
-  attractions$: Observable<Place[]>;
   numberOfDays: number;
   tripPrivacy = TripPrivacy;
+  constructor(private planningFacade: PlanningFacade) {}
+
   ngOnInit(): void {
-    this.attractions$ = this.planningFacade.attractions$;
     this.planningTrip = {
       id: undefined,
       locationName: 'Brasov',

@@ -1,0 +1,27 @@
+<div class="trip-attractions">
+  <div class="attraction-container">
+    <div class="left-arrow">
+      <button
+        mat-icon-button
+        (click)="prevPhoto()"
+        [disabled]="selectedPhotoIndex === 0"
+      >
+        <fa-icon [icon]="faAngleLeft" size="4x"></fa-icon>
+      </button>
+    </div>
+    <div class="selected-image">
+      <hk-photo
+        [selectedAttraction]="(attractions$ | async)[selectedPhotoIndex]"
+      ></hk-photo>
+    </div>
+    <div class="right-arrow">
+      <button
+        mat-icon-button
+        (click)="nextPhoto()"
+        [disabled]="selectedPhotoIndex === (attractions$ | async).length - 1"
+      >
+        <fa-icon [icon]="faAngleRight" size="4x"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

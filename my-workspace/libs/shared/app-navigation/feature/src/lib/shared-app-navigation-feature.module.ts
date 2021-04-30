@@ -13,6 +13,7 @@ import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { ScreenService } from './options/screen.service';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import {HikingUiUiCommonUiModule} from '@hkworkspace/hiking-ui/ui-common/ui';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
     DxLoadIndicatorModule,
     DxContextMenuModule,
     TranslocoModule,
+    HikingUiUiCommonUiModule,
     TranslocoLocaleModule.init()
   ],
   providers: [

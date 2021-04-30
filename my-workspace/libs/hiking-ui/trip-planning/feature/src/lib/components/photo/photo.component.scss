@@ -1,0 +1,52 @@
+.image-container {
+    position: relative;
+    cursor: pointer;
+    border-radius: 7px;
+  
+    .image {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+    }
+  
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.25s;
+      border-radius: 7px;
+  
+      .image-title {
+        font-size: 2em;
+        font-weight: bold;
+      }
+  
+      .image-rating {
+        opacity: 0;
+      }
+  
+      &:hover {
+        background: rgba(0, 0, 0, 0.6);
+        .image-rating {
+          opacity: 1;
+        }
+        transition: background-color 0.25s;
+        & > * {
+          transform: translateY(10px);
+        }
+      }
+  
+      & > * {
+        transform: translateY(30px);
+        transition: transform 0.25s;
+      }
+    }
+  }

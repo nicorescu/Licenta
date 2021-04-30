@@ -1,0 +1,26 @@
+<div class="trip-details" *transloco="let t; read: 'tripPlanning.tripPreview'">
+  <div class="background-shape">
+    <div class="title">
+      {{ numberOfDays }} {{ numberOfDays > 1 ? t('days') : t('day') }} in
+      {{ planningTrip.locationName }}
+    </div>
+  </div>
+  <div class="background-shape">
+    <div class="dates">
+      <div class="start-date">
+        {{ planningTrip.startDate | date: 'fullDate' }}
+      </div>
+      <div class="line"></div>
+      <div class="end-date">
+        {{ planningTrip.endDate | date: 'fullDate' }}
+      </div>
+    </div>
+  </div>
+  <div class="background-shape align-items-center">
+    <div class="slots">{{ planningTrip.slotsNumber }} {{ t('slots') }}</div>
+    <div class="line"></div>
+    <div class="privacy">
+      {{ t(tripPrivacy[planningTrip.tripPrivacy]) }}
+    </div>
+  </div>
+</div>

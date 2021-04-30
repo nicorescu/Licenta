@@ -44,7 +44,6 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     types: ['(cities)'],
   };
   today = new Date();
-
   trip: Trip;
   photos: string[];
   selectedAddress: Address;
@@ -89,7 +88,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     this.createTripForm = this.formBuilder.group({
       location: [this.trip?.address, [Validators.required]],
       startDate: [this.trip?.startDate, [Validators.required]],
-      endDate: [this.trip?.endDate, [Validators.required]],
+      endDate: [this.trip?.endDate],
       slotsNumber: [
         this.trip?.slotsNumber,
         [Validators.required, Validators.pattern('^[1-9]\\d*$')],
@@ -97,7 +96,10 @@ export class CreateTripComponent implements OnInit, OnDestroy {
       privacy: [this.trip ? this.trip.tripPrivacy : TripPrivacy.Public],
     });
 
-    this.endDate.setValidators(RxwebValidators.minDate(this.startDate));
+    this.endDate.setValidators([
+      Validators.required,
+      RxwebValidators.minDate(this.startDate),
+    ]);
   }
 
   onSubmit() {
