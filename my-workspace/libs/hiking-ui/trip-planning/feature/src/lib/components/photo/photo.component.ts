@@ -23,4 +23,8 @@ export class PhotoComponent implements OnInit {
       500
     );
   }
+
+  onRate(ev){
+    console.log(ev);
+  }
 }
