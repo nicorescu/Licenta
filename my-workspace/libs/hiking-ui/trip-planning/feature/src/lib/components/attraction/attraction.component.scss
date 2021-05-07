@@ -1,0 +1,12 @@
+@import 'theme.scss';
+
+.attraction {
+  .attraction-name {
+    font-size: large;
+  }
+
+  .attraction-rating {
+    display: flex;
+    justify-content: center;
+  }
+}

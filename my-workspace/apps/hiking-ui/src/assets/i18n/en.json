@@ -124,11 +124,13 @@
       "Private": "private",
       "FriendsOnly": "For friends only",
       "Public": "Public",
-      "thingsToDo": "Things to do",
+      "tripHighlights": "Highlights for your trip",
       "finalize": "Finalize",
       "edit": "Edit",
+      "tripCreatedSuccess": "Your trip has been successfuly created",
       "errors": {
-        "errorLoadingAttractions": "Failed loading tourist attractions, please try again later"
+        "errorLoadingAttractions": "Failed loading tourist attractions, please try again later",
+        "errorCreatingTrip": "An error occured while trying to create the trip, please try again later"
       }
     }
   },

@@ -9,10 +9,10 @@
         <fa-icon [icon]="faAngleLeft" size="4x"></fa-icon>
       </button>
     </div>
-    <div class="selected-image">
-      <hk-photo
+    <div class="selected-attraction">
+      <hk-attraction
         [selectedAttraction]="(attractions$ | async)[selectedPhotoIndex]"
-      ></hk-photo>
+      ></hk-attraction>
     </div>
     <div class="right-arrow">
       <button

@@ -27,6 +27,10 @@ export class PlanningFacade {
     this.store.dispatch(TripActions.previewTrip({ trip: trip}));
   }
 
+  createTrip(trip: Trip){
+    this.store.dispatch(TripActions.createTrip({ trip: trip}));
+  }
+
   clearState() {
     this.store.dispatch(TripActions.clearState());
   }

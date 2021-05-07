@@ -3,19 +3,13 @@
     [src]="photoUrl"
     class="image img-fluid responsive"
     [alt]="selectedAttraction.name"
+    (error)="onError($event)"
+    (load)="onLoad()"
   />
-  <div class="image-overlay">
+  <div *ngIf="isImageLoaded" class="image-overlay">
     <div class="image-title">{{ selectedAttraction.name }}</div>
-    <p class="image-rating">
-      <star-rating
-        [value]="selectedAttraction.rating"
-        [totalstars]="5"
-        [checkedcolor]="'yellow'"
-        [uncheckedcolor]="white"
-        [size]="'24px'"
-        [readonly]="true"
-        (rate)="onRate($event)"
-      ></star-rating>
+    <p class="image-arrow">
+      <i class="fas fa-angle-double-right fa-3x"></i>
     </p>
   </div>
 </div>

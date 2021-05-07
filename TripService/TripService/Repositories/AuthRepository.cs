@@ -24,21 +24,29 @@ namespace TripService.Repositories
 
         public async Task<string> Login(CredentialsModel credentials)
         {
-            User result;
-            if (credentials.Password != null)
+            try
             {
-                result = await _collection.FindAsync(User => User.Email == credentials.Email && User.Password == credentials.Password).Result.FirstOrDefaultAsync();
-            }
-            else
-            {
-                result = await _collection.FindAsync(User => User.Email == credentials.Email && User.AccountProvider == credentials.AccountProvider).Result.FirstOrDefaultAsync();
-            }
-            if (result != null)
-            {
-                return AuthResources.GenerateToken(result); ;
-            }
+                User result;
+                if (credentials.Password != null)
+                {
+                    result = await _collection.FindAsync(User => User.Email == credentials.Email && User.Password == credentials.Password).Result.FirstOrDefaultAsync();
+                }
+                else
+                {
+                    result = await _collection.FindAsync(User => User.Email == credentials.Email && User.AccountProvider == credentials.AccountProvider).Result.FirstOrDefaultAsync();
+                }
+                if (result != null)
+                {
+                    return AuthResources.GenerateToken(result); ;
+                }
 
-            return null;
+                return null;
+            } catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return null;
+            }
+            
         }
 
         public async Task<string> Signup(User user)

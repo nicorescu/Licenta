@@ -25,7 +25,20 @@ export const loadTripFailure = createAction(
   props<{ error: any }>()
 );
 
-
 export const clearState = createAction(
   '[Clear state]'
+);
+
+export const createTrip = createAction(
+  '[Preview Trip] Finalize Trip',
+  props<{ trip: Trip }>()
+);
+
+export const createTripSuccess = createAction(
+  '[Preview Trip] Trip created success'
+);
+
+export const createTripFailure = createAction(
+  '[Preview Trip] Trip creation failure',
+  props<{error : string}>()
 );

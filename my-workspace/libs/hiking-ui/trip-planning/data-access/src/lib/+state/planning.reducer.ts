@@ -47,12 +47,21 @@ const PlanningReducer = createReducer(
     attractions: []
   })),
   on(PlanningActions.clearState, (state) => ({
+    ...initialState
+  })),
+  on(PlanningActions.createTrip, (state, {trip}) => ({
+    ...state,
+    isLoading: true
+  })),
+  on(PlanningActions.createTripSuccess, (state) => ({
+    ...state,
+    isLoading: false
+  })),
+  on(PlanningActions.createTripFailure, (state, {error}) => ({
     ...state,
     isLoading: false,
-    error: null,
-    planningTrip: null,
-    selectedLocation: null,
-  }))
+    error: error
+  })),
 );
 
 export function reducer(state: PlanningState | undefined, action: Action) {

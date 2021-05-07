@@ -119,6 +119,9 @@ export class CreateTripComponent implements OnInit, OnDestroy {
       address: address.formatted_address,
       locationName: address.name,
       placeId: address.place_id,
+      country: address.address_components.find((x) =>
+        x.types.includes('country')
+      ).long_name,
       geometry: {
         lat: address.geometry.location.lat(),
         lng: address.geometry.location.lng(),
@@ -131,16 +134,15 @@ export class CreateTripComponent implements OnInit, OnDestroy {
       this.trip = {
         ...this.trip,
         id: undefined,
-        country: null,
         startDate: this.startDate.value,
         endDate: this.endDate.value,
         organizerId: token.loggedInId,
         slotsNumber: this.slotsNumber.value,
-        participantsIds: null,
+        participantsIds: [],
         tripPrivacy: this.privacy.value,
         tripState: TripState.Planning,
-        reviews: null,
-        reviewAverage: null,
+        reviews: [],
+        reviewAverage: 0,
       };
     });
   }

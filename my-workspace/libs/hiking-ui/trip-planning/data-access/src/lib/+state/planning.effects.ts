@@ -8,6 +8,8 @@ import { of } from 'rxjs';
 import { GooglePlacesService } from '../services/google-places.service';
 import { Place } from '../models/place.model';
 import { TranslocoService } from '@ngneat/transloco';
+import { TripService } from '../services/trip.service';
+import { ToastService } from '@hkworkspace/utils';
 
 @Injectable()
 export class PlanningEffects {
@@ -20,7 +22,7 @@ export class PlanningEffects {
           .pipe(
             map((res: any) => {
               const places: Place[] = res.results.filter((x) => !!x.photos);
-              console.log("places: ", places)
+              console.log('places: ', places);
               return TripActions.loadTripSuccess({ attractions: places });
             }),
             catchError((err) => {
@@ -41,11 +43,41 @@ export class PlanningEffects {
     )
   );
 
+  createTrip$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TripActions.createTrip),
+      switchMap((action) => {
+        return this.tripService.createTrip(action.trip).pipe(
+          map((res) => {
+            return TripActions.createTripSuccess();
+          }),
+          tap(() => {
+            const message = this.translocoService.translate(
+              'tripPlanning.tripPreview.tripCreatedSuccess'
+            );
+            this.toastrService.success(message);
+            this.router.navigate(['/trip-planning']);
+          }),
+          catchError((err) => {
+            console.log('eroare', err);
+            const error = this.translocoService.translate(
+              'tripPlanning.tripPreview.errors.errorCreatingTrip'
+            );
+            this.toastrService.error(error);
+            return of(TripActions.createTripFailure({ error: error }));
+          })
+        );
+      })
+    )
+  );
+
   constructor(
     private pixabayService: PixabayService,
     private googleService: GooglePlacesService,
     private translocoService: TranslocoService,
+    private tripService: TripService,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastService
   ) {}
 }

@@ -1,8 +1,23 @@
 <div class="attraction">
-     <div class="main-image">
-        <hk-photo *ngIf="selectedAttraction" [photoUrl]="photoUrl" [imageTitle]="attraction.name" [rating]="attraction.rating" [alt]="attraction.name"></hk-photo>
-     </div>
-     <div class="attraction-details">
-
-     </div>
+  <div class="attraction-header">
+    <div class="background-shape">
+      <div class="attraction-name">
+        {{ selectedAttraction.name }}
+      </div>
+    </div>
+    <div class="attraction-rating">
+      <hk-star-rating
+        [rating]="selectedAttraction.rating"
+        [totalStars]="5"
+        [checkedColor]="'#ecae21'"
+        [uncheckedColor]="'lightgray'"
+        [size]="'24px'"
+        [readOnly]="true"
+      ></hk-star-rating>
+    </div>
+  </div>
+  <div class="main-image">
+    <hk-photo [selectedAttraction]="selectedAttraction"></hk-photo>
+  </div>
+  <div class="attraction-details"></div>
 </div>

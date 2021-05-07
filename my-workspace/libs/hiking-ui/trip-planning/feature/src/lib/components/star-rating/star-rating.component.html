@@ -1,0 +1,11 @@
+<p class="image-rating">
+    <star-rating
+      [value]="rating"
+      [totalstars]="totalStars"
+      [checkedcolor]="checkedColor"
+      [uncheckedcolor]="uncheckedColor"
+      [size]="size"
+      [readonly]="readOnly"
+      (rate)="onRate($event)"
+    ></star-rating>
+  </p>

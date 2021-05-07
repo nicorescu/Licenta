@@ -123,11 +123,13 @@
       "Private": "Privat",
       "FriendsOnly": "Doar pentru prieteni",
       "Public": "Public",
-      "thingsToDo": "Activitati recomandate",
+      "tripHighlights": "Activitati recomandate",
       "finalize": "Finalizeaza",
       "edit": "Editeaza",
+      "tripCreatedSuccess": "Excursia ta a fost creata cu success",
       "errors": {
-        "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice, incearca, din nou, mai tarziu"
+        "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice. Incearca, din nou, mai tarziu",
+        "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu"
       }
     }
   },

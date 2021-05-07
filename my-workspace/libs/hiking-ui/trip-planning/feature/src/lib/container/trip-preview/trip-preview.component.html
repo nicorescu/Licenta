@@ -6,10 +6,14 @@
       </div>
       <div class="trip-attractions">
         <div class="text-center h4">
-          {{ t('thingsToDo') }}
+          {{ t('tripHighlights') }}
         </div>
+        <mat-divider style="margin: 25px;"></mat-divider>
         <hk-trip-attractions></hk-trip-attractions>
       </div>
     </div>
+  </div>
+  <div *ngIf="isLoading$ | async" class="loading-container">
+    <mat-spinner [diameter]="50"></mat-spinner>
   </div>
 </div>

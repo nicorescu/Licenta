@@ -48,6 +48,7 @@ import {RatingModule} from 'ng-starrating';
 import 'hammerjs';
 import 'mousetrap';
 import { PhotoComponent } from './components/photo/photo.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { PhotoComponent } from './components/photo/photo.component';
     TripDetailsComponent,
     TripAttractionsComponent,
     AttractionComponent,
-    PhotoComponent
+    PhotoComponent,
+    StarRatingComponent
   ],
   providers: [NgxImageCompressService],
 })

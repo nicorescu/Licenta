@@ -14,12 +14,12 @@ namespace TripService.Models.Mapping
         {
             CreateMap<User, UserDto>()
                 .ForMember(dto => dto.Age, opt => opt.MapFrom(domain => DateTime.Today.Year - domain.Birthday.Year))
-                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => Math.Round(domain.Reviews.Select(r => r.Stars).Average(), 2)));
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
             CreateMap<UserDto, User>();
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))
-                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Average(review => review.Stars)));
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
             CreateMap<TripDto, Trip>();
 
             CreateMap<Role, RoleDto>();

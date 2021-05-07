@@ -13,6 +13,8 @@ export class PhotoComponent implements OnInit {
   @Input()
   selectedAttraction: Place;
 
+  isImageLoaded: boolean;
+
   constructor(private googleService: GooglePlacesService) {}
 
   ngOnInit(): void {}
@@ -26,5 +28,13 @@ export class PhotoComponent implements OnInit {
 
   onRate(ev){
     console.log(ev);
+  }
+  
+  onError(){
+    this.isImageLoaded = false;
+  }
+
+  onLoad(){
+    this.isImageLoaded = true;
   }
 }
