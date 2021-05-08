@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
+import { TripFilter } from '../models/trip-filter.model';
 import { Trip } from '../models/trip.model';
 
 export const selectLocation = createAction(
@@ -40,5 +41,20 @@ export const createTripSuccess = createAction(
 
 export const createTripFailure = createAction(
   '[Preview Trip] Trip creation failure',
+  props<{error : string}>()
+);
+
+export const searchTrips = createAction(
+  '[Trip-Planning] Search trips',
+  props<{tripFilter : TripFilter}>()
+);
+
+export const searchTripsSuccess = createAction(
+  '[Trip-Planning] Search trips success',
+  props<{trips : Trip[]}>()
+);
+
+export const searchTripFailure = createAction(
+  '[Trip-Planning] Search trips failure',
   props<{error : string}>()
 );

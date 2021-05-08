@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Models.Domain;
 using TripService.Resources;
 
 namespace TripService.Extensions
@@ -36,11 +37,13 @@ namespace TripService.Extensions
                         },
                         {AtlasStringResources.EndDate, new BsonDocument{
                                 {AtlasStringResources.Lte, endDate }
-                            }   
+                            }
                         }
                     }
                 }
             };
+
+            //return BsonDocument.Parse($"{{\"$match\": {{\"StartDate\": {{\"$gte\": ISODate('{startDate.ToUniversalTime()}')}}, \"EndDate\": {{\"$lte\": ISODate('{endDate.ToUniversalTime()}')}}}}");
         }
 
         public static BsonArray SetSearchCriterias(string[] keywords)
@@ -60,6 +63,18 @@ namespace TripService.Extensions
                 criterias.Add(criteria);
             }
             return criterias;
+        }
+
+        public static BsonDocument GetFriendsOnlyRestriction(List<Guid> friendsIds)
+        {
+            return new BsonDocument
+            {
+                {"OrganizerId", new BsonDocument
+                    {
+                        {AtlasStringResources.In, new BsonArray(friendsIds) }
+                    }
+                }
+            };
         }
     }
 }

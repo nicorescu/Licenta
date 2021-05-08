@@ -6,6 +6,7 @@ import { SelectedLocation } from '@hkworkspace/hiking-ui/trip-planning/data-acce
 import * as TripActions from './planning.actions';
 import * as TripSelectors from './planning.selectors';
 import { Trip } from '../models/trip.model';
+import { TripFilter } from '../models/trip-filter.model';
 
 @Injectable()
 export class PlanningFacade {
@@ -16,6 +17,7 @@ export class PlanningFacade {
   planningTrip$ = this.store.pipe(select(TripSelectors.getPlanningTrip));
   error$ = this.store.pipe(select(TripSelectors.getError));
   attractions$ = this.store.pipe(select(TripSelectors.getAttractions));
+  loadedTrips$ = this.store.pipe(select(TripSelectors.getLoadedTrips));
 
   constructor(private store: Store) {}
 
@@ -24,14 +26,18 @@ export class PlanningFacade {
   }
 
   previewTrip(trip: Trip) {
-    this.store.dispatch(TripActions.previewTrip({ trip: trip}));
+    this.store.dispatch(TripActions.previewTrip({ trip: trip }));
   }
 
-  createTrip(trip: Trip){
-    this.store.dispatch(TripActions.createTrip({ trip: trip}));
+  createTrip(trip: Trip) {
+    this.store.dispatch(TripActions.createTrip({ trip: trip }));
   }
 
   clearState() {
     this.store.dispatch(TripActions.clearState());
+  }
+
+  searchTrips(tripFilter: TripFilter) {
+    this.store.dispatch(TripActions.searchTrips({ tripFilter: tripFilter }));
   }
 }

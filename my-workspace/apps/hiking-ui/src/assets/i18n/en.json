@@ -100,8 +100,9 @@
       "tripPrivacy": "Trip privacy",
       "create": "Create now",
       "previewTrip": "Preview your trip",
-      "Private": "private",
+      "Private": "Private",
       "FriendsOnly": "For friends only",
+      "ApprovalRequired": "Approval required",
       "Public": "Public",
       "hints": {
         "privateTripHint": "Only the people you invite will be able to join",
@@ -123,6 +124,7 @@
       "slots": "slots",
       "Private": "private",
       "FriendsOnly": "For friends only",
+      "ApprovalRequired": "Approval required",
       "Public": "Public",
       "tripHighlights": "Highlights for your trip",
       "finalize": "Finalize",
@@ -130,7 +132,8 @@
       "tripCreatedSuccess": "Your trip has been successfuly created",
       "errors": {
         "errorLoadingAttractions": "Failed loading tourist attractions, please try again later",
-        "errorCreatingTrip": "An error occured while trying to create the trip, please try again later"
+        "errorCreatingTrip": "An error occured while trying to create the trip, please try again later",
+        "errorLoadingTrips": "There was an error loading the trips, try again later"
       }
     }
   },

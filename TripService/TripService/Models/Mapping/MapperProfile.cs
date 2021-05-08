@@ -19,7 +19,7 @@ namespace TripService.Models.Mapping
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))
-                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
             CreateMap<TripDto, Trip>();
 
             CreateMap<Role, RoleDto>();
@@ -30,6 +30,9 @@ namespace TripService.Models.Mapping
 
             CreateMap<Conversation, ConversationDto>();
             CreateMap<ConversationDto, Conversation>();
+
+            CreateMap<Message, MessageDto>();
+            CreateMap<MessageDto, Message>();
         }
     }
 }

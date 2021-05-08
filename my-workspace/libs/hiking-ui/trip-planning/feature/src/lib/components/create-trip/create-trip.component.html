@@ -83,7 +83,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ t('tripPrivacy') }}</mat-label>
-        <mat-select formControlName="privacy">
+        <mat-select
+          formControlName="privacy"
+          style="text-transform: capitalize"
+        >
           <mat-option
             *ngFor="let item of tripPrivacy | enumToArray"
             [value]="item.value"

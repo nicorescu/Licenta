@@ -76,7 +76,8 @@
               "globalStyles/devextreme-overrides/generated/theme.base.css",
               "globalStyles/devextreme-overrides/generated/theme.additional.css",
               "globalStyles/devextreme-overrides/dx-styles.scss",
-              "apps/hiking-ui/src/styles.scss"
+              "apps/hiking-ui/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {

@@ -8,7 +8,7 @@ namespace TripService.Enumerators
     public enum TripPrivacy
     {
         Private,
-        FriendsOnly,
+        ApprovalRequired,
         Public
     }
 }

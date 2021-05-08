@@ -6,3 +6,4 @@ export * from './lib/components/create-trip/create-trip.component';
 export * from './lib/container/trip-preview/trip-preview.component';
 export * from './lib/container/create-and-preview-trip/create-and-preview-trip.component';
 export * from './lib/container/trip-planning/trip-planning.component';
+export * from './lib/container/trips-list/trips-list.component';

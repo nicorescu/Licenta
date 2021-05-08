@@ -1,5 +1,5 @@
 export enum TripPrivacy {
   Private,
-  FriendsOnly,
+  ApprovalRequired,
   Public,
 }

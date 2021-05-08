@@ -49,6 +49,7 @@ import 'hammerjs';
 import 'mousetrap';
 import { PhotoComponent } from './components/photo/photo.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { TripsListComponent } from './container/trips-list/trips-list.component';
 
 @NgModule({
   imports: [
@@ -98,7 +99,8 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     TripAttractionsComponent,
     AttractionComponent,
     PhotoComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    TripsListComponent
   ],
   providers: [NgxImageCompressService],
 })

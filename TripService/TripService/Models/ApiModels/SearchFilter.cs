@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace TripService.Models.ApiModels
 {
-    public class SearchTripModel
+    public class SearchFilter
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string[] Keywords { get; set; }
+        public Guid RequesterId { get; set; }
+        public string Keywords { get; set; }
+        public bool WholeCountry { get; set; }
         public bool FriendsOnly { get; set; }
     }
 }

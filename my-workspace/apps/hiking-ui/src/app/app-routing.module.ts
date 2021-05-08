@@ -13,6 +13,7 @@ import {
   TripPlanningComponent,
   ConversationsComponent,
   CreateAndPreviewTripComponent,
+  TripsListComponent,
 } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import {
   SignInContainerComponent,
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'preview-trip',
     component: TripPreviewComponent,
+  },
+  {
+    path: 'view-trips',
+    component: TripsListComponent,
   },
   {
     path: 'tasks',

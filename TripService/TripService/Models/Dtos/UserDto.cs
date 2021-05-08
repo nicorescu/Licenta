@@ -20,7 +20,7 @@ namespace TripService.Models.Dtos
         public DateTime Birthday { get; set; }
         public int Age { get; set; }
         public RoleEnum Role { get; set; }
-        public List<UserDto> friends { get; set; }
+        public List<Guid> Friends { get; set; }
         public List<ConversationDto> Conversations { get; set; }
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }

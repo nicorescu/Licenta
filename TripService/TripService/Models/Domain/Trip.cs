@@ -11,7 +11,6 @@ namespace TripService.Models.Domain
 {
     public class Trip
     {
-        [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
         public string LocationName { get; set; }
         public string Address { get; set; }

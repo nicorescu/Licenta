@@ -15,6 +15,7 @@ using TripService.Setup;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using MongoDB.Bson;
 
 namespace TripService
 {
@@ -39,7 +40,7 @@ namespace TripService
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
-
+            BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
 
             services.AddSingleton<IMongoClient, MongoClient>(services =>

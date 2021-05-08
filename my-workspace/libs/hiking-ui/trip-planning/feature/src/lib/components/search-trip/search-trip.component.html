@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="text-center">
-      <div class="col-12 mb-4 mt-2">
+      <div *ngIf="sessionToken$ | async" class="col-12 mb-4 mt-2">
         <mat-slide-toggle
           formControlName="friendsOnly"
           name="friendsOnly"

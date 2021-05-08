@@ -1,23 +1,23 @@
 import {
   Component,
+  EventEmitter,
   OnDestroy,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { TripFilter } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
-  GooglePlacesService,
-  TripFilter,
-} from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { HttpClient } from '@angular/common/http';
+  AppAuthenticateFacade,
+  SessionToken,
+} from '@hkworkspace/shared/app-authentication/data-access';
+import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hk-search-trip',
@@ -31,18 +31,21 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     types: ['(cities)'],
   };
 
+  @Output()
+  submitted = new EventEmitter();
+
   rendererListener: () => void;
   searchForm: FormGroup;
   currentDate = new Date();
   tripFilter: TripFilter;
   isInvalidLocation = true;
   isSubmittedOnce = false;
+  sessionToken$: Observable<SessionToken>;
 
   constructor(
     private renderer: Renderer2,
     private formBuilder: FormBuilder,
-    private googleService: GooglePlacesService,
-    private http: HttpClient
+    private authFacade: AppAuthenticateFacade
   ) {
     this.tripFilter = new TripFilter();
     this.rendererListener = this.renderer.listen(
@@ -63,19 +66,14 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       location: [null, [Validators.required]],
-      startDate: [null, [Validators.required]],
-      endDate: [null, [Validators.required]],
+      startDate: [this.tripFilter.startDate, [Validators.required]],
+      endDate: [this.tripFilter.endDate, [Validators.required]],
       friendsOnly: [false],
     });
-    console.log(this.placesRef);
-  }
-
-  public get startDate() {
-    return this.searchForm.controls['startDate'];
-  }
-
-  public get endDate() {
-    return this.searchForm.controls['endDate'];
+    this.authFacade.sessionToken$.pipe(take(1)).subscribe((sessionToken) => {
+      this.tripFilter.requesterId = sessionToken.loggedInId;
+    });
+    this.sessionToken$ = this.authFacade.sessionToken$;
   }
 
   ngOnDestroy(): void {
@@ -83,7 +81,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
   photoUrls: string[];
   public handleAddressChange(address: Address) {
-    this.photoUrls = this.getPhotoUrls(address);
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
     console.log('address: ', address);
@@ -105,7 +102,11 @@ export class SearchTripComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isSubmittedOnce = true;
+    if (this.searchForm.invalid) {
+      return;
+    }
     this.setSearchModelProps();
+    this.submitted.emit(this.tripFilter);
   }
 
   onKey() {
@@ -115,9 +116,9 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
 
   setSearchModelProps() {
-    this.tripFilter.startDate = this.searchForm.value.startDate;
-    this.tripFilter.endDate = this.searchForm.value.endDate;
-    this.tripFilter.friendsOnly = this.searchForm.value.friendsOnly;
+    this.tripFilter.startDate = new Date(this.startDate.value);
+    this.tripFilter.endDate = new Date(this.endDate.value);
+    this.tripFilter.friendsOnly = this.friendsOnly.value;
   }
 
   clearSearchInput() {
@@ -131,5 +132,17 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     address.address_components.forEach((comp) => {
       this.tripFilter.keywords.push(comp.long_name);
     });
+  }
+
+  public get startDate() {
+    return this.searchForm.controls['startDate'];
+  }
+
+  public get endDate() {
+    return this.searchForm.controls['endDate'];
+  }
+
+  public get friendsOnly() {
+    return this.searchForm.controls['friendsOnly'];
   }
 }

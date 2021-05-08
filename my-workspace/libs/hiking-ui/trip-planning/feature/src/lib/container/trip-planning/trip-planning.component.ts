@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import {
+  PlanningFacade,
+  TripFilter,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Config } from '@hkworkspace/utils';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hk-trip-planning',
@@ -7,16 +12,20 @@ import { Config } from '@hkworkspace/utils';
   styleUrls: ['./trip-planning.component.scss'],
 })
 export class TripPlanningComponent implements OnInit {
-  imageUrl =
-    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=ATtYBwJxtQ_hhHocSQocvUo7EivLKYJ8hkYlgYonobKCfhUk9eFCfExl83FUKB0xX3HjrV9WvwlGmQkHZdH7rpTUAzRXDSyd7G4b68GwhzpBb7PTbvFrBVtBIjmxg4j--FdyxjoFPZEyCSiqZjEAUt3_XvuzDwpC1J8pw6ysniE9lFz0YV7A&key=AIzaSyBRjcx1SlMYyd2y3l0_gVP8g4-4pQBeAW0';
-  urls: string[];
-  constructor(@Inject(Config) private config: Config) {}
+
+  isLoading$: Observable<boolean>
+
+  constructor(
+    @Inject(Config) private config: Config,
+    private planningFacade: PlanningFacade
+  ) {}
 
   ngOnInit(): void {
     this.config.redirectUrl = '/trip-planning';
+    this.isLoading$ = this.planningFacade.isLoading$;
   }
 
-  getEmittedPhotos(photos: string[]) {
-    this.urls = photos;
+  viewRequestedTrips(tripFilter: TripFilter) {
+    this.planningFacade.searchTrips(tripFilter);
   }
 }

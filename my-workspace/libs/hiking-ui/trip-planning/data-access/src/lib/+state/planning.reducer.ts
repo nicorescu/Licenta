@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
+import { TripFilter } from '../models/trip-filter.model';
 import { Trip } from '../models/trip.model';
 import * as PlanningActions from './planning.actions';
 
@@ -12,6 +13,8 @@ export interface PlanningState {
   planningTrip: Trip;
   error: string;
   attractions: Place[];
+  tripFilter: TripFilter,
+  trips: Trip[]
 }
 
 export const initialState: PlanningState = {
@@ -19,7 +22,9 @@ export const initialState: PlanningState = {
   isLoading: false,
   planningTrip: null,
   error: null,
-  attractions: []
+  attractions: [],
+  tripFilter: null,
+  trips: [],
 };
 
 const PlanningReducer = createReducer(
@@ -55,9 +60,26 @@ const PlanningReducer = createReducer(
   })),
   on(PlanningActions.createTripSuccess, (state) => ({
     ...state,
-    isLoading: false
+    isLoading: false,
+    error: null
   })),
   on(PlanningActions.createTripFailure, (state, {error}) => ({
+    ...state,
+    isLoading: false,
+    error: error
+  })),
+  on(PlanningActions.searchTrips, (state, {tripFilter}) => ({
+    ...state,
+    tripFilter: tripFilter,
+    isLoading: true
+  })),
+  on(PlanningActions.searchTripsSuccess, (state, {trips}) => ({
+    ...state,
+    trips: trips,
+    isLoading: false,
+    error: null
+  })),
+  on(PlanningActions.searchTripFailure, (state, {error}) => ({
     ...state,
     isLoading: false,
     error: error

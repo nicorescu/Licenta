@@ -9,7 +9,6 @@ namespace TripService.Models.Domain
 {
     public class Role
     {
-        [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
         public string RoleName { get; set; }
     }

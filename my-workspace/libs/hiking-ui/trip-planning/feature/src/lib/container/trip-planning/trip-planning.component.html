@@ -4,9 +4,10 @@
       {{ t('findTrip') }}
     </div>
     <div id="searchTrip">
-      <hk-search-trip
-        (photosUrlEmitter)="getEmittedPhotos($event)"
-      ></hk-search-trip>
+      <hk-search-trip (submitted)="viewRequestedTrips($event)"></hk-search-trip>
     </div>
+  </div>
+  <div *ngIf="isLoading$ | async" class="loading-container">
+    <mat-spinner [diameter]="100"></mat-spinner>
   </div>
 </div>

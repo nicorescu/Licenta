@@ -30,3 +30,9 @@ export const getAttractions = createSelector(
   getTripState,
   (state: PlanningState) => state.attractions
 );
+
+export const getLoadedTrips = createSelector(
+  getTripState,
+  (state: PlanningState) => state.trips
+);
+

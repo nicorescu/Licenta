@@ -21,5 +21,6 @@ namespace TripService.Resources
         public const string EndDate = "EndDate";
         public const string Lte = "$lte";
         public const string Gte = "$gte";
+        public const string In = "$in";
     }
 }

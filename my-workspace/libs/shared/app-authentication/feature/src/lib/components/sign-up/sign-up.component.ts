@@ -115,7 +115,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
       return;
     }
     this.setUserProps();
-    console.log(this.user);
     this.signUpSubmitted.emit(this.user);
   }
 

@@ -12,6 +12,7 @@ using TripService.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TripService.Resources;
+using TripService.MongoUtils;
 
 namespace TripService.Setup
 {
@@ -23,6 +24,7 @@ namespace TripService.Setup
             services.TryAddSingleton<ITripRepository, TripRepository>();
             services.TryAddSingleton<IRoleRepository, RoleRepository>();
             services.TryAddSingleton<IAuthRepository, AuthRepository>();
+            services.TryAddSingleton<IUserUtils, UserUtils>();
         }
 
         public static void AddAutomapper(IServiceCollection services)

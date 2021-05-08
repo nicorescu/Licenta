@@ -14,9 +14,5 @@ export class PhotosComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // this.images = this.photos.map((x, index) => {
-    //   return new Image(index, { img: x, extUrl: 'http://wwww.google.com' });
-    // });
-    // console.log(this.photos[0])
   }
 }

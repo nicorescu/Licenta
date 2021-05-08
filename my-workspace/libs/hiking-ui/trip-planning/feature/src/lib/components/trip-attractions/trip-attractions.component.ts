@@ -22,9 +22,6 @@ export class TripAttractionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.attractions$ = this.planningFacade.attractions$;
-    this.planningFacade.attractions$.subscribe((res) => {
-      console.log(res, 'length', res.length);
-    });
   }
 
   prevPhoto() {

@@ -12,7 +12,6 @@ namespace TripService.Models.Domain
 {
     public class User
     {
-        [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,7 +21,7 @@ namespace TripService.Models.Domain
         public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
         public RoleEnum Role { get; set; }
-        public List<User> friends { get; set; }
+        public List<Guid> Friends { get; set; }
         public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
     }

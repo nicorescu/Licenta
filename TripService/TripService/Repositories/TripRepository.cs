@@ -1,4 +1,5 @@
-﻿ using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using TripService.Enumerators;
 using TripService.Extensions;
 using TripService.Models.ApiModels;
 using TripService.Models.Domain;
+using TripService.MongoUtils;
 using TripService.Resources;
 
 namespace TripService.Repositories
@@ -14,10 +16,12 @@ namespace TripService.Repositories
     public class TripRepository : ITripRepository
     {
         private readonly IMongoCollection<Trip> _collection;
-        public TripRepository(IMongoClient mongoClient)
+        private readonly IUserUtils _userUtils;
+        public TripRepository(IMongoClient mongoClient, IUserUtils userUtils)
         {
 
             _collection = mongoClient.GetDatabase(StringResources.DatabaseName).GetCollection<Trip>(StringResources.TripCollectionName);
+            _userUtils = userUtils;
         }
         public async Task<List<Trip>> GetAllTrips()
         {
@@ -32,13 +36,22 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<List<Trip>> GetBestTripMatches(SearchTripModel searchTrip)
+        public async Task<List<Trip>> SearchTrips(SearchFilter searchFilter)
         {
             try
             {
-                var result = await _collection.Aggregate()
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchTrip.Keywords))
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchTrip.StartDate, searchTrip.EndDate)).ToListAsync();
+                var requesterFriends = searchFilter.FriendsOnly ? await _userUtils.GetUserFriends(searchFilter.RequesterId) : new List<Guid>();
+                string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
+                var query = _collection.Aggregate()
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate));
+                /*if (searchFilter.FriendsOnly)
+                {
+                   
+                    query.AppendStage<Trip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));
+                }*/
+
+                var result = await query.ToListAsync();
 
                 return result;
             }
@@ -66,6 +79,7 @@ namespace TripService.Repositories
         {
             try
             {
+                var x = trip;
                 await _collection.InsertOneAsync(trip);
                 return true;
             }
@@ -83,7 +97,7 @@ namespace TripService.Repositories
                 var tripFilter = Builders<Trip>.Filter.Eq(trip => trip.Id, tripId);
                 var tripUpdate = Builders<Trip>.Update.Set(trip => trip.State, TripState.CanceledByAuthority);
 
-                var result = await _collection.UpdateOneAsync(tripFilter,tripUpdate);
+                var result = await _collection.UpdateOneAsync(tripFilter, tripUpdate);
                 return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false;
             }
             catch (Exception exception)
@@ -92,7 +106,7 @@ namespace TripService.Repositories
                 return false;
             }
         }
-        
+
         public async Task<bool> UpdateTrip(Guid tripId, Trip trip)
         {
             try

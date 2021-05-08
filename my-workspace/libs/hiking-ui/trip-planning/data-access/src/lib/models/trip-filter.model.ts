@@ -3,9 +3,12 @@ export class TripFilter {
   endDate: Date;
   friendsOnly: boolean;
   keywords: string[];
+  requesterId: string;
+  wholeCountry: boolean;
 
   public constructor() {
     this.friendsOnly = false;
+    this.wholeCountry = false;
     this.keywords = [];
   }
 

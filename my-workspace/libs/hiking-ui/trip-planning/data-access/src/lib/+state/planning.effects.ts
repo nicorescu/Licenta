@@ -22,7 +22,6 @@ export class PlanningEffects {
           .pipe(
             map((res: any) => {
               const places: Place[] = res.results.filter((x) => !!x.photos);
-              console.log('places: ', places);
               return TripActions.loadTripSuccess({ attractions: places });
             }),
             catchError((err) => {
@@ -65,6 +64,30 @@ export class PlanningEffects {
             );
             this.toastrService.error(error);
             return of(TripActions.createTripFailure({ error: error }));
+          })
+        );
+      })
+    )
+  );
+
+  searchTrips$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TripActions.searchTrips),
+      switchMap((action) => {
+        return this.tripService.searchTrips(action.tripFilter).pipe(
+          map((trips) => {
+            return TripActions.searchTripsSuccess({trips: trips});
+          }),
+          tap(() => {
+            this.router.navigate(['/view-trips']);
+          }),
+          catchError((err) => {
+            console.log('eroare', err);
+            const error = this.translocoService.translate(
+              'tripPlanning.tripPreview.errors.errorLoadingTrips'
+            );
+            this.toastrService.error(error);
+            return of(TripActions.searchTripFailure({ error: error }));
           })
         );
       })

@@ -31,9 +31,9 @@ namespace TripService.Processors
 
             return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
         }
-        public async Task<ActionResult<List<TripDto>>> GetBestTripMatches(SearchTripModel searchTrip)
+        public async Task<ActionResult<List<TripDto>>> SearchTrips(SearchFilter searchFilter)
         {
-            List<Trip> result = await _tripRepository.GetBestTripMatches(searchTrip);
+            List<Trip> result = await _tripRepository.SearchTrips(searchFilter);
 
             if (result == null)
             {

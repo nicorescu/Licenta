@@ -101,6 +101,7 @@
       "previewTrip": "Previzualizeaza excursia",
       "Private": "Privat",
       "FriendsOnly": "Doar pentru prieteni",
+      "ApprovalRequired": "Necesita aprobare",
       "Public": "Public",
       "hints": {
         "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
@@ -122,6 +123,7 @@
       "slots": "locuri",
       "Private": "Privat",
       "FriendsOnly": "Doar pentru prieteni",
+      "ApprovalRequired": "Necesita aprobare",
       "Public": "Public",
       "tripHighlights": "Activitati recomandate",
       "finalize": "Finalizeaza",
@@ -129,7 +131,8 @@
       "tripCreatedSuccess": "Excursia ta a fost creata cu success",
       "errors": {
         "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice. Incearca, din nou, mai tarziu",
-        "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu"
+        "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu",
+        "errorLoadingTrips": "A aparut o eroare la afisarea excursiilor. Incearca, din nou, mai tarziu"
       }
     }
   },
