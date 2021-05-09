@@ -71,7 +71,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
       friendsOnly: [false],
     });
     this.authFacade.sessionToken$.pipe(take(1)).subscribe((sessionToken) => {
-      this.tripFilter.requesterId = sessionToken.loggedInId;
+      this.tripFilter.requesterId = sessionToken?.loggedInId;
     });
     this.sessionToken$ = this.authFacade.sessionToken$;
   }
@@ -106,6 +106,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
       return;
     }
     this.setSearchModelProps();
+    console.log("filter: ", this.tripFilter)
     this.submitted.emit(this.tripFilter);
   }
 

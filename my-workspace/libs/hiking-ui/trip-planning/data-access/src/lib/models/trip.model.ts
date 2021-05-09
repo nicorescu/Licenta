@@ -14,9 +14,10 @@ export interface Trip {
   organizerId: string;
   slotsNumber: number;
   participantsIds: string[];
-  tripPrivacy: TripPrivacy;
-  tripState: TripState;
+  privacy: TripPrivacy;
+  state: TripState;
   reviews: Review[];
   reviewAverage: number;
   geometry: Geometry;
+  thumbnailUrl: string;
 }

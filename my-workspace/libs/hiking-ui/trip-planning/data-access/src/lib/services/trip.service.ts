@@ -22,9 +22,10 @@ export class TripService {
 
   searchTrips(searchFilter: TripFilter): Observable<Trip[]> {
     const params = new HttpParams()
+      .set('requesterId', searchFilter.requesterId)
       .set('startDate', searchFilter.startDate.toISOString())
       .set('endDate', searchFilter.endDate.toISOString())
-      .set('keywords', searchFilter.keywords.join(', '),)
+      .set('keywords', searchFilter.keywords.join(', '))
       .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false');
 
     console.log(params);

@@ -134,6 +134,9 @@
         "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu",
         "errorLoadingTrips": "A aparut o eroare la afisarea excursiilor. Incearca, din nou, mai tarziu"
       }
+    },
+    "tripsList": {
+      
     }
   },
   "toast": {

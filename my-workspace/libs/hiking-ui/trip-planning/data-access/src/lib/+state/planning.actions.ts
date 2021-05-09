@@ -16,12 +16,12 @@ export const previewTrip = createAction(
   props<{trip: Trip}>()
 );
 
-export const loadTripSuccess = createAction(
+export const previewTripSuccess = createAction(
   '[Preview Trip] Load trip success',
   props<{attractions: Place[]}>()
 );
 
-export const loadTripFailure = createAction(
+export const previewTripFailure = createAction(
   '[Create Trip] Load Trip Failure',
   props<{ error: any }>()
 );

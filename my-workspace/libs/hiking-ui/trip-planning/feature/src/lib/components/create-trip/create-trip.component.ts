@@ -93,7 +93,7 @@ export class CreateTripComponent implements OnInit, OnDestroy {
         this.trip?.slotsNumber,
         [Validators.required, Validators.pattern('^[1-9]\\d*$')],
       ],
-      privacy: [this.trip ? this.trip.tripPrivacy : TripPrivacy.Public],
+      privacy: [this.trip ? this.trip.privacy : TripPrivacy.Public],
     });
 
     this.endDate.setValidators([
@@ -139,8 +139,8 @@ export class CreateTripComponent implements OnInit, OnDestroy {
         organizerId: token.loggedInId,
         slotsNumber: this.slotsNumber.value,
         participantsIds: [],
-        tripPrivacy: this.privacy.value,
-        tripState: TripState.Planning,
+        privacy: this.privacy.value,
+        state: TripState.Planning,
         reviews: [],
         reviewAverage: 0,
       };

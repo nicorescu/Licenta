@@ -39,13 +39,17 @@ const PlanningReducer = createReducer(
     isLoading: true,
     planningTrip: trip,
   })),
-  on(PlanningActions.loadTripSuccess, (state, { attractions}) => ({
+  on(PlanningActions.previewTripSuccess, (state, { attractions}) => ({
     ...state,
     isLoading: false,
     error: null,
-    attractions: attractions
+    attractions: attractions,
+    planningTrip: {
+      ...state.planningTrip,
+      thumbnailReference: attractions[0].photos[0].photo_reference
+    }
   })),
-  on(PlanningActions.loadTripFailure, (state, { error}) => ({
+  on(PlanningActions.previewTripFailure, (state, { error}) => ({
     ...state,
     isLoading: false,
     error: error,

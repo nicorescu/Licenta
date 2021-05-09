@@ -40,17 +40,17 @@ namespace TripService.Repositories
         {
             try
             {
-                var requesterFriends = searchFilter.FriendsOnly ? await _userUtils.GetUserFriends(searchFilter.RequesterId) : new List<Guid>();
+                List<Guid> requesterFriends = new List<Guid>();
+                if (searchFilter.FriendsOnly)
+                {
+                    requesterFriends = await _userUtils.GetUserFriends(searchFilter.RequesterId);
+                }
+
                 string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
                 var query = _collection.Aggregate()
                     .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate));
-                /*if (searchFilter.FriendsOnly)
-                {
-                   
-                    query.AppendStage<Trip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));
-                }*/
-
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
+                    .AppendStage<Trip>(searchFilter.FriendsOnly ? AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends) : AtlasSearchExtensions.GetEmptyStage());
                 var result = await query.ToListAsync();
 
                 return result;

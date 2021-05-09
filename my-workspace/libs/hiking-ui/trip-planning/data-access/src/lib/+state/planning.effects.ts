@@ -22,14 +22,14 @@ export class PlanningEffects {
           .pipe(
             map((res: any) => {
               const places: Place[] = res.results.filter((x) => !!x.photos);
-              return TripActions.loadTripSuccess({ attractions: places });
+              return TripActions.previewTripSuccess({ attractions: places });
             }),
             catchError((err) => {
               const error: string = this.translocoService.translate(
                 'tripPlanning.tripPreview.errors.errorLoadingAttractions'
               );
               return of(
-                TripActions.loadTripFailure({
+                TripActions.previewTripFailure({
                   error: error,
                 })
               );

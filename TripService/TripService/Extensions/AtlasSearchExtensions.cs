@@ -32,11 +32,11 @@ namespace TripService.Extensions
                     new BsonDocument
                     {
                         {AtlasStringResources.StartDate, new BsonDocument{
-                                {AtlasStringResources.Gte, startDate }
+                                {AtlasStringResources.Gte, startDate.AddDays(1) }
                             }
                         },
                         {AtlasStringResources.EndDate, new BsonDocument{
-                                {AtlasStringResources.Lte, endDate }
+                                {AtlasStringResources.Lte, endDate.AddDays(1)}
                             }
                         }
                     }
@@ -44,6 +44,19 @@ namespace TripService.Extensions
             };
 
             //return BsonDocument.Parse($"{{\"$match\": {{\"StartDate\": {{\"$gte\": ISODate('{startDate.ToUniversalTime()}')}}, \"EndDate\": {{\"$lte\": ISODate('{endDate.ToUniversalTime()}')}}}}");
+        }
+
+        public static BsonDocument GetEmptyStage()
+        {
+            return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
+                    {
+
+                    }
+                }
+            };
         }
 
         public static BsonArray SetSearchCriterias(string[] keywords)
@@ -67,11 +80,22 @@ namespace TripService.Extensions
 
         public static BsonDocument GetFriendsOnlyRestriction(List<Guid> friendsIds)
         {
+
             return new BsonDocument
             {
-                {"OrganizerId", new BsonDocument
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
                     {
-                        {AtlasStringResources.In, new BsonArray(friendsIds) }
+                        {
+                            "OrganizerId",
+                            new BsonDocument
+                            {
+                                {
+                                    AtlasStringResources.In,
+                                    new BsonArray(friendsIds)
+                                }
+                            }
+                        }
                     }
                 }
             };

@@ -135,6 +135,9 @@
         "errorCreatingTrip": "An error occured while trying to create the trip, please try again later",
         "errorLoadingTrips": "There was an error loading the trips, try again later"
       }
+    },
+    "tripsList": {
+      
     }
   },
   "toast": {
