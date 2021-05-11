@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Enumerators;
 using TripService.Models.Domain;
 using TripService.Resources;
 
@@ -78,6 +79,39 @@ namespace TripService.Extensions
             return criterias;
         }
 
+        public static BsonDocument GetPrivacyRestriction()
+        {
+            return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
+                    {
+                        {
+                            "Privacy",
+                            new BsonDocument
+                            {
+                                {
+                                    AtlasStringResources.NotEquals,
+                                    TripPrivacy.Private
+                                }
+                            }
+                        },
+                        {
+                            "State",
+                            new BsonDocument
+                            {
+                                {
+                                   AtlasStringResources.Equals,
+                                   TripState.Planning
+                                }
+
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
         public static BsonDocument GetFriendsOnlyRestriction(List<Guid> friendsIds)
         {
 
@@ -97,6 +131,16 @@ namespace TripService.Extensions
                             }
                         }
                     }
+                }
+            };
+        }
+
+        public static BsonDocument GetCountStage()
+        {
+            return new BsonDocument
+            {
+                {
+                    AtlasStringResources.Count,"tripsNo"
                 }
             };
         }

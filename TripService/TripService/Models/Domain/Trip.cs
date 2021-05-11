@@ -23,7 +23,7 @@ namespace TripService.Models.Domain
         public TripPrivacy Privacy { get; set; }
         public TripState State { get; set; }
         public List<Review> Reviews { get; set; }
-        public string ThumbnailUrl { get; set; }
+        public string ThumbnailReference { get; set; }
 
     }
 }

@@ -31,16 +31,16 @@ namespace TripService.Processors
 
             return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
         }
-        public async Task<ActionResult<List<TripDto>>> SearchTrips(SearchFilter searchFilter)
+        public async Task<ActionResult<TripsResultDto>> SearchTrips(SearchFilter searchFilter)
         {
-            List<Trip> result = await _tripRepository.SearchTrips(searchFilter);
-
-            if (result == null)
+            var result = await _tripRepository.SearchTrips(searchFilter);
+            if (result == null || result.Item1 == null || result.Item1.Count == 0)
             {
                 return new NoContentResult();
             }
-
-            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+            var trips = _mapper.Map<List<TripDto>>(result.Item1);
+            var tripsResult = new TripsResultDto() { Trips = trips, Count = result.Item2 };
+            return new OkObjectResult(tripsResult);
         }
         public async Task<ActionResult<TripDto>> GetTripById(Guid tripId)
         {

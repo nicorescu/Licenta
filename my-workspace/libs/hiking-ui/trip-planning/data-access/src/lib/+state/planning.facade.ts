@@ -18,6 +18,7 @@ export class PlanningFacade {
   error$ = this.store.pipe(select(TripSelectors.getError));
   attractions$ = this.store.pipe(select(TripSelectors.getAttractions));
   loadedTrips$ = this.store.pipe(select(TripSelectors.getLoadedTrips));
+  tripsCount$ = this.store.pipe(select(TripSelectors.getTripsCount));
 
   constructor(private store: Store) {}
 

@@ -36,7 +36,7 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<List<Trip>> SearchTrips(SearchFilter searchFilter)
+        public async Task<Tuple<List<Trip>, int>> SearchTrips(SearchFilter searchFilter)
         {
             try
             {
@@ -46,14 +46,13 @@ namespace TripService.Repositories
                     requesterFriends = await _userUtils.GetUserFriends(searchFilter.RequesterId);
                 }
 
-                string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
-                var query = _collection.Aggregate()
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
-                    .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
-                    .AppendStage<Trip>(searchFilter.FriendsOnly ? AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends) : AtlasSearchExtensions.GetEmptyStage());
-                var result = await query.ToListAsync();
+                var query = GetSearchQuery(searchFilter, requesterFriends);
+                var count = query.Count();
 
-                return result;
+                var tripsResult = await query.ToListAsync();
+                var tripsCount = await count.FirstOrDefaultAsync();
+
+                return Tuple.Create(tripsResult, (int)tripsCount.Count);
             }
             catch (Exception exception)
             {
@@ -135,6 +134,17 @@ namespace TripService.Repositories
                 Console.WriteLine(excetion.ToString());
                 return false;
             }
+        }
+
+        private IAggregateFluent<Trip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
+        {
+            string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
+            var query = _collection.Aggregate()
+                .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
+                .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
+                .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
+                .AppendStage<Trip>(searchFilter.FriendsOnly ? AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends) : AtlasSearchExtensions.GetEmptyStage());
+            return query;
         }
 
     }

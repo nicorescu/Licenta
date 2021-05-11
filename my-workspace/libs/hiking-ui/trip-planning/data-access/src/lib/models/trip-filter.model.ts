@@ -5,11 +5,13 @@ export class TripFilter {
   keywords: string[];
   requesterId: string;
   wholeCountry: boolean;
+  requestedPage: number;
 
   public constructor() {
     this.friendsOnly = false;
     this.wholeCountry = false;
     this.keywords = [];
+    this.requestedPage = 1;
   }
 
   clearSearch() {

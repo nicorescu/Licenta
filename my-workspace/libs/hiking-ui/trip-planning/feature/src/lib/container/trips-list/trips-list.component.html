@@ -1,3 +1,23 @@
-<div class="container" *transloco="let t; read: 'tripPlanning.tripsList'">
-    
+<div
+  class="trips-view-container container"
+  *transloco="let t; read: 'tripPlanning.tripsList'"
+>
+  <div class="trips-list-header">
+    <hk-filters></hk-filters>
+    <hk-trips-paginator></hk-trips-paginator>
+  </div>
+  <div class="trips-list">
+    <div class="row">
+      <div
+        class="col-lg-4 col-md-6 col-xs-12 mb-5"
+        style="display: flex; justify-content: center"
+        *ngFor="let trip of trips"
+      >
+        <hk-trip-card [trip]="trip"></hk-trip-card>
+      </div>
+    </div>
+  </div>
+  <div class="trips-paginator">
+    <hk-trips-paginator></hk-trips-paginator>
+  </div>
 </div>

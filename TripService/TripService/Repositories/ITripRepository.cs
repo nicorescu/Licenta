@@ -10,7 +10,7 @@ namespace TripService.Repositories
     public interface ITripRepository
     {
         Task<List<Trip>> GetAllTrips();
-        Task<List<Trip>> SearchTrips(SearchFilter searchFilter);
+        Task<Tuple<List<Trip>, int>> SearchTrips(SearchFilter searchFilter);
         Task<Trip> GetTripById(Guid tripId);
 
         Task<bool> InsertNewTrip(Trip trip);

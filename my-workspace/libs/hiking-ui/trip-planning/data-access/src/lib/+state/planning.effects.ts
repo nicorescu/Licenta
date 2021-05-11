@@ -75,8 +75,8 @@ export class PlanningEffects {
       ofType(TripActions.searchTrips),
       switchMap((action) => {
         return this.tripService.searchTrips(action.tripFilter).pipe(
-          map((trips) => {
-            return TripActions.searchTripsSuccess({trips: trips});
+          map((res) => {
+            return TripActions.searchTripsSuccess({ ...res });
           }),
           tap(() => {
             this.router.navigate(['/view-trips']);

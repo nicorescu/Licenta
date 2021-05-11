@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
 import { TripFilter } from '../models/trip-filter.model';
+import { TripsResult } from '../models/trip-result.model';
 import { Trip } from '../models/trip.model';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class TripService {
     return this.httpClient.get<Trip[]>(`${this.baseApiUrl}/trips`);
   }
 
-  searchTrips(searchFilter: TripFilter): Observable<Trip[]> {
+  searchTrips(searchFilter: TripFilter): Observable<TripsResult> {
     const params = new HttpParams()
       .set('requesterId', searchFilter.requesterId)
       .set('startDate', searchFilter.startDate.toISOString())
@@ -29,7 +30,7 @@ export class TripService {
       .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false');
 
     console.log(params);
-    return this.httpClient.get<Trip[]>(`${this.baseApiUrl}/trips/search`, {
+    return this.httpClient.get<TripsResult>(`${this.baseApiUrl}/trips/search`, {
       params: params,
     });
   }

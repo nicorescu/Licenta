@@ -1,146 +1,148 @@
 {
-  "navigation": {
-    "home": "Home",
-    "profile": "Profile"
-  },
-
-  "authentication": {
-    "createAccount": "Create account",
-
-    "signUp": {
-      "createYourAccount": "Create your account",
-      "createAccount": "Create account",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email",
-      "password": "Password",
-      "repeatPassword": "Repeat password",
-      "phoneNumber": "Phone number",
-      "birthday": "Birthday",
-      "country": "Country",
-      "searchCountry": "Search country",
-      "alreadyHaveAccount": "Already have an account?",
-      "signIn": "Sign-in",
-
-      "errors": {
-        "firstNameIsRequired": "First name is required.",
-        "lastNameIsRequired": "Last name is required.",
-        "emailIsRequired": "Email is required.",
-        "birthdayIsRequired": "Birthday is required.",
-        "passwordIsRequired": "Password is required.",
-        "passwordMinLength": "Password should have at least 8 characters",
-        "repeatPasswordIsRequired": "Repeating password is required.",
-        "passwordsMustMatch": "Passwords must match",
-        "emailAlreadyExists": "The email you provided already exists",
-        "emailIsNotValid": "Please provide a valid email!",
-        "anErrorOccured": "An error has occured, try again later!"
-      }
+    "navigation": {
+        "home": "Home",
+        "profile": "Profile"
     },
 
-    "signIn": {
-      "signIn": "Sign-in",
-      "email": "Email",
-      "password": "Password",
-      "signUp": "Sign-up",
-      "dontHaveAnAccount": "You don't have an account?",
-      "or": "Or",
+    "authentication": {
+        "createAccount": "Create account",
 
-      "errors": {
-        "wrongCredentials": "Email and password don't match",
-        "anErrorOccured": "An error has occured, try again later!",
-        "emailRequired": "Please provide your email",
-        "emailIsNotValid": "Please provide a valid email!",
-        "passwordRequired": "Please provide your password"
-      }
+        "signUp": {
+            "createYourAccount": "Create your account",
+            "createAccount": "Create account",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "password": "Password",
+            "repeatPassword": "Repeat password",
+            "phoneNumber": "Phone number",
+            "birthday": "Birthday",
+            "country": "Country",
+            "searchCountry": "Search country",
+            "alreadyHaveAccount": "Already have an account?",
+            "signIn": "Sign-in",
+
+            "errors": {
+                "firstNameIsRequired": "First name is required.",
+                "lastNameIsRequired": "Last name is required.",
+                "emailIsRequired": "Email is required.",
+                "birthdayIsRequired": "Birthday is required.",
+                "passwordIsRequired": "Password is required.",
+                "passwordMinLength": "Password should have at least 8 characters",
+                "repeatPasswordIsRequired": "Repeating password is required.",
+                "passwordsMustMatch": "Passwords must match",
+                "emailAlreadyExists": "The email you provided already exists",
+                "emailIsNotValid": "Please provide a valid email!",
+                "anErrorOccured": "An error has occured, try again later!"
+            }
+        },
+
+        "signIn": {
+            "signIn": "Sign-in",
+            "email": "Email",
+            "password": "Password",
+            "signUp": "Sign-up",
+            "dontHaveAnAccount": "You don't have an account?",
+            "or": "Or",
+
+            "errors": {
+                "wrongCredentials": "Email and password don't match",
+                "anErrorOccured": "An error has occured, try again later!",
+                "emailRequired": "Please provide your email",
+                "emailIsNotValid": "Please provide a valid email!",
+                "passwordRequired": "Please provide your password"
+            }
+        }
+    },
+
+    "header": {
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "createTrip": "Create a trip",
+        "userPanel": {
+            "myAccount": "My account",
+            "logout": "Log Out"
+        },
+        "chatPanel": {
+            "noContentMessage": "You don't have any conversation",
+            "viewAllConversations": "View all conversations"
+        },
+        "notificationsPanel": {
+            "noContentMessage": "You don't have any notification",
+            "viewAllNotifications": "View all notifications"
+        }
+    },
+
+    "tripPlanning": {
+        "findTrip": "Find a trip",
+        "or": "Or",
+        "searchTrip": {
+            "enterLocation": "Enter a location (country, region or city)",
+            "startDate": "Start date",
+            "endDate": "End date",
+            "enterDateRange": "Enter a date range",
+            "friendsOnly": "Friends only",
+            "seeTrips": "See your trips",
+            "createTrip": "Create a trip",
+
+            "errors": {
+                "selectLocationError": "You need to select a location from the list",
+                "selectAValidRangeError": "Select a valid date range"
+            }
+        },
+        "createTrip": {
+            "enterLocation": "Enter the location (country, region or city)",
+            "startDate": "Start date",
+            "endDate": "End date",
+            "enterDateRange": "Enter a date range",
+            "createTrip": "Create a trip",
+            "numberOfSlots": "Number of slots",
+            "tripPrivacy": "Trip privacy",
+            "create": "Create now",
+            "previewTrip": "Preview your trip",
+            "Private": "Private",
+            "FriendsOnly": "For friends only",
+            "ApprovalRequired": "Approval required",
+            "Public": "Public",
+            "hints": {
+                "privateTripHint": "Only the people you invite will be able to join",
+                "friendsOnlyTripHint": "Only people from your friends list will be able to join",
+                "publicTripHint": "Everyone will be able to join",
+                "locationDetailsHint": "After you select a location, you can view several details about it below"
+            },
+            "errors": {
+                "selectLocation": "You need to provide the location",
+                "provideStartDate": "Please, provide the start date",
+                "provideEndDate": "Please provide the end date",
+                "endDateMinError": "End date cannot be earlier than start date",
+                "invalidNumber": "The number should be at least 1"
+            }
+        },
+        "tripPreview": {
+            "days": "days",
+            "day": "day",
+            "slots": "slots",
+            "Private": "private",
+            "FriendsOnly": "For friends only",
+            "ApprovalRequired": "Approval required",
+            "Public": "Public",
+            "tripHighlights": "Highlights for your trip",
+            "finalize": "Finalize",
+            "edit": "Edit",
+            "tripCreatedSuccess": "Your trip has been successfuly created",
+            "errors": {
+                "errorLoadingAttractions": "Failed loading tourist attractions, please try again later",
+                "errorCreatingTrip": "An error occured while trying to create the trip, please try again later",
+                "errorLoadingTrips": "There was an error loading the trips, try again later"
+            }
+        },
+        "tripsList": {
+            "approvalRequired": "Approval required from the organizer",
+            "slotRemaining": "slot remaining",
+            "slotsRemaining": "slots remaining"
+        }
+    },
+    "toast": {
+        "signInRequired": "You need to sign-in first"
     }
-  },
-
-  "header": {
-    "signIn": "Sign in",
-    "signUp": "Sign up",
-    "createTrip": "Create a trip",
-    "userPanel": {
-      "myAccount": "My account",
-      "logout": "Log Out"
-    },
-    "chatPanel": {
-      "noContentMessage": "You don't have any conversation",
-      "viewAllConversations": "View all conversations"
-    },
-    "notificationsPanel": {
-      "noContentMessage": "You don't have any notification",
-      "viewAllNotifications": "View all notifications"
-    }
-  },
-
-  "tripPlanning": {
-    "findTrip": "Find a trip",
-    "or": "Or",
-    "searchTrip": {
-      "enterLocation": "Enter a location (country, region or city)",
-      "startDate": "Start date",
-      "endDate": "End date",
-      "enterDateRange": "Enter a date range",
-      "friendsOnly": "Friends only",
-      "seeTrips": "See your trips",
-      "createTrip": "Create a trip",
-
-      "errors": {
-        "selectLocationError": "You need to select a location from the list",
-        "selectAValidRangeError": "Select a valid date range"
-      }
-    },
-    "createTrip": {
-      "enterLocation": "Enter the location (country, region or city)",
-      "startDate": "Start date",
-      "endDate": "End date",
-      "enterDateRange": "Enter a date range",
-      "createTrip": "Create a trip",
-      "numberOfSlots": "Number of slots",
-      "tripPrivacy": "Trip privacy",
-      "create": "Create now",
-      "previewTrip": "Preview your trip",
-      "Private": "Private",
-      "FriendsOnly": "For friends only",
-      "ApprovalRequired": "Approval required",
-      "Public": "Public",
-      "hints": {
-        "privateTripHint": "Only the people you invite will be able to join",
-        "friendsOnlyTripHint": "Only people from your friends list will be able to join",
-        "publicTripHint": "Everyone will be able to join",
-        "locationDetailsHint": "After you select a location, you can view several details about it below"
-      },
-      "errors": {
-        "selectLocation": "You need to provide the location",
-        "provideStartDate": "Please, provide the start date",
-        "provideEndDate": "Please provide the end date",
-        "endDateMinError": "End date cannot be earlier than start date",
-        "invalidNumber": "The number should be at least 1"
-      }
-    },
-    "tripPreview": {
-      "days": "days",
-      "day" : "day",
-      "slots": "slots",
-      "Private": "private",
-      "FriendsOnly": "For friends only",
-      "ApprovalRequired": "Approval required",
-      "Public": "Public",
-      "tripHighlights": "Highlights for your trip",
-      "finalize": "Finalize",
-      "edit": "Edit",
-      "tripCreatedSuccess": "Your trip has been successfuly created",
-      "errors": {
-        "errorLoadingAttractions": "Failed loading tourist attractions, please try again later",
-        "errorCreatingTrip": "An error occured while trying to create the trip, please try again later",
-        "errorLoadingTrips": "There was an error loading the trips, try again later"
-      }
-    },
-    "tripsList": {
-      
-    }
-  },
-  "toast": {
-    "signInRequired": "You need to sign-in first"
-  }
 }

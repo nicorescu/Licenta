@@ -45,7 +45,7 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<List<TripDto>>> SearchTrips([FromQuery] SearchFilter searchFilter)
+        public async Task<ActionResult<TripsResultDto>> SearchTrips([FromQuery] SearchFilter searchFilter)
         {
             return await _tripProcessor.SearchTrips(searchFilter);
         }

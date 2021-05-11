@@ -13,8 +13,9 @@ export interface PlanningState {
   planningTrip: Trip;
   error: string;
   attractions: Place[];
-  tripFilter: TripFilter,
-  trips: Trip[]
+  tripFilter: TripFilter;
+  trips: Trip[];
+  tripsCount: number;
 }
 
 export const initialState: PlanningState = {
@@ -25,6 +26,7 @@ export const initialState: PlanningState = {
   attractions: [],
   tripFilter: null,
   trips: [],
+  tripsCount: null,
 };
 
 const PlanningReducer = createReducer(
@@ -34,60 +36,61 @@ const PlanningReducer = createReducer(
     selectedLocation: location,
     isLoading: false,
   })),
-  on(PlanningActions.previewTrip, (state, { trip}) => ({
+  on(PlanningActions.previewTrip, (state, { trip }) => ({
     ...state,
     isLoading: true,
     planningTrip: trip,
   })),
-  on(PlanningActions.previewTripSuccess, (state, { attractions}) => ({
+  on(PlanningActions.previewTripSuccess, (state, { attractions }) => ({
     ...state,
     isLoading: false,
     error: null,
     attractions: attractions,
     planningTrip: {
       ...state.planningTrip,
-      thumbnailReference: attractions[0].photos[0].photo_reference
-    }
+      thumbnailReference: attractions[0].photos[0].photo_reference,
+    },
   })),
-  on(PlanningActions.previewTripFailure, (state, { error}) => ({
+  on(PlanningActions.previewTripFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     error: error,
-    attractions: []
+    attractions: [],
   })),
   on(PlanningActions.clearState, (state) => ({
-    ...initialState
+    ...initialState,
   })),
-  on(PlanningActions.createTrip, (state, {trip}) => ({
+  on(PlanningActions.createTrip, (state, { trip }) => ({
     ...state,
-    isLoading: true
+    isLoading: true,
   })),
   on(PlanningActions.createTripSuccess, (state) => ({
     ...state,
     isLoading: false,
-    error: null
+    error: null,
   })),
-  on(PlanningActions.createTripFailure, (state, {error}) => ({
+  on(PlanningActions.createTripFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error
+    error: error,
   })),
-  on(PlanningActions.searchTrips, (state, {tripFilter}) => ({
+  on(PlanningActions.searchTrips, (state, { tripFilter }) => ({
     ...state,
     tripFilter: tripFilter,
-    isLoading: true
+    isLoading: true,
   })),
-  on(PlanningActions.searchTripsSuccess, (state, {trips}) => ({
+  on(PlanningActions.searchTripsSuccess, (state, { trips, count }) => ({
     ...state,
     trips: trips,
     isLoading: false,
-    error: null
+    error: null,
+    tripsCount: count,
   })),
-  on(PlanningActions.searchTripFailure, (state, {error}) => ({
+  on(PlanningActions.searchTripFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
-    error: error
-  })),
+    error: error,
+  }))
 );
 
 export function reducer(state: PlanningState | undefined, action: Action) {

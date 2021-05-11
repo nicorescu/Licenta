@@ -19,5 +19,5 @@ export interface Trip {
   reviews: Review[];
   reviewAverage: number;
   geometry: Geometry;
-  thumbnailUrl: string;
+  thumbnailReference: string;
 }

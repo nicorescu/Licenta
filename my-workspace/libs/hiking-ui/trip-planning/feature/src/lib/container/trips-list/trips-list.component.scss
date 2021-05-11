@@ -1,0 +1,17 @@
+.trips-view-container {
+  .trips-list {
+    background-color: white;
+    padding-top: 20px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
+  }
+
+  .trips-list-header {
+    margin-bottom: 10px;
+  }
+
+  .trips-paginator {
+    margin-bottom: 10px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
+    margin-top: 10px;
+  }
+}

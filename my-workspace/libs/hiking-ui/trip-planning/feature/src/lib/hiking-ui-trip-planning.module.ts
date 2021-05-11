@@ -17,7 +17,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -32,10 +35,12 @@ import { TripDetailsComponent } from './components/trip-details/trip-details.com
 import { TripAttractionsComponent } from './components/trip-attractions/trip-attractions.component';
 import { AttractionComponent } from './components/attraction/attraction.component';
 import { CreateAndPreviewTripComponent } from './container/create-and-preview-trip/create-and-preview-trip.component';
+import { PhotoComponent } from './components/photo/photo.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { TripsListComponent } from './container/trips-list/trips-list.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-
 
 import { AgmCoreModule } from '@agm/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -43,13 +48,13 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { NgxImageGalleryModule } from 'ngx-image-gallery';
 import { GalleryModule } from '@ks89/angular-modal-gallery';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {RatingModule} from 'ng-starrating';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RatingModule } from 'ng-starrating';
 import 'hammerjs';
 import 'mousetrap';
-import { PhotoComponent } from './components/photo/photo.component';
-import { StarRatingComponent } from './components/star-rating/star-rating.component';
-import { TripsListComponent } from './container/trips-list/trips-list.component';
+import { TripCardComponent } from './components/trip-card/trip-card.component';
+import { TripsPaginatorComponent } from './components/trips-paginator/trips-paginator.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   imports: [
@@ -79,6 +84,9 @@ import { TripsListComponent } from './container/trips-list/trips-list.component'
     RatingModule,
     FontAwesomeModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatPaginatorModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -100,7 +108,10 @@ import { TripsListComponent } from './container/trips-list/trips-list.component'
     AttractionComponent,
     PhotoComponent,
     StarRatingComponent,
-    TripsListComponent
+    TripsListComponent,
+    TripCardComponent,
+    TripsPaginatorComponent,
+    FiltersComponent,
   ],
   providers: [NgxImageCompressService],
 })

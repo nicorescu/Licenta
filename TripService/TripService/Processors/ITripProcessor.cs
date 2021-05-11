@@ -11,7 +11,7 @@ namespace TripService.Processors
     public interface ITripProcessor
     {
         Task<ActionResult<List<TripDto>>> GetAllTrips();
-        Task<ActionResult<List<TripDto>>> SearchTrips(SearchFilter searchFilter);
+        Task<ActionResult<TripsResultDto>> SearchTrips(SearchFilter searchFilter);
         Task<ActionResult<TripDto>> GetTripById(Guid tripId);
 
         Task<ActionResult<bool>> InsertNewTrip(TripDto trip);

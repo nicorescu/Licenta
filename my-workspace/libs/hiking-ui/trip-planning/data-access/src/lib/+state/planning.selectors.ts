@@ -36,3 +36,7 @@ export const getLoadedTrips = createSelector(
   (state: PlanningState) => state.trips
 );
 
+export const getTripsCount = createSelector(
+  getTripState,
+  (state: PlanningState) => state.tripsCount
+);

@@ -9,16 +9,14 @@ export const selectLocation = createAction(
   props<{ location: SelectedLocation }>()
 );
 
-
-
 export const previewTrip = createAction(
   '[Create Trip] Preview Trip',
-  props<{trip: Trip}>()
+  props<{ trip: Trip }>()
 );
 
 export const previewTripSuccess = createAction(
   '[Preview Trip] Load trip success',
-  props<{attractions: Place[]}>()
+  props<{ attractions: Place[] }>()
 );
 
 export const previewTripFailure = createAction(
@@ -26,9 +24,7 @@ export const previewTripFailure = createAction(
   props<{ error: any }>()
 );
 
-export const clearState = createAction(
-  '[Clear state]'
-);
+export const clearState = createAction('[Clear state]');
 
 export const createTrip = createAction(
   '[Preview Trip] Finalize Trip',
@@ -41,20 +37,20 @@ export const createTripSuccess = createAction(
 
 export const createTripFailure = createAction(
   '[Preview Trip] Trip creation failure',
-  props<{error : string}>()
+  props<{ error: string }>()
 );
 
 export const searchTrips = createAction(
   '[Trip-Planning] Search trips',
-  props<{tripFilter : TripFilter}>()
+  props<{ tripFilter: TripFilter }>()
 );
 
 export const searchTripsSuccess = createAction(
   '[Trip-Planning] Search trips success',
-  props<{trips : Trip[]}>()
+  props<{ trips: Trip[]; count: number }>()
 );
 
 export const searchTripFailure = createAction(
   '[Trip-Planning] Search trips failure',
-  props<{error : string}>()
+  props<{ error: string }>()
 );

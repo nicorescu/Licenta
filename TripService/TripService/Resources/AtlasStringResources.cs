@@ -22,5 +22,8 @@ namespace TripService.Resources
         public const string Lte = "$lte";
         public const string Gte = "$gte";
         public const string In = "$in";
+        public const string NotEquals = "$ne";
+        public const string Count = "$count";
+        public const string Equals = "$eq";
     }
 }
