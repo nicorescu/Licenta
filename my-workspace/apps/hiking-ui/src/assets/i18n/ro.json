@@ -1,147 +1,158 @@
 {
-    "navigation": {
-        "home": "Pagina principala",
-        "profile": "Profil"
+  "navigation": {
+    "home": "Pagina principala",
+    "profile": "Profil"
+  },
+
+  "authentication": {
+    "createAccount": "Creeaza cont",
+
+    "signUp": {
+      "createYourAccount": "Creeaza-ti contul",
+      "createAccount": "Creeaza cont",
+      "firstName": "Prenume",
+      "lastName": "Nume de familie",
+      "email": "Email",
+      "password": "Parola",
+      "repeatPassword": "Repeta parola",
+      "phoneNumber": "Numar de telefon",
+      "birthday": "Data nasterii",
+      "country": "Țară",
+      "searchCountry": "Caută țara",
+      "alreadyHaveAccount": "Ai deja un cont?",
+      "signIn": "Autentifica-te",
+
+      "errors": {
+        "firstNameIsRequired": "Prenumele este necesar.",
+        "lastNameIsRequired": "Numele de familie este necesar.",
+        "emailIsRequired": "Email-ul este necesar.",
+        "birthdayIsRequired": "Data nasterii este necesara.",
+        "passwordIsRequired": "Parola este necesara.",
+        "passwordMinLength": "Parola trebuie sa contina minim 8 caractere",
+        "repeatPasswordIsRequired": "Trebuie sa repeti parola.",
+        "passwordsMustMatch": "Parolele trebuie sa se potriveasca",
+        "emailAlreadyExists": "Email-ul pe care l-ai introdus este deja folosit",
+        "emailIsNotValid": "Te rugam sa introduci un email valid!",
+        "anErrorOccured": "S-a produs o eroare, incearca din nou mai tarziu!"
+      }
     },
+    "signIn": {
+      "signIn": "Autentifica-te",
+      "email": "Email",
+      "password": "Parola",
+      "signUp": "Inscrie-te",
+      "dontHaveAnAccount": "Nu ai un cont?",
+      "or": "sau",
 
-    "authentication": {
-        "createAccount": "Creeaza cont",
-
-        "signUp": {
-            "createYourAccount": "Creeaza-ti contul",
-            "createAccount": "Creeaza cont",
-            "firstName": "Prenume",
-            "lastName": "Nume de familie",
-            "email": "Email",
-            "password": "Parola",
-            "repeatPassword": "Repeta parola",
-            "phoneNumber": "Numar de telefon",
-            "birthday": "Data nasterii",
-            "country": "Țară",
-            "searchCountry": "Caută țara",
-            "alreadyHaveAccount": "Ai deja un cont?",
-            "signIn": "Autentifica-te",
-
-            "errors": {
-                "firstNameIsRequired": "Prenumele este necesar.",
-                "lastNameIsRequired": "Numele de familie este necesar.",
-                "emailIsRequired": "Email-ul este necesar.",
-                "birthdayIsRequired": "Data nasterii este necesara.",
-                "passwordIsRequired": "Parola este necesara.",
-                "passwordMinLength": "Parola trebuie sa contina minim 8 caractere",
-                "repeatPasswordIsRequired": "Trebuie sa repeti parola.",
-                "passwordsMustMatch": "Parolele trebuie sa se potriveasca",
-                "emailAlreadyExists": "Email-ul pe care l-ai introdus este deja folosit",
-                "emailIsNotValid": "Te rugam sa introduci un email valid!",
-                "anErrorOccured": "S-a produs o eroare, incearca din nou mai tarziu!"
-            }
-        },
-        "signIn": {
-            "signIn": "Autentifica-te",
-            "email": "Email",
-            "password": "Parola",
-            "signUp": "Inscrie-te",
-            "dontHaveAnAccount": "Nu ai un cont?",
-            "or": "sau",
-
-            "errors": {
-                "wrongCredentials": "Email-ul si parola nu se potrivesc",
-                "anErrorOccured": "S-a produs o eroare, incearca din nou mai tarziu!",
-                "emailRequired": "Te rugam sa introduci email-ul",
-                "emailIsNotValid": "Te rugam sa introduci un email valid!",
-                "passwordRequired": "Te rugam sa introduci parola"
-            }
-        }
-    },
-
-    "header": {
-        "signIn": "Autentifica-te",
-        "signUp": "Inregistreaza-te",
-        "createTrip": "Planifica o excursie",
-        "userPanel": {
-            "myAccount": "Contul meu",
-            "notifications": "Notificari",
-            "logout": "Deconecteaza-te"
-        },
-        "chatPanel": {
-            "noContentMessage": "Nu ai nicio conversatie",
-            "viewAllConversations": "Vezi toate conversatiile"
-        },
-        "notificationsPanel": {
-            "noContentMessage": "Nu ai nicio notificare",
-            "viewAllNotifications": "Vezi toate notificarile"
-        }
-    },
-
-    "tripPlanning": {
-        "findTrip": "Gaseste o excursie",
-        "searchTrip": {
-            "enterLocation": "Introdu o locatie (tara, regiune sau oras)",
-            "startDate": "Data de inceput",
-            "endDate": "Data de incheiere",
-            "enterDateRange": "Selecteaza un interval",
-            "friendsOnly": "Doar prieteni",
-            "seeTrips": "Vezi excursiile",
-            "createTrip": "Creeaza o excursie",
-            "errors": {
-                "selectLocationError": "Trebuie sa selectezi o locatie din lista",
-                "selectAValidRangeError": "Selecteaza un interval valid"
-            }
-        },
-        "or": "Sau",
-        "createTrip": {
-            "enterLocation": "Introdu locatia (tara, regiune sau oras)",
-            "startDate": "Data de inceput",
-            "endDate": "Data de incheiere",
-            "enterDateRange": "Selecteaza un interval",
-            "createTrip": "Creeaza o excursie",
-            "numberOfSlots": "Numar de locuri",
-            "tripPrivacy": "Accesibilitatea excursiei",
-            "create": "Creeaza acum",
-            "previewTrip": "Previzualizeaza excursia",
-            "Private": "Privat",
-            "FriendsOnly": "Doar pentru prieteni",
-            "ApprovalRequired": "Necesita aprobare",
-            "Public": "Public",
-            "hints": {
-                "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
-                "friendsOnlyTripHint": "Doar prietenii se vor putea alatura",
-                "publicTripHint": "Oricine se poate alatura",
-                "locationDetailsHint": "Dupa ce selectezi o locatie, poti vedea mai multe detalii despre aceasta mai jos"
-            },
-            "errors": {
-                "selectLocation": "Trebuie sa selectezi locatia",
-                "provideStartDate": "Te rugam sa selectezi data de inceput",
-                "provideEndDate": "Te rugam sa selectezi data de incheiere",
-                "endDateMinError": "Data de incheiere nu poate fi mai devreme de data de inceput",
-                "invalidNumber": "Trebuie sa fie cel putin 1 loc"
-            }
-        },
-        "tripPreview": {
-            "days": "zile",
-            "day": "zi",
-            "slots": "locuri",
-            "Private": "Privat",
-            "FriendsOnly": "Doar pentru prieteni",
-            "ApprovalRequired": "Necesita aprobare",
-            "Public": "Public",
-            "tripHighlights": "Activitati recomandate",
-            "finalize": "Finalizeaza",
-            "edit": "Editeaza",
-            "tripCreatedSuccess": "Excursia ta a fost creata cu success",
-            "errors": {
-                "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice. Incearca, din nou, mai tarziu",
-                "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu",
-                "errorLoadingTrips": "A aparut o eroare la afisarea excursiilor. Incearca, din nou, mai tarziu"
-            }
-        },
-        "tripsList": {
-            "approvalRequired": "Este nevoie de aprobare de la organizator",
-            "slotRemaining": "loc ramas",
-            "slotsRemaining": "locuri ramase"
-        }
-    },
-    "toast": {
-        "signInRequired": "Trebuie sa te autentifici"
+      "errors": {
+        "wrongCredentials": "Email-ul si parola nu se potrivesc",
+        "anErrorOccured": "S-a produs o eroare, incearca din nou mai tarziu!",
+        "emailRequired": "Te rugam sa introduci email-ul",
+        "emailIsNotValid": "Te rugam sa introduci un email valid!",
+        "passwordRequired": "Te rugam sa introduci parola"
+      }
     }
+  },
+
+  "header": {
+    "signIn": "Autentifica-te",
+    "signUp": "Inregistreaza-te",
+    "createTrip": "Planifica o excursie",
+    "userPanel": {
+      "myAccount": "Contul meu",
+      "notifications": "Notificari",
+      "logout": "Deconecteaza-te"
+    },
+    "chatPanel": {
+      "noContentMessage": "Nu ai nicio conversatie",
+      "viewAllConversations": "Vezi toate conversatiile"
+    },
+    "notificationsPanel": {
+      "noContentMessage": "Nu ai nicio notificare",
+      "viewAllNotifications": "Vezi toate notificarile"
+    }
+  },
+
+  "tripPlanning": {
+    "findTrip": "Gaseste o excursie",
+    "searchTrip": {
+      "enterLocation": "Introdu o locatie (tara, regiune sau oras)",
+      "startDate": "Data de inceput",
+      "endDate": "Data de incheiere",
+      "enterDateRange": "Selecteaza un interval",
+      "friendsOnly": "Doar prieteni",
+      "seeTrips": "Vezi excursiile",
+      "createTrip": "Creeaza o excursie",
+      "errors": {
+        "selectLocationError": "Trebuie sa selectezi o locatie din lista",
+        "selectAValidRangeError": "Selecteaza un interval valid"
+      }
+    },
+    "or": "Sau",
+    "createTrip": {
+      "enterLocation": "Introdu locatia (tara, regiune sau oras)",
+      "startDate": "Data de inceput",
+      "endDate": "Data de incheiere",
+      "enterDateRange": "Selecteaza un interval",
+      "createTrip": "Creeaza o excursie",
+      "numberOfSlots": "Numar de locuri",
+      "tripPrivacy": "Accesibilitatea excursiei",
+      "create": "Creeaza acum",
+      "previewTrip": "Previzualizeaza excursia",
+      "Private": "Privat",
+      "FriendsOnly": "Doar pentru prieteni",
+      "ApprovalRequired": "Necesita aprobare",
+      "Public": "Public",
+      "hints": {
+        "privateTripHint": "Doar persoanele pe care le inviti se vor putea alatura",
+        "friendsOnlyTripHint": "Doar prietenii se vor putea alatura",
+        "publicTripHint": "Oricine se poate alatura",
+        "locationDetailsHint": "Dupa ce selectezi o locatie, poti vedea mai multe detalii despre aceasta mai jos"
+      },
+      "errors": {
+        "selectLocation": "Trebuie sa selectezi locatia",
+        "provideStartDate": "Te rugam sa selectezi data de inceput",
+        "provideEndDate": "Te rugam sa selectezi data de incheiere",
+        "endDateMinError": "Data de incheiere nu poate fi mai devreme de data de inceput",
+        "invalidNumber": "Trebuie sa fie cel putin 1 loc"
+      }
+    },
+    "tripPreview": {
+      "days": "zile",
+      "day": "zi",
+      "slots": "locuri",
+      "Private": "Privat",
+      "FriendsOnly": "Doar pentru prieteni",
+      "ApprovalRequired": "Necesita aprobare",
+      "Public": "Public",
+      "tripHighlights": "Activitati recomandate",
+      "finalize": "Finalizeaza",
+      "edit": "Editeaza",
+      "tripCreatedSuccess": "Excursia ta a fost creata cu success",
+      "errors": {
+        "errorLoadingAttractions": "Nu s-au putut incarca atractiile turistice. Incearca, din nou, mai tarziu",
+        "errorCreatingTrip": "A aparut o eroare la crearea excursiei. Incearca, din nou, mai tarziu",
+        "errorLoadingTrips": "A aparut o eroare la afisarea excursiilor. Incearca, din nou, mai tarziu"
+      }
+    },
+    "tripsList": {
+      "approvalRequired": "Este nevoie de aprobare de la organizator",
+      "slotRemaining": "loc ramas",
+      "slotsRemaining": "locuri ramase",
+      "results": "Rezultate",
+      "result": "Rezultat",
+      "noResults": "Imi pare rau, nu au fost gasite rezultate. Modifica filtrele si incearca din nou.",
+      "filters": {
+        "startDate": "Data de inceput",
+        "endDate": "Date de incheiere",
+        "friendsOnly": "Doar prieteni",
+        "dateRange": "Interval",
+        "wholeCountry": "Toata tara",
+        "location": "Locatie"
+      }
+    }
+  },
+  "toast": {
+    "signInRequired": "Trebuie sa te autentifici"
+  }
 }

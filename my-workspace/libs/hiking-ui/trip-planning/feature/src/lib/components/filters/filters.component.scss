@@ -1,0 +1,41 @@
+.trips-filters {
+  padding: 10px;
+  #googleInputField {
+    margin-right: 10px;
+  }
+  @media only screen and (max-width: 991px) {
+    .filters-form {
+      display: block;
+      align-items: center;
+      .toggle-buttons {
+        display: flex;
+        justify-content: flex-start;
+
+        .friends-only-toggle {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: 992px) {
+    .filters-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .flex-start {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .flex-end {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .whole-country-toggle {
+        margin-left: 10px;
+      }
+    }
+  }
+}

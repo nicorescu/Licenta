@@ -3,9 +3,11 @@ export class TripFilter {
   endDate: Date;
   friendsOnly: boolean;
   keywords: string[];
+  location: string;
   requesterId: string;
   wholeCountry: boolean;
   requestedPage: number;
+  pageSize: number;
 
   public constructor() {
     this.friendsOnly = false;

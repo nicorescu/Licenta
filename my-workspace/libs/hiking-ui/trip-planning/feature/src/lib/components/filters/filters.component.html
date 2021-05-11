@@ -1,1 +1,75 @@
-<div class="trips-filters"></div>
+<div
+  class="trips-filters"
+  *transloco="let t; read: 'tripPlanning.tripsList.filters'"
+>
+  <form [formGroup]="filterForm" class="filters-form">
+    <div class="flex-start">
+      <mat-form-field id="googleInputField">
+        <mat-label>{{ t('location') }}</mat-label>
+        <input
+          id="locationInput"
+          #googlePlacesInput
+          matInput
+          ngx-google-places-autocomplete
+          [options]="options"
+          #placesRef="ngx-places"
+          (onAddressChange)="handleAddressChange($event)"
+          class="google-input theme-input"
+          formControlName="location"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="clearSearchInput()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field id="dateRange">
+        <mat-label>{{ t('dateRange') }}</mat-label>
+        <mat-date-range-input (click)="picker.open()" [rangePicker]="picker">
+          <input
+            class="theme-input"
+            matInput
+            matStartDate
+            formControlName="startDate"
+            [placeholder]="t('startDate')"
+            readonly
+          />
+          <input
+            class="theme-input"
+            matInput
+            matEndDate
+            formControlName="endDate"
+            [placeholder]="t('endDate')"
+            readonly
+          />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="flex-end toggle-buttons">
+      <div class="friends-only-toggle">
+        <mat-slide-toggle
+          *ngIf="sessionToken$ | async"
+          formControlName="friendsOnly"
+          name="friendsOnly"
+          color="primary"
+        >
+          {{ t('friendsOnly') }}
+        </mat-slide-toggle>
+      </div>
+      <div class="whole-country-toggle">
+        <mat-slide-toggle
+          formControlName="wholeCountry"
+          name="friendsOnly"
+          color="primary"
+        >
+          {{ t('wholeCountry') }}
+        </mat-slide-toggle>
+      </div>
+    </div>
+  </form>
+</div>

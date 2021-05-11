@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 import { AppAuthenticateFacade } from '../+state/app-authenticate.facade';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { switchMap } from 'rxjs/operators';
-import { Config,ToastService } from '@hkworkspace/utils';
+import { Config, ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({

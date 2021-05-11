@@ -19,7 +19,7 @@ export class PlanningFacade {
   attractions$ = this.store.pipe(select(TripSelectors.getAttractions));
   loadedTrips$ = this.store.pipe(select(TripSelectors.getLoadedTrips));
   tripsCount$ = this.store.pipe(select(TripSelectors.getTripsCount));
-
+  tripsFilter$ = this.store.pipe(select(TripSelectors.getTripsFilter));
   constructor(private store: Store) {}
 
   selectLocation(location: SelectedLocation) {

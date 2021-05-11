@@ -38,6 +38,9 @@ import { CreateAndPreviewTripComponent } from './container/create-and-preview-tr
 import { PhotoComponent } from './components/photo/photo.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { TripsListComponent } from './container/trips-list/trips-list.component';
+import { TripCardComponent } from './components/trip-card/trip-card.component';
+import { TripsPaginatorComponent } from './components/trips-paginator/trips-paginator.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -52,9 +55,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from 'ng-starrating';
 import 'hammerjs';
 import 'mousetrap';
-import { TripCardComponent } from './components/trip-card/trip-card.component';
-import { TripsPaginatorComponent } from './components/trips-paginator/trips-paginator.component';
-import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   imports: [

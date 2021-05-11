@@ -40,3 +40,8 @@ export const getTripsCount = createSelector(
   getTripState,
   (state: PlanningState) => state.tripsCount
 );
+
+export const getTripsFilter = createSelector(
+  getTripState,
+  (state: PlanningState) => state.tripFilter
+);

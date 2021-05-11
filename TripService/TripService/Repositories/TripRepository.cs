@@ -46,7 +46,9 @@ namespace TripService.Repositories
                     requesterFriends = await _userUtils.GetUserFriends(searchFilter.RequesterId);
                 }
 
-                var query = GetSearchQuery(searchFilter, requesterFriends);
+                var query = GetSearchQuery(searchFilter, requesterFriends)
+                    .Limit(searchFilter.PageSize)
+                    .Skip(searchFilter.PageSize * (searchFilter.RequestedPage-1));
                 var count = query.Count();
 
                 var tripsResult = await query.ToListAsync();

@@ -2,22 +2,44 @@
   class="trips-view-container container"
   *transloco="let t; read: 'tripPlanning.tripsList'"
 >
-  <div class="trips-list-header">
-    <hk-filters></hk-filters>
-    <hk-trips-paginator></hk-trips-paginator>
+  <div class="trips-list-filters">
+    <hk-filters
+      [tripsFilter]="tripsFilter$ | async"
+      (filtersChangedEmitter)="filtersChanged($event)"
+      [isLoading]="isLoading$ | async"
+    ></hk-filters>
   </div>
-  <div class="trips-list">
-    <div class="row">
-      <div
-        class="col-lg-4 col-md-6 col-xs-12 mb-5"
-        style="display: flex; justify-content: center"
-        *ngFor="let trip of trips"
-      >
-        <hk-trip-card [trip]="trip"></hk-trip-card>
+  <ng-container>
+    <div class="trips-list">
+      <div class="text-center h4">
+        {{ totalLength$ | async }}
+        {{ (totalLength$ | async) === 1 ? t('result') : t('results') }}
+      </div>
+      <mat-divider style="margin: 25px"></mat-divider>
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-6 col-xs-12 mb-5"
+          style="display: flex; justify-content: center"
+          *ngFor="let trip of trips$ | async"
+        >
+          <hk-trip-card [trip]="trip"></hk-trip-card>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="trips-paginator">
-    <hk-trips-paginator></hk-trips-paginator>
-  </div>
+    <div class="trips-paginator">
+      <hk-trips-paginator
+        (paginationChangedEmitter)="paginationChanged($event)"
+      ></hk-trips-paginator>
+    </div>
+  </ng-container>
+  <ng-template #noResultsBlock>
+    <div class="no-results-container">
+      <div class="no-results">
+        <div class="search-icon">
+          <fa-icon [icon]="searchIcon" size="4x"></fa-icon>
+        </div>
+        <div class="no-results-message">{{ t('noResults') }}</div>
+      </div>
+    </div>
+  </ng-template>
 </div>

@@ -14,5 +14,7 @@ namespace TripService.Models.ApiModels
         public bool WholeCountry { get; set; }
         public bool FriendsOnly { get; set; }
         public int RequestedPage { get; set; }
+        public int PageSize { get; set; }
+        public string Location { get; set; }
     }
 }

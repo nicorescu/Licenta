@@ -84,6 +84,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
     console.log('address: ', address);
+    this.tripFilter.location = address.formatted_address;
     try {
       this.setSearchKeywords(address);
       this.isInvalidLocation = false;
@@ -106,7 +107,7 @@ export class SearchTripComponent implements OnInit, OnDestroy {
       return;
     }
     this.setSearchModelProps();
-    console.log("filter: ", this.tripFilter)
+    console.log('filter: ', this.tripFilter);
     this.submitted.emit(this.tripFilter);
   }
 
