@@ -24,6 +24,10 @@ export class PlanningEffects {
               const places: Place[] = res.results.filter((x) => !!x.photos);
               return TripActions.previewTripSuccess({ attractions: places });
             }),
+
+            tap(() => {
+              this.router.navigate(['/preview-trip']);
+            }),
             catchError((err) => {
               const error: string = this.translocoService.translate(
                 'tripPlanning.tripPreview.errors.errorLoadingAttractions'
@@ -35,9 +39,6 @@ export class PlanningEffects {
               );
             })
           );
-      }),
-      tap(() => {
-        this.router.navigate(['/preview-trip']);
       })
     )
   );

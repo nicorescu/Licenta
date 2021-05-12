@@ -70,7 +70,7 @@ namespace TripService.Extensions
                     {AtlasStringResources.Text, new BsonDocument
                         {
                             {AtlasStringResources.Query, key },
-                            {AtlasStringResources.Path, AtlasStringResources.PathName }
+                            {AtlasStringResources.Path, "FullAddress" }
                         }
                     }
                 };
@@ -127,6 +127,28 @@ namespace TripService.Extensions
                                 {
                                     AtlasStringResources.In,
                                     new BsonArray(friendsIds)
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        public static BsonDocument GetOwnTripsRestriction(Guid organizerId)
+        {
+            return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
+                    {
+                        {
+                            "OrganizerId",
+                            new BsonDocument
+                            {
+                                {
+                                    AtlasStringResources.NotEquals,
+                                    organizerId
                                 }
                             }
                         }

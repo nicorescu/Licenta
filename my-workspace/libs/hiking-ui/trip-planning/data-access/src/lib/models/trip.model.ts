@@ -7,6 +7,7 @@ export interface Trip {
   id: string;
   locationName: string;
   address: string;
+  fullAddress: string;
   country: string;
   placeId: string;
   startDate: Date;

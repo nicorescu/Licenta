@@ -15,7 +15,8 @@ namespace TripService.Models.Mapping
             CreateMap<User, UserDto>()
                 .ForMember(dto => dto.Age, opt => opt.MapFrom(domain => DateTime.Today.Year - domain.Birthday.Year))
                 .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
-            CreateMap<UserDto, User>();
+            CreateMap<UserDto, User>()
+                .ForMember(domain => domain.Email, opt => opt.MapFrom(dto =>  dto.Email.ToLower()));
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))

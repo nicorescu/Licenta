@@ -117,6 +117,11 @@ export class CreateTripComponent implements OnInit, OnDestroy {
     this.trip = {
       ...this.trip,
       address: address.formatted_address,
+      fullAddress: address.address_components
+        .map((comp) => {
+          return comp.long_name;
+        })
+        .join(','),
       locationName: address.name,
       placeId: address.place_id,
       country: address.address_components.find((x) =>

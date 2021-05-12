@@ -27,7 +27,9 @@ export class TripService {
       .set('startDate', searchFilter.startDate.toISOString())
       .set('endDate', searchFilter.endDate.toISOString())
       .set('keywords', searchFilter.keywords.join(', '))
-      .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false');
+      .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false')
+      .set('pageSize', searchFilter.pageSize.toString())
+      .set('requestedPage', searchFilter.requestedPage.toString());
 
     console.log(params);
     return this.httpClient.get<TripsResult>(`${this.baseApiUrl}/trips/search`, {

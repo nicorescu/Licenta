@@ -52,6 +52,9 @@ export class FiltersComponent implements OnInit {
     }
     this.sessionToken$ = this.authFacade.sessionToken$;
     this.buildForm();
+    this.filterForm.valueChanges.subscribe((val) => {
+      console.log('da');
+    });
   }
 
   buildForm() {
@@ -74,6 +77,9 @@ export class FiltersComponent implements OnInit {
     address.address_components.forEach((comp) => {
       this.tripsFilter.keywords.push(comp.long_name);
     });
+  }
+  test() {
+    console.log('date changed');
   }
 
   clearSearchInput() {

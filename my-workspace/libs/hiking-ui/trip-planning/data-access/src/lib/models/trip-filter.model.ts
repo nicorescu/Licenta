@@ -14,6 +14,7 @@ export class TripFilter {
     this.wholeCountry = false;
     this.keywords = [];
     this.requestedPage = 1;
+    this.pageSize = 6;
   }
 
   clearSearch() {

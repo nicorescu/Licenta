@@ -54,7 +54,7 @@ namespace TripService.Repositories
                 var tripsResult = await query.ToListAsync();
                 var tripsCount = await count.FirstOrDefaultAsync();
 
-                return Tuple.Create(tripsResult, (int)tripsCount.Count);
+                return Tuple.Create(tripsResult, tripsCount !=null? (int)tripsCount.Count : 0);
             }
             catch (Exception exception)
             {
@@ -144,6 +144,7 @@ namespace TripService.Repositories
             var query = _collection.Aggregate()
                 .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
+                .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
                 .AppendStage<Trip>(searchFilter.FriendsOnly ? AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends) : AtlasSearchExtensions.GetEmptyStage());
             return query;

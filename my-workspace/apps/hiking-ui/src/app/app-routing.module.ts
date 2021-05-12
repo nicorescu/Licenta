@@ -24,6 +24,10 @@ import {
   LoginGuard,
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { TripPreviewComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
+import {
+  TripPreviewGuard,
+  TripsListGuard,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 const routes: Routes = [
   {
@@ -38,10 +42,12 @@ const routes: Routes = [
   {
     path: 'preview-trip',
     component: TripPreviewComponent,
+    canActivate: [TripPreviewGuard],
   },
   {
     path: 'view-trips',
     component: TripsListComponent,
+    canActivate: [TripsListGuard],
   },
   {
     path: 'tasks',

@@ -1,27 +1,44 @@
-<div class="trip-attractions">
+<div
+  class="trip-attractions"
+  *transloco="let t; read: 'tripPlanning.tripPreview'"
+>
   <div class="attraction-container">
-    <div class="left-arrow">
-      <button
-        mat-icon-button
-        (click)="prevPhoto()"
-        [disabled]="selectedPhotoIndex === 0"
-      >
-        <fa-icon [icon]="faAngleLeft" size="4x"></fa-icon>
-      </button>
-    </div>
-    <div class="selected-attraction">
-      <hk-attraction
-        [selectedAttraction]="(attractions$ | async)[selectedPhotoIndex]"
-      ></hk-attraction>
-    </div>
-    <div class="right-arrow">
-      <button
-        mat-icon-button
-        (click)="nextPhoto()"
-        [disabled]="selectedPhotoIndex === (attractions$ | async).length - 1"
-      >
-        <fa-icon [icon]="faAngleRight" size="4x"></fa-icon>
-      </button>
-    </div>
+    <ng-container
+      *ngIf="(attractions$ | async).length > 0; else noAttractionsBlock"
+    >
+      <div class="left-arrow">
+        <button
+          mat-icon-button
+          (click)="prevPhoto()"
+          [disabled]="selectedPhotoIndex === 0"
+        >
+          <fa-icon [icon]="faAngleLeft" size="4x"></fa-icon>
+        </button>
+      </div>
+      <div class="selected-attraction">
+        <hk-attraction
+          [selectedAttraction]="(attractions$ | async)[selectedPhotoIndex]"
+        ></hk-attraction>
+      </div>
+      <div class="right-arrow">
+        <button
+          mat-icon-button
+          (click)="nextPhoto()"
+          [disabled]="selectedPhotoIndex === (attractions$ | async).length - 1"
+        >
+          <fa-icon [icon]="faAngleRight" size="4x"></fa-icon>
+        </button>
+      </div>
+    </ng-container>
   </div>
+  <ng-template #noAttractionsBlock>
+    <div class="no-attractions-container">
+      <div class="no-attractions">
+        <div class="search-icon">
+          <fa-icon [icon]="searchIcon" size="4x"></fa-icon>
+        </div>
+        <div class="no-attractions-message">{{ t('noAttractions') }}</div>
+      </div>
+    </div>
+  </ng-template>
 </div>

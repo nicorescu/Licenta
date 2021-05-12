@@ -22,6 +22,7 @@ namespace TripService.Processors
         }
         public async Task<ActionResult<string>> Login(CredentialsModel credentials)
         {
+            credentials.Email = credentials.Email.ToLower();
             var result = await _authRepository.Login(credentials);
             
             if(result == null)

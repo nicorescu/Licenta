@@ -4,9 +4,11 @@ import {
   PlanningFacade,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Observable } from 'rxjs';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faAngleLeft,
+  faAngleRight,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'hk-trip-attractions',
   templateUrl: './trip-attractions.component.html',
@@ -17,6 +19,7 @@ export class TripAttractionsComponent implements OnInit {
   selectedPhotoIndex: number = 0;
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
+  searchIcon = faSearch;
 
   constructor(private planningFacade: PlanningFacade) {}
 

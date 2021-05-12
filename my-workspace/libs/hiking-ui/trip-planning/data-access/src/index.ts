@@ -17,3 +17,5 @@ export * from './lib/services/pixabay.service';
 export * from './lib/models/pixabay-result.model';
 export * from './lib/models/pixabay-hit.model';
 export * from './lib/models/place.model';
+export * from './lib/guards/trip-preview.guard';
+export * from './lib/guards/trips-list.guard';

@@ -39,7 +39,7 @@ namespace TripService.Processors
                 return new NoContentResult();
             }
             var trips = _mapper.Map<List<TripDto>>(result.Item1);
-            var tripsResult = new TripsResultDto() { Trips = trips, Count = result.Item2 !=null ? result.Item2 : 0};
+            var tripsResult = new TripsResultDto() { Trips = trips, Count = result.Item2};
             return new OkObjectResult(tripsResult);
         }
         public async Task<ActionResult<TripDto>> GetTripById(Guid tripId)

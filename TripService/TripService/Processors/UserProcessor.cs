@@ -45,7 +45,6 @@ namespace TripService.Processors
         public async Task<ActionResult<bool>> InsertNewUser(UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
-
             var result = await _userRepository.InsertNewUser(user);
 
             if (!result)
