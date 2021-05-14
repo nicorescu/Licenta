@@ -55,6 +55,13 @@ export class TripsListComponent implements OnInit, OnDestroy {
     this.planningFacade.searchTrips(tripsFilter);
   }
 
+  removeCountryKeyword(tripsFilter: TripFilter) {
+    tripsFilter.keywords = tripsFilter.keywords.replace(
+      `,${tripsFilter.country}`,
+      ''
+    );
+  }
+
   pushFakeTrips() {
     this.trips.push({
       id: '262b03c6-2961-45cf-bf43-76f77b4f2b19',

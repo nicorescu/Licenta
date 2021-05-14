@@ -49,7 +49,7 @@ namespace TripService.Repositories
                 var query = GetSearchQuery(searchFilter, requesterFriends)
                     .Limit(searchFilter.PageSize)
                     .Skip(searchFilter.PageSize * (searchFilter.RequestedPage-1));
-                var count = query.Count();
+                var count = GetSearchQuery(searchFilter, requesterFriends).Count();
 
                 var tripsResult = await query.ToListAsync();
                 var tripsCount = await count.FirstOrDefaultAsync();
@@ -142,7 +142,7 @@ namespace TripService.Repositories
         {
             string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
             var query = _collection.Aggregate()
-                .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(searchFilter.WholeCountry ? keywords : keywords.SkipLast(1).ToArray()))
+                .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))

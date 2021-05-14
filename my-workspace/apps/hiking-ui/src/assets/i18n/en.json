@@ -150,7 +150,8 @@
         "friendsOnly": "Friends only",
         "dateRange": "Date range",
         "wholeCountry": "Whole country",
-        "location": "Location"
+        "location": "Location",
+        "searchAgain": "Search again"
       }
     }
   },

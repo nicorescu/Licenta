@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -14,14 +15,15 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { Observable } from 'rxjs';
+import { combineLatest, merge, Observable } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'hk-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss'],
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, OnDestroy {
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
   @ViewChild('googlePlacesInput') locationsInput;
 
@@ -32,35 +34,40 @@ export class FiltersComponent implements OnInit {
   @Output()
   filtersChangedEmitter = new EventEmitter();
   sessionToken$: Observable<SessionToken>;
+  alive = true;
 
   filterForm: FormGroup;
   options = {
     types: ['(cities)'],
   };
-
   constructor(
     private formBuilder: FormBuilder,
     private authFacade: AppAuthenticateFacade
   ) {}
 
   ngOnInit(): void {
-    if (!this.tripsFilter) {
-      this.tripsFilter = new TripFilter();
-      this.tripsFilter.startDate = new Date('2021-05-23T21:00:00Z');
-      this.tripsFilter.endDate = new Date('2021-06-23T21:00:00Z');
-      this.tripsFilter.location = 'Suceava, Romania';
-    }
+    console.log(this.tripsFilter);
     this.sessionToken$ = this.authFacade.sessionToken$;
     this.buildForm();
-    this.filterForm.valueChanges.subscribe((val) => {
-      console.log('da');
+    merge(
+      this.endDate.valueChanges,
+      this.friendsOnly.valueChanges,
+      this.wholeCountry.valueChanges
+    ).subscribe(() => {
+      if (this.endDate.value) {
+        this.filterChanged();
+      }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.alive = false;
   }
 
   buildForm() {
     this.filterForm = this.formBuilder.group({
-      startDate: [this.tripsFilter.startDate],
-      endDate: [this.tripsFilter.endDate],
+      startDate: [new Date(this.tripsFilter.startDate)],
+      endDate: [new Date(this.tripsFilter.endDate)],
       friendsOnly: [this.tripsFilter.friendsOnly],
       wholeCountry: [this.tripsFilter.wholeCountry],
       location: [this.tripsFilter.location],
@@ -68,18 +75,17 @@ export class FiltersComponent implements OnInit {
   }
 
   public handleAddressChange(address: Address) {
-    this.tripsFilter.location = address.formatted_address;
-    this.setSearchKeywords(address);
-    this.filtersChangedEmitter.emit(this.tripsFilter);
-  }
-
-  setSearchKeywords(address: Address) {
-    address.address_components.forEach((comp) => {
-      this.tripsFilter.keywords.push(comp.long_name);
-    });
-  }
-  test() {
-    console.log('date changed');
+    const newFilter: TripFilter = {
+      ...this.tripsFilter,
+      location: address.formatted_address,
+      keywords: address.address_components
+        .map((comp) => comp.long_name)
+        .join(','),
+      country: address.address_components.find((x) =>
+        x.types.indexOf('country')
+      ).long_name,
+    };
+    this.filtersChangedEmitter.emit(newFilter);
   }
 
   clearSearchInput() {
@@ -88,26 +94,30 @@ export class FiltersComponent implements OnInit {
   }
 
   filterChanged() {
-    this.tripsFilter.startDate = new Date(this.startDate);
-    this.tripsFilter.endDate = new Date(this.endDate);
-    this.tripsFilter.friendsOnly = this.friendsOnly;
-    this.tripsFilter.wholeCountry = this.wholeCountry;
-    this.filtersChangedEmitter.emit(this.tripsFilter);
+    const newFilter: TripFilter = {
+      ...this.tripsFilter,
+      startDate: new Date(this.startDate.value),
+      endDate: new Date(this.endDate.value),
+      friendsOnly: this.friendsOnly.value,
+      wholeCountry: this.wholeCountry.value,
+    };
+    console.log(newFilter);
+    this.filtersChangedEmitter.emit(newFilter);
   }
 
   public get startDate() {
-    return this.filterForm.get('startDate').value;
+    return this.filterForm.get('startDate');
   }
 
   public get endDate() {
-    return this.filterForm.get('endDate').value;
+    return this.filterForm.get('endDate');
   }
 
   public get friendsOnly() {
-    return this.filterForm.get('friendsOnly').value;
+    return this.filterForm.get('friendsOnly');
   }
 
   public get wholeCountry() {
-    return this.filterForm.get('wholeCountry').value;
+    return this.filterForm.get('wholeCountry');
   }
 }

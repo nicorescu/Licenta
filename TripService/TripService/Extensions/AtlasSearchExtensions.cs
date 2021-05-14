@@ -33,11 +33,11 @@ namespace TripService.Extensions
                     new BsonDocument
                     {
                         {AtlasStringResources.StartDate, new BsonDocument{
-                                {AtlasStringResources.Gte, startDate.AddDays(1) }
+                                {AtlasStringResources.Gte, startDate }
                             }
                         },
                         {AtlasStringResources.EndDate, new BsonDocument{
-                                {AtlasStringResources.Lte, endDate.AddDays(1)}
+                                {AtlasStringResources.Lte, endDate}
                             }
                         }
                     }

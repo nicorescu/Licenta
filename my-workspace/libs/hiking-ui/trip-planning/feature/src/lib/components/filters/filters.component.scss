@@ -3,6 +3,10 @@
   #googleInputField {
     margin-right: 10px;
   }
+  //location mat-form-field input
+  ::ng-deep .mat-form-field-flex.ng-tns-c452-6 {
+    width: 300px;
+  }
   @media only screen and (max-width: 991px) {
     .filters-form {
       display: block;

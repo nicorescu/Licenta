@@ -37,7 +37,20 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   rendererListener: () => void;
   searchForm: FormGroup;
   currentDate = new Date();
-  tripFilter: TripFilter;
+
+  tripFilter: TripFilter = {
+    friendsOnly: false,
+    wholeCountry: false,
+    keywords: '',
+    requestedPage: 1,
+    pageSize: 6,
+    startDate: null,
+    endDate: null,
+    location: '',
+    requesterId: '',
+    country: '',
+  };
+
   isInvalidLocation = true;
   isSubmittedOnce = false;
   sessionToken$: Observable<SessionToken>;
@@ -47,7 +60,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authFacade: AppAuthenticateFacade
   ) {
-    this.tripFilter = new TripFilter();
     this.rendererListener = this.renderer.listen(
       'window',
       'click',
@@ -85,6 +97,9 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     console.log(address.geometry.location.lng());
     console.log('address: ', address);
     this.tripFilter.location = address.formatted_address;
+    this.tripFilter.country = address.address_components.find(
+      (x) => x.types.indexOf('country') !== -1
+    ).long_name;
     try {
       this.setSearchKeywords(address);
       this.isInvalidLocation = false;
@@ -93,22 +108,19 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     }
   }
 
-  getPhotoUrls(address: Address): string[] {
-    return address.photos.map((photo) =>
-      photo
-        .getUrl({ maxHeight: 500, maxWidth: 500 })
-        .replace('https://lh3.googleusercontent.com', '/googleUserContent')
-    );
-  }
-
   onSubmit() {
     this.isSubmittedOnce = true;
     if (this.searchForm.invalid) {
       return;
     }
-    this.setSearchModelProps();
     console.log('filter: ', this.tripFilter);
-    this.submitted.emit(this.tripFilter);
+    const newFilter: TripFilter = {
+      ...this.tripFilter,
+      startDate: new Date(this.startDate.value),
+      endDate: new Date(this.endDate.value),
+      friendsOnly: this.friendsOnly.value,
+    };
+    this.submitted.emit(newFilter);
   }
 
   onKey() {
@@ -117,34 +129,28 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     }
   }
 
-  setSearchModelProps() {
-    this.tripFilter.startDate = new Date(this.startDate.value);
-    this.tripFilter.endDate = new Date(this.endDate.value);
-    this.tripFilter.friendsOnly = this.friendsOnly.value;
-  }
-
   clearSearchInput() {
     this.locationsInput.nativeElement.value = null;
     this.searchForm.value.location = '';
-    this.tripFilter.clearSearch();
     this.isInvalidLocation = true;
   }
 
   setSearchKeywords(address: Address) {
-    address.address_components.forEach((comp) => {
-      this.tripFilter.keywords.push(comp.long_name);
-    });
+    const keywords = address.address_components
+      .map((comp) => comp.long_name)
+      .join(',');
+    this.tripFilter.keywords = keywords;
   }
 
   public get startDate() {
-    return this.searchForm.controls['startDate'];
+    return this.searchForm.get('startDate');
   }
 
   public get endDate() {
-    return this.searchForm.controls['endDate'];
+    return this.searchForm.get('endDate');
   }
 
   public get friendsOnly() {
-    return this.searchForm.controls['friendsOnly'];
+    return this.searchForm.get('friendsOnly');
   }
 }

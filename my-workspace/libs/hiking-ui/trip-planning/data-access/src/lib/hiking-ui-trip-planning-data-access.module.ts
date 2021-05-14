@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromPlanning from './+state/planning.reducer';
 import { PlanningEffects } from './+state/planning.effects';
 import { PlanningFacade } from './+state/planning.facade';
+import { InputWithSelectDirective } from './directives/input-with-select.directive';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { PlanningFacade } from './+state/planning.facade';
     EffectsModule.forFeature([PlanningEffects]),
   ],
   providers: [GooglePlacesService, PlanningFacade],
-  declarations: [EnumToArrayPipe, EnumToStringPipe],
+  declarations: [EnumToArrayPipe, EnumToStringPipe, InputWithSelectDirective],
   exports: [EnumToArrayPipe, EnumToStringPipe],
 })
 export class HikingUiTripPlanningDataAccessModule {

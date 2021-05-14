@@ -149,7 +149,8 @@
         "friendsOnly": "Doar prieteni",
         "dateRange": "Interval",
         "wholeCountry": "Toata tara",
-        "location": "Locatie"
+        "location": "Locatie",
+        "searchAgain": "Cauta din nou"
       }
     }
   },

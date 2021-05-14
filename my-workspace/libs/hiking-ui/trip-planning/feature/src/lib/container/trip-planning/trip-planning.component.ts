@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./trip-planning.component.scss'],
 })
 export class TripPlanningComponent implements OnInit {
-
-  isLoading$: Observable<boolean>
+  isLoading$: Observable<boolean>;
 
   constructor(
     @Inject(Config) private config: Config,

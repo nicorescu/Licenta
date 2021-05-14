@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { createEffect, Actions, ofType, act } from '@ngrx/effects';
 import * as TripActions from './planning.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { PixabayService } from '../services/pixabay.service';
@@ -10,6 +10,7 @@ import { Place } from '../models/place.model';
 import { TranslocoService } from '@ngneat/transloco';
 import { TripService } from '../services/trip.service';
 import { ToastService } from '@hkworkspace/utils';
+import { TripFilter } from '../models/trip-filter.model';
 
 @Injectable()
 export class PlanningEffects {
@@ -75,7 +76,14 @@ export class PlanningEffects {
     this.actions$.pipe(
       ofType(TripActions.searchTrips),
       switchMap((action) => {
-        return this.tripService.searchTrips(action.tripFilter).pipe(
+        const filter = action.tripFilter;
+        const newFilter: TripFilter = {
+          ...filter,
+          keywords: filter.wholeCountry
+            ? filter.keywords
+            : filter.keywords.replace(`,${filter.country}`, ''),
+        };
+        return this.tripService.searchTrips(newFilter).pipe(
           map((res) => {
             return TripActions.searchTripsSuccess({ ...res });
           }),
