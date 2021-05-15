@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
   GooglePlacesService,
+  Place,
   PlanningFacade,
+  Trip,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Observable } from 'rxjs';
 @Component({
@@ -10,13 +12,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./trip-preview.component.scss'],
 })
 export class TripPreviewComponent implements OnInit {
-
   isLoading$: Observable<boolean>;
-
-  constructor(
-    private planningFacade: PlanningFacade
-  ) {}
+  planningTrip$: Observable<Trip>;
+  attractions$: Observable<Place[]>;
+  constructor(private planningFacade: PlanningFacade) {}
   ngOnInit(): void {
     this.isLoading$ = this.planningFacade.isLoading$;
+    this.planningTrip$ = this.planningFacade.planningTrip$;
+    this.attractions$ = this.planningFacade.attractions$;
   }
 }

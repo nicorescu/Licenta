@@ -1,0 +1,89 @@
+@import 'theme.scss';
+
+::ng-deep .view-selected-trip-container {
+  padding-bottom: 10px;
+  .tabs-group {
+    display: flex;
+    justify-content: center;
+
+    .mat-tab-body-wrapper {
+      width: 100%;
+    }
+
+    .mat-tab-group {
+      width: 100%;
+      align-items: center;
+
+      .mat-tab-header {
+        min-width: 400px;
+        width: 70%;
+        .mat-tab-header-pagination {
+          display: none;
+        }
+      }
+
+      .mat-tab-body {
+        padding-top: 25px;
+      }
+
+      #trip-details {
+        width: 100%;
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+
+        .divider {
+          margin: 10px;
+        }
+        .organizer-picture {
+          width: 200px;
+          height: 200px;
+          display: flex;
+          justify-content: center;
+          margin: auto;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+          }
+        }
+        .about-trip {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .title {
+            font-size: 25px;
+          }
+
+          .trip-details {
+            max-width: 500px;
+          }
+        }
+
+        @media only screen and (max-width: 991px) {
+          .about-user {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+
+    #tripAttractions {
+      padding: 20px 0px 20px 0px;
+      background-color: white;
+      border-radius: 5px;
+    }
+  }
+
+  .actions-container {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+}

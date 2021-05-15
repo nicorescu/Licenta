@@ -46,18 +46,19 @@ export class FiltersComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.tripsFilter);
     this.sessionToken$ = this.authFacade.sessionToken$;
     this.buildForm();
     merge(
       this.endDate.valueChanges,
       this.friendsOnly.valueChanges,
       this.wholeCountry.valueChanges
-    ).subscribe(() => {
-      if (this.endDate.value) {
-        this.filterChanged();
-      }
-    });
+    )
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => {
+        if (this.endDate.value) {
+          this.filterChanged();
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -75,14 +76,15 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   public handleAddressChange(address: Address) {
+    console.log('address: ', address);
     const newFilter: TripFilter = {
       ...this.tripsFilter,
       location: address.formatted_address,
       keywords: address.address_components
         .map((comp) => comp.long_name)
         .join(','),
-      country: address.address_components.find((x) =>
-        x.types.indexOf('country')
+      country: address.address_components.find(
+        (x) => x.types.indexOf('country') !== -1
       ).long_name,
     };
     this.filtersChangedEmitter.emit(newFilter);
@@ -100,8 +102,12 @@ export class FiltersComponent implements OnInit, OnDestroy {
       endDate: new Date(this.endDate.value),
       friendsOnly: this.friendsOnly.value,
       wholeCountry: this.wholeCountry.value,
+      requestedPage:
+        this.friendsOnly.value != this.tripsFilter.friendsOnly ||
+        this.wholeCountry.value != this.tripsFilter.wholeCountry
+          ? 1
+          : this.tripsFilter.requestedPage,
     };
-    console.log(newFilter);
     this.filtersChangedEmitter.emit(newFilter);
   }
 

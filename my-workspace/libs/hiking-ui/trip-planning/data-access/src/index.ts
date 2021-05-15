@@ -19,3 +19,6 @@ export * from './lib/models/pixabay-hit.model';
 export * from './lib/models/place.model';
 export * from './lib/guards/trip-preview.guard';
 export * from './lib/guards/trips-list.guard';
+export * from './lib/guards/view-selected-trip.guard';
+export * from './lib/services/trip.service';
+export * from './lib/services/user.service';

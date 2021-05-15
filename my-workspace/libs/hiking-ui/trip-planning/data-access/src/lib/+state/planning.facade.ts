@@ -20,6 +20,7 @@ export class PlanningFacade {
   loadedTrips$ = this.store.pipe(select(TripSelectors.getLoadedTrips));
   tripsCount$ = this.store.pipe(select(TripSelectors.getTripsCount));
   tripsFilter$ = this.store.pipe(select(TripSelectors.getTripsFilter));
+  selectedTripId$ = this.store.pipe(select(TripSelectors.getSelectedTripId));
   constructor(private store: Store) {}
 
   selectLocation(location: SelectedLocation) {
@@ -40,5 +41,13 @@ export class PlanningFacade {
 
   searchTrips(tripFilter: TripFilter) {
     this.store.dispatch(TripActions.searchTrips({ tripFilter: tripFilter }));
+  }
+
+  selectTrip(tripId: string) {
+    this.store.dispatch(TripActions.selectTrip({ tripId: tripId }));
+  }
+
+  loadAttractions(location: string) {
+    this.store.dispatch(TripActions.loadAttractions({ location: location }));
   }
 }

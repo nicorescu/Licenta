@@ -12,20 +12,17 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./trip-details.component.scss'],
 })
 export class TripDetailsComponent implements OnInit {
-  planningTrip: Trip;
+  @Input()
+  trip: Trip;
   numberOfDays: number;
   tripPrivacy = TripPrivacy;
-  constructor(private planningFacade: PlanningFacade) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.planningFacade.planningTrip$.pipe(take(1)).subscribe((trip) => {
-      console.log('trip', trip);
-      this.planningTrip = trip;
-      this.numberOfDays =
-        (this.planningTrip.endDate.getTime() -
-          this.planningTrip.startDate.getTime()) /
-          (1000 * 3600 * 24) +
-        1;
-    });
+    console.log(this.trip);
+    this.numberOfDays =
+      (this.trip.endDate.getTime() - this.trip.startDate.getTime()) /
+        (1000 * 3600 * 24) +
+      1;
   }
 }

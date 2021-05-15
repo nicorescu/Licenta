@@ -47,8 +47,9 @@ namespace TripService.Repositories
                 }
 
                 var query = GetSearchQuery(searchFilter, requesterFriends)
-                    .Limit(searchFilter.PageSize)
-                    .Skip(searchFilter.PageSize * (searchFilter.RequestedPage-1));
+                    .Skip(searchFilter.PageSize * (searchFilter.RequestedPage - 1))
+                    .Limit(searchFilter.PageSize);
+                 
                 var count = GetSearchQuery(searchFilter, requesterFriends).Count();
 
                 var tripsResult = await query.ToListAsync();
@@ -140,13 +141,16 @@ namespace TripService.Repositories
 
         private IAggregateFluent<Trip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
         {
-            string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).ToArray();
+            string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
             var query = _collection.Aggregate()
                 .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
-                .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
-                .AppendStage<Trip>(searchFilter.FriendsOnly ? AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends) : AtlasSearchExtensions.GetEmptyStage());
+                .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate));
+            if (searchFilter.FriendsOnly)
+            {
+                query = query.AppendStage<Trip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));
+            }
             return query;
         }
 

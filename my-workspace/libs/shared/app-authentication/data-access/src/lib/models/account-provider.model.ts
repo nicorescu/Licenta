@@ -1,5 +1,5 @@
-export enum AccountProvider{
-        TripPlanning,
-        Google,
-        Facebook
+export enum AccountProvider {
+  TripPlanning,
+  Google,
+  Facebook,
 }

@@ -14,12 +14,17 @@ export const previewTrip = createAction(
   props<{ trip: Trip }>()
 );
 
-export const previewTripSuccess = createAction(
+export const loadAttractions = createAction(
+  'Load attractions',
+  props<{ location: string }>()
+);
+
+export const loadAttractionsSuccess = createAction(
   '[Preview Trip] Load trip success',
   props<{ attractions: Place[] }>()
 );
 
-export const previewTripFailure = createAction(
+export const loadAttractionsFailure = createAction(
   '[Create Trip] Load Trip Failure',
   props<{ error: any }>()
 );
@@ -52,5 +57,20 @@ export const searchTripsSuccess = createAction(
 
 export const searchTripFailure = createAction(
   '[Trip-Planning] Search trips failure',
+  props<{ error: string }>()
+);
+
+export const selectTrip = createAction(
+  '[Trip-list] Select trip',
+  props<{ tripId: string }>()
+);
+
+export const loadTripSuccess = createAction(
+  '[Trip-list] Load trip success',
+  props<{ trip: Trip }>()
+);
+
+export const loadTripFailure = createAction(
+  '[Trip-list] Load trip failure',
   props<{ error: string }>()
 );

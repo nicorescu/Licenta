@@ -9,7 +9,7 @@
       [isLoading]="isLoading$ | async"
     ></hk-filters>
   </div>
-  <ng-container>
+  <ng-container *ngIf="(trips$ | async)?.length > 0; else noResultsBlock">
     <div class="trips-list">
       <div class="text-center h4">
         {{ totalLength$ | async }}
@@ -22,13 +22,18 @@
           style="display: flex; justify-content: center"
           *ngFor="let trip of trips$ | async"
         >
-          <hk-trip-card [trip]="trip"></hk-trip-card>
+          <hk-trip-card
+            [trip]="trip"
+            (selectTripEmitter)="selectTrip($event)"
+          ></hk-trip-card>
         </div>
       </div>
     </div>
     <div class="trips-paginator">
       <hk-trips-paginator
-        (paginationChangedEmitter)="paginationChanged($event)"
+        (paginationChangedEmitter)="filtersChanged($event)"
+        [tripsFilter]="tripsFilter$ | async"
+        [length]="totalLength$ | async"
       ></hk-trips-paginator>
     </div>
   </ng-container>

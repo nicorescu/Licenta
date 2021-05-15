@@ -2,14 +2,16 @@
   <div class="container">
     <div class="trip-preview-container">
       <div class="trip-details">
-        <hk-trip-details></hk-trip-details>
+        <hk-trip-details [trip]="planningTrip$ | async"></hk-trip-details>
       </div>
       <div class="trip-attractions">
         <div class="text-center h4">
           {{ t('tripHighlights') }}
         </div>
-        <mat-divider style="margin: 25px;"></mat-divider>
-        <hk-trip-attractions></hk-trip-attractions>
+        <mat-divider style="margin: 25px"></mat-divider>
+        <hk-trip-attractions
+          [attractions]="attractions$ | async"
+        ></hk-trip-attractions>
       </div>
     </div>
   </div>

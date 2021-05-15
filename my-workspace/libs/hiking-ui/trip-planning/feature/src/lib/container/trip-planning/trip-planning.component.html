@@ -10,4 +10,5 @@
   <div *ngIf="isLoading$ | async" class="loading-container">
     <mat-spinner [diameter]="100"></mat-spinner>
   </div>
+  <img *ngFor="let url of urls" [src]="url" />
 </div>

@@ -16,6 +16,7 @@ export interface PlanningState {
   tripFilter: TripFilter;
   trips: Trip[];
   tripsCount: number;
+  selectedTripId: string;
 }
 
 export const initialState: PlanningState = {
@@ -27,6 +28,7 @@ export const initialState: PlanningState = {
   tripFilter: null,
   trips: [],
   tripsCount: null,
+  selectedTripId: null,
 };
 
 const PlanningReducer = createReducer(
@@ -41,7 +43,7 @@ const PlanningReducer = createReducer(
     isLoading: true,
     planningTrip: trip,
   })),
-  on(PlanningActions.previewTripSuccess, (state, { attractions }) => ({
+  on(PlanningActions.loadAttractionsSuccess, (state, { attractions }) => ({
     ...state,
     isLoading: false,
     error: null,
@@ -51,7 +53,7 @@ const PlanningReducer = createReducer(
       thumbnailReference: attractions[0]?.photos[0]?.photo_reference,
     },
   })),
-  on(PlanningActions.previewTripFailure, (state, { error }) => ({
+  on(PlanningActions.loadAttractionsFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     error: error,
@@ -88,6 +90,10 @@ const PlanningReducer = createReducer(
     ...state,
     isLoading: false,
     error: error,
+  })),
+  on(PlanningActions.selectTrip, (state, { tripId }) => ({
+    ...state,
+    selectedTripId: tripId,
   }))
 );
 

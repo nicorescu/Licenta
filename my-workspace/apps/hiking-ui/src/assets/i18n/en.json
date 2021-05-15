@@ -152,7 +152,20 @@
         "wholeCountry": "Whole country",
         "location": "Location",
         "searchAgain": "Search again"
+      },
+      "errors": {
+        "errorLoadingTrip": "An error has occured while selecting the trip, please try again later"
       }
+    },
+    "tripView": {
+      "header": {},
+      "body": {
+        "organizer": "Organizer",
+        "name": "Name"
+      },
+      "pickAnotherTrip": "Pick another trip",
+      "askForApproval": "Ask for approval",
+      "joinTrip": "Join trip"
     }
   },
   "toast": {

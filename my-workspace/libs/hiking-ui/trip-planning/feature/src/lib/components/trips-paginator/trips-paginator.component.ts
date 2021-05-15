@@ -32,10 +32,18 @@ export class TripsPaginatorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.paginator.page.pipe(takeWhile(() => this.alive)).subscribe(() => {
-      this.tripsFilter.requestedPage = this.paginator.pageIndex + 1;
-      this.tripsFilter.pageSize = this.paginator.pageSize;
-      this.paginationChangedEmitter.emit(this.tripsFilter);
+      this.paginationChanged();
     });
+  }
+
+  paginationChanged() {
+    const newFilter: TripFilter = {
+      ...this.tripsFilter,
+      requestedPage: this.paginator.pageIndex + 1,
+      pageSize: this.paginator.pageSize,
+    };
+    console.log(newFilter);
+    this.paginationChangedEmitter.emit(newFilter);
   }
 
   ngOnDestroy(): void {

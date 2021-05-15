@@ -23,7 +23,9 @@ export class PlanningEffects {
           .pipe(
             map((res: any) => {
               const places: Place[] = res.results.filter((x) => !!x.photos);
-              return TripActions.previewTripSuccess({ attractions: places });
+              return TripActions.loadAttractionsSuccess({
+                attractions: places,
+              });
             }),
 
             tap(() => {
@@ -34,7 +36,35 @@ export class PlanningEffects {
                 'tripPlanning.tripPreview.errors.errorLoadingAttractions'
               );
               return of(
-                TripActions.previewTripFailure({
+                TripActions.loadAttractionsFailure({
+                  error: error,
+                })
+              );
+            })
+          );
+      })
+    )
+  );
+
+  loadAttractions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TripActions.loadAttractions),
+      switchMap((action) => {
+        return this.googleService
+          .getDetailsByQuery(action.location, 'tourist_attraction')
+          .pipe(
+            map((res: any) => {
+              const places: Place[] = res.results.filter((x) => !!x.photos);
+              return TripActions.loadAttractionsSuccess({
+                attractions: places,
+              });
+            }),
+            catchError((err) => {
+              const error: string = this.translocoService.translate(
+                'tripPlanning.tripPreview.errors.errorLoadingAttractions'
+              );
+              return of(
+                TripActions.loadAttractionsFailure({
                   error: error,
                 })
               );
@@ -81,7 +111,7 @@ export class PlanningEffects {
           ...filter,
           keywords: filter.wholeCountry
             ? filter.keywords
-            : filter.keywords.replace(`,${filter.country}`, ''),
+            : filter.keywords.replace(filter.country, '').replace('County', ''),
         };
         return this.tripService.searchTrips(newFilter).pipe(
           map((res) => {
@@ -101,6 +131,17 @@ export class PlanningEffects {
         );
       })
     )
+  );
+
+  selectTrip$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(TripActions.selectTrip),
+        tap(() => {
+          this.router.navigate(['/view-selected-trip']);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

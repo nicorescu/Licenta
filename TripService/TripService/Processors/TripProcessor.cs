@@ -51,7 +51,7 @@ namespace TripService.Processors
                 return new NoContentResult();
             }
 
-            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+            return new OkObjectResult(_mapper.Map<TripDto>(result));
         }
 
         public async Task<ActionResult<bool>> InsertNewTrip(TripDto tripDto)

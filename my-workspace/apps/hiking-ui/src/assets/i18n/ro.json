@@ -149,9 +149,21 @@
         "friendsOnly": "Doar prieteni",
         "dateRange": "Interval",
         "wholeCountry": "Toata tara",
-        "location": "Locatie",
-        "searchAgain": "Cauta din nou"
+        "location": "Locatie"
+      },
+      "errors": {
+        "errorLoadingTrip": "A aparut o eroare la selectarea excursiei. Te rugam sa incerci mai tarziu"
       }
+    },
+    "tripView": {
+      "header": {},
+      "body": {
+        "organizer": "Organizator",
+        "name": "Nume"
+      },
+      "pickAnotherTrip": "Alege alta excursie",
+      "askForApproval": "Solicita aprobare",
+      "joinTrip": "Alatura-te excursiei"
     }
   },
   "toast": {

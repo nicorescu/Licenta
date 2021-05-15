@@ -21,6 +21,10 @@ export class TripService {
     return this.httpClient.get<Trip[]>(`${this.baseApiUrl}/trips`);
   }
 
+  getTripById(tripId: string): Observable<Trip> {
+    return this.httpClient.get<Trip>(`${this.baseApiUrl}/trips/${tripId}`);
+  }
+
   searchTrips(searchFilter: TripFilter): Observable<TripsResult> {
     let params = new HttpParams()
       .set('startDate', searchFilter.startDate.toISOString())

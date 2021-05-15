@@ -21,6 +21,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -41,6 +43,7 @@ import { TripsListComponent } from './container/trips-list/trips-list.component'
 import { TripCardComponent } from './components/trip-card/trip-card.component';
 import { TripsPaginatorComponent } from './components/trips-paginator/trips-paginator.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { ViewSelectedTripComponent } from './container/view-selected-trip/view-selected-trip.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -87,6 +90,8 @@ import 'mousetrap';
     MatCardModule,
     MatProgressBarModule,
     MatPaginatorModule,
+    MatStepperModule,
+    MatTabsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -112,6 +117,7 @@ import 'mousetrap';
     TripCardComponent,
     TripsPaginatorComponent,
     FiltersComponent,
+    ViewSelectedTripComponent,
   ],
   providers: [NgxImageCompressService],
 })

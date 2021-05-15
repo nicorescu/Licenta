@@ -1,12 +1,12 @@
 <ng-container *transloco="let t; read: 'tripPlanning.tripsList'">
-  <mat-card class="trip-card" style="width: 300px">
+  <mat-card class="trip-card" style="width: 300px" (click)="selectTrip()">
     <mat-card-title class="mat-card-title"
       >{{ trip.locationName }}, {{ trip.country }}</mat-card-title
     >
     <mat-card-subtitle class="mat-card-subtitle">
       {{ trip.startDate | date }} - {{ trip.endDate | date }}
     </mat-card-subtitle>
-    <img mat-card-image [src]="thumbnailUrl" />
+    <img mat-card-image [src]="thumbnailUrl" class="image" />
     <mat-card-footer class="mat-card-footer">
       <mat-icon *ngIf="trip.privacy === tripPrivacy.ApprovalRequired"
         >lock</mat-icon

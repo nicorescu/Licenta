@@ -50,9 +50,12 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     phoneNumber: '',
     birthday: null,
     country: '',
+    countryCode: '',
     role: Role.User,
     friends: [],
     reviews: [],
+    conversations: [],
+    age: 0,
     reviewAverage: 0,
   };
   isInvalidCountry = true;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   Place,
   PlanningFacade,
@@ -15,17 +15,16 @@ import {
   styleUrls: ['./trip-attractions.component.scss'],
 })
 export class TripAttractionsComponent implements OnInit {
-  attractions$: Observable<Place[]>;
+  @Input()
+  attractions: Place[];
   selectedPhotoIndex: number = 0;
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
   searchIcon = faSearch;
 
-  constructor(private planningFacade: PlanningFacade) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.attractions$ = this.planningFacade.attractions$;
-  }
+  ngOnInit(): void {}
 
   prevPhoto() {
     this.selectedPhotoIndex--;

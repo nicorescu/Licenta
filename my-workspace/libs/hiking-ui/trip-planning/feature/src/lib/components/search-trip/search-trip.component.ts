@@ -93,8 +93,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
   }
   photoUrls: string[];
   public handleAddressChange(address: Address) {
-    console.log(address.geometry.location.lat());
-    console.log(address.geometry.location.lng());
     console.log('address: ', address);
     this.tripFilter.location = address.formatted_address;
     this.tripFilter.country = address.address_components.find(

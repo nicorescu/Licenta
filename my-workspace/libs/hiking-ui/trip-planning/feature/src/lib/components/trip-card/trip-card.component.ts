@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   GooglePlacesService,
   Trip,
@@ -13,6 +13,8 @@ import {
 export class TripCardComponent implements OnInit {
   @Input()
   trip: Trip;
+  @Output()
+  selectTripEmitter = new EventEmitter();
 
   tripPrivacy = TripPrivacy;
   constructor(private googleService: GooglePlacesService) {}
@@ -27,5 +29,9 @@ export class TripCardComponent implements OnInit {
 
   public get remainingSlots() {
     return this.trip.slotsNumber - this.trip.participantsIds.length;
+  }
+
+  selectTrip() {
+    this.selectTripEmitter.emit(this.trip.id);
   }
 }

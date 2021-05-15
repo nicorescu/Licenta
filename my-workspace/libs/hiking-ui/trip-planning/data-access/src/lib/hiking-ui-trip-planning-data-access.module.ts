@@ -24,5 +24,4 @@ import { InputWithSelectDirective } from './directives/input-with-select.directi
   declarations: [EnumToArrayPipe, EnumToStringPipe, InputWithSelectDirective],
   exports: [EnumToArrayPipe, EnumToStringPipe],
 })
-export class HikingUiTripPlanningDataAccessModule {
-}
+export class HikingUiTripPlanningDataAccessModule {}

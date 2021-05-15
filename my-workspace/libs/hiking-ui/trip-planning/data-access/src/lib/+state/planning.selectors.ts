@@ -45,3 +45,8 @@ export const getTripsFilter = createSelector(
   getTripState,
   (state: PlanningState) => state.tripFilter
 );
+
+export const getSelectedTripId = createSelector(
+  getTripState,
+  (state: PlanningState) => state.selectedTripId
+);

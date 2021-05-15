@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, UrlTree, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { PlanningFacade } from '../+state/planning.facade';
 import { switchMap } from 'rxjs/operators';
+import { PlanningFacade } from '../+state/planning.facade';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TripPreviewGuard implements CanActivate {
+export class ViewSelectedTripGuard implements CanActivate {
   constructor(private planningFacade: PlanningFacade, private router: Router) {}
   canActivate(): Observable<boolean | UrlTree> {
-    return this.planningFacade.planningTrip$.pipe(
-      switchMap((trip) => {
-        return trip
+    return this.planningFacade.selectedTripId$.pipe(
+      switchMap((id) => {
+        console.log('id selectat: ', id);
+        return id
           ? of(true)
-          : of(this.router.createUrlTree(['/create-trip']));
+          : of(this.router.createUrlTree(['/trip-planning']));
       })
     );
   }
