@@ -121,7 +121,9 @@
     "tripPreview": {
       "days": "days",
       "day": "day",
-      "slots": "slots",
+      "slots": "slot(s)",
+      "remainingSlots": "remaining slots",
+      "remainigSlot": "remaining slot",
       "Private": "private",
       "FriendsOnly": "For friends only",
       "ApprovalRequired": "Approval required",
@@ -139,8 +141,6 @@
     },
     "tripsList": {
       "ApprovalRequired": "Approval required from the organizer",
-      "slotRemaining": "slot remaining",
-      "slotsRemaining": "slots remaining",
       "results": "Results",
       "result": "Rezult",
       "noResults": "Sorry, we couldn't find any results, change the filters and try again.",
@@ -161,7 +161,8 @@
       "header": {},
       "body": {
         "organizer": "Organizer",
-        "name": "Name"
+        "name": "Name",
+        "slotsLeft": "slot(s) left"
       },
       "pickAnotherTrip": "Pick another trip",
       "askForApproval": "Ask for approval",

@@ -33,9 +33,13 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-12 about-trip">
-                <hk-trip-details [trip]="selectedTrip"></hk-trip-details>
+                <hk-trip-details
+                  [trip]="selectedTrip"
+                  [slotsText]="t('body.slotsLeft')"
+                ></hk-trip-details>
               </div>
             </div>
+            <div class="trip-participants-container">Other</div>
           </div>
         </ng-template>
       </mat-tab>

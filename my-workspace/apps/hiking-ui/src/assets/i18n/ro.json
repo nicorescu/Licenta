@@ -138,8 +138,6 @@
     },
     "tripsList": {
       "approvalRequired": "Este nevoie de aprobare de la organizator",
-      "slotRemaining": "loc ramas",
-      "slotsRemaining": "locuri ramase",
       "results": "Rezultate",
       "result": "Rezultat",
       "noResults": "Imi pare rau, nu au fost gasite rezultate. Modifica filtrele si incearca din nou.",
@@ -159,7 +157,8 @@
       "header": {},
       "body": {
         "organizer": "Organizator",
-        "name": "Nume"
+        "name": "Nume",
+        "slotsLeft": "locuri ramase"
       },
       "pickAnotherTrip": "Alege alta excursie",
       "askForApproval": "Solicita aprobare",

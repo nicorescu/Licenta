@@ -44,6 +44,10 @@ namespace TripService.Repositories
                 if (searchFilter.FriendsOnly)
                 {
                     requesterFriends = await _userUtils.GetUserFriends(searchFilter.RequesterId);
+                    if(requesterFriends == null)
+                    {
+                        requesterFriends = new List<Guid>();
+                    }
                 }
 
                 var query = GetSearchQuery(searchFilter, requesterFriends)
@@ -146,7 +150,8 @@ namespace TripService.Repositories
                 .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
-                .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate));
+                .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
+                .AppendStage<Trip>(AtlasSearchExtensions.GetSlotsNumberStage());
             if (searchFilter.FriendsOnly)
             {
                 query = query.AppendStage<Trip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));

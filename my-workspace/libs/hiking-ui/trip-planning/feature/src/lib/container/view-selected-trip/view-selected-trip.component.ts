@@ -27,7 +27,7 @@ export class ViewSelectedTripComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   tripPrivacy = TripPrivacy;
   attractions$: Observable<Place[]>;
-
+  participants: User[];
   constructor(
     private planningFacade: PlanningFacade,
     private tripService: TripService,
@@ -81,9 +81,73 @@ export class ViewSelectedTripComponent implements OnInit {
       country: 'Romania',
       countryCode: 'ro',
     };
-
+    this.participants = [
+      (this.organizer = {
+        accountProvider: AccountProvider.TripPlanning,
+        age: 25,
+        birthday: new Date('2021-05-08T17:08:43.409Z'),
+        conversations: [],
+        email: 'marius@email.com',
+        firstName: 'marius',
+        friends: [
+          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
+        ],
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+        lastName: 'micu',
+        password: '11111111',
+        phoneNumber: 'string',
+        reviewAverage: 0,
+        reviews: [],
+        role: Role.User,
+        country: 'Romania',
+        countryCode: 'ro',
+      }),
+      (this.organizer = {
+        accountProvider: AccountProvider.TripPlanning,
+        age: 25,
+        birthday: new Date('2021-05-08T17:08:43.409Z'),
+        conversations: [],
+        email: 'marius@email.com',
+        firstName: 'marius',
+        friends: [
+          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
+        ],
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+        lastName: 'micu',
+        password: '11111111',
+        phoneNumber: 'string',
+        reviewAverage: 0,
+        reviews: [],
+        role: Role.User,
+        country: 'Romania',
+        countryCode: 'ro',
+      }),
+      (this.organizer = {
+        accountProvider: AccountProvider.TripPlanning,
+        age: 25,
+        birthday: new Date('2021-05-08T17:08:43.409Z'),
+        conversations: [],
+        email: 'marius@email.com',
+        firstName: 'marius',
+        friends: [
+          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
+        ],
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+        lastName: 'micu',
+        password: '11111111',
+        phoneNumber: 'string',
+        reviewAverage: 0,
+        reviews: [],
+        role: Role.User,
+        country: 'Romania',
+        countryCode: 'ro',
+      }),
+    ];
     this.selectedTrip = {
-      address: 'Făgăraș, Romania',
+      address: 'Brasov, Romania',
       country: 'Romania',
       endDate: new Date('2021-05-24T21:00:00Z'),
       fullAddress: 'Bucharest,Bucharest,Bucharest,Romania',
@@ -92,7 +156,10 @@ export class ViewSelectedTripComponent implements OnInit {
       placeId: '',
       geometry: null,
       organizerId: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-      participantsIds: [],
+      participantsIds: [
+        '3fa85f64-5717-4562-b3fc-2c963f66afa7',
+        '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      ],
       privacy: 2,
       reviewAverage: 0,
       reviews: [],

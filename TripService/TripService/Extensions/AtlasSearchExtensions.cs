@@ -157,6 +157,32 @@ namespace TripService.Extensions
             };
         }
 
+        public static BsonDocument GetSlotsNumberStage()
+        {
+            /*return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
+                    {
+                        {
+                            "OrganizerId",
+                            new BsonDocument
+                            {
+                                {
+                                    AtlasStringResources.NotEquals,
+                                    organizerId
+                                }
+                            }
+                        }
+                    }
+                }
+            };*/
+
+            string stage = "{\"$match\": {\"$expr\": {\"$gt\": [\"SlotsNumber\",\"ParticipantsIds.length\"]}}}";
+            var x = BsonDocument.Parse(stage);
+            return BsonDocument.Parse(stage);
+        }
+
         public static BsonDocument GetCountStage()
         {
             return new BsonDocument

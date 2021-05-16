@@ -14,6 +14,8 @@ import { take } from 'rxjs/operators';
 export class TripDetailsComponent implements OnInit {
   @Input()
   trip: Trip;
+  @Input()
+  slotsText: string;
   numberOfDays: number;
   tripPrivacy = TripPrivacy;
   constructor() {}
@@ -24,5 +26,10 @@ export class TripDetailsComponent implements OnInit {
       (this.trip.endDate.getTime() - this.trip.startDate.getTime()) /
         (1000 * 3600 * 24) +
       1;
+    console.log(this.tripPrivacy[this.trip.privacy]);
+  }
+
+  public get slots() {
+    return this.trip.slotsNumber - this.trip.participantsIds.length;
   }
 }

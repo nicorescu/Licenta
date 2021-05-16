@@ -17,11 +17,13 @@ namespace TripService.Resources
         public const string IndexName = "Trip-search-index";
         public const string PathName = "Address";
         public const string MatchStage = "$match";
+        public const string ProjectStage = "$project";
         public const string StartDate = "StartDate";
         public const string EndDate = "EndDate";
         public const string Lte = "$lte";
         public const string Gte = "$gte";
         public const string In = "$in";
+        public const string Expr = "$expr";
         public const string NotEquals = "$ne";
         public const string Count = "$count";
         public const string Equals = "$eq";

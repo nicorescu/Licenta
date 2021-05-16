@@ -2,7 +2,10 @@
   <div class="container">
     <div class="trip-preview-container">
       <div class="trip-details">
-        <hk-trip-details [trip]="planningTrip$ | async"></hk-trip-details>
+        <hk-trip-details
+          [trip]="planningTrip$ | async"
+          [slotsText]="t('slots')"
+        ></hk-trip-details>
       </div>
       <div class="trip-attractions">
         <div class="text-center h4">
