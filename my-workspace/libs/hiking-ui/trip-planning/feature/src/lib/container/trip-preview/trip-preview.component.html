@@ -12,9 +12,7 @@
           {{ t('tripHighlights') }}
         </div>
         <mat-divider style="margin: 25px"></mat-divider>
-        <hk-trip-attractions
-          [attractions]="attractions$ | async"
-        ></hk-trip-attractions>
+        <hk-places [places]="attractions$ | async"></hk-places>
       </div>
     </div>
   </div>

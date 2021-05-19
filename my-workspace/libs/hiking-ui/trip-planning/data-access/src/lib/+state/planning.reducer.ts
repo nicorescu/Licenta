@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
+import { SelectedTripResult } from '../models/selected-trip-result.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { Trip } from '../models/trip.model';
 import * as PlanningActions from './planning.actions';

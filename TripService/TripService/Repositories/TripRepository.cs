@@ -44,7 +44,7 @@ namespace TripService.Repositories
                 if (searchFilter.FriendsOnly)
                 {
                     requesterFriends = await _userUtils.GetUserFriends(searchFilter.RequesterId);
-                    if(requesterFriends == null)
+                    if (requesterFriends == null)
                     {
                         requesterFriends = new List<Guid>();
                     }
@@ -53,13 +53,13 @@ namespace TripService.Repositories
                 var query = GetSearchQuery(searchFilter, requesterFriends)
                     .Skip(searchFilter.PageSize * (searchFilter.RequestedPage - 1))
                     .Limit(searchFilter.PageSize);
-                 
+
                 var count = GetSearchQuery(searchFilter, requesterFriends).Count();
 
                 var tripsResult = await query.ToListAsync();
                 var tripsCount = await count.FirstOrDefaultAsync();
 
-                return Tuple.Create(tripsResult, tripsCount !=null? (int)tripsCount.Count : 0);
+                return Tuple.Create(tripsResult, tripsCount != null ? (int)tripsCount.Count : 0);
             }
             catch (Exception exception)
             {

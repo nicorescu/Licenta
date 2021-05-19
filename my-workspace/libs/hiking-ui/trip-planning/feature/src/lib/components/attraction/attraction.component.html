@@ -2,12 +2,12 @@
   <div class="attraction-header">
     <div class="background-shape">
       <div class="attraction-name">
-        {{ selectedAttraction.name }}
+        {{ selectedPlace.name }}
       </div>
     </div>
     <div class="attraction-rating">
       <hk-star-rating
-        [rating]="selectedAttraction.rating"
+        [rating]="selectedPlace.rating"
         [totalStars]="5"
         [checkedColor]="'#ecae21'"
         [uncheckedColor]="'lightgray'"
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="main-image">
-    <hk-photo [selectedAttraction]="selectedAttraction"></hk-photo>
+    <hk-photo [selectedPlace]="selectedPlace"></hk-photo>
   </div>
   <div class="attraction-details"></div>
 </div>

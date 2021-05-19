@@ -11,7 +11,7 @@ import {
 })
 export class PhotoComponent implements OnInit {
   @Input()
-  selectedAttraction: Place;
+  selectedPlace: Place;
 
   isImageLoaded: boolean;
 
@@ -21,20 +21,20 @@ export class PhotoComponent implements OnInit {
 
   public get photoUrl(): string {
     return this.googleService.getPhotoUrl(
-      this.selectedAttraction.photos[0].photo_reference,
+      this.selectedPlace.photos[0].photo_reference,
       500
     );
   }
 
-  onRate(ev){
+  onRate(ev) {
     console.log(ev);
   }
-  
-  onError(){
+
+  onError() {
     this.isImageLoaded = false;
   }
 
-  onLoad(){
+  onLoad() {
     this.isImageLoaded = true;
   }
 }

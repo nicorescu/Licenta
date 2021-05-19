@@ -142,8 +142,10 @@
     "tripsList": {
       "ApprovalRequired": "Approval required from the organizer",
       "results": "Results",
-      "result": "Rezult",
+      "result": "Result",
       "noResults": "Sorry, we couldn't find any results, change the filters and try again.",
+      "slotLeft": "Slot left",
+      "slotsLeft": "Slots left",
       "filters": {
         "startDate": "Start date",
         "endDate": "End date",
@@ -158,11 +160,16 @@
       }
     },
     "tripView": {
-      "header": {},
+      "header": {
+        "aboutTrip": "About trip",
+        "touristAttractions": "Tourist attractions",
+        "lodging": "Lodging"
+      },
       "body": {
         "organizer": "Organizer",
         "name": "Name",
-        "slotsLeft": "slot(s) left"
+        "slotsLeft": "slot(s) left",
+        "otherParticipants": "Other participants"
       },
       "pickAnotherTrip": "Pick another trip",
       "askForApproval": "Ask for approval",

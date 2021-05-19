@@ -18,4 +18,10 @@ export class UserService {
   getUserById(userId: string): Observable<User> {
     return this.httpClient.get<User>(`${this.baseApiUrl}/users/${userId}`);
   }
+
+  getUsersByIds(usersIds: string[]): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      `https://localhost:5001/users/by-ids?ids=3fa85f64-5717-4562-b3fc-2c963f66afa6&ids=3fa85f64-5717-4562-b3fc-2c963f66afa8&ids=3fa85f64-5717-4562-b3fc-2c963f66afa7`
+    );
+  }
 }

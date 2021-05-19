@@ -141,6 +141,8 @@
       "results": "Rezultate",
       "result": "Rezultat",
       "noResults": "Imi pare rau, nu au fost gasite rezultate. Modifica filtrele si incearca din nou.",
+      "slotLeft": "Loc ramas",
+      "slotsLeft": "Locuri ramase",
       "filters": {
         "startDate": "Data de inceput",
         "endDate": "Date de incheiere",
@@ -154,11 +156,16 @@
       }
     },
     "tripView": {
-      "header": {},
+      "header": {
+        "aboutTrip": "Despre excursie",
+        "touristAttractions": "Atractii turistice",
+        "lodging": "Cazare"
+      },
       "body": {
         "organizer": "Organizator",
         "name": "Nume",
-        "slotsLeft": "locuri ramase"
+        "slotsLeft": "locuri ramase",
+        "otherParticipants": "Alti participanti"
       },
       "pickAnotherTrip": "Alege alta excursie",
       "askForApproval": "Solicita aprobare",

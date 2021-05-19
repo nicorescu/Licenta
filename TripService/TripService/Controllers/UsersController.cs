@@ -75,5 +75,16 @@ namespace TripService.Controllers
         {
             return await _userProcessor.DeleteUser(userId);
         }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [HttpGet("/users/by-ids")]
+        public async Task<ActionResult<List<UserDto>>> GetUsersByIds([FromQuery] List<Guid> ids)
+        {
+            return await _userProcessor.GetUsersByIds(ids);
+        }
     }
 }

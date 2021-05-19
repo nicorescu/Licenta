@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
+import { SelectedTripResult } from '../models/selected-trip-result.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { Trip } from '../models/trip.model';
 
@@ -63,6 +64,11 @@ export const searchTripFailure = createAction(
 export const selectTrip = createAction(
   '[Trip-list] Select trip',
   props<{ tripId: string }>()
+);
+
+export const loadSelectedTrip = createAction(
+  '[Trip-list] Load full trip result',
+  props<{ selectedResult: SelectedTripResult }>()
 );
 
 export const loadTripSuccess = createAction(

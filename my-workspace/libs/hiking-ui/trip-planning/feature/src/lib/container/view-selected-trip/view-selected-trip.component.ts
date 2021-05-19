@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  Place,
+  GooglePlacesService,
   PlanningFacade,
-  Trip,
+  SelectedTripResult,
+  TripFilter,
   TripPrivacy,
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { TripService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import {
-  AccountProvider,
-  Role,
-  User,
-} from '@hkworkspace/shared/app-authentication/data-access';
-import { Observable, of } from 'rxjs';
 import { concatMap, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 
@@ -22,152 +17,87 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
   styleUrls: ['./view-selected-trip.component.scss'],
 })
 export class ViewSelectedTripComponent implements OnInit {
-  selectedTrip: Trip;
-  organizer: User;
   faArrowLeft = faArrowLeft;
   tripPrivacy = TripPrivacy;
-  attractions$: Observable<Place[]>;
-  participants: User[];
+  selectedTripResult: SelectedTripResult;
+  isLoading = true;
+
   constructor(
     private planningFacade: PlanningFacade,
     private tripService: TripService,
-    private userService: UserService
+    private userService: UserService,
+    private googleService: GooglePlacesService
   ) {}
 
   ngOnInit(): void {
-    // this.planningFacade.selectedTripId$
-    //   .pipe(
-    //     take(1),
-    //     switchMap((tripId) => {
-    //       return this.tripService.getTripById(tripId);
-    //     }),
-    //     concatMap((trip) => {
-    //       return this.userService.getUserById(trip.organizerId).pipe(
-    //         map((user) => {
-    //           return { trip: trip, organizer: user };
-    //         })
-    //       );
-    //     })
-    //   )
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //     this.selectedTrip = res.trip;
-    //     this.organizer = res.organizer;
-    //   });
-    this.setFakeData();
-    this.planningFacade.loadAttractions(this.selectedTrip.locationName);
-    this.attractions$ = this.planningFacade.attractions$;
+    this.getFullTripDetails();
   }
 
-  setFakeData() {
-    this.organizer = {
-      accountProvider: AccountProvider.TripPlanning,
-      age: 25,
-      birthday: new Date('2021-05-08T17:08:43.409Z'),
-      conversations: [],
-      email: 'marius@email.com',
-      firstName: 'marius',
-      friends: [
-        '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        '3fa85f64-5717-4562-b3fc-2c963f66afa7',
-      ],
-      id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-      lastName: 'micu',
-      password: '11111111',
-      phoneNumber: 'string',
-      reviewAverage: 0,
-      reviews: [],
-      role: Role.User,
-      country: 'Romania',
-      countryCode: 'ro',
-    };
-    this.participants = [
-      (this.organizer = {
-        accountProvider: AccountProvider.TripPlanning,
-        age: 25,
-        birthday: new Date('2021-05-08T17:08:43.409Z'),
-        conversations: [],
-        email: 'marius@email.com',
-        firstName: 'marius',
-        friends: [
-          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
-        ],
-        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-        lastName: 'micu',
-        password: '11111111',
-        phoneNumber: 'string',
-        reviewAverage: 0,
-        reviews: [],
-        role: Role.User,
-        country: 'Romania',
-        countryCode: 'ro',
-      }),
-      (this.organizer = {
-        accountProvider: AccountProvider.TripPlanning,
-        age: 25,
-        birthday: new Date('2021-05-08T17:08:43.409Z'),
-        conversations: [],
-        email: 'marius@email.com',
-        firstName: 'marius',
-        friends: [
-          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
-        ],
-        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-        lastName: 'micu',
-        password: '11111111',
-        phoneNumber: 'string',
-        reviewAverage: 0,
-        reviews: [],
-        role: Role.User,
-        country: 'Romania',
-        countryCode: 'ro',
-      }),
-      (this.organizer = {
-        accountProvider: AccountProvider.TripPlanning,
-        age: 25,
-        birthday: new Date('2021-05-08T17:08:43.409Z'),
-        conversations: [],
-        email: 'marius@email.com',
-        firstName: 'marius',
-        friends: [
-          '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          '3fa85f64-5717-4562-b3fc-2c963f66afa7',
-        ],
-        id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-        lastName: 'micu',
-        password: '11111111',
-        phoneNumber: 'string',
-        reviewAverage: 0,
-        reviews: [],
-        role: Role.User,
-        country: 'Romania',
-        countryCode: 'ro',
-      }),
-    ];
-    this.selectedTrip = {
-      address: 'Brasov, Romania',
-      country: 'Romania',
-      endDate: new Date('2021-05-24T21:00:00Z'),
-      fullAddress: 'Bucharest,Bucharest,Bucharest,Romania',
-      id: '02c34ad9-3826-4df3-9865-65e2be3ccbad',
-      locationName: 'Făgăraș',
-      placeId: '',
-      geometry: null,
-      organizerId: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
-      participantsIds: [
-        '3fa85f64-5717-4562-b3fc-2c963f66afa7',
-        '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-      ],
-      privacy: 2,
-      reviewAverage: 0,
-      reviews: [],
-      slotsNumber: 7,
-      startDate: new Date('2021-05-20T21:00:00Z'),
-      state: 0,
-      thumbnailReference:
-        'ATtYBwLfCxww2-gSrjT934DxKXVn6eynLXml-h1JY3RSoeEzMgvxq9bF4Pfc94mIWv3seaj18Bx2ITazHpneC7FtKa8tHs3HlhFQFQruGnE1lWp0MhxFZu38fMaVyTXHWKB42P1yu7VwM2i-oPOPA5EedMPrhm1WAvAdYVGBaxdCNmyCaC6A',
-    };
+  getFullTripDetails() {
+    this.planningFacade.selectedTripId$
+      .pipe(
+        take(1),
+        switchMap((tripId) => {
+          return this.tripService.getTripById(tripId);
+        }),
+        concatMap((trip) => {
+          return this.userService.getUserById(trip.organizerId).pipe(
+            map((user) => {
+              trip = {
+                ...trip,
+                startDate: new Date(trip.startDate),
+                endDate: new Date(trip.endDate),
+              };
+              return { trip: trip, organizer: user };
+            })
+          );
+        }),
+        concatMap((res1) => {
+          return this.userService.getUsersByIds(res1.trip.participantsIds).pipe(
+            map((users) => {
+              return { ...res1, participants: users };
+            })
+          );
+        }),
+        concatMap((res2) => {
+          return this.googleService
+            .getDetailsByQuery(res2.trip.locationName, 'lodging')
+            .pipe(
+              map((result: any) => {
+                const hotels = result.results.filter((x) => !!x.photos);
+                return { ...res2, hotels: hotels };
+              })
+            );
+        }),
+        concatMap((res3) => {
+          return this.googleService
+            .getDetailsByQuery(res3.trip.locationName, 'tourist_attraction')
+            .pipe(
+              map((attractions: any) => {
+                const finalResult: SelectedTripResult = {
+                  ...res3,
+                  attractions: attractions.results.filter((x) => !!x.photos),
+                };
+                return finalResult;
+              })
+            );
+        })
+      )
+      .subscribe((res: SelectedTripResult) => {
+        console.log(res);
+        this.selectedTripResult = res;
+        this.isLoading = false;
+      });
   }
+
+  pickAnotherTrip() {
+    this.planningFacade.tripsFilter$.pipe(take(1)).subscribe((filter) => {
+      const newFilter: TripFilter = { ...filter, requestedPage: 1 };
+      this.planningFacade.searchTrips(newFilter);
+    });
+  }
+
+  askApproval() {}
+
+  joinTrip() {}
 }

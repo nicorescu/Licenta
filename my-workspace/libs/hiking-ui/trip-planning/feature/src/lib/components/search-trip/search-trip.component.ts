@@ -111,7 +111,6 @@ export class SearchTripComponent implements OnInit, OnDestroy {
     if (this.searchForm.invalid) {
       return;
     }
-    console.log('filter: ', this.tripFilter);
     const newFilter: TripFilter = {
       ...this.tripFilter,
       startDate: new Date(this.startDate.value),

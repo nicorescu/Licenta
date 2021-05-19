@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localeRo from '@angular/common/locales/ro';
+import roExtra from '@angular/common/locales/extra/ro';
 
 import { AppComponent } from './app.component';
 import {
@@ -39,6 +41,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GalleryModule } from '@ks89/angular-modal-gallery';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeRo, 'ro', roExtra);
 
 @NgModule({
   declarations: [AppComponent],

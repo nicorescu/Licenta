@@ -12,13 +12,13 @@ import {
 export class AttractionComponent implements OnInit {
   constructor(private googleService: GooglePlacesService) {}
   @Input()
-  selectedAttraction: Place;
+  selectedPlace: Place;
 
   ngOnInit(): void {}
 
   public get photoUrl(): string {
     return this.googleService.getPhotoUrl(
-      this.selectedAttraction.photos[0].photo_reference,
+      this.selectedPlace.photos[0].photo_reference,
       500
     );
   }

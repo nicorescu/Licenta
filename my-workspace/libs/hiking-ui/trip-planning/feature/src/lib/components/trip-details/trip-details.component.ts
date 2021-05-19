@@ -4,6 +4,7 @@ import {
   Trip,
   TripPrivacy,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { TranslocoService } from '@ngneat/transloco';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -18,15 +19,15 @@ export class TripDetailsComponent implements OnInit {
   slotsText: string;
   numberOfDays: number;
   tripPrivacy = TripPrivacy;
-  constructor() {}
+  activeLang: string;
+  constructor(private translocoService: TranslocoService) {}
 
   ngOnInit(): void {
-    console.log(this.trip);
+    this.activeLang = this.translocoService.getActiveLang();
     this.numberOfDays =
       (this.trip.endDate.getTime() - this.trip.startDate.getTime()) /
         (1000 * 3600 * 24) +
       1;
-    console.log(this.tripPrivacy[this.trip.privacy]);
   }
 
   public get slots() {

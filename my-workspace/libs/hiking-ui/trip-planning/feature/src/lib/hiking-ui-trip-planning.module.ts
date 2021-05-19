@@ -23,6 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -34,7 +35,7 @@ import { TripPreviewComponent } from './container/trip-preview/trip-preview.comp
 import { GoogleMapComponent } from './components/google-map/google-map.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
-import { TripAttractionsComponent } from './components/trip-attractions/trip-attractions.component';
+import { TripPlacesComponent } from './components/trip-attractions/trip-attractions.component';
 import { AttractionComponent } from './components/attraction/attraction.component';
 import { CreateAndPreviewTripComponent } from './container/create-and-preview-trip/create-and-preview-trip.component';
 import { PhotoComponent } from './components/photo/photo.component';
@@ -92,6 +93,7 @@ import 'mousetrap';
     MatPaginatorModule,
     MatStepperModule,
     MatTabsModule,
+    MatListModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -109,7 +111,7 @@ import 'mousetrap';
     GoogleMapComponent,
     PhotosComponent,
     TripDetailsComponent,
-    TripAttractionsComponent,
+    TripPlacesComponent,
     AttractionComponent,
     PhotoComponent,
     StarRatingComponent,

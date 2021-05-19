@@ -1,13 +1,13 @@
-<div class="image-container" *ngIf="selectedAttraction">
+<div class="image-container" *ngIf="selectedPlace">
   <img
     [src]="photoUrl"
     class="image img-fluid responsive"
-    [alt]="selectedAttraction.name"
+    [alt]="selectedPlace.name"
     (error)="onError($event)"
     (load)="onLoad()"
   />
   <div *ngIf="isImageLoaded" class="image-overlay">
-    <div class="image-title">{{ selectedAttraction.name }}</div>
+    <div class="image-title">{{ selectedPlace.name }}</div>
     <p class="image-arrow">
       <i class="fas fa-angle-double-right fa-3x"></i>
     </p>

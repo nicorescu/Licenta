@@ -1,26 +1,31 @@
-<div class="trip-details" *transloco="let t; read: 'tripPlanning.tripPreview'">
-  <div class="background-shape">
-    <div class="title">
-      {{ numberOfDays }} {{ numberOfDays > 1 ? t('days') : t('day') }} in
-      {{ trip.locationName }}
-    </div>
-  </div>
-  <div class="background-shape">
-    <div class="dates">
-      <div class="start-date">
-        {{ trip.startDate | date: 'fullDate' }}
+<ng-container *ngIf="trip">
+  <div
+    class="trip-details"
+    *transloco="let t; read: 'tripPlanning.tripPreview'"
+  >
+    <div class="background-shape">
+      <div class="title">
+        {{ numberOfDays }} {{ numberOfDays > 1 ? t('days') : t('day') }} in
+        {{ trip.locationName }}
       </div>
+    </div>
+    <div class="background-shape">
+      <div class="dates">
+        <div class="start-date">
+          {{ trip.startDate | date: 'fullDate':'GMT':activeLang }}
+        </div>
+        <div class="line"></div>
+        <div class="end-date">
+          {{ trip.endDate | date: 'fullDate':'GMT':activeLang }}
+        </div>
+      </div>
+    </div>
+    <div class="background-shape align-items-center">
+      <div class="slots">{{ trip.slotsNumber }} {{ slotsText }}</div>
       <div class="line"></div>
-      <div class="end-date">
-        {{ trip.endDate | date: 'fullDate' }}
+      <div class="privacy">
+        {{ t(tripPrivacy[trip.privacy]) }}
       </div>
     </div>
   </div>
-  <div class="background-shape align-items-center">
-    <div class="slots">{{ trip.slotsNumber }} {{ slotsText }}</div>
-    <div class="line"></div>
-    <div class="privacy">
-      {{ t(tripPrivacy[trip.privacy]) }}
-    </div>
-  </div>
-</div>
+</ng-container>

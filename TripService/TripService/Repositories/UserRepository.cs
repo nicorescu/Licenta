@@ -90,5 +90,20 @@ namespace TripService.Repositories
                 return false;
             }
         }
+
+       public async Task<List<User>> GetUsersByIds(List<Guid> ids)
+        {
+            try
+            {
+                var result = await _collection.FindAsync(user => ids.Contains(user.Id));
+
+                return result.ToList();
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
     }
 }

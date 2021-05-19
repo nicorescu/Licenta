@@ -13,7 +13,7 @@
       >
       <mat-icon *ngIf="trip.privacy === tripPrivacy.Public">lock_open</mat-icon
       >{{ remainingSlots }}
-      {{ remainingSlots != 1 ? t('slotsRemaining') : t('slotRemaining') }}
+      {{ remainingSlots !== 1 ? t('slotsLeft') : t('slotLeft') }}
     </mat-card-footer>
   </mat-card>
 </ng-container>

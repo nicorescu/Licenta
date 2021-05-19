@@ -1,78 +1,118 @@
-<div
-  class="view-selected-trip-container container"
-  *transloco="let t; read: 'tripPlanning.tripView'"
->
-  <div class="tabs-group">
-    <mat-tab-group dynamicHeight mat-align-tabs="center">
-      <mat-tab label="Tehnical details">
-        <ng-template matTabContent>
-          <div id="trip-details">
-            <div class="row">
-              <div class="col-lg-6 col-md-12 about-user">
-                <div class="organizer-details">
-                  <div class="text-center h4">
-                    {{ t('body.organizer') }}
+<ng-container *ngIf="selectedTripResult; else loadingBlock">
+  <div
+    class="view-selected-trip-container container"
+    *transloco="let t; read: 'tripPlanning.tripView'"
+  >
+    <div class="tabs-group">
+      <mat-tab-group dynamicHeight mat-align-tabs="center">
+        <mat-tab [label]="t('header.aboutTrip')">
+          <ng-template matTabContent>
+            <div id="trip-details">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 about-user">
+                  <div class="organizer-details">
+                    <div class="text-center h4">
+                      {{ t('body.organizer') }}
+                    </div>
+                    <mat-divider class="divider"></mat-divider>
+                    <div class="text-center" style="margin: 10px">
+                      <a routerLink="/user-profile" style="margin-right: 5px"
+                        >{{ selectedTripResult.organizer.firstName }}
+                        {{ selectedTripResult.organizer.lastName }}</a
+                      >
+                      <span
+                        class="flag-icon flag-icon-{{
+                          selectedTripResult.organizer.countryCode
+                        }} flag-icon-squared"
+                      ></span>
+                    </div>
                   </div>
-                  <mat-divider class="divider"></mat-divider>
-                  <div class="text-center" style="margin: 10px">
-                    <a routerLink="/user-profile" style="margin-right: 5px"
-                      >{{ organizer.firstName }} {{ organizer.lastName }}</a
-                    >
-                    <span
-                      class="flag-icon flag-icon-{{
-                        organizer.countryCode
-                      }} flag-icon-squared"
-                    ></span>
+                  <div class="organizer-picture">
+                    <img
+                      class="img-fluid responsive"
+                      src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
+                    />
                   </div>
                 </div>
-                <div class="organizer-picture">
-                  <img
-                    class="img-fluid responsive"
-                    src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
-                  />
+                <div class="col-lg-6 col-md-12 about-trip">
+                  <hk-trip-details
+                    [trip]="selectedTripResult.trip"
+                    [slotsText]="t('body.slotsLeft')"
+                  ></hk-trip-details>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-12 about-trip">
-                <hk-trip-details
-                  [trip]="selectedTrip"
-                  [slotsText]="t('body.slotsLeft')"
-                ></hk-trip-details>
+              <div class="trip-participants-container">
+                <div class="text-center h4 mt-2">
+                  {{ t('body.otherParticipants') }}
+                </div>
+              </div>
+              <mat-divider class="divider"></mat-divider>
+              <div class="participants">
+                <mat-list class="participants-list">
+                  <mat-list-item
+                    *ngFor="let participant of selectedTripResult.participants"
+                    class="participant-list-item"
+                  >
+                    <div class="participant">
+                      <img
+                        class="img-fluid responsive participant-picture"
+                        src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
+                      />
+                      <a routerLink="/user-profile" style="margin-right: 5px"
+                        >{{ participant.firstName }}
+                        {{ participant.lastName }}</a
+                      >
+                      <span
+                        class="flag-icon flag-icon-{{
+                          participant.countryCode
+                        }} flag-icon-squared"
+                      ></span>
+                    </div>
+                  </mat-list-item>
+                </mat-list>
               </div>
             </div>
-            <div class="trip-participants-container">Other</div>
-          </div>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Attractions">
-        <ng-template matTabContent>
-          <div id="tripAttractions">
-            <hk-trip-attractions
-              [attractions]="attractions$ | async"
-            ></hk-trip-attractions>
-          </div>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Hotels">
-        <ng-template matTabContent> <div class="hotels"></div> </ng-template
-      ></mat-tab>
-    </mat-tab-group>
+          </ng-template>
+        </mat-tab>
+        <mat-tab [label]="t('header.touristAttractions')">
+          <ng-template matTabContent>
+            <div id="tripAttractions">
+              <hk-places [places]="selectedTripResult.attractions"></hk-places>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab [label]="t('header.lodging')">
+          <ng-template matTabContent>
+            <div id="tripLodging">
+              <hk-places [places]="selectedTripResult.hotels"></hk-places>
+            </div> </ng-template
+        ></mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="actions-container">
+      <a (click)="pickAnotherTrip()" [routerLink]="">
+        <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
+        {{ t('pickAnotherTrip') }}</a
+      >
+      <button
+        (click)="askApproval()"
+        class="btn btn-primary"
+        *ngIf="selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired"
+      >
+        {{ t('askForApproval') }}
+      </button>
+      <button
+        (click)="joinTrip()"
+        class="btn btn-primary"
+        *ngIf="selectedTripResult.trip.privacy === tripPrivacy.Public"
+      >
+        {{ t('joinTrip') }}
+      </button>
+    </div>
   </div>
-  <div class="actions-container">
-    <a routerLink="/vew-trips">
-      <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
-      {{ t('pickAnotherTrip') }}</a
-    >
-    <button
-      class="btn btn-primary"
-      *ngIf="selectedTrip.privacy === tripPrivacy.ApprovalRequired"
-    >
-      {{ t('askForApproval') }}
-    </button>
-    <button
-      class="btn btn-primary"
-      *ngIf="selectedTrip.privacy === tripPrivacy.Public"
-    >
-      {{ t('joinTrip') }}
-    </button>
+</ng-container>
+<ng-template #loadingBlock>
+  <div class="loading-container">
+    <mat-spinner [diameter]="100"></mat-spinner>
   </div>
-</div>
+</ng-template>

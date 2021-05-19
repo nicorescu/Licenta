@@ -3,7 +3,7 @@
   *transloco="let t; read: 'tripPlanning.tripPreview'"
 >
   <div class="attraction-container">
-    <ng-container *ngIf="attractions.length > 0; else noAttractionsBlock">
+    <ng-container *ngIf="places.length > 0; else noPlacesBlock">
       <div class="left-arrow">
         <button
           mat-icon-button
@@ -15,21 +15,21 @@
       </div>
       <div class="selected-attraction">
         <hk-attraction
-          [selectedAttraction]="attractions[selectedPhotoIndex]"
+          [selectedPlace]="places[selectedPhotoIndex]"
         ></hk-attraction>
       </div>
       <div class="right-arrow">
         <button
           mat-icon-button
           (click)="nextPhoto()"
-          [disabled]="selectedPhotoIndex === attractions.length - 1"
+          [disabled]="selectedPhotoIndex === places.length - 1"
         >
           <fa-icon [icon]="faAngleRight" size="4x"></fa-icon>
         </button>
       </div>
     </ng-container>
   </div>
-  <ng-template #noAttractionsBlock>
+  <ng-template #noPlacesBlock>
     <div class="no-attractions-container">
       <div class="no-attractions">
         <div class="search-icon">

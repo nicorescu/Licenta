@@ -79,5 +79,16 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+        public async Task<ActionResult<List<UserDto>>> GetUsersByIds(List<Guid> ids)
+        {
+            var result = await _userRepository.GetUsersByIds(ids);
+            if(result == null)
+            {
+                return new NoContentResult();
+            }
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
+        }
+
     }
 }

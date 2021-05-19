@@ -10,13 +10,13 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 @Component({
-  selector: 'hk-trip-attractions',
+  selector: 'hk-places',
   templateUrl: './trip-attractions.component.html',
   styleUrls: ['./trip-attractions.component.scss'],
 })
-export class TripAttractionsComponent implements OnInit {
+export class TripPlacesComponent implements OnInit {
   @Input()
-  attractions: Place[];
+  places: Place[];
   selectedPhotoIndex: number = 0;
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
