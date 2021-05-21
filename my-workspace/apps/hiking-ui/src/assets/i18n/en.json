@@ -171,9 +171,19 @@
         "slotsLeft": "slot(s) left",
         "otherParticipants": "Other participants"
       },
+      "errors": {
+        "errorLoadingTrip": "An error has occured while selecting the trip, please try again later",
+        "errorSubmittingRequest": "An error has occured while submitting your request",
+        "anErrorHasOccured": "An error has occured, try again later!",
+        "errorJoiningTrip": "An error has occured, try again"
+      },
       "pickAnotherTrip": "Pick another trip",
       "askForApproval": "Ask for approval",
-      "joinTrip": "Join trip"
+      "joinTrip": "Join trip",
+      "requestSubmitted": "Your request has been submitted",
+      "cancelTrip": "Cancel trip",
+      "deleteTrip": "Delete trip",
+      "successfullyJoinedTrip": "You successfully joined the trip"
     }
   },
   "toast": {

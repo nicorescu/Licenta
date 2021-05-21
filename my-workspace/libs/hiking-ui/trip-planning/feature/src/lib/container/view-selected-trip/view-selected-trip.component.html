@@ -1,4 +1,5 @@
-<ng-container *ngIf="selectedTripResult; else loadingBlock">
+<ng-container *ngIf="selectedTripResult">
+  <ng-container> </ng-container>
   <div
     class="view-selected-trip-container container"
     *transloco="let t; read: 'tripPlanning.tripView'"
@@ -90,29 +91,39 @@
       </mat-tab-group>
     </div>
     <div class="actions-container">
-      <a (click)="pickAnotherTrip()" [routerLink]="">
-        <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
-        {{ t('pickAnotherTrip') }}</a
-      >
-      <button
-        (click)="askApproval()"
-        class="btn btn-primary"
-        *ngIf="selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired"
-      >
-        {{ t('askForApproval') }}
-      </button>
-      <button
-        (click)="joinTrip()"
-        class="btn btn-primary"
-        *ngIf="selectedTripResult.trip.privacy === tripPrivacy.Public"
-      >
-        {{ t('joinTrip') }}
-      </button>
+      <ng-container *ngIf="!isOrganizer">
+        <a (click)="pickAnotherTrip()" [routerLink]="">
+          <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
+          {{ t('pickAnotherTrip') }}</a
+        >
+        <ng-container *ngIf="sessionToken$ | async">
+          <button
+            (click)="askForApproval()"
+            class="btn btn-primary"
+            *ngIf="
+              selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired
+            "
+          >
+            {{ t('askForApproval') }}
+          </button>
+          <button
+            (click)="joinTrip()"
+            class="btn btn-primary"
+            *ngIf="selectedTripResult.trip.privacy === tripPrivacy.Public"
+          >
+            {{ t('joinTrip') }}
+          </button>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="isOrganizer">
+        <div class="separator"></div>
+        <button (click)="cancelTrip()" class="btn btn-danger">
+          {{ t('cancelTrip') }}
+        </button>
+      </ng-container>
     </div>
   </div>
 </ng-container>
-<ng-template #loadingBlock>
-  <div class="loading-container">
-    <mat-spinner [diameter]="100"></mat-spinner>
-  </div>
-</ng-template>
+<ng-container *ngIf="isLoading">
+  <hk-loading></hk-loading>
+</ng-container>

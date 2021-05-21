@@ -1,7 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
+import { AddParticipantRequest } from '../models/add-participant-request.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { TripsResult } from '../models/trip-result.model';
 import { Trip } from '../models/trip.model';
@@ -47,5 +48,15 @@ export class TripService {
 
   editTrip(trip: Trip) {
     return this.httpClient.put(`${this.baseApiUrl}/trips/${trip.id}`, trip);
+  }
+
+  addParticipant(
+    tripId: string,
+    participantIdRequest: AddParticipantRequest
+  ): Observable<boolean> {
+    return this.httpClient.post<boolean>(
+      `${this.baseApiUrl}/trips/${tripId}/participants`,
+      participantIdRequest
+    );
   }
 }

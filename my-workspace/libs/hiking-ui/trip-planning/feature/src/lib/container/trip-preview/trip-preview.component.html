@@ -16,7 +16,5 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isLoading$ | async" class="loading-container">
-    <mat-spinner [diameter]="100"></mat-spinner>
-  </div>
+  <hk-loading *ngIf="isLoading$ | async"></hk-loading>
 </div>

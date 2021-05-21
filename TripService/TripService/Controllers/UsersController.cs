@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,30 @@ namespace TripService.Controllers
         public async Task<ActionResult<List<UserDto>>> GetUsersByIds([FromQuery] List<Guid> ids)
         {
             return await _userProcessor.GetUsersByIds(ids);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPost("/users/approval-requests/{id}")]
+        public async Task<ActionResult<bool>> AddApprovalRequest([FromRoute] Guid id,[FromBody] ApprovalRequestDto approvalRequestDto)
+        {
+            return await _userProcessor.AddApprovalRequest(id, approvalRequestDto);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPost("/users/friend-requests/{id}")]
+        public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromBody] FriendRequestDto friendRequestDto)
+        {
+            return await _userProcessor.AddFriendRequest(id, friendRequestDto);
         }
     }
 }

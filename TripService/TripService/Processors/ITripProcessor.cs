@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TripService.Models.ApiModels;
 using TripService.Models.Dtos;
@@ -18,5 +17,7 @@ namespace TripService.Processors
         Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId);
         Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto trip);
         Task<ActionResult<bool>> DeleteTrip(Guid tripId);
+        Task<ActionResult<bool>> AddParticipant(Guid tripId, Guid participantId);
+
     }
 }

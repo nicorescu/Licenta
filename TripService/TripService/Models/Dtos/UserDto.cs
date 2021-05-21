@@ -26,6 +26,8 @@ namespace TripService.Models.Dtos
         public List<ConversationDto> Conversations { get; set; }
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }
+        public List<ApprovalRequestDto> ApprovalRequests { get; set; }
+        public List<FriendRequestDto> FriendRequests { get; set; }
 
     }
 }

@@ -96,6 +96,22 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> AddParticipant(Guid tripId, Guid participantId)
+        {
+            try
+            {
+                var filter = Builders<Trip>.Filter.Eq(x => x.Id, tripId);
+                var update = Builders<Trip>.Update.Push(x => x.ParticipantsIds, participantId);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
         public async Task<bool> CancelTripByAuthority(Guid tripId)
         {
             try
@@ -142,6 +158,7 @@ namespace TripService.Repositories
                 return false;
             }
         }
+
 
         private IAggregateFluent<Trip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
         {

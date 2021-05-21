@@ -59,6 +59,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from 'ng-starrating';
 import 'hammerjs';
 import 'mousetrap';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   imports: [
@@ -120,6 +121,7 @@ import 'mousetrap';
     TripsPaginatorComponent,
     FiltersComponent,
     ViewSelectedTripComponent,
+    LoadingComponent,
   ],
   providers: [NgxImageCompressService],
 })

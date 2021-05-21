@@ -52,7 +52,6 @@ namespace TripService.Controllers
 
         [HttpGet]
         [Route("/trips/{tripId}")]
-        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -65,6 +64,7 @@ namespace TripService.Controllers
 
         [HttpPost]
         [Route("/trips")]
+        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -73,6 +73,19 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> AddTrip([FromBody] TripDto trip)
         {
             return await _tripProcessor.InsertNewTrip(trip);
+        }
+
+        [HttpPost]
+        [Route("/trips/{tripId}/participants")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> AddParticipant([FromRoute] Guid tripId, [FromBody] ParticipantIdRequest participantIdRequest)
+        {
+            return await _tripProcessor.AddParticipant(tripId, participantIdRequest.ParticipantId);
         }
 
 
@@ -85,7 +98,7 @@ namespace TripService.Controllers
         [ProducesResponseType(500)]
         public async Task<ActionResult<bool>> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripDto trip)
         {
-            return  await _tripProcessor.UpdateTrip(tripId, trip);
+            return await _tripProcessor.UpdateTrip(tripId, trip);
         }
 
         [Authorize(Roles = "Administrator")]
@@ -102,6 +115,7 @@ namespace TripService.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("/trips/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

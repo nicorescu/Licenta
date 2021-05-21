@@ -167,9 +167,19 @@
         "slotsLeft": "locuri ramase",
         "otherParticipants": "Alti participanti"
       },
+      "errors": {
+        "errorLoadingTrip": "A aparut o eroare la selectarea excursiei. Te rugam sa incerci mai tarziu",
+        "errorSubmittingRequest": "A aparut o eroare la trimiterea cererii",
+        "anErrorHasOccured": "A aparut o eroare. Incearca, din nou, mai tarziu",
+        "errorJoiningTrip": "A aparut o eroare, incearca din nou"
+      },
       "pickAnotherTrip": "Alege alta excursie",
       "askForApproval": "Solicita aprobare",
-      "joinTrip": "Alatura-te excursiei"
+      "joinTrip": "Alatura-te excursiei",
+      "requestSubmitted": "Cererea ta a fost trimisa",
+      "cancelTrip": "Anuleaza excursia",
+      "deleteTrip": "Sterge trip",
+      "successfullyJoinedTrip": "Te-ai alaturat cu succes excursiei"
     }
   },
   "toast": {

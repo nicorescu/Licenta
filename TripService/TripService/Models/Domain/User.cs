@@ -1,12 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TripService.Enumerators;
-using TripService.Models.ApiModels;
 
 namespace TripService.Models.Domain
 {
@@ -26,5 +20,7 @@ namespace TripService.Models.Domain
         public List<Guid> Friends { get; set; }
         public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
+        public List<ApprovalRequest> ApprovalRequests { get; set; }
+        public List<FriendRequest> FriendRequests { get; set; }
     }
 }

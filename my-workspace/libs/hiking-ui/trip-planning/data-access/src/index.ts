@@ -23,3 +23,7 @@ export * from './lib/guards/view-selected-trip.guard';
 export * from './lib/services/trip.service';
 export * from './lib/services/user.service';
 export * from './lib/models/selected-trip-result.model';
+export * from './lib/models/approval-request.model';
+export * from './lib/models/request-state.model';
+export * from './lib/models/friend-request.model';
+export * from './lib/models/add-participant-request.model';

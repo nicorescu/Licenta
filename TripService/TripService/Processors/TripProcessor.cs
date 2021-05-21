@@ -67,6 +67,17 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
+        public async Task<ActionResult<bool>> AddParticipant(Guid tripId, Guid participantId)
+        {
+            var result = await _tripRepository.AddParticipant(tripId, participantId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
         public async Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId)
         {
             

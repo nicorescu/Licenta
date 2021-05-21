@@ -23,12 +23,12 @@ namespace TripService.Repositories
                 var result = await _collection.FindAsync(user => true);
                 return result.ToList();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
                 return null;
             }
-            
+
         }
 
         public async Task<User> GetUserById(Guid userId)
@@ -38,12 +38,12 @@ namespace TripService.Repositories
                 var result = await _collection.FindAsync(user => user.Id == userId);
                 return result.FirstOrDefault(); ;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
                 return null;
             }
-            
+
         }
 
         public async Task<bool> InsertNewUser(User user)
@@ -51,7 +51,7 @@ namespace TripService.Repositories
             try
             {
                 user.Id = Guid.NewGuid();
-                 await _collection.InsertOneAsync(user);
+                await _collection.InsertOneAsync(user);
                 return true;
             }
             catch (Exception exception)
@@ -91,17 +91,50 @@ namespace TripService.Repositories
             }
         }
 
-       public async Task<List<User>> GetUsersByIds(List<Guid> ids)
+        public async Task<List<User>> GetUsersByIds(List<Guid> ids)
         {
             try
             {
                 var result = await _collection.FindAsync(user => ids.Contains(user.Id));
 
                 return result.ToList();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
+            }
+        }
+
+        public async Task<bool> AddApprovalRequest(Guid userId, ApprovalRequest approvalRequest)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Push(x => x.ApprovalRequests, approvalRequest);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+
+        }
+        public async Task<bool> AddFriendRequest(Guid userId, FriendRequest friendRequest)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Push(x => x.FriendRequests, friendRequest);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
             }
         }
 

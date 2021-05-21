@@ -16,5 +16,7 @@ namespace TripService.Repositories
         Task<bool> UpdateUser(Guid userId, User user);
         Task<bool> DeleteUser(Guid userId);
         Task<List<User>> GetUsersByIds(List<Guid> ids);
+        Task<bool> AddApprovalRequest(Guid userId, ApprovalRequest approvalRequest);
+        Task<bool> AddFriendRequest(Guid userId, FriendRequest friendRequest);
     }
 }

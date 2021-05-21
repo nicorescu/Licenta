@@ -10,7 +10,7 @@ using TripService.Repositories;
 
 namespace TripService.Processors
 {
-    public class UserProcessor: IUserProcessor
+    public class UserProcessor : IUserProcessor
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace TripService.Processors
         {
             List<User> result = await _userRepository.GetAllUsers();
 
-            if(result == null)
+            if (result == null)
             {
                 return new NoContentResult();
             }
@@ -35,7 +35,7 @@ namespace TripService.Processors
         {
             User result = await _userRepository.GetUserById(userId);
 
-            if(result == null)
+            if (result == null)
             {
                 return new NoContentResult();
             }
@@ -57,7 +57,7 @@ namespace TripService.Processors
         public async Task<ActionResult<bool>> UpdateUser(Guid id, UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
-            var result = await _userRepository.UpdateUser(id,user);
+            var result = await _userRepository.UpdateUser(id, user);
 
             if (!result)
             {
@@ -83,12 +83,32 @@ namespace TripService.Processors
         public async Task<ActionResult<List<UserDto>>> GetUsersByIds(List<Guid> ids)
         {
             var result = await _userRepository.GetUsersByIds(ids);
-            if(result == null)
+            if (result == null)
             {
                 return new NoContentResult();
             }
             return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
         }
 
+        public async Task<ActionResult<bool>> AddApprovalRequest(Guid userId, ApprovalRequestDto approvalRequestDto)
+        {
+            var result = await _userRepository.AddApprovalRequest(userId,_mapper.Map<ApprovalRequest>(approvalRequestDto));
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+        public async Task<ActionResult<bool>> AddFriendRequest(Guid userId, FriendRequestDto friendRequestDto)
+        {
+            var result = await _userRepository.AddFriendRequest(userId, _mapper.Map<FriendRequest>(friendRequestDto));
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
     }
 }
