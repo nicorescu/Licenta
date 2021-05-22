@@ -12,6 +12,7 @@
       </div>
       <div class="flex-end">
         <ng-container *ngIf="!!(sessionToken$ | async)">
+          <hk-friend-requests-panel></hk-friend-requests-panel>
           <hk-chats-panel></hk-chats-panel>
           <hk-notifications-panel></hk-notifications-panel>
           <mat-divider

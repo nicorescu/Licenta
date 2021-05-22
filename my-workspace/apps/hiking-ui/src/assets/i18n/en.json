@@ -70,6 +70,22 @@
     "notificationsPanel": {
       "noContentMessage": "You don't have any notification",
       "viewAllNotifications": "View all notifications"
+    },
+    "friendsPanel": {
+      "friends": "Friends",
+      "friendRequests": "Friend requests",
+      "searchFriend": "Search for a friend..",
+      "noFriendsMessage": "No friends to display",
+      "noFriendRequestsMessage": "No friend requests to display",
+      "loadMore": "Load more",
+      "friendRequestApproved": "You successfully approved the friend request",
+      "errors": {
+        "anErrorHasOccured": "An error has occured, try again later!"
+      }
+    },
+    "approvalRequestsPanel": {},
+    "general": {
+      "searchFriendExample": "ex: John"
     }
   },
 
@@ -169,7 +185,8 @@
         "organizer": "Organizer",
         "name": "Name",
         "slotsLeft": "slot(s) left",
-        "otherParticipants": "Other participants"
+        "otherParticipants": "Other participants",
+        "noParticipants": "There is no other participant at the moment"
       },
       "errors": {
         "errorLoadingTrip": "An error has occured while selecting the trip, please try again later",

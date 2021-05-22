@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatListModule} from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
@@ -22,8 +26,13 @@ import { NotificationsPanelComponent } from './components/notifications-panel/no
 import { ChatsPanelComponent } from './components/chats-panel/chats-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {InlineSVGModule } from 'ng-inline-svg';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InlineSVGModule } from 'ng-inline-svg';
+import { FriendsPanelComponent } from './components/friends-panel/friends-panel.component';
+import { ApprovalRequestsPanelComponent } from './components/approval-requests-panel/approval-requests-panel.component';
+import { SearchComponent } from './components/search/search.component';
+import { FriendsListComponent } from './components/friends-list/friends-list.component';
+import { FriendRequestsListComponent } from './components/friend-requests-list/friend-requests-list.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,9 +48,26 @@ import {InlineSVGModule } from 'ng-inline-svg';
     FontAwesomeModule,
     MatDividerModule,
     MatListModule,
-    InlineSVGModule.forRoot()
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatBadgeModule,
+    InlineSVGModule.forRoot(),
   ],
-  declarations: [HeaderComponent, UserPanelComponent, LinkImageComponent, UserMenuComponent, NotificationsPanelComponent, ChatsPanelComponent, FooterComponent],
+  declarations: [
+    HeaderComponent,
+    UserPanelComponent,
+    LinkImageComponent,
+    UserMenuComponent,
+    NotificationsPanelComponent,
+    ChatsPanelComponent,
+    FooterComponent,
+    FriendsPanelComponent,
+    ApprovalRequestsPanelComponent,
+    SearchComponent,
+    FriendsListComponent,
+    FriendRequestsListComponent,
+  ],
   exports: [HeaderComponent, LinkImageComponent, FooterComponent],
 })
 export class HikingUiUiCommonUiModule {}

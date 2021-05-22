@@ -49,7 +49,10 @@
               </div>
               <mat-divider class="divider"></mat-divider>
               <div class="participants">
-                <mat-list class="participants-list">
+                <mat-list
+                  *ngIf="selectedTripResult?.participants.length > 0"
+                  class="participants-list"
+                >
                   <mat-list-item
                     *ngFor="let participant of selectedTripResult.participants"
                     class="participant-list-item"
@@ -71,6 +74,7 @@
                     </div>
                   </mat-list-item>
                 </mat-list>
+                <h6>{{ t('body.noParticipants') }}</h6>
               </div>
             </div>
           </ng-template>

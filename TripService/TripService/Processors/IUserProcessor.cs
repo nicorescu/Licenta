@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Models.ApiModels;
 using TripService.Models.Dtos;
 
 namespace TripService.Processors
@@ -18,5 +19,9 @@ namespace TripService.Processors
         Task<ActionResult<List<UserDto>>> GetUsersByIds(List<Guid> ids);
         Task<ActionResult<bool>> AddApprovalRequest(Guid userId, ApprovalRequestDto approvalRequest);
         Task<ActionResult<bool>> AddFriendRequest(Guid userId, FriendRequestDto friendRequest);
+        Task<ActionResult<List<UserDto>>> GetFriendRequests(Guid userId);
+        Task<ActionResult<bool>> ApproveFriendRequest(FriendRequestApproval friendRequestApproval);
+        Task<ActionResult<bool>> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId);
+
     }
 }

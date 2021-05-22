@@ -27,3 +27,4 @@ export * from './lib/models/approval-request.model';
 export * from './lib/models/request-state.model';
 export * from './lib/models/friend-request.model';
 export * from './lib/models/add-participant-request.model';
+export * from './lib/models/actions-friend-request.model';

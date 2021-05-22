@@ -83,9 +83,9 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<bool>> AddParticipant([FromRoute] Guid tripId, [FromBody] ParticipantIdRequest participantIdRequest)
+        public async Task<ActionResult<bool>> AddParticipant([FromRoute] Guid tripId, [FromBody] UserIdRequest participantIdRequest)
         {
-            return await _tripProcessor.AddParticipant(tripId, participantIdRequest.ParticipantId);
+            return await _tripProcessor.AddParticipant(tripId, participantIdRequest.UserId);
         }
 
 

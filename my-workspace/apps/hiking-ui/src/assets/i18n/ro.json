@@ -70,6 +70,22 @@
     "notificationsPanel": {
       "noContentMessage": "Nu ai nicio notificare",
       "viewAllNotifications": "Vezi toate notificarile"
+    },
+    "friendsPanel": {
+      "friends": "Prieteni",
+      "friendRequests": "Cereri de prietenie",
+      "searchFriend": "Cauta un prieten..",
+      "noFriendsMessage": "Niciun prieten de afisat",
+      "noFriendRequestsMessage": "Nu ai nicio cerere de prietenie",
+      "loadMore": "Incarca mai multi",
+      "friendRequestApproved": "Ai acceptat cu succes cererea de prietenie",
+      "errors": {
+        "anErrorHasOccured": "A aparut o eroare. Incearca, din nou, mai tarziu"
+      }
+    },
+    "approvalRequestsPanel": {},
+    "general": {
+      "searchFriendExample": "ex: Teodor"
     }
   },
 
@@ -165,7 +181,8 @@
         "organizer": "Organizator",
         "name": "Nume",
         "slotsLeft": "locuri ramase",
-        "otherParticipants": "Alti participanti"
+        "otherParticipants": "Alti participanti",
+        "noParticipants": "Nu exista niciun participant momentan"
       },
       "errors": {
         "errorLoadingTrip": "A aparut o eroare la selectarea excursiei. Te rugam sa incerci mai tarziu",

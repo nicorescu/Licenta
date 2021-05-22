@@ -1,0 +1,60 @@
+<ng-container *transloco="let t; read: 'header.friendsPanel'">
+  <button
+    id="openMenuButton"
+    mat-icon-button
+    [matBadge]="requesters?.length"
+    [matBadgeHidden]="!(requesters?.length < 0)"
+    matBadgeColor="#00437B"
+    [matMenuTriggerFor]="menu"
+    (menuOpened)="menuOpened()"
+  >
+    <fa-icon [icon]="faUserFriends"></fa-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <mat-tab-group (click)="$event.stopPropagation()">
+      <mat-tab [label]="t('friends')">
+        <ng-template matTabContent>
+          <div id="friends">
+            <div class="search-friends">
+              <hk-search></hk-search>
+            </div>
+            <mat-divider class="divider"></mat-divider>
+            <ng-container *ngIf="friends?.length > 0; else noFriendsBlock">
+              <hk-friends-list [friends]="friends"></hk-friends-list>
+            </ng-container>
+            <ng-template #noFriendsBlock>
+              <div class="text-center h5">{{ t('noFriendsMessage') }}</div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template matTabLabel>
+          <span
+            id="friendRequestsLabel"
+            [matBadge]="requesters?.length"
+            [matBadgeHidden]="!(requesters?.length < 0)"
+            >{{ t('friendRequests') }}</span
+          >
+        </ng-template>
+        <ng-template matTabContent>
+          <div id="friendRequests">
+            <ng-container
+              *ngIf="requesters?.length > 0; else noRequestersBlock"
+            >
+              <hk-friend-requests-list
+                [requesters]="requesters"
+                (requestsListChanged)="requestsListChanged()"
+              ></hk-friend-requests-list>
+            </ng-container>
+            <ng-template #noRequestersBlock>
+              <div class="text-center h5">
+                {{ t('noFriendRequestsMessage') }}
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-menu>
+</ng-container>

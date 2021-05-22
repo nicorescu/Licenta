@@ -1,0 +1,14 @@
+@import 'theme.scss';
+
+.friend-requests-list {
+  .requester {
+    align-items: center;
+    display: flex;
+    .requester-picture {
+      max-width: 50px;
+      max-height: 50px;
+      border-radius: 5%;
+      margin-right: 10px;
+    }
+  }
+}

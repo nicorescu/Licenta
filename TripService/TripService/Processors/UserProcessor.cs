@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Models.ApiModels;
 using TripService.Models.Domain;
 using TripService.Models.Dtos;
 using TripService.Repositories;
@@ -110,5 +111,39 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+        public async Task<ActionResult<List<UserDto>>> GetFriendRequests(Guid userId)
+        {
+            var result = await _userRepository.GetFriendRequests(userId);
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
+        }
+
+        public async Task<ActionResult<bool>> ApproveFriendRequest(FriendRequestApproval friendRequestApproval)
+        {
+            var result = await _userRepository.ApproveFriendRequest(friendRequestApproval);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
+        public async Task<ActionResult<bool>> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId)
+        {
+            var result = await _userRepository.RemoveFriendRequest(requestedUserId, requesterUserId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+       
     }
 }

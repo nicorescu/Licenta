@@ -1,0 +1,14 @@
+@import 'theme.scss';
+
+.friends-list {
+  .friend {
+    align-items: center;
+    display: flex;
+    .friend-picture {
+      max-width: 50px;
+      max-height: 50px;
+      border-radius: 5%;
+      margin-right: 10px;
+    }
+  }
+}

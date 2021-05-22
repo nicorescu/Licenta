@@ -159,27 +159,35 @@ namespace TripService.Extensions
 
         public static BsonDocument GetSlotsNumberStage()
         {
-            /*return new BsonDocument
+            const string stage = "{\"$match\": {\"$expr\": {\"$gt\": [\"SlotsNumber\",\"ParticipantsIds.length\"]}}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument GetMatchByIdStage(Guid id)
+        {
+            return new BsonDocument
             {
                 {AtlasStringResources.MatchStage,
                     new BsonDocument
                     {
                         {
-                            "OrganizerId",
-                            new BsonDocument
-                            {
-                                {
-                                    AtlasStringResources.NotEquals,
-                                    organizerId
-                                }
-                            }
+                            "_id",
+                           id
                         }
                     }
                 }
-            };*/
+            };
+        }
 
-            string stage = "{\"$match\": {\"$expr\": {\"$gt\": [\"SlotsNumber\",\"ParticipantsIds.length\"]}}}";
-            var x = BsonDocument.Parse(stage);
+        public static BsonDocument GetFriendRequestsLookupStage()
+        {
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'FriendRequests.UserId', foreignField: '_id', as: 'Users'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument GetUsersProjectionStage()
+        {
+            const string stage = "{\"$project\": {Users: 1, _id: 0}}";
             return BsonDocument.Parse(stage);
         }
 

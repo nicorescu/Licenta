@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using TripService.Models.ApiModels;
 using TripService.Models.Dtos;
 using TripService.Processors;
 
@@ -110,6 +111,42 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromBody] FriendRequestDto friendRequestDto)
         {
             return await _userProcessor.AddFriendRequest(id, friendRequestDto);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpGet("/users/friend-requests/{userId}")]
+        public async Task<ActionResult<List<UserDto>>> GetFriendRequests([FromRoute] Guid userId)
+        {
+            return await _userProcessor.GetFriendRequests(userId);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPut("/users/friend-requests/approve")]
+        public async Task<ActionResult<bool>> ApproveFriendRequest([FromBody] FriendRequestApproval friendRequestApproval)
+        {
+            return await _userProcessor.ApproveFriendRequest(friendRequestApproval);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpDelete("/users/friend-requests/remove")]
+        public async Task<ActionResult<bool>> RemoveFriendRequest([FromQuery] Guid requestedUserId, [FromQuery] Guid requesterUserId)
+        {
+            return await _userProcessor.RemoveFriendRequest(requestedUserId,requesterUserId);
         }
     }
 }

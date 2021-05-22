@@ -1,8 +1,12 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripService.Extensions;
+using TripService.Models.ApiModels;
 using TripService.Models.Domain;
 using TripService.Resources;
 
@@ -35,8 +39,9 @@ namespace TripService.Repositories
         {
             try
             {
-                var result = await _collection.FindAsync(user => user.Id == userId);
-                return result.FirstOrDefault(); ;
+                var projection = Builders<User>.Projection.Exclude(x => x.Password);
+                var result = _collection.Find(user => user.Id == userId).Project<User>(projection);
+                return await result.FirstOrDefaultAsync(); ;
             }
             catch (Exception exception)
             {
@@ -95,9 +100,11 @@ namespace TripService.Repositories
         {
             try
             {
-                var result = await _collection.FindAsync(user => ids.Contains(user.Id));
+                var projection = Builders<User>.Projection.Exclude(x => x.Password);
 
-                return result.ToList();
+                var result = _collection.Find(user => ids.Contains(user.Id)).Project<User>(projection);
+
+                return await result.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -113,7 +120,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
                 var update = Builders<User>.Update.Push(x => x.ApprovalRequests, approvalRequest);
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)
             {
@@ -126,10 +133,75 @@ namespace TripService.Repositories
         {
             try
             {
+
                 var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+
+
                 var update = Builders<User>.Update.Push(x => x.FriendRequests, friendRequest);
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<List<User>> GetFriendRequests(Guid userId)
+        {
+            try
+            {
+                var projection = Builders<User>.Projection.Include("Users").Exclude("_id");
+                var query = _collection.Aggregate()
+                    .AppendStage<User>(AtlasSearchExtensions.GetMatchByIdStage(userId))
+                    .AppendStage<User>(AtlasSearchExtensions.GetFriendRequestsLookupStage())
+                    .AppendStage<FriendRequestsResult>(AtlasSearchExtensions.GetUsersProjectionStage());
+                var result = await query.FirstOrDefaultAsync();
+                return result.Users;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> ApproveFriendRequest(FriendRequestApproval friendRequestApproval)
+        {
+            try
+            {
+
+                var firstFilter = Builders<User>.Filter.Eq(x => x.Id, friendRequestApproval.RequestedUserId);
+                var firstUpdate = Builders<User>.Update.Push(x => x.Friends, friendRequestApproval.RequesterUserId);
+
+                var secondFilter = Builders<User>.Filter.Eq(x => x.Id, friendRequestApproval.RequesterUserId);
+                var secondUpdate = Builders<User>.Update.Push(x => x.Friends, friendRequestApproval.RequestedUserId);
+
+                var requests = new List<UpdateOneModel<User>> { 
+                    new UpdateOneModel<User>(firstFilter, firstUpdate), 
+                    new UpdateOneModel<User>(secondFilter, secondUpdate) 
+                };
+                var result = await _collection.BulkWriteAsync(requests);
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, requestedUserId);
+
+
+                var update = Builders<User>.Update.PullFilter(x => x.FriendRequests, t=>t.UserId.Equals(requesterUserId));
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)
             {

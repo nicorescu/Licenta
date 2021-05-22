@@ -1,0 +1,39 @@
+@import 'theme.scss';
+
+::ng-deep {
+  .mat-tab-header-pagination {
+    display: none !important;
+  }
+  .mat-menu-panel {
+    height: auto;
+    overflow: unset !important;
+    max-width: unset !important;
+    min-width: 325px !important;
+    .mat-menu-content {
+      height: 100%;
+    }
+  }
+
+  .divider {
+    margin: 0px 2px 10px 2px !important;
+  }
+
+  #friendRequests {
+    padding-top: 10px;
+  }
+
+  #openMenuButton {
+    .mat-badge-content {
+      top: -5px !important;
+      right: -5px !important;
+    }
+  }
+
+  #friendRequestsLabel {
+    .mat-badge-content {
+      top: -13px !important;
+      right: -20px !important;
+      background-color: $col_blue_main;
+    }
+  }
+}

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TripService.Models.ApiModels
 {
-    public class ParticipantIdRequest
+    public class UserIdRequest
     {
-        public Guid ParticipantId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

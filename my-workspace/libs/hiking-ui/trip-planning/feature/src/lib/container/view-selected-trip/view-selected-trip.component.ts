@@ -174,7 +174,6 @@ export class ViewSelectedTripComponent implements OnInit {
               'tripPlanning.tripView.errors.anErrorHasOccured'
             )
           );
-          this.router.navigate(['/trip-planning']);
         }
       );
   }
@@ -222,7 +221,7 @@ export class ViewSelectedTripComponent implements OnInit {
   public get isOrganizer() {
     return (
       !!this.selectedTripResult &&
-      this.selectedTripResult.organizer.id === this.sessionToken.loggedInId
+      this.selectedTripResult.organizer.id === this.sessionToken?.loggedInId
     );
   }
 }

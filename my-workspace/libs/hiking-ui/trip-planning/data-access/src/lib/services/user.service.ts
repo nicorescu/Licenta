@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
 import { ApprovalRequest } from '../models/approval-request.model';
+import { ActionsFriendRequest } from '../models/actions-friend-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class UserService {
 
   getUsersByIds(usersIds: string[]): Observable<User[]> {
     return this.httpClient.get<User[]>(
-      `https://localhost:5001/users/by-ids?ids=3fa85f64-5717-4562-b3fc-2c963f66afa6&ids=3fa85f64-5717-4562-b3fc-2c963f66afa8&ids=3fa85f64-5717-4562-b3fc-2c963f66afa7`
+      `${this.baseApiUrl}/users/by-ids${this.IdsToQueryParam(usersIds)}`
     );
   }
 
@@ -45,5 +46,32 @@ export class UserService {
       `${this.baseApiUrl}/users/approval-requests/${organizerId}`,
       approvalRequest
     );
+  }
+
+  getFriendRequests(userId: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      `${this.baseApiUrl}/users/friend-requests/${userId}`
+    );
+  }
+
+  approveFriendRequest(approveModel: ActionsFriendRequest) {
+    return this.httpClient.put(
+      `${this.baseApiUrl}/users/friend-requests/approve`,
+      approveModel
+    );
+  }
+
+  removeFriendRequest(friendRequestModel: ActionsFriendRequest) {
+    const queryParams = new HttpParams()
+      .set('requestedUserId', friendRequestModel.requestedUserId)
+      .set('requesterUserId', friendRequestModel.requesterUserId);
+    return this.httpClient.delete(
+      `${this.baseApiUrl}/users/friend-requests/remove`,
+      { params: queryParams }
+    );
+  }
+
+  private IdsToQueryParam(ids: string[]): string {
+    return ids.length > 0 ? `?ids=${ids.join('&ids=')}` : '';
   }
 }

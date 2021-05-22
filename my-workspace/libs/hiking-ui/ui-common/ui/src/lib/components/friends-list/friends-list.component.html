@@ -1,0 +1,18 @@
+<div class="friends-list" *transloco="let t; read: 'header.friendsPanel'">
+  <mat-list>
+    <mat-list-item *ngFor="let friend of friends">
+      <div class="friend">
+        <img
+          class="img-fluid responsive friend-picture"
+          src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
+        />
+        <a routerLink="/user-profile" style="margin-right: 5px"
+          >{{ friend.firstName }} {{ friend.lastName }}</a
+        >
+        <span
+          class="flag-icon flag-icon-{{ friend.countryCode }} flag-icon-squared"
+        ></span>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
