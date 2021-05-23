@@ -12,7 +12,7 @@ namespace TripService.Processors
         Task<ActionResult<List<TripDto>>> GetAllTrips();
         Task<ActionResult<TripsResultDto>> SearchTrips(SearchFilter searchFilter);
         Task<ActionResult<TripDto>> GetTripById(Guid tripId);
-
+        Task<ActionResult<SelectedTripResultDto>> GetSelectedTrip(Guid tripId);
         Task<ActionResult<bool>> InsertNewTrip(TripDto trip);
         Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId);
         Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto trip);

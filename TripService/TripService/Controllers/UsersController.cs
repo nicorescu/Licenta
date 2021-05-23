@@ -108,9 +108,9 @@ namespace TripService.Controllers
         [ProducesResponseType(500)]
         [Authorize]
         [HttpPost("/users/friend-requests/{id}")]
-        public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromBody] FriendRequestDto friendRequestDto)
+        public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromQuery] Guid requesterId)
         {
-            return await _userProcessor.AddFriendRequest(id, friendRequestDto);
+            return await _userProcessor.AddFriendRequest(id, requesterId);
         }
 
         [ProducesResponseType((int)HttpStatusCode.OK)]

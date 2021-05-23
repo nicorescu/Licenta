@@ -21,6 +21,6 @@ namespace TripService.Models.Domain
         public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
         public List<ApprovalRequest> ApprovalRequests { get; set; }
-        public List<FriendRequest> FriendRequests { get; set; }
+        public List<Guid> FriendRequests { get; set; }
     }
 }

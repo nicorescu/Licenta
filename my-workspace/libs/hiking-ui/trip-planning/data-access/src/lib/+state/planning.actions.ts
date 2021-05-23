@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { DetailedTrip } from '../models/detailed-trip.model';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
 import { SelectedTripResult } from '../models/selected-trip-result.model';
@@ -53,7 +54,7 @@ export const searchTrips = createAction(
 
 export const searchTripsSuccess = createAction(
   '[Trip-Planning] Search trips success',
-  props<{ trips: Trip[]; count: number }>()
+  props<{ trips: DetailedTrip[]; count: number }>()
 );
 
 export const searchTripFailure = createAction(

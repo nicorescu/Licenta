@@ -17,15 +17,31 @@
                     </div>
                     <mat-divider class="divider"></mat-divider>
                     <div class="text-center" style="margin: 10px">
-                      <a routerLink="/user-profile" style="margin-right: 5px"
+                      <a
+                        routerLink="/user-profile"
+                        style="margin-right: 5px; text-transform: capitalize"
                         >{{ selectedTripResult.organizer.firstName }}
                         {{ selectedTripResult.organizer.lastName }}</a
                       >
                       <span
+                        style="margin-right: 5px"
                         class="flag-icon flag-icon-{{
                           selectedTripResult.organizer.countryCode
                         }} flag-icon-squared"
                       ></span>
+                      <button
+                        mat-icon-button
+                        *ngIf="!isFriend && !isFriendRequested"
+                        (click)="sendFriendRequest()"
+                      >
+                        <mat-icon>person_add</mat-icon>
+                      </button>
+                      <button mat-icon-button *ngIf="isFriend">
+                        <fa-icon [icon]="faUserCheck" size="1x"></fa-icon>
+                      </button>
+                      <button mat-icon-button *ngIf="isFriendRequested">
+                        <fa-icon [icon]="faUserTimes" size="1x"></fa-icon>
+                      </button>
                     </div>
                   </div>
                   <div class="organizer-picture">
@@ -74,7 +90,9 @@
                     </div>
                   </mat-list-item>
                 </mat-list>
-                <h6>{{ t('body.noParticipants') }}</h6>
+                <h6 *ngIf="!(selectedTripResult?.participants.length > 0)">
+                  {{ t('body.noParticipants') }}
+                </h6>
               </div>
             </div>
           </ng-template>

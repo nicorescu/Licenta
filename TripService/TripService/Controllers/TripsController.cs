@@ -62,6 +62,18 @@ namespace TripService.Controllers
             return await _tripProcessor.GetTripById(tripId);
         }
 
+        
+        [HttpGet("/trips/selected/{tripId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<SelectedTripResultDto>> GetSelectedTrip(Guid tripId)
+        {
+            return await _tripProcessor.GetSelectedTrip(tripId);
+        }
+
         [HttpPost]
         [Route("/trips")]
         [Authorize]

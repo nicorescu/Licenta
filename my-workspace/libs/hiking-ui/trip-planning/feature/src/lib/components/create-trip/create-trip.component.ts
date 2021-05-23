@@ -127,10 +127,6 @@ export class CreateTripComponent implements OnInit, OnDestroy {
       country: address.address_components.find((x) =>
         x.types.includes('country')
       ).long_name,
-      geometry: {
-        lat: address.geometry.location.lat(),
-        lng: address.geometry.location.lng(),
-      },
     };
   }
 

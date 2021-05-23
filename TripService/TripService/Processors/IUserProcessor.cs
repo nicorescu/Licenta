@@ -18,10 +18,9 @@ namespace TripService.Processors
         Task<ActionResult<bool>> DeleteUser(Guid userId);
         Task<ActionResult<List<UserDto>>> GetUsersByIds(List<Guid> ids);
         Task<ActionResult<bool>> AddApprovalRequest(Guid userId, ApprovalRequestDto approvalRequest);
-        Task<ActionResult<bool>> AddFriendRequest(Guid userId, FriendRequestDto friendRequest);
+        Task<ActionResult<bool>> AddFriendRequest(Guid userId, Guid requesterId);
         Task<ActionResult<List<UserDto>>> GetFriendRequests(Guid userId);
         Task<ActionResult<bool>> ApproveFriendRequest(FriendRequestApproval friendRequestApproval);
         Task<ActionResult<bool>> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId);
-
     }
 }

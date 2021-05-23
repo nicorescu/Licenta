@@ -1,4 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
+import { DetailedTrip } from '../models/detailed-trip.model';
 import { Place } from '../models/place.model';
 import { SelectedLocation } from '../models/selected-location.model';
 import { SelectedTripResult } from '../models/selected-trip-result.model';
@@ -15,7 +16,7 @@ export interface PlanningState {
   error: string;
   attractions: Place[];
   tripFilter: TripFilter;
-  trips: Trip[];
+  trips: DetailedTrip[];
   tripsCount: number;
   selectedTripId: string;
 }

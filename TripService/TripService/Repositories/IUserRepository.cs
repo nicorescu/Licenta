@@ -18,7 +18,7 @@ namespace TripService.Repositories
         Task<bool> DeleteUser(Guid userId);
         Task<List<User>> GetUsersByIds(List<Guid> ids);
         Task<bool> AddApprovalRequest(Guid userId, ApprovalRequest approvalRequest);
-        Task<bool> AddFriendRequest(Guid userId, FriendRequest friendRequest);
+        Task<bool> AddFriendRequest(Guid userId, Guid requesterId);
         Task<List<User>> GetFriendRequests(Guid userId);
         // Task<List<DetailedApprovalRequest>> GetDetailedApprovalRequests(Guid userId);
         Task<bool> ApproveFriendRequest(FriendRequestApproval friendRequestApproval);

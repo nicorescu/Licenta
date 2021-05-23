@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
 import { AddParticipantRequest } from '../models/add-participant-request.model';
+import { SelectedTripResult } from '../models/selected-trip-result.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { TripsResult } from '../models/trip-result.model';
 import { Trip } from '../models/trip.model';
@@ -40,6 +41,12 @@ export class TripService {
     return this.httpClient.get<TripsResult>(`${this.baseApiUrl}/trips/search`, {
       params: params,
     });
+  }
+
+  getSelectedTrip(tripId: string): Observable<SelectedTripResult> {
+    return this.httpClient.get<SelectedTripResult>(
+      `${this.baseApiUrl}/trips/selected/${tripId}`
+    );
   }
 
   createTrip(trip: Trip) {

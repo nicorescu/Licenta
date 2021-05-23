@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace TripService.Models.Dtos
 {
-    public class TripsResultDto
+    public class DetailedTripDto
     {
-        public List<DetailedTripDto> Trips { get; set; }
-        public int Count { get; set; }
+        public TripDto Trip { get; set; }
+        public UserDto Organizer { get; set; }
     }
 }

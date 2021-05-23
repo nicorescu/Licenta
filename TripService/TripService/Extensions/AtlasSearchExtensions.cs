@@ -121,7 +121,7 @@ namespace TripService.Extensions
                     new BsonDocument
                     {
                         {
-                            "OrganizerId",
+                            "Trip.OrganizerId",
                             new BsonDocument
                             {
                                 {
@@ -181,7 +181,7 @@ namespace TripService.Extensions
 
         public static BsonDocument GetFriendRequestsLookupStage()
         {
-            const string stage = "{\"$lookup\": {from: 'User', localField: 'FriendRequests.UserId', foreignField: '_id', as: 'Users'}}";
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'FriendRequests', foreignField: '_id', as: 'Users'}}";
             return BsonDocument.Parse(stage);
         }
 
@@ -199,6 +199,36 @@ namespace TripService.Extensions
                     AtlasStringResources.Count,"tripsNo"
                 }
             };
+        }
+
+        public static BsonDocument ProjectTripStage()
+        {
+            const string stage = "{\"$project\": {_id: 0, \"Trip\": \"$$ROOT\"}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectWithoutPasswords()
+        {
+            const string stage = "{\"$project\": {\"Organizer.Password\": 0, \"Participants.Password\": 0}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument LookupOrganizerStage()
+        {
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'Trip.OrganizerId', foreignField: '_id', as: 'Organizer'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument LookupParticipantsStage()
+        {
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'Trip.ParticipantsIds', foreignField: '_id', as: 'Participants'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectFullTripStage()
+        {
+            const string stage = "{\"$project\": {\"Trip\": \"$Trip\", \"Organizer\": {$arrayElemAt: [\"$Organizer\", 0]}, \"Participants\": \"$Participants\"}}";
+            return BsonDocument.Parse(stage);
         }
     }
 }

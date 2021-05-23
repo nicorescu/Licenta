@@ -159,6 +159,7 @@
       "noResults": "Imi pare rau, nu au fost gasite rezultate. Modifica filtrele si incearca din nou.",
       "slotLeft": "Loc ramas",
       "slotsLeft": "Locuri ramase",
+      "organizer": "Organizator: ",
       "filters": {
         "startDate": "Data de inceput",
         "endDate": "Date de incheiere",

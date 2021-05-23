@@ -54,7 +54,7 @@ const routes: Routes = [
   {
     path: 'view-selected-trip',
     component: ViewSelectedTripComponent,
-    //canActivate: [ViewSelectedTripGuard],
+    canActivate: [ViewSelectedTripGuard],
   },
   {
     path: 'tasks',

@@ -38,7 +38,7 @@ namespace TripService.Processors
             {
                 return new NoContentResult();
             }
-            var trips = _mapper.Map<List<TripDto>>(result.Item1);
+            var trips = _mapper.Map<List<DetailedTripDto>>(result.Item1);
             var tripsResult = new TripsResultDto() { Trips = trips, Count = result.Item2};
             return new OkObjectResult(tripsResult);
         }
@@ -52,6 +52,18 @@ namespace TripService.Processors
             }
 
             return new OkObjectResult(_mapper.Map<TripDto>(result));
+        }
+
+        public async Task<ActionResult<SelectedTripResultDto>> GetSelectedTrip(Guid tripId)
+        {
+            var result = await _tripRepository.GetSelectedTrip(tripId);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<SelectedTripResultDto>(result));
         }
 
         public async Task<ActionResult<bool>> InsertNewTrip(TripDto tripDto)

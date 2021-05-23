@@ -36,7 +36,7 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<Tuple<List<Trip>, int>> SearchTrips(SearchFilter searchFilter)
+        public async Task<Tuple<List<DetailedTrip>, int>> SearchTrips(SearchFilter searchFilter)
         {
             try
             {
@@ -73,6 +73,26 @@ namespace TripService.Repositories
             {
                 var result = await _collection.FindAsync(trip => trip.Id == tripId);
                 return result.FirstOrDefault(); ;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                return null;
+            }
+        }
+        public async Task<SelectedTripResult> GetSelectedTrip(Guid tripId)
+        {
+            try
+            {
+                var result = _collection.Aggregate()
+                    .AppendStage<Trip>(AtlasSearchExtensions.GetMatchByIdStage(tripId))
+                    .AppendStage<SelectedTripResult>(AtlasSearchExtensions.ProjectTripStage())
+                    .AppendStage<SelectedTripResult>(AtlasSearchExtensions.LookupOrganizerStage())
+                    .AppendStage<SelectedTripResult>(AtlasSearchExtensions.LookupParticipantsStage())
+                    .AppendStage<SelectedTripResult>(AtlasSearchExtensions.ProjectWithoutPasswords())
+                    .AppendStage<SelectedTripResult>(AtlasSearchExtensions.ProjectFullTripStage());
+
+                return await result.FirstOrDefaultAsync(); ;
             }
             catch (Exception exception)
             {
@@ -160,7 +180,7 @@ namespace TripService.Repositories
         }
 
 
-        private IAggregateFluent<Trip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
+        private IAggregateFluent<DetailedTrip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
         {
             string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
             var query = _collection.Aggregate()
@@ -168,10 +188,14 @@ namespace TripService.Repositories
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
-                .AppendStage<Trip>(AtlasSearchExtensions.GetSlotsNumberStage());
+                .AppendStage<Trip>(AtlasSearchExtensions.GetSlotsNumberStage())
+                .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectTripStage())
+                .AppendStage<DetailedTrip>(AtlasSearchExtensions.LookupOrganizerStage())
+                .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectFullTripStage())
+                .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectWithoutPasswords());
             if (searchFilter.FriendsOnly)
             {
-                query = query.AppendStage<Trip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));
+                query = query.AppendStage<DetailedTrip>(AtlasSearchExtensions.GetFriendsOnlyRestriction(requesterFriends));
             }
             return query;
         }

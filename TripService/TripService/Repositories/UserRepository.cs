@@ -129,7 +129,7 @@ namespace TripService.Repositories
             }
 
         }
-        public async Task<bool> AddFriendRequest(Guid userId, FriendRequest friendRequest)
+        public async Task<bool> AddFriendRequest(Guid userId, Guid requesterId)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
 
 
-                var update = Builders<User>.Update.Push(x => x.FriendRequests, friendRequest);
+                var update = Builders<User>.Update.Push(x => x.FriendRequests, requesterId);
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
@@ -199,7 +199,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, requestedUserId);
 
 
-                var update = Builders<User>.Update.PullFilter(x => x.FriendRequests, t=>t.UserId.Equals(requesterUserId));
+                var update = Builders<User>.Update.PullFilter(x => x.FriendRequests, t => t.Equals(requesterUserId));
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }

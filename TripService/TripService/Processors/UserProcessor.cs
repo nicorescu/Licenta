@@ -101,9 +101,9 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
-        public async Task<ActionResult<bool>> AddFriendRequest(Guid userId, FriendRequestDto friendRequestDto)
+        public async Task<ActionResult<bool>> AddFriendRequest(Guid userId, Guid requesterId)
         {
-            var result = await _userRepository.AddFriendRequest(userId, _mapper.Map<FriendRequest>(friendRequestDto));
+            var result = await _userRepository.AddFriendRequest(userId, requesterId);
             if (!result)
             {
                 return new StatusCodeResult(500);

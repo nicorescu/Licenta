@@ -11,7 +11,7 @@ import {
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { TripService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { concatMap, map, switchMap, take } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, take } from 'rxjs/operators';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import {
   AppAuthenticateFacade,
@@ -19,8 +19,9 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { faUserCheck, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'hk-view-selected-trip',
@@ -29,6 +30,8 @@ import { Router } from '@angular/router';
 })
 export class ViewSelectedTripComponent implements OnInit {
   faArrowLeft = faArrowLeft;
+  faUserCheck = faUserCheck;
+  faUserTimes = faUserTimes;
   tripPrivacy = TripPrivacy;
   selectedTripResult: SelectedTripResult;
   isLoading = true;
@@ -58,58 +61,40 @@ export class ViewSelectedTripComponent implements OnInit {
       .pipe(
         take(1),
         switchMap((tripId) => {
-          return this.tripService.getTripById(tripId);
+          return this.tripService.getSelectedTrip(tripId);
         }),
-        concatMap((trip) => {
-          return this.userService.getUserById(trip.organizerId).pipe(
-            map((user) => {
-              trip = {
-                ...trip,
-                startDate: new Date(trip.startDate),
-                endDate: new Date(trip.endDate),
-              };
-              return { trip: trip, organizer: user };
-            })
-          );
-        }),
-        concatMap((res1) => {
-          return this.userService.getUsersByIds(res1.trip.participantsIds).pipe(
-            map((users) => {
-              return { ...res1, participants: users };
-            })
-          );
-        }),
-        concatMap((res2) => {
+        concatMap((res) => {
           return this.googleService
-            .getDetailsByQuery(res2.trip.locationName, 'lodging')
+            .getDetailsByQuery(res.trip.locationName, 'lodging')
             .pipe(
               map((result: any) => {
+                res = {
+                  ...res,
+                  trip: {
+                    ...res.trip,
+                    startDate: new Date(res.trip.startDate),
+                    endDate: new Date(res.trip.endDate),
+                  },
+                };
                 const hotels = result.results.filter((x) => !!x.photos);
-                return { ...res2, hotels: hotels };
+                return { ...res, hotels: hotels };
               })
             );
         }),
-        concatMap((res3) => {
+        concatMap((res2) => {
           return this.googleService
-            .getDetailsByQuery(res3.trip.locationName, 'tourist_attraction')
+            .getDetailsByQuery(res2.trip.locationName, 'tourist_attraction')
             .pipe(
               map((attractions: any) => {
                 const finalResult: SelectedTripResult = {
-                  ...res3,
+                  ...res2,
                   attractions: attractions.results.filter((x) => !!x.photos),
                 };
                 return finalResult;
               })
             );
-        })
-      )
-      .subscribe(
-        (res: SelectedTripResult) => {
-          console.log(res);
-          this.selectedTripResult = res;
-          this.isLoading = false;
-        },
-        (err) => {
+        }),
+        catchError((err) => {
           this.toastrService.error(
             this.translocoService.translate(
               'tripPlanning.tripView.errors.errorLoadingTrip'
@@ -122,8 +107,14 @@ export class ViewSelectedTripComponent implements OnInit {
               this.router.navigate(['/trip-planning']);
             }
           });
-        }
-      );
+          return of();
+        })
+      )
+      .subscribe((res: SelectedTripResult) => {
+        console.log(res);
+        this.selectedTripResult = res;
+        this.isLoading = false;
+      });
   }
 
   pickAnotherTrip() {
@@ -218,10 +209,28 @@ export class ViewSelectedTripComponent implements OnInit {
 
   cancelTrip() {}
 
+  sendFriendRequest() {}
+
   public get isOrganizer() {
     return (
       !!this.selectedTripResult &&
       this.selectedTripResult.organizer.id === this.sessionToken?.loggedInId
+    );
+  }
+
+  public get isFriend() {
+    return (
+      this.selectedTripResult.organizer.friends.indexOf(
+        this.sessionToken.loggedInId
+      ) >= 0
+    );
+  }
+
+  public get isFriendRequested() {
+    return (
+      this.selectedTripResult.organizer.friendRequests.indexOf(
+        this.sessionToken.loggedInId
+      ) >= 0
     );
   }
 }

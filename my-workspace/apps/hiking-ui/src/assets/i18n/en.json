@@ -162,6 +162,7 @@
       "noResults": "Sorry, we couldn't find any results, change the filters and try again.",
       "slotLeft": "Slot left",
       "slotsLeft": "Slots left",
+      "organizer": "Organizer: ",
       "filters": {
         "startDate": "Start date",
         "endDate": "End date",

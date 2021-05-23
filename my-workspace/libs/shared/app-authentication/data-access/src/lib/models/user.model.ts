@@ -20,4 +20,5 @@ export interface User {
   reviews: Review[];
   reviewAverage: number;
   conversations: Conversation[];
+  friendRequests: string[];
 }

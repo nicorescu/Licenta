@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
+  DetailedTrip,
   GooglePlacesService,
   PixabayService,
   PlanningFacade,
@@ -18,13 +19,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./trips-list.component.scss'],
 })
 export class TripsListComponent implements OnInit, OnDestroy {
-  trips: Trip[] = [];
   totalLength$: Observable<number>;
   tripsFilter$: Observable<TripFilter>;
   searchIcon = faSearch;
   alive = true;
   x = 2;
-  trips$: Observable<Trip[]>;
+  trips$: Observable<DetailedTrip[]>;
   isLoading$: Observable<boolean>;
 
   constructor(private planningFacade: PlanningFacade) {}

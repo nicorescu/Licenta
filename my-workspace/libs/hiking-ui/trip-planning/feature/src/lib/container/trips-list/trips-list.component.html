@@ -23,7 +23,7 @@
           *ngFor="let trip of trips$ | async"
         >
           <hk-trip-card
-            [trip]="trip"
+            [detailedTrip]="trip"
             (selectTripEmitter)="selectTrip($event)"
           ></hk-trip-card>
         </div>
