@@ -24,6 +24,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -60,6 +61,7 @@ import { RatingModule } from 'ng-starrating';
 import 'hammerjs';
 import 'mousetrap';
 import { LoadingComponent } from './components/loading/loading.component';
+import { FriendOptionsComponent } from './components/friend-options/friend-options.component';
 
 @NgModule({
   imports: [
@@ -95,6 +97,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatStepperModule,
     MatTabsModule,
     MatListModule,
+    MatMenuModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -122,6 +125,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     FiltersComponent,
     ViewSelectedTripComponent,
     LoadingComponent,
+    FriendOptionsComponent,
   ],
   providers: [NgxImageCompressService],
 })

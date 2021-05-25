@@ -105,6 +105,9 @@
       }
     },
     "or": "Sau",
+    "unfriend": "Sterge prieten",
+    "sendMessage": "Trimite un mesaj",
+    "cancelFriendRequest": "Anuleaza cererea de prietenie",
     "createTrip": {
       "enterLocation": "Introdu locatia (tara, regiune sau oras)",
       "startDate": "Data de inceput",

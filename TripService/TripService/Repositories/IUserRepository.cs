@@ -23,6 +23,6 @@ namespace TripService.Repositories
         // Task<List<DetailedApprovalRequest>> GetDetailedApprovalRequests(Guid userId);
         Task<bool> ApproveFriendRequest(FriendRequestApproval friendRequestApproval);
         Task<bool> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId);
-
+        Task<bool> RemoveFriend(Guid userId, Guid friendToRemoveId);
     }
 }

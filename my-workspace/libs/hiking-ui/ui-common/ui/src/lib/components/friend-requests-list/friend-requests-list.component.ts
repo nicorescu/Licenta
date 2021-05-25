@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  ActionsFriendRequest,
+  FriendRequest,
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
@@ -24,7 +24,7 @@ export class FriendRequestsListComponent implements OnInit {
   @Output()
   requestsListChanged = new EventEmitter();
 
-  approveModel: ActionsFriendRequest;
+  approveModel: FriendRequest;
   constructor(
     private userService: UserService,
     private authFacade: AppAuthenticateFacade,
@@ -48,7 +48,7 @@ export class FriendRequestsListComponent implements OnInit {
         switchMap(() => {
           return this.userService.removeFriendRequest(this.approveModel);
         }),
-        catchError((err) => {
+        catchError(() => {
           this.toastrService.error(
             this.translocoService.translate(
               'header.friendsPanel.errors.anErrorHasOccured'
@@ -70,17 +70,15 @@ export class FriendRequestsListComponent implements OnInit {
   removeRequest(requester: User) {
     this.authFacade.sessionToken$
       .pipe(
+        take(1),
         switchMap((token) => {
           this.approveModel = {
             requestedUserId: token.loggedInId,
             requesterUserId: requester.id,
           };
           return this.userService.removeFriendRequest(this.approveModel);
-        })
-      )
-      .pipe(
-        take(1),
-        catchError((err) => {
+        }),
+        catchError(() => {
           this.toastrService.error(
             this.translocoService.translate(
               'header.friendsPanel.errors.anErrorHasOccured'
@@ -89,6 +87,8 @@ export class FriendRequestsListComponent implements OnInit {
           return of();
         })
       )
-      .subscribe();
+      .subscribe(() => {
+        this.requestsListChanged.emit();
+      });
   }
 }

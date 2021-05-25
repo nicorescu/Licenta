@@ -5,7 +5,6 @@ import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
 import { ApprovalRequest } from '../models/approval-request.model';
-import { ActionsFriendRequest } from '../models/actions-friend-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +27,15 @@ export class UserService {
     );
   }
 
-  sendFriendRequest(
-    userId: string,
-    friendRequest: FriendRequest
-  ): Observable<boolean> {
+  sendFriendRequest(friendRequest: FriendRequest): Observable<boolean> {
+    const httpParams = new HttpParams().set(
+      'requesterUserId',
+      friendRequest.requesterUserId
+    );
     return this.httpClient.post<boolean>(
-      `${this.baseApiUrl}/users/friend-requests/${userId}`,
-      friendRequest
+      `${this.baseApiUrl}/users/friend-requests/${friendRequest.requestedUserId}`,
+      null,
+      { params: httpParams }
     );
   }
 
@@ -54,19 +55,31 @@ export class UserService {
     );
   }
 
-  approveFriendRequest(approveModel: ActionsFriendRequest) {
+  approveFriendRequest(friendRequest: FriendRequest) {
     return this.httpClient.put(
       `${this.baseApiUrl}/users/friend-requests/approve`,
-      approveModel
+      friendRequest
     );
   }
 
-  removeFriendRequest(friendRequestModel: ActionsFriendRequest) {
-    const queryParams = new HttpParams()
-      .set('requestedUserId', friendRequestModel.requestedUserId)
-      .set('requesterUserId', friendRequestModel.requesterUserId);
+  removeFriendRequest(friendRequest: FriendRequest) {
+    const queryParams = new HttpParams().set(
+      'requesterUserId',
+      friendRequest.requesterUserId
+    );
     return this.httpClient.delete(
-      `${this.baseApiUrl}/users/friend-requests/remove`,
+      `${this.baseApiUrl}/users/friend-requests/remove/${friendRequest.requestedUserId}`,
+      { params: queryParams }
+    );
+  }
+
+  removeFriend(userId: string, friendToRemoveId: string): Observable<boolean> {
+    const queryParams = new HttpParams().set(
+      'friendToRemoveId',
+      friendToRemoveId
+    );
+    return this.httpClient.delete<boolean>(
+      `${this.baseApiUrl}/users/friends/remove/${userId}`,
       { params: queryParams }
     );
   }

@@ -92,6 +92,9 @@
   "tripPlanning": {
     "findTrip": "Find a trip",
     "or": "Or",
+    "unfriend": "Unfriend",
+    "sendMessage": "Send message",
+    "cancelFriendRequest": "Cancel friend request",
     "searchTrip": {
       "enterLocation": "Enter a location (country, region or city)",
       "startDate": "Start date",

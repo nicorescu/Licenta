@@ -29,19 +29,12 @@
                           selectedTripResult.organizer.countryCode
                         }} flag-icon-squared"
                       ></span>
-                      <button
-                        mat-icon-button
-                        *ngIf="!isFriend && !isFriendRequested"
-                        (click)="sendFriendRequest()"
-                      >
-                        <mat-icon>person_add</mat-icon>
-                      </button>
-                      <button mat-icon-button *ngIf="isFriend">
-                        <fa-icon [icon]="faUserCheck" size="1x"></fa-icon>
-                      </button>
-                      <button mat-icon-button *ngIf="isFriendRequested">
-                        <fa-icon [icon]="faUserTimes" size="1x"></fa-icon>
-                      </button>
+                      <hk-friend-options
+                        [isFriend]="isFriend"
+                        [isFriendRequested]="isFriendRequested"
+                        (friendRequestedEmitter)="onFriendRequested()"
+                        (unfriendEmitter)="onUnfriend()"
+                      ></hk-friend-options>
                     </div>
                   </div>
                   <div class="organizer-picture">

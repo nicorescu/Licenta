@@ -144,6 +144,18 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+        public async Task<ActionResult<bool>> RemoveFriend(Guid userId, Guid friendToRemoveId)
+        {
+            var result = await _userRepository.RemoveFriend(userId, friendToRemoveId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
        
+
     }
 }

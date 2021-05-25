@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import {
   AddParticipantRequest,
   ApprovalRequest,
+  FriendRequest,
   GooglePlacesService,
   PlanningFacade,
   RequestState,
@@ -12,7 +13,6 @@ import {
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { TripService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { catchError, concatMap, map, switchMap, take } from 'rxjs/operators';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import {
   AppAuthenticateFacade,
   SessionToken,
@@ -21,7 +21,7 @@ import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { faUserCheck, faUserTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'hk-view-selected-trip',
@@ -29,14 +29,12 @@ import { faUserCheck, faUserTimes } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./view-selected-trip.component.scss'],
 })
 export class ViewSelectedTripComponent implements OnInit {
-  faArrowLeft = faArrowLeft;
-  faUserCheck = faUserCheck;
-  faUserTimes = faUserTimes;
   tripPrivacy = TripPrivacy;
   selectedTripResult: SelectedTripResult;
   isLoading = true;
   sessionToken$: Observable<SessionToken>;
   sessionToken: SessionToken;
+  faArrowLeft = faArrowLeft;
   constructor(
     private planningFacade: PlanningFacade,
     private authFacade: AppAuthenticateFacade,
@@ -114,6 +112,60 @@ export class ViewSelectedTripComponent implements OnInit {
         console.log(res);
         this.selectedTripResult = res;
         this.isLoading = false;
+      });
+  }
+
+  onFriendRequested() {
+    const friendRequest: FriendRequest = {
+      requestedUserId: this.selectedTripResult.trip.organizerId,
+      requesterUserId: this.sessionToken.loggedInId,
+    };
+    this.userService
+      .sendFriendRequest(friendRequest)
+      .pipe(
+        take(1),
+        catchError(() => {
+          this.toastrService.error(
+            this.translocoService.translate(
+              'tripPlanning.tripView.errors.errorSubmittingRequest'
+            )
+          );
+          return of();
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.selectedTripResult.organizer.friendRequests.push(
+            this.sessionToken.loggedInId
+          );
+        }
+      });
+  }
+
+  onUnfriend() {
+    this.userService
+      .removeFriend(
+        this.sessionToken.loggedInId,
+        this.selectedTripResult.trip.organizerId
+      )
+      .pipe(
+        take(1),
+        switchMap(() => {
+          return this.userService.removeFriend(
+            this.selectedTripResult.trip.organizerId,
+            this.sessionToken.loggedInId
+          );
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          console.log('rezultat baa', res);
+          const index = this.selectedTripResult.organizer.friends.indexOf(
+            this.sessionToken.loggedInId,
+            0
+          );
+          this.selectedTripResult.organizer.friends.splice(index, 1);
+        }
       });
   }
 
@@ -208,8 +260,6 @@ export class ViewSelectedTripComponent implements OnInit {
   }
 
   cancelTrip() {}
-
-  sendFriendRequest() {}
 
   public get isOrganizer() {
     return (

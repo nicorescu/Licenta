@@ -108,9 +108,9 @@ namespace TripService.Controllers
         [ProducesResponseType(500)]
         [Authorize]
         [HttpPost("/users/friend-requests/{id}")]
-        public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromQuery] Guid requesterId)
+        public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromQuery] Guid requesterUserId)
         {
-            return await _userProcessor.AddFriendRequest(id, requesterId);
+            return await _userProcessor.AddFriendRequest(id, requesterUserId);
         }
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -143,10 +143,22 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
-        [HttpDelete("/users/friend-requests/remove")]
-        public async Task<ActionResult<bool>> RemoveFriendRequest([FromQuery] Guid requestedUserId, [FromQuery] Guid requesterUserId)
+        [HttpDelete("/users/friend-requests/remove/{userId}")]
+        public async Task<ActionResult<bool>> RemoveFriendRequest([FromRoute] Guid userId, [FromQuery] Guid requesterUserId)
         {
-            return await _userProcessor.RemoveFriendRequest(requestedUserId,requesterUserId);
+            return await _userProcessor.RemoveFriendRequest(userId, requesterUserId);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpDelete("/users/friends/remove/{userId}")]
+        public async Task<ActionResult<bool>> RemoveFriend([FromRoute] Guid userId, [FromQuery] Guid friendToRemoveId)
+        {
+            return await _userProcessor.RemoveFriend(userId, friendToRemoveId);
         }
     }
 }
