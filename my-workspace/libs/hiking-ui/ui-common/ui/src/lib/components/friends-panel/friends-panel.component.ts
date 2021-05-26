@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
 import {
   RequestState,
@@ -68,6 +69,10 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
   }
 
   menuOpened() {
+    this.fetchFriends();
+  }
+
+  fetchFriends() {
     this.authFacade.sessionToken$
       .pipe(
         take(1),
@@ -82,5 +87,22 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
       .subscribe((friends) => {
         this.friends = friends;
       });
+  }
+
+  searchFriends(keyword: string) {
+    if (keyword) {
+      this.authFacade.sessionToken$
+        .pipe(
+          take(1),
+          switchMap((token) => {
+            return this.userService.searchFriends(token.loggedInId, keyword);
+          })
+        )
+        .subscribe((users) => {
+          this.friends = users;
+        });
+    } else {
+      this.fetchFriends();
+    }
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
-import { AddParticipantRequest } from '../models/add-participant-request.model';
+import { UserIdRequest } from '../models/user-id-request.model';
 import { SelectedTripResult } from '../models/selected-trip-result.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { TripsResult } from '../models/trip-result.model';
@@ -59,11 +59,35 @@ export class TripService {
 
   addParticipant(
     tripId: string,
-    participantIdRequest: AddParticipantRequest
+    userIdRequest: UserIdRequest
   ): Observable<boolean> {
+    console.log('id request: ', userIdRequest);
     return this.httpClient.post<boolean>(
       `${this.baseApiUrl}/trips/${tripId}/participants`,
-      participantIdRequest
+      userIdRequest
+    );
+  }
+
+  removeParticipant(tripId: string, userId: string) {
+    const httpParams = new HttpParams().set('userId', userId);
+    return this.httpClient.delete(
+      `${this.baseApiUrl}/trips/${tripId}/participants`,
+      { params: httpParams }
+    );
+  }
+
+  sendParticipationRequest(tripId: string, userId: string) {
+    return this.httpClient.post(
+      `${this.baseApiUrl}/trips/${tripId}/participation-requests`,
+      { userId: userId }
+    );
+  }
+
+  removeParticipationRequest(tripId: string, userId: string) {
+    const httpParams = new HttpParams().set('userId', userId);
+    return this.httpClient.delete(
+      `${this.baseApiUrl}/trips/${tripId}/participation-requests`,
+      { params: httpParams }
     );
   }
 }

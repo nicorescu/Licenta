@@ -1,17 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   DetailedTrip,
-  GooglePlacesService,
-  PixabayService,
   PlanningFacade,
-  Trip,
   TripFilter,
-  TripPrivacy,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { TripsPaginatorComponent } from '../../components/trips-paginator/trips-paginator.component';
 
 @Component({
   selector: 'hk-trips-list',
@@ -19,6 +14,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./trips-list.component.scss'],
 })
 export class TripsListComponent implements OnInit, OnDestroy {
+  @ViewChild(TripsPaginatorComponent, { static: false })
+  paginatorComponent: TripsPaginatorComponent;
+
   totalLength$: Observable<number>;
   tripsFilter$: Observable<TripFilter>;
   searchIcon = faSearch;
@@ -41,6 +39,14 @@ export class TripsListComponent implements OnInit, OnDestroy {
   }
 
   filtersChanged(tripsFilter: TripFilter) {
+    if (this.paginatorComponent) {
+      this.paginatorComponent.paginator.pageIndex = 0;
+    }
+    this.planningFacade.searchTrips(tripsFilter);
+    console.log(tripsFilter);
+  }
+
+  paginationChanged(tripsFilter: TripFilter) {
     this.planningFacade.searchTrips(tripsFilter);
   }
 

@@ -102,11 +102,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
       endDate: new Date(this.endDate.value),
       friendsOnly: this.friendsOnly.value,
       wholeCountry: this.wholeCountry.value,
-      requestedPage:
-        this.friendsOnly.value != this.tripsFilter.friendsOnly ||
-        this.wholeCountry.value != this.tripsFilter.wholeCountry
-          ? 1
-          : this.tripsFilter.requestedPage,
+      requestedPage: 1,
     };
     this.filtersChangedEmitter.emit(newFilter);
   }

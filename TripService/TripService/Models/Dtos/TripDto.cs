@@ -23,6 +23,7 @@ namespace TripService.Models.Dtos
         public TripPrivacy Privacy { get; set; }
         public TripState State { get; set; }
         public List<ReviewDto> Reviews { get; set; }
+        public List<Guid> Requests { get; set; }
         public double ReviewAverage { get; set; }
         public string ThumbnailReference { get; set; }
 

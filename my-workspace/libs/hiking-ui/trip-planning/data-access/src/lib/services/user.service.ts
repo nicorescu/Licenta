@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
-import { ApprovalRequest } from '../models/approval-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,16 +38,6 @@ export class UserService {
     );
   }
 
-  sendApprovalRequest(
-    organizerId: string,
-    approvalRequest: ApprovalRequest
-  ): Observable<boolean> {
-    return this.httpClient.post<boolean>(
-      `${this.baseApiUrl}/users/approval-requests/${organizerId}`,
-      approvalRequest
-    );
-  }
-
   getFriendRequests(userId: string): Observable<User[]> {
     return this.httpClient.get<User[]>(
       `${this.baseApiUrl}/users/friend-requests/${userId}`
@@ -80,6 +69,14 @@ export class UserService {
     );
     return this.httpClient.delete<boolean>(
       `${this.baseApiUrl}/users/friends/remove/${userId}`,
+      { params: queryParams }
+    );
+  }
+
+  searchFriends(userId: string, keyword: string): Observable<User[]> {
+    const queryParams = new HttpParams().set('keyword', keyword);
+    return this.httpClient.get<User[]>(
+      `${this.baseApiUrl}/users/search/friends/${userId}`,
       { params: queryParams }
     );
   }

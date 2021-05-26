@@ -95,18 +95,6 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
-        [HttpPost("/users/approval-requests/{id}")]
-        public async Task<ActionResult<bool>> AddApprovalRequest([FromRoute] Guid id,[FromBody] ApprovalRequestDto approvalRequestDto)
-        {
-            return await _userProcessor.AddApprovalRequest(id, approvalRequestDto);
-        }
-
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType(500)]
-        [Authorize]
         [HttpPost("/users/friend-requests/{id}")]
         public async Task<ActionResult<bool>> AddFriendRequest([FromRoute] Guid id, [FromQuery] Guid requesterUserId)
         {
@@ -159,6 +147,18 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> RemoveFriend([FromRoute] Guid userId, [FromQuery] Guid friendToRemoveId)
         {
             return await _userProcessor.RemoveFriend(userId, friendToRemoveId);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpGet("/users/search/friends/{userId:guid}")]
+        public async Task<ActionResult<List<UserDto>>> SearchFriends([FromRoute] Guid userId, [FromQuery] string keyword)
+        {
+            return await _userProcessor.SearchFriends(userId, keyword);
         }
     }
 }

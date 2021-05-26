@@ -17,12 +17,11 @@ namespace TripService.Repositories
         Task<bool> UpdateUser(Guid userId, User user);
         Task<bool> DeleteUser(Guid userId);
         Task<List<User>> GetUsersByIds(List<Guid> ids);
-        Task<bool> AddApprovalRequest(Guid userId, ApprovalRequest approvalRequest);
         Task<bool> AddFriendRequest(Guid userId, Guid requesterId);
         Task<List<User>> GetFriendRequests(Guid userId);
-        // Task<List<DetailedApprovalRequest>> GetDetailedApprovalRequests(Guid userId);
         Task<bool> ApproveFriendRequest(FriendRequestApproval friendRequestApproval);
         Task<bool> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId);
         Task<bool> RemoveFriend(Guid userId, Guid friendToRemoveId);
+        Task<List<User>> SearchFriends(Guid userId, string keyword);
     }
 }

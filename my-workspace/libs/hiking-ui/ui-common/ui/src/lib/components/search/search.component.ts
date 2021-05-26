@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  @ViewChild('searchInput') searchInput;
   @Output()
   submitSearchEmitter = new EventEmitter();
 
@@ -21,6 +28,14 @@ export class SearchComponent implements OnInit {
 
   submitSearch() {
     this.submitSearchEmitter.emit(this.keyword);
+  }
+
+  clearSearch() {
+    if (this.keyword) {
+      this.searchInput.nativeElement.value = '';
+      this.searchForm.value.keyword = '';
+      this.submitSearchEmitter.emit('');
+    }
   }
 
   public get keyword() {

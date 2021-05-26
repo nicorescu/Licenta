@@ -24,6 +24,7 @@ namespace TripService.Models.Domain
         public TripPrivacy Privacy { get; set; }
         public TripState State { get; set; }
         public List<Review> Reviews { get; set; }
+        public List<Guid> Requests { get; set; } //ids of users requesting to participate
         public string ThumbnailReference { get; set; }
 
     }

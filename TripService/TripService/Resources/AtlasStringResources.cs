@@ -14,7 +14,8 @@ namespace TripService.Resources
         public const string Path = "path";
         public const string Query = "query";
         public const string Index = "index";
-        public const string IndexName = "Trip-search-index";
+        public const string TripIndexName = "Trip-search-index";
+        public const string FriendsIndexName = "Friends-search-index";
         public const string PathName = "Address";
         public const string MatchStage = "$match";
         public const string ProjectStage = "$project";

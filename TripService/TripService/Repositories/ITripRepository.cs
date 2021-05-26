@@ -18,5 +18,8 @@ namespace TripService.Repositories
         Task<bool> UpdateTrip(Guid tripId, Trip trip);
         Task<bool> DeleteTrip(Guid tripId);
         Task<bool> AddParticipant(Guid tripId, Guid participantId);
+        Task<bool> AddParticipationRequest(Guid tripId, Guid userId);
+        Task<bool> RemoveParticipationRequest(Guid tripId, Guid userId);
+        Task<bool> RemoveParticipant(Guid tripId, Guid userId);
     }
 }

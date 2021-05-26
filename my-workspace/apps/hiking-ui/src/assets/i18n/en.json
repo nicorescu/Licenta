@@ -198,12 +198,17 @@
         "anErrorHasOccured": "An error has occured, try again later!",
         "errorJoiningTrip": "An error has occured, try again"
       },
-      "pickAnotherTrip": "Pick another trip",
-      "askForApproval": "Ask for approval",
-      "joinTrip": "Join trip",
-      "requestSubmitted": "Your request has been submitted",
-      "cancelTrip": "Cancel trip",
-      "deleteTrip": "Delete trip",
+      "actions": {
+        "pickAnotherTrip": "Pick another trip",
+        "askForApproval": "Ask for approval",
+        "joinTrip": "Join trip",
+        "cancelTrip": "Cancel trip",
+        "deleteTrip": "Delete trip",
+        "leaveTrip": "Leave trip",
+        "cancelRequest": "Cancel request"
+      },
+      "requestSubmitted": "Your participation request has been submitted",
+      "requestCancelled": "Your participation request has been cancelled",
       "successfullyJoinedTrip": "You successfully joined the trip"
     }
   },

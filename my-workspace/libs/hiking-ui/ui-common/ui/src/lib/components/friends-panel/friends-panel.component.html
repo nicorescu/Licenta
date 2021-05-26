@@ -16,7 +16,9 @@
         <ng-template matTabContent>
           <div id="friends">
             <div class="search-friends">
-              <hk-search></hk-search>
+              <hk-search
+                (submitSearchEmitter)="searchFriends($event)"
+              ></hk-search>
             </div>
             <mat-divider class="divider"></mat-divider>
             <ng-container *ngIf="friends?.length > 0; else noFriendsBlock">

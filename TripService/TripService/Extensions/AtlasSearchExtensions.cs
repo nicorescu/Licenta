@@ -15,7 +15,7 @@ namespace TripService.Extensions
         {
             return new BsonDocument(AtlasStringResources.SearchStage,
             new BsonDocument
-               {        {AtlasStringResources.Index, AtlasStringResources.IndexName},
+               {        {AtlasStringResources.Index, AtlasStringResources.TripIndexName},
                         { AtlasStringResources.Compound,
                 new BsonDocument
                 {
@@ -23,6 +23,42 @@ namespace TripService.Extensions
                 }
                 },
                });
+        }
+
+        public static BsonDocument GetMatchingFriendsQuery(string keyword)
+        {
+            return new BsonDocument(AtlasStringResources.SearchStage,
+            new BsonDocument
+               {        {AtlasStringResources.Index, AtlasStringResources.FriendsIndexName},
+                        { AtlasStringResources.Compound,
+                new BsonDocument
+                {
+                    {AtlasStringResources.Should,  GetFriendsSearchCriteria(keyword)}
+                }
+                },
+               });
+        }
+
+        public static BsonDocument GetMatchToBeFriends(Guid userId)
+        {
+            return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage,
+                    new BsonDocument
+                    {
+                        {"Friends", userId
+                        }
+                    }
+                }
+            };
+            /*string stage = $"{{\"$match\": {{\"Friends\": {userId}}}}}";
+            return BsonDocument.Parse(stage);*/
+        }
+
+        private static BsonDocument GetFriendsSearchCriteria(string keyword)
+        {
+            string document = $"{{text: {{query: \"{keyword}\", path: [\"FirstName\",\"LastName\"]}}}}";
+            return BsonDocument.Parse(document);
         }
 
         public static BsonDocument GetDatesRestrictionQuery(DateTime startDate, DateTime endDate)
@@ -78,6 +114,7 @@ namespace TripService.Extensions
             }
             return criterias;
         }
+
 
         public static BsonDocument GetPrivacyRestriction()
         {

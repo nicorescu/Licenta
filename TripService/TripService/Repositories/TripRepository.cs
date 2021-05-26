@@ -131,6 +131,58 @@ namespace TripService.Repositories
                 return false;
             }
         }
+        public async Task<bool> AddParticipationRequest(Guid tripId, Guid userId)
+        {
+            try
+            {
+                var filter = Builders<Trip>.Filter.Eq(x => x.Id, tripId);
+                var update = Builders<Trip>.Update.Push(x => x.Requests, userId);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+
+        }
+
+        public async Task<bool> RemoveParticipationRequest(Guid tripId, Guid userId)
+        {
+            try
+            {
+                var filter = Builders<Trip>.Filter.Eq(x => x.Id, tripId);
+
+
+                var update = Builders<Trip>.Update.Pull(x => x.Requests, userId);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> RemoveParticipant(Guid tripId, Guid userId)
+        {
+            try
+            {
+                var filter = Builders<Trip>.Filter.Eq(x => x.Id, tripId);
+
+
+                var update = Builders<Trip>.Update.Pull(x => x.ParticipantsIds, userId);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
 
         public async Task<bool> CancelTripByAuthority(Guid tripId)
         {
@@ -178,6 +230,8 @@ namespace TripService.Repositories
                 return false;
             }
         }
+
+        
 
 
         private IAggregateFluent<DetailedTrip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)

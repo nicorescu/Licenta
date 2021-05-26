@@ -62,6 +62,7 @@ import 'hammerjs';
 import 'mousetrap';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FriendOptionsComponent } from './components/friend-options/friend-options.component';
+import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
 
 @NgModule({
   imports: [
@@ -126,6 +127,7 @@ import { FriendOptionsComponent } from './components/friend-options/friend-optio
     ViewSelectedTripComponent,
     LoadingComponent,
     FriendOptionsComponent,
+    TripActionsComponent,
   ],
   providers: [NgxImageCompressService],
 })

@@ -89,6 +89,39 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+        public async Task<ActionResult<bool>> AddParticipationRequest(Guid tripId, Guid userId)
+        {
+            var result = await _tripRepository.AddParticipationRequest(tripId, userId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
+        public async Task<ActionResult<bool>> RemoveParticipationRequest(Guid tripId, Guid userId)
+        {
+            var result = await _tripRepository.RemoveParticipationRequest(tripId, userId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
+        public async Task<ActionResult<bool>> RemoveParticipant(Guid tripId, Guid userId)
+        {
+            var result = await _tripRepository.RemoveParticipant(tripId, userId);
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
 
         public async Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId)
         {

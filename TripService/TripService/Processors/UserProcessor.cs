@@ -90,17 +90,6 @@ namespace TripService.Processors
             }
             return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
         }
-
-        public async Task<ActionResult<bool>> AddApprovalRequest(Guid userId, ApprovalRequestDto approvalRequestDto)
-        {
-            var result = await _userRepository.AddApprovalRequest(userId,_mapper.Map<ApprovalRequest>(approvalRequestDto));
-            if (!result)
-            {
-                return new StatusCodeResult(500);
-            }
-
-            return new OkObjectResult(result);
-        }
         public async Task<ActionResult<bool>> AddFriendRequest(Guid userId, Guid requesterId)
         {
             var result = await _userRepository.AddFriendRequest(userId, requesterId);
@@ -155,7 +144,17 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
-       
+
+        public async Task<ActionResult<List<UserDto>>> SearchFriends(Guid userId, string keyword)
+        {
+            var result = await _userRepository.SearchFriends(userId, keyword);
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(result);
+        }
 
     }
 }

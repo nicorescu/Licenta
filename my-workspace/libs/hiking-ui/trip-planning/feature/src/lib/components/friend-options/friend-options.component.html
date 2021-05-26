@@ -28,7 +28,7 @@
     </button>
   </mat-menu>
   <mat-menu #requestedMenu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="cancelRequest()">
       {{ t('cancelFriendRequest') }}
     </button>
   </mat-menu>

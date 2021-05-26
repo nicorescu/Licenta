@@ -194,12 +194,17 @@
         "anErrorHasOccured": "A aparut o eroare. Incearca, din nou, mai tarziu",
         "errorJoiningTrip": "A aparut o eroare, incearca din nou"
       },
-      "pickAnotherTrip": "Alege alta excursie",
-      "askForApproval": "Solicita aprobare",
-      "joinTrip": "Alatura-te excursiei",
-      "requestSubmitted": "Cererea ta a fost trimisa",
-      "cancelTrip": "Anuleaza excursia",
-      "deleteTrip": "Sterge trip",
+      "actions": {
+        "pickAnotherTrip": "Pick another trip",
+        "askForApproval": "Ask for approval",
+        "joinTrip": "Join trip",
+        "cancelTrip": "Cancel trip",
+        "deleteTrip": "Delete trip",
+        "leaveTrip": "Paraseste excursia",
+        "cancelRequest": "Anuleaza cererea"
+      },
+      "requestSubmitted": "Cererea ta de participare a fost trimisa",
+      "requestCancelled": "Cererea de participare a fost anulata",
       "successfullyJoinedTrip": "Te-ai alaturat cu succes excursiei"
     }
   },

@@ -20,6 +20,8 @@ export class FriendOptionsComponent implements OnInit {
   friendRequestedEmitter = new EventEmitter();
   @Output()
   unfriendEmitter = new EventEmitter();
+  @Output()
+  cancelRequestEmitter = new EventEmitter();
   faArrowLeft = faArrowLeft;
   faUserCheck = faUserCheck;
   faUserTimes = faUserTimes;
@@ -34,5 +36,9 @@ export class FriendOptionsComponent implements OnInit {
 
   unfriend() {
     this.unfriendEmitter.emit();
+  }
+
+  cancelRequest() {
+    this.cancelRequestEmitter.emit();
   }
 }

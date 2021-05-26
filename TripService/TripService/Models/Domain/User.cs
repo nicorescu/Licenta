@@ -20,7 +20,6 @@ namespace TripService.Models.Domain
         public List<Guid> Friends { get; set; }
         public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
-        public List<ApprovalRequest> ApprovalRequests { get; set; }
         public List<Guid> FriendRequests { get; set; }
     }
 }

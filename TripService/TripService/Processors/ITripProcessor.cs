@@ -18,6 +18,8 @@ namespace TripService.Processors
         Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto trip);
         Task<ActionResult<bool>> DeleteTrip(Guid tripId);
         Task<ActionResult<bool>> AddParticipant(Guid tripId, Guid participantId);
-
+        Task<ActionResult<bool>> AddParticipationRequest(Guid tripId, Guid userId);
+        Task<ActionResult<bool>> RemoveParticipationRequest(Guid tripId, Guid userId);
+        Task<ActionResult<bool>> RemoveParticipant(Guid tripId, Guid userId);
     }
 }

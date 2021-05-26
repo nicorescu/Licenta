@@ -34,6 +34,7 @@
                         [isFriendRequested]="isFriendRequested"
                         (friendRequestedEmitter)="onFriendRequested()"
                         (unfriendEmitter)="onUnfriend()"
+                        (cancelRequestEmitter)="onCancelFriendRequest()"
                       ></hk-friend-options>
                     </div>
                   </div>
@@ -93,7 +94,13 @@
         <mat-tab [label]="t('header.touristAttractions')">
           <ng-template matTabContent>
             <div id="tripAttractions">
-              <hk-places [places]="selectedTripResult.attractions"></hk-places>
+              <ng-container
+                *ngIf="selectedTripResult.attractions; else loadingBlock"
+              >
+                <hk-places
+                  [places]="selectedTripResult.attractions"
+                ></hk-places>
+              </ng-container>
             </div>
           </ng-template>
         </mat-tab>
@@ -106,39 +113,28 @@
       </mat-tab-group>
     </div>
     <div class="actions-container">
-      <ng-container *ngIf="!isOrganizer">
-        <a (click)="pickAnotherTrip()" [routerLink]="">
-          <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
-          {{ t('pickAnotherTrip') }}</a
-        >
-        <ng-container *ngIf="sessionToken$ | async">
-          <button
-            (click)="askForApproval()"
-            class="btn btn-primary"
-            *ngIf="
-              selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired
-            "
-          >
-            {{ t('askForApproval') }}
-          </button>
-          <button
-            (click)="joinTrip()"
-            class="btn btn-primary"
-            *ngIf="selectedTripResult.trip.privacy === tripPrivacy.Public"
-          >
-            {{ t('joinTrip') }}
-          </button>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngIf="isOrganizer">
-        <div class="separator"></div>
-        <button (click)="cancelTrip()" class="btn btn-danger">
-          {{ t('cancelTrip') }}
-        </button>
-      </ng-container>
+      <hk-trip-actions
+        style="width: 100%"
+        [selectedTripResult]="selectedTripResult"
+        [sessionToken]="sessionToken"
+        (actionClicked)="actionClicked($event)"
+      ></hk-trip-actions>
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="isLoading">
+<ng-container *ngIf="isLoadingTrip">
   <hk-loading></hk-loading>
 </ng-container>
+<ng-template #loadingBlock>
+  <div
+    style="
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>

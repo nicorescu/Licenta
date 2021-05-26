@@ -1,0 +1,61 @@
+<div
+  *ngIf="selectedTripResult && sessionToken"
+  style="
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  "
+>
+  <ng-container *transloco="let t; read: 'tripPlanning.tripView.actions'">
+    <ng-container *ngIf="!isOrganizer">
+      <a (click)="pickAnotherTrip()" [routerLink]="">
+        <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
+        {{ t('pickAnotherTrip') }}</a
+      >
+      <ng-container *ngIf="sessionToken">
+        <button
+          (click)="askForApproval()"
+          class="btn btn-primary"
+          *ngIf="
+            selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired &&
+            !isParticipant &&
+            !isParticipationRequested
+          "
+        >
+          {{ t('askForApproval') }}
+        </button>
+        <button
+          (click)="joinTrip()"
+          class="btn btn-primary"
+          *ngIf="
+            selectedTripResult.trip.privacy === tripPrivacy.Public &&
+            !isParticipant
+          "
+        >
+          {{ t('joinTrip') }}
+        </button>
+        <button
+          (click)="quitTrip()"
+          class="btn btn-primary"
+          *ngIf="isParticipant"
+        >
+          {{ t('leaveTrip') }}
+        </button>
+        <button
+          (click)="cancelRequest()"
+          class="btn btn-primary"
+          *ngIf="isParticipationRequested"
+        >
+          {{ t('cancelRequest') }}
+        </button>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="isOrganizer">
+      <div class="separator"></div>
+      <button (click)="cancelTrip()" class="btn btn-danger">
+        {{ t('cancelTrip') }}
+      </button>
+    </ng-container>
+  </ng-container>
+</div>

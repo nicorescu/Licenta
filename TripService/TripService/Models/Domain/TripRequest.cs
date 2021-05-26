@@ -3,7 +3,7 @@ using TripService.Enumerators;
 
 namespace TripService.Models.Domain
 {
-    public class ApprovalRequest
+    public class TripRequest
     {
         //User who sends the request
         public Guid UserId { get; set; }

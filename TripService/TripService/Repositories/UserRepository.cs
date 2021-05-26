@@ -112,23 +112,6 @@ namespace TripService.Repositories
                 return null;
             }
         }
-
-        public async Task<bool> AddApprovalRequest(Guid userId, ApprovalRequest approvalRequest)
-        {
-            try
-            {
-                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
-                var update = Builders<User>.Update.Push(x => x.ApprovalRequests, approvalRequest);
-                var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
-            }
-            catch (Exception exception)
-            {
-                Console.Write(exception.Message);
-                return false;
-            }
-
-        }
         public async Task<bool> AddFriendRequest(Guid userId, Guid requesterId)
         {
             try
@@ -227,6 +210,24 @@ namespace TripService.Repositories
                 return false;
             }
         }
+
+        public async Task<List<User>> SearchFriends(Guid userId, string keyword)
+        {
+            try
+            {
+                var query = _collection.Aggregate()
+                    .AppendStage<User>(AtlasSearchExtensions.GetMatchingFriendsQuery(keyword))
+                    .AppendStage<User>(AtlasSearchExtensions.GetMatchToBeFriends(userId));
+                var result = await query.ToListAsync();
+                return result;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return null;
+            }
+        }
+
 
 
     }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -52,6 +53,8 @@ import { FriendRequestsListComponent } from './components/friend-requests-list/f
     MatFormFieldModule,
     MatInputModule,
     MatBadgeModule,
+    ReactiveFormsModule,
+    FormsModule,
     InlineSVGModule.forRoot(),
   ],
   declarations: [
