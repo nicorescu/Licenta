@@ -66,6 +66,7 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
       .subscribe((users) => {
         this.requesters = users;
       });
+    this.fetchFriends();
   }
 
   menuOpened() {

@@ -182,7 +182,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, requestedUserId);
 
 
-                var update = Builders<User>.Update.Pull(x => x.FriendRequests, requesterUserId);
+                var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[]{ requesterUserId});
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
@@ -200,7 +200,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
 
 
-                var update = Builders<User>.Update.Pull(x => x.Friends, friendToRemoveId);
+                var update = Builders<User>.Update.PullAll(x => x.Friends, new Guid[] { friendToRemoveId });
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }

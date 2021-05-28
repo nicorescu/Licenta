@@ -329,4 +329,20 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
         break;
     }
   }
+
+  public get isFriend() {
+    return (
+      this.selectedTripResult.organizer.friends.indexOf(
+        this.sessionToken.loggedInId
+      ) >= 0
+    );
+  }
+
+  public get isFriendRequested() {
+    return (
+      this.selectedTripResult.organizer.friendRequests.indexOf(
+        this.sessionToken.loggedInId
+      ) >= 0
+    );
+  }
 }

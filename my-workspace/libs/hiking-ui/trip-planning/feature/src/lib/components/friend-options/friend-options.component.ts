@@ -28,7 +28,9 @@ export class FriendOptionsComponent implements OnInit {
   faUserClock = faUserClock;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(!this.isFriend && !this.isFriendRequested);
+  }
 
   sendFriendRequest() {
     this.friendRequestedEmitter.emit();
