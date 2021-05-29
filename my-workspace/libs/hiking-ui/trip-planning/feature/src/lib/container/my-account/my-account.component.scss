@@ -1,0 +1,23 @@
+#myAccount {
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  .profile-head {
+    display: block;
+
+    .edit-profile {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        display: flex;
+      }
+      mat-icon {
+        margin-right: 5px;
+      }
+    }
+
+    .user-full-name {
+      text-transform: capitalize;
+    }
+  }
+}

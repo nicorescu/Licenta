@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TripService.Models.Domain;
 using TripService.Models.Dtos;
+using TripService.Resources;
 
 namespace TripService.Models.Mapping
 {
@@ -17,7 +18,9 @@ namespace TripService.Models.Mapping
                         domain.Birthday.Date > DateTime.Today.AddYears(-DateTime.Today.Year + domain.Birthday.Year) ?
                         DateTime.Today.Year - domain.Birthday.Year - 1 :
                         DateTime.Today.Year - domain.Birthday.Year))
-                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0));
+                .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0))
+                .ForMember(dto => dto.ProfilePicUrl, opt => opt.MapFrom(domain => FileResources.ToBase64(domain.ProfilePicturePath)));
+            
             CreateMap<UserDto, User>()
                 .ForMember(domain => domain.Email, opt => opt.MapFrom(dto => dto.Email.ToLower()))
                 .ForMember(domain => domain.CountryCode, opt => opt.MapFrom(dto => dto.CountryCode.ToLower()));

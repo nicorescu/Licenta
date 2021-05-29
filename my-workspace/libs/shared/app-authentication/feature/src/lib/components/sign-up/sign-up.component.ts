@@ -48,6 +48,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     accountProvider: AccountProvider.TripPlanning,
     password: '',
     phoneNumber: '',
+    profilePicUrl: '',
     birthday: null,
     country: '',
     countryCode: '',

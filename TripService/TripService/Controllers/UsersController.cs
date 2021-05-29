@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -159,6 +160,18 @@ namespace TripService.Controllers
         public async Task<ActionResult<List<UserDto>>> SearchFriends([FromRoute] Guid userId, [FromQuery] string keyword)
         {
             return await _userProcessor.SearchFriends(userId, keyword);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPost("/users/profile-pictures/{userId}")]
+        public async Task<ActionResult<bool>> AddProfilePicture([FromRoute] Guid userId, [FromForm] IFormFile image)
+        {
+            return await _userProcessor.AddProfilePicture(userId, image);
         }
     }
 }

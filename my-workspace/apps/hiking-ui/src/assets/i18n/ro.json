@@ -210,5 +210,15 @@
   },
   "toast": {
     "signInRequired": "Trebuie sa te autentifici"
+  },
+  "myAccount": {
+    "editProfile": " Editeaza profilul",
+    "save": "Salveaza",
+    "cancel": "Anuleaza",
+    "resultedImage": "Imaginea rezultat",
+    "actions": {
+      "changeProfilePicture": "Schimba poza de profil",
+      "removeProfilePicture": "Sterge poza de profil"
+    }
   }
 }

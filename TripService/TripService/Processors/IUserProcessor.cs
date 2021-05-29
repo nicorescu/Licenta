@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace TripService.Processors
         Task<ActionResult<bool>> RemoveFriendRequest(Guid requestedUserId, Guid requesterUserId);
         Task<ActionResult<bool>> RemoveFriend(Guid userId, Guid friendToRemoveId);
         Task<ActionResult<List<UserDto>>> SearchFriends(Guid userId, string keyword);
+        Task<ActionResult<bool>> AddProfilePicture(Guid userId, IFormFile image);
     }
 }

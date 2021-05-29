@@ -14,6 +14,7 @@ namespace TripService.Models.Domain
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public string CountryCode { get; set; }
+        public string ProfilePicturePath { get; set; }
         public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
         public RoleEnum Role { get; set; }

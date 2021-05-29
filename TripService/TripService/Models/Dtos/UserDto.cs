@@ -18,6 +18,7 @@ namespace TripService.Models.Dtos
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public string CountryCode { get; set; }
+        public string ProfilePicUrl { get; set; }
         public ProviderEnum AccountProvider { get; set; }
         public DateTime Birthday { get; set; }
         public int Age { get; set; }

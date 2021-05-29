@@ -1,0 +1,35 @@
+<div class="container cropper-container" *transloco="let t; read: 'myAccount'">
+  <div class="cropper">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [containWithinAspectRatio]="false"
+      [aspectRatio]="4 / 3"
+      [resizeToWidth]="200"
+      [resizeToHeight]="200"
+      [cropperStaticWidth]="200"
+      [cropperStaticHeight]="200"
+      [hideResizeSquares]="true"
+      [cropperMinWidth]="200"
+      [onlyScaleDown]="true"
+      [roundCropper]="true"
+      [alignImage]="'left'"
+      [style.display]="showCropper ? null : 'none'"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="showCropper = true"
+    ></image-cropper>
+  </div>
+  <div class="text-center h5" style="margin: 15px">
+    {{ t('resultedImage') }}:
+  </div>
+  <div class="cropped-image">
+    <img [src]="croppedImageUrl" />
+  </div>
+  <div class="actions">
+    <button class="btn btn-secondary" mat-dialog-close>
+      {{ t('cancel') }}
+    </button>
+    <button class="btn btn-primary">{{ t('save') }}</button>
+  </div>
+</div>

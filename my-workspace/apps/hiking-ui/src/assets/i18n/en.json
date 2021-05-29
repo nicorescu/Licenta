@@ -214,5 +214,15 @@
   },
   "toast": {
     "signInRequired": "You need to sign-in first"
+  },
+  "myAccount": {
+    "editProfile": " Edit profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "resultedImage": "Resulted image",
+    "actions": {
+      "changeProfilePicture": "Change profile picture",
+      "removeProfilePicture": "Remove profile picture"
+    }
   }
 }

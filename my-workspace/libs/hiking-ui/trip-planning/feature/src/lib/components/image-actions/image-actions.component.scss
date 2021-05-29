@@ -1,0 +1,16 @@
+#imageActions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  img {
+    border-radius: 100%;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    &:active {
+      box-shadow: 0px 0px 0px 1px #666;
+    }
+  }
+}

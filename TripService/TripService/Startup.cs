@@ -16,6 +16,10 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using MongoDB.Bson;
+using Microsoft.AspNetCore.Http.Features;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace TripService
 {
@@ -31,7 +35,7 @@ namespace TripService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options => 
+            services.AddControllers(options =>
             {
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
             }).AddNewtonsoftJson(options =>
@@ -47,6 +51,13 @@ namespace TripService
             {
                 var uri = services.GetRequiredService<IConfiguration>()["MongoUri"];
                 return new MongoClient(uri);
+            });
+
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
             });
 
             ServiceCollectionSetup.AddAuthentication(services);
@@ -71,6 +82,12 @@ namespace TripService
             app.UseHttpsRedirection();
 
             app.UseCors("EnableCORS");
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
+                RequestPath = new PathString("/Files")
+            });
 
             app.UseRouting();
 

@@ -12,6 +12,6 @@ namespace TripService.Enumerators
     public enum RoleEnum
     {
         User,
-        Admin
+        Administrator
     }
 }

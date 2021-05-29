@@ -1,0 +1,24 @@
+.cropper-container {
+  .cropper {
+    display: flex;
+    justify-content: center;
+  }
+  .cropped-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 100%;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

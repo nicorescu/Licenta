@@ -11,6 +11,7 @@ export interface User {
   email: string;
   accountProvider: AccountProvider;
   password: string;
+  profilePicUrl: string;
   phoneNumber: string;
   birthday: Date;
   country: string;

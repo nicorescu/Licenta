@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TripService.Models.ApiModels;
 using TripService.Models.Domain;
 using TripService.Models.Dtos;
 using TripService.Repositories;
+using TripService.Resources;
 
 namespace TripService.Processors
 {
@@ -156,5 +159,33 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
+        public async Task<ActionResult<bool>> AddProfilePicture(Guid userId, IFormFile image)
+        {
+            try
+            {
+                var folderName = Path.Combine("Files", "ProfilePictures");
+                var fileName = $"{userId}{Path.GetExtension(image.FileName)}";
+
+                var pathToFolder = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var pathToSave = Path.Combine(pathToFolder, fileName);
+                var dbPath = Path.Combine(folderName, fileName);
+
+                var result = await _userRepository.AddProfilePicture(userId, dbPath);
+
+                if (!result)
+                {
+                    return new StatusCodeResult(500);
+                }
+                FileResources.DeleteFilesByPattern(pathToFolder, userId.ToString());
+                FileResources.SaveFormFile(pathToSave, image);
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new StatusCodeResult(500);
+            }
+
+        }
     }
 }

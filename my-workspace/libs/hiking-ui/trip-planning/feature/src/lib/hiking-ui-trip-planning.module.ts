@@ -5,6 +5,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
@@ -25,11 +26,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { MyAccountComponent } from './components/my-account/my-account.component';
 import { ConversationsComponent } from './components/conversations/conversations.component';
 import { CreateTripComponent } from './components/create-trip/create-trip.component';
 import { TripPreviewComponent } from './container/trip-preview/trip-preview.component';
@@ -46,6 +47,12 @@ import { TripCardComponent } from './components/trip-card/trip-card.component';
 import { TripsPaginatorComponent } from './components/trips-paginator/trips-paginator.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { ViewSelectedTripComponent } from './container/view-selected-trip/view-selected-trip.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { FriendOptionsComponent } from './components/friend-options/friend-options.component';
+import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
+import { MyAccountComponent } from './container/my-account/my-account.component';
+import { ImageActionsComponent } from './components/image-actions/image-actions.component';
+import { ImageCropperComponent } from './components/image-cropper/image-cropper.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -58,15 +65,14 @@ import { GalleryModule } from '@ks89/angular-modal-gallery';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from 'ng-starrating';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import 'hammerjs';
 import 'mousetrap';
-import { LoadingComponent } from './components/loading/loading.component';
-import { FriendOptionsComponent } from './components/friend-options/friend-options.component';
-import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     GooglePlaceModule,
@@ -99,6 +105,8 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
     MatTabsModule,
     MatListModule,
     MatMenuModule,
+    ImageCropperModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -108,7 +116,6 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
     TripPlanningComponent,
     SearchTripComponent,
     NotificationsComponent,
-    MyAccountComponent,
     ConversationsComponent,
     CreateTripComponent,
     CreateAndPreviewTripComponent,
@@ -128,6 +135,9 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
     LoadingComponent,
     FriendOptionsComponent,
     TripActionsComponent,
+    MyAccountComponent,
+    ImageActionsComponent,
+    ImageCropperComponent,
   ],
   providers: [NgxImageCompressService],
 })

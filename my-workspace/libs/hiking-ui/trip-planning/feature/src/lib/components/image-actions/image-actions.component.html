@@ -1,0 +1,20 @@
+<div id="imageActions" *transloco="let t; read: 'myAccount.actions'">
+  <img [src]="imageUrl" [matMenuTriggerFor]="menu" />
+  <input
+    #fileInput
+    type="file"
+    style="opacity: 0"
+    (change)="imagePicked($event)"
+    accept="image/png,image/jpeg"
+    style="width: 0px; height: 0px"
+    (click)="$event.target.value = null"
+  />
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="fileInput.click()">
+      {{ t('changeProfilePicture') }}
+    </button>
+    <button mat-menu-item (click)="removeProfilePicture()">
+      {{ t('removeProfilePicture') }}
+    </button>
+  </mat-menu>
+</div>

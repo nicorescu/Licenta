@@ -81,6 +81,15 @@ export class UserService {
     );
   }
 
+  addProfilePicture(userId: string, image: File) {
+    let formData: FormData = new FormData();
+    formData.append('image', image, image.name);
+    return this.httpClient.post(
+      `${this.baseApiUrl}/users/profile-pictures/${userId}`,
+      formData
+    );
+  }
+
   private IdsToQueryParam(ids: string[]): string {
     return ids.length > 0 ? `?ids=${ids.join('&ids=')}` : '';
   }
