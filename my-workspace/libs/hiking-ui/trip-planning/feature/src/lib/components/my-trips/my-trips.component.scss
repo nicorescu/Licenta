@@ -1,0 +1,30 @@
+@import 'theme.scss';
+
+.my-trips {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+
+  .trip-container {
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    .trip-picture {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      margin-right: 10px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .trip-state {
+      position: absolute;
+      top: 0;
+      right: 24px;
+    }
+  }
+}

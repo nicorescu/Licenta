@@ -1,14 +1,16 @@
 <div id="myAccount" class="container" *transloco="let t; read: 'myAccount'">
   <div class="profile-head">
     <div class="edit-profile">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" (click)="test()">
         <mat-icon>edit</mat-icon>
         {{ t('editProfile') }}
       </button>
     </div>
     <ng-container>
       <hk-image-actions
-        [imageUrl]="buildPictureUrl(user?.profilePicUrl)"
+        [imageUrl]="user?.profilePicUrl"
+        (imageSaved)="saveProfilePicture($event)"
+        (removeImageConfirmed)="removeProfilePic()"
       ></hk-image-actions>
     </ng-container>
     <div class="text-center h4 user-full-name">
@@ -16,4 +18,27 @@
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>
+  <div class="profile-body">
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
+      <mat-tab [label]="t('about')">
+        <ng-template matTabContent>
+          <div class="about" style="padding: 20px">
+            <hk-about-user [user]="user" style="width: 100%"></hk-about-user>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="t('friends')">
+        <ng-template matTabContent>
+          <div class="friends-container">
+            <hk-friends [friends]="friends"></hk-friends>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="t('myTrips')">
+        <ng-template matTabContent>
+          <hk-my-trips></hk-my-trips>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>

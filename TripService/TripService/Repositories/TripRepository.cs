@@ -231,7 +231,35 @@ namespace TripService.Repositories
             }
         }
 
-        
+        public async Task<List<Trip>> GetUsersOrganizedTrips(Guid userId)
+        {
+            try
+            {
+                var result = _collection.Find(trip => trip.OrganizerId.Equals(userId));
+
+                return await result.ToListAsync();
+            }
+            catch (Exception excetion)
+            {
+                Console.WriteLine(excetion.ToString());
+                return null;
+            }
+        }
+        public async Task<List<Trip>> GetUsersParticipatedTrips(Guid userId)
+        {
+            try
+            {
+                var result = _collection.Find(trip => trip.ParticipantsIds.Contains(userId));
+
+                return await result.ToListAsync();
+            }
+            catch (Exception excetion)
+            {
+                Console.WriteLine(excetion.ToString());
+                return null;
+            }
+        }
+
 
 
         private IAggregateFluent<DetailedTrip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)

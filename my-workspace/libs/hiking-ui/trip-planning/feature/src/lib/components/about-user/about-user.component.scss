@@ -1,0 +1,32 @@
+.about-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group {
+  #inputGroup-sizing-default {
+    background-color: #f2f2f2;
+  }
+
+  mat-icon {
+    margin-right: 5px;
+  }
+
+  input {
+    background-color: white;
+    cursor: default;
+  }
+
+  .flag-icon {
+    position: absolute;
+    right: 0px;
+    top: 10%;
+    font-size: 30px;
+    z-index: 1000;
+  }
+
+  .no-value-set {
+    text-align: center;
+  }
+}

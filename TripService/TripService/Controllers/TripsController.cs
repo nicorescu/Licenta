@@ -166,5 +166,30 @@ namespace TripService.Controllers
         {
             return await _tripProcessor.DeleteTrip(tripId);
         }
+
+
+        [HttpGet("/trips/user/as-organizer/{userId}")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId)
+        {
+            return await _tripProcessor.GetUsersOrganizedTrips(userId);
+        }
+
+        [HttpGet("/trips/user/as-participant/{userId}")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId)
+        {
+            return await _tripProcessor.GetUsersParticipatedTrips(userId);
+        }
     }
 }

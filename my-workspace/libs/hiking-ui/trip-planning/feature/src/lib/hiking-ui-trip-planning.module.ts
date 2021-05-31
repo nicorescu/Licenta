@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -68,6 +69,9 @@ import { RatingModule } from 'ng-starrating';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import 'hammerjs';
 import 'mousetrap';
+import { AboutUserComponent } from './components/about-user/about-user.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
 
 @NgModule({
   imports: [
@@ -107,6 +111,7 @@ import 'mousetrap';
     MatMenuModule,
     ImageCropperModule,
     MatDialogModule,
+    MatExpansionModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -138,6 +143,9 @@ import 'mousetrap';
     MyAccountComponent,
     ImageActionsComponent,
     ImageCropperComponent,
+    AboutUserComponent,
+    FriendsComponent,
+    MyTripsComponent,
   ],
   providers: [NgxImageCompressService],
 })

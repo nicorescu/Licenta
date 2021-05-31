@@ -24,5 +24,8 @@ namespace TripService.Repositories
         Task<bool> RemoveFriend(Guid userId, Guid friendToRemoveId);
         Task<List<User>> SearchFriends(Guid userId, string keyword);
         Task<bool> AddProfilePicture(Guid userId, string imagePath);
+        Task<bool> RemoveProfilePicture(Guid userId);
+        Task<List<User>> GetUserFriends(Guid userId);
+
     }
 }

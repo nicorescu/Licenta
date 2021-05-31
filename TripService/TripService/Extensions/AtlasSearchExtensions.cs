@@ -267,5 +267,26 @@ namespace TripService.Extensions
             const string stage = "{\"$project\": {\"Trip\": \"$Trip\", \"Organizer\": {$arrayElemAt: [\"$Organizer\", 0]}, \"Participants\": \"$Participants\"}}";
             return BsonDocument.Parse(stage);
         }
+
+        public static BsonDocument LookupUserFriends()
+        {
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'Friends', foreignField: '_id', as: 'friends'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument UnwindFriends()
+        {
+            return BsonDocument.Parse("{\"$unwind\": {path: \"$friends\"}}");
+        }
+
+        public static BsonDocument ReplaceRootFriends()
+        {
+            return BsonDocument.Parse("{\"$replaceRoot\": {newRoot: \"$friends\"}}");
+        }
+
+        public static BsonDocument ProjectFriendsNoPassword()
+        {
+            return BsonDocument.Parse("{\"$project\": {\"Password\": 0}}");
+        }
     }
 }

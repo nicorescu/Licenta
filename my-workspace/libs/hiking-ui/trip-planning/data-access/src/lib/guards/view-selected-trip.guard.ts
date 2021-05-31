@@ -12,7 +12,6 @@ export class ViewSelectedTripGuard implements CanActivate {
   canActivate(): Observable<boolean | UrlTree> {
     return this.planningFacade.selectedTripId$.pipe(
       switchMap((id) => {
-        console.log('id selectat: ', id);
         return id
           ? of(true)
           : of(this.router.createUrlTree(['/trip-planning']));

@@ -1,0 +1,16 @@
+<ng-container>
+  <div class="row friends">
+    <div class="col-lg-6 col-md-12 mb-2" *ngFor="let friend of friends">
+      <div class="friend-container border">
+        <img
+          [src]="buildProfilePicUrl(friend.profilePicUrl)"
+          class="friend-picture"
+          routerLink="view-profile"
+        />
+        <a routerLink="view-profile" class="friend-name"
+          >{{ friend.firstName }} {{ friend.lastName }}</a
+        >
+      </div>
+    </div>
+  </div>
+</ng-container>

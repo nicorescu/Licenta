@@ -1,5 +1,5 @@
 <div id="imageActions" *transloco="let t; read: 'myAccount.actions'">
-  <img [src]="imageUrl" [matMenuTriggerFor]="menu" />
+  <img class="profile-picture" [src]="pictureUrl" [matMenuTriggerFor]="menu" />
   <input
     #fileInput
     type="file"
@@ -13,8 +13,32 @@
     <button mat-menu-item (click)="fileInput.click()">
       {{ t('changeProfilePicture') }}
     </button>
-    <button mat-menu-item (click)="removeProfilePicture()">
+    <button
+      *ngIf="imageUrl"
+      mat-menu-item
+      (click)="openConfirmDialog(confirmDeleteTemplate)"
+    >
       {{ t('removeProfilePicture') }}
     </button>
   </mat-menu>
 </div>
+<ng-template #confirmDeleteTemplate>
+  <ng-container *transloco="let t; read: 'myAccount'">
+    <mat-dialog-title>
+      <h5>{{ t('confirmRemoveMessage') }}</h5>
+    </mat-dialog-title>
+    <mat-dialog-actions style="display: flex; justify-content: space-between">
+      <button mat-dialog-close mat-button color="primary">
+        {{ t('cancel') }}
+      </button>
+      <button
+        mat-dialog-close
+        mat-button
+        color="primary"
+        (click)="removeProfilePicture()"
+      >
+        {{ t('remove') }}
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+</ng-template>

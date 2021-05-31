@@ -164,7 +164,7 @@ namespace TripService.Processors
             try
             {
                 var folderName = Path.Combine("Files", "ProfilePictures");
-                var fileName = $"{userId}{Path.GetExtension(image.FileName)}";
+                var fileName = $"{userId}.png";
 
                 var pathToFolder = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 var pathToSave = Path.Combine(pathToFolder, fileName);
@@ -176,7 +176,6 @@ namespace TripService.Processors
                 {
                     return new StatusCodeResult(500);
                 }
-                FileResources.DeleteFilesByPattern(pathToFolder, userId.ToString());
                 FileResources.SaveFormFile(pathToSave, image);
                 return new OkObjectResult(result);
             }
@@ -187,5 +186,43 @@ namespace TripService.Processors
             }
 
         }
+
+        public async Task<ActionResult<bool>> RemoveProfilePicture(Guid userId)
+        {
+            try
+            {
+                var folderName = Path.Combine("Files", "ProfilePictures");
+                var fileName = $"{userId}.png";
+
+                var pathToFolder = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                var result = await _userRepository.RemoveProfilePicture(userId);
+
+                if (!result)
+                {
+                    return new StatusCodeResult(500);
+                }
+                FileResources.DeleteFilesByPattern(pathToFolder,userId.ToString());
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new StatusCodeResult(500);
+            }
+
+        }
+
+        public async Task<ActionResult<List<UserDto>>> GetUserFriends(Guid userId)
+        {
+            var result = await _userRepository.GetUserFriends(userId);
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
+        }
+
     }
 }

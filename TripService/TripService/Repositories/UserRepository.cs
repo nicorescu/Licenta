@@ -161,9 +161,9 @@ namespace TripService.Repositories
                 var secondFilter = Builders<User>.Filter.Eq(x => x.Id, friendRequestApproval.RequesterUserId);
                 var secondUpdate = Builders<User>.Update.Push(x => x.Friends, friendRequestApproval.RequestedUserId);
 
-                var requests = new List<UpdateOneModel<User>> { 
-                    new UpdateOneModel<User>(firstFilter, firstUpdate), 
-                    new UpdateOneModel<User>(secondFilter, secondUpdate) 
+                var requests = new List<UpdateOneModel<User>> {
+                    new UpdateOneModel<User>(firstFilter, firstUpdate),
+                    new UpdateOneModel<User>(secondFilter, secondUpdate)
                 };
                 var result = await _collection.BulkWriteAsync(requests);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
@@ -182,7 +182,7 @@ namespace TripService.Repositories
                 var filter = Builders<User>.Filter.Eq(x => x.Id, requestedUserId);
 
 
-                var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[]{ requesterUserId});
+                var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[] { requesterUserId });
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
@@ -245,7 +245,45 @@ namespace TripService.Repositories
                 return false;
             }
         }
-        
+
+        public async Task<bool> RemoveProfilePicture(Guid userId)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Set(x => x.ProfilePicturePath, null);
+
+                var result = await _collection.UpdateOneAsync(filter, update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<List<User>> GetUserFriends(Guid userId)
+        {
+            try
+            {
+                var query = _collection.Aggregate()
+                    .AppendStage<User>(AtlasSearchExtensions.GetMatchByIdStage(userId))
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.LookupUserFriends())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.UnwindFriends())
+                    .AppendStage<User>(AtlasSearchExtensions.ReplaceRootFriends())
+                    .AppendStage<User>(AtlasSearchExtensions.ProjectFriendsNoPassword());
+
+                var result = await query.ToListAsync();
+                return result;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return null;
+            }
+        }
 
     }
 }

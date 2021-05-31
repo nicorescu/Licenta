@@ -49,6 +49,18 @@ export class TripService {
     );
   }
 
+  getUsersOrganizedTrips(userId: string): Observable<Trip[]> {
+    return this.httpClient.get<Trip[]>(
+      `${this.baseApiUrl}/trips/user/as-organizer/${userId}`
+    );
+  }
+
+  getUsersParticipatedTrips(userId: string): Observable<Trip[]> {
+    return this.httpClient.get<Trip[]>(
+      `${this.baseApiUrl}/trips/user/as-participant/${userId}`
+    );
+  }
+
   createTrip(trip: Trip) {
     return this.httpClient.post(`${this.baseApiUrl}/trips`, trip);
   }
@@ -61,7 +73,6 @@ export class TripService {
     tripId: string,
     userIdRequest: UserIdRequest
   ): Observable<boolean> {
-    console.log('id request: ', userIdRequest);
     return this.httpClient.post<boolean>(
       `${this.baseApiUrl}/trips/${tripId}/participants`,
       userIdRequest

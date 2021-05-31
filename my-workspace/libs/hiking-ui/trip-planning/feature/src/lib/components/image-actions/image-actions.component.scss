@@ -1,10 +1,14 @@
+@import 'theme.scss';
+
 #imageActions {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 
-  img {
+  .profile-picture {
     border-radius: 100%;
+    width: 200px;
+    height: 200px;
     &:hover {
       opacity: 0.8;
       cursor: pointer;

@@ -25,15 +25,7 @@ export class TripActionsComponent implements OnInit {
   tripPrivacy = TripPrivacy;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(
-      this.selectedTripResult.trip.privacy ===
-        this.tripPrivacy.ApprovalRequired &&
-        !this.isParticipant &&
-        !this.isParticipationRequested,
-      this.isParticipationRequested
-    );
-  }
+  ngOnInit(): void {}
 
   askForApproval() {
     this.actionClicked.emit(TripActions.AskForApproval);

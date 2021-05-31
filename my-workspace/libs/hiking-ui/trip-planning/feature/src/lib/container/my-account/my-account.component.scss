@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 #myAccount {
   background-color: white;
   padding-top: 1rem;
@@ -18,6 +20,37 @@
 
     .user-full-name {
       text-transform: capitalize;
+    }
+  }
+
+  .profile-body {
+    display: flex;
+    justify-content: center;
+
+    .about {
+      width: 60%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      min-width: 430px;
+    }
+
+    ::ng-deep .mat-tab-group {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      min-width: 430px;
+
+      .mat-tab-header {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+      }
+    }
+
+    .friends-container {
+      padding: 20px;
     }
   }
 }

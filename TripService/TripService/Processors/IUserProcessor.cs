@@ -25,5 +25,8 @@ namespace TripService.Processors
         Task<ActionResult<bool>> RemoveFriend(Guid userId, Guid friendToRemoveId);
         Task<ActionResult<List<UserDto>>> SearchFriends(Guid userId, string keyword);
         Task<ActionResult<bool>> AddProfilePicture(Guid userId, IFormFile image);
+        Task<ActionResult<bool>> RemoveProfilePicture(Guid userId);
+        Task<ActionResult<List<UserDto>>> GetUserFriends(Guid userId);
+
     }
 }

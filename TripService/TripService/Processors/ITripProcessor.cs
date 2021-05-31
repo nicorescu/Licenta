@@ -21,5 +21,7 @@ namespace TripService.Processors
         Task<ActionResult<bool>> AddParticipationRequest(Guid tripId, Guid userId);
         Task<ActionResult<bool>> RemoveParticipationRequest(Guid tripId, Guid userId);
         Task<ActionResult<bool>> RemoveParticipant(Guid tripId, Guid userId);
+        Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId);
+        Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId);
     }
 }

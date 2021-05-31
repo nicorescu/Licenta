@@ -161,5 +161,28 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId)
+        {
+            var result = await _tripRepository.GetUsersOrganizedTrips(userId);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+        }
+        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId)
+        {
+            var result = await _tripRepository.GetUsersParticipatedTrips(userId);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+        }
     }
 }

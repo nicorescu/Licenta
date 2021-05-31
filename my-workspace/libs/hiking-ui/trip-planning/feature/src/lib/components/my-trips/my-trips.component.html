@@ -1,0 +1,41 @@
+<div class="my-trips" *transloco="let t; read: 'myAccount'">
+  <mat-accordion class="w-100">
+    <mat-expansion-panel (opened)="getAsOrganizer()">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ t('organizer') }}</mat-panel-title>
+        <mat-panel-description>
+          {{ t('tripsYouOrganized') }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row trips">
+        <div
+          class="col-lg-6 col-md-12 mb-2"
+          *ngFor="let trip of organizedTrips"
+        >
+          <div class="trip-container border">
+            <img [src]="buildThumbnailUrl(trip)" class="trip-picture" />
+            <div class="trip-state">{{ t(tripState[trip.state]) }}</div>
+            <div style="display: block">
+              <p class="trip-location">
+                {{ trip.locationName }}, {{ trip.country }}
+              </p>
+              <p>
+                {{ trip.startDate | date }} -
+                {{ trip.endDate | date }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="getAsParticipant()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ t('participant') }} </mat-panel-title>
+        <mat-panel-description>
+          {{ t('tripsYouParticipatedAt') }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{ participatedTrips | json }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

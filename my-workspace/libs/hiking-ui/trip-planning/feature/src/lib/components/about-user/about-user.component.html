@@ -1,0 +1,77 @@
+<ng-container *transloco="let t; read: 'myAccount'">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">
+        <mat-icon>contact_mail</mat-icon>Email
+      </span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      readonly
+      [value]="user?.email | lowercase"
+    />
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">
+        <mat-icon>location_on</mat-icon>{{ t('country') }}
+      </span>
+    </div>
+    <input
+      *ngIf="user?.country"
+      type="text"
+      class="form-control"
+      readonly
+      [value]="user?.country"
+    />
+    <input
+      *ngIf="!user?.country"
+      type="text"
+      class="form-control no-value-set"
+      readonly
+      value="- - - - -"
+    />
+    <span
+      style="margin-right: 5px"
+      class="flag-icon flag-icon-{{ user?.countryCode }} flag-icon-squared"
+    ></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">
+        <mat-icon>phone</mat-icon>{{ t('phoneNumber') }}
+      </span>
+    </div>
+    <input
+      *ngIf="user?.phoneNumber"
+      type="text"
+      class="form-control"
+      readonly
+      [value]="user?.phoneNumber"
+    />
+    <input
+      *ngIf="!user?.phoneNumber"
+      type="text"
+      class="form-control no-value-set"
+      readonly
+      value="- - - - -"
+    />
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">
+        <mat-icon>date_range</mat-icon>{{ t('birthdate') }}
+      </span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      readonly
+      [value]="user?.birthday | date: 'mediumDate':'GMT':activeLang"
+    />
+  </div>
+</ng-container>

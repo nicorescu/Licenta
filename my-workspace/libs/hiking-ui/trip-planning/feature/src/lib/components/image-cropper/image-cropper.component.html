@@ -1,35 +1,57 @@
 <div class="container cropper-container" *transloco="let t; read: 'myAccount'">
-  <div class="cropper">
-    <image-cropper
-      [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="true"
-      [containWithinAspectRatio]="false"
-      [aspectRatio]="4 / 3"
-      [resizeToWidth]="200"
-      [resizeToHeight]="200"
-      [cropperStaticWidth]="200"
-      [cropperStaticHeight]="200"
-      [hideResizeSquares]="true"
-      [cropperMinWidth]="200"
-      [onlyScaleDown]="true"
-      [roundCropper]="true"
-      [alignImage]="'left'"
-      [style.display]="showCropper ? null : 'none'"
-      format="png"
-      (imageCropped)="imageCropped($event)"
-      (imageLoaded)="showCropper = true"
-    ></image-cropper>
-  </div>
-  <div class="text-center h5" style="margin: 15px">
-    {{ t('resultedImage') }}:
-  </div>
-  <div class="cropped-image">
-    <img [src]="croppedImageUrl" />
-  </div>
-  <div class="actions">
-    <button class="btn btn-secondary" mat-dialog-close>
-      {{ t('cancel') }}
-    </button>
-    <button class="btn btn-primary">{{ t('save') }}</button>
+  <div mat-dialog-content>
+    <div class="cropper">
+      <image-cropper
+        [align]="'center'"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [transform]="transform"
+        [containWithinAspectRatio]="false"
+        [aspectRatio]="4 / 3"
+        [resizeToWidth]="200"
+        [resizeToHeight]="200"
+        [cropperStaticWidth]="200"
+        [cropperStaticHeight]="200"
+        [hideResizeSquares]="true"
+        [cropperMinWidth]="200"
+        [onlyScaleDown]="true"
+        [roundCropper]="true"
+        [alignImage]="'left'"
+        [style.display]="showCropper ? null : 'none'"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="showCropper = true"
+      ></image-cropper>
+    </div>
+    <div class="transform-buttons">
+      <div class="zoom-buttons">
+        <button mat-icon-button (click)="zoomOut()">
+          <mat-icon style="font-size: 2rem">zoom_out</mat-icon>
+        </button>
+        <button mat-icon-button (click)="zoomIn()">
+          <mat-icon style="font-size: 2rem">zoom_in</mat-icon>
+        </button>
+      </div>
+      <div class="reset">
+        <button mat-icon-button (click)="reset()">
+          <mat-icon style="font-size: 2rem">restart_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="text-center h5" style="margin: 15px">
+      {{ t('resultedImage') }}:
+    </div>
+    <div class="cropped-image">
+      <img [src]="croppedImageUrl" />
+    </div>
+    <div class="actions" mat-dialog-actions>
+      <button mat-button color="primary" mat-dialog-close>
+        {{ t('cancel') }}
+      </button>
+      <button mat-button color="primary" (click)="save()" mat-dialog-close>
+        {{ t('save') }}
+      </button>
+    </div>
   </div>
 </div>

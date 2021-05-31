@@ -173,5 +173,29 @@ namespace TripService.Controllers
         {
             return await _userProcessor.AddProfilePicture(userId, image);
         }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpDelete("/users/profile-pictures/{userId}")]
+        public async Task<ActionResult<bool>> RemoveProfilePicture([FromRoute] Guid userId)
+        {
+            return await _userProcessor.RemoveProfilePicture(userId);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpGet("/users/friends/{userId}")]
+        public async Task<ActionResult<List<UserDto>>> GetUserFriends([FromRoute] Guid userId)
+        {
+            return await _userProcessor.GetUserFriends(userId);
+        }
     }
 }

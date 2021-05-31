@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
@@ -10,7 +10,7 @@ import { FriendRequest } from '../models/friend-request.model';
 })
 export class UserService {
   baseApiUrl: string = this.config.apiURI;
-
+  userChanged = new EventEmitter();
   constructor(
     @Inject(Config) private config: Config,
     private httpClient: HttpClient
@@ -23,6 +23,12 @@ export class UserService {
   getUsersByIds(usersIds: string[]): Observable<User[]> {
     return this.httpClient.get<User[]>(
       `${this.baseApiUrl}/users/by-ids${this.IdsToQueryParam(usersIds)}`
+    );
+  }
+
+  getUserFriends(userId: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      `${this.baseApiUrl}/users/friends/${userId}`
     );
   }
 
@@ -87,6 +93,12 @@ export class UserService {
     return this.httpClient.post(
       `${this.baseApiUrl}/users/profile-pictures/${userId}`,
       formData
+    );
+  }
+
+  removeProfilePicture(userId: string) {
+    return this.httpClient.delete(
+      `${this.baseApiUrl}/users/profile-pictures/${userId}`
     );
   }
 

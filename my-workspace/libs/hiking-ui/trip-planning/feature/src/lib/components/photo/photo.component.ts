@@ -26,10 +26,6 @@ export class PhotoComponent implements OnInit {
     );
   }
 
-  onRate(ev) {
-    console.log(ev);
-  }
-
   onError() {
     this.isImageLoaded = false;
   }

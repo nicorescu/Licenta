@@ -1,0 +1,28 @@
+@import 'theme.scss';
+
+.friends {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+
+  .friend-container {
+    padding: 16px;
+    border-radius: 8px;
+
+    .friend-picture {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      margin-right: 10px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .friend-name {
+      text-transform: capitalize;
+    }
+  }
+}
