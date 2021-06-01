@@ -1,0 +1,126 @@
+<div class="edit-profile" *transloco="let t; read: 'myAccount.editProfile'">
+  <div class="container-heading">
+    <div class="title">
+      <h5>{{ t('editProfile') }}</h5>
+    </div>
+    <div class="close-btn">
+      <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider class="w-100 mb-2"></mat-divider>
+  <div class="profile-picture">
+    <div class="section-head">
+      <h5 class="section-title">{{ t('profilePicture') }}</h5>
+      <mat-divider class="divider"></mat-divider>
+      <input
+        type="file"
+        style="display: none"
+        #fileInput
+        (click)="$event.target.value = null"
+        (change)="imagePicked($event)"
+      />
+      <button mat-button color="primary" (click)="fileInput.click()">
+        {{ t('edit') }}
+      </button>
+    </div>
+    <div class="section-body">
+      <img [src]="pictureUrl" class="picture" />
+    </div>
+  </div>
+
+  <div class="user-information">
+    <div class="section-head">
+      <h5 class="section-title">{{ t('information') }}</h5>
+      <mat-divider class="divider"></mat-divider>
+    </div>
+    <div class="section-body">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            {{ t('yourFullName') }}
+          </span>
+        </div>
+        <input
+          style="text-transform: capitalize"
+          type="text"
+          class="form-control"
+          readonly
+          [value]="data.user.firstName + ' ' + data.user.lastName"
+        />
+        <button mat-button color="primary" class="edit-button">
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>contact_mail</mat-icon>Email
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="data.user.email | lowercase"
+        />
+        <button mat-button color="primary" class="edit-button">
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>location_on</mat-icon>{{ t('yourCountry') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="data.user.country ? data.user.country : '- - - - -'"
+        />
+        <button mat-button color="primary" class="edit-button">
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>phone</mat-icon>{{ t('yourPhoneNumber') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="data.user.phoneNumber ? data.user.phoneNumber : '- - - - -'"
+        />
+        <button mat-button color="primary" class="edit-button">
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>date_range</mat-icon>{{ t('yourBirthdate') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="user?.birthday | date: 'mediumDate':'GMT':activeLang"
+        />
+        <button mat-button color="primary" class="edit-button">
+          {{ t('edit') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

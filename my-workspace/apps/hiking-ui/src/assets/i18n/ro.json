@@ -212,7 +212,7 @@
     "signInRequired": "Trebuie sa te autentifici"
   },
   "myAccount": {
-    "editProfile": " Editeaza profilul",
+    "edit": " Editeaza profilul",
     "save": "Salveaza",
     "remove": "Sterge",
     "cancel": "Anuleaza",
@@ -244,9 +244,25 @@
     "CanceledByAuthority": "Anulata de catre autoritate",
     "tripsYouParticipatedAt": "Excursiile la care ai participat",
     "tripsYouOrganized": "Excursiile organizate de tine",
+    "viewTrip": "Vezi excursia",
+    "noTripsAsOrganizer": "Nu ai organizat nicio excursie",
+    "noTripsAsParticipant": "Nu ai participat la nicio excursie",
     "actions": {
       "changeProfilePicture": "Schimba poza de profil",
       "removeProfilePicture": "Sterge poza de profil"
+    },
+    "editProfile": {
+      "editProfile": "Editează profilul",
+      "profilePicture": "Fotografie de profil",
+      "yourFullName": "Numele tau complet",
+      "firstName": "Prenume",
+      "lastName": "Nume de familie",
+      "yourCountry": "Țara ta",
+      "yourPhoneNumber": "Numarul de telefon",
+      "yourBirthdate": "Data nasterii",
+      "edit": "Editeaza",
+      "information": "Informatii",
+      "yourEmail": "Adresa de email"
     }
   }
 }

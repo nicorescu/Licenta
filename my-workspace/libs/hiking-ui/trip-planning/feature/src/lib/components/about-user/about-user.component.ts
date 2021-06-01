@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '@hkworkspace/shared/app-authentication/data-access';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'hk-about-user',
@@ -9,7 +10,10 @@ import { User } from '@hkworkspace/shared/app-authentication/data-access';
 export class AboutUserComponent implements OnInit {
   @Input()
   user: User;
-  constructor() {}
+  activeLang: string;
+  constructor(private translocoService: TranslocoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeLang = this.translocoService.getActiveLang();
+  }
 }

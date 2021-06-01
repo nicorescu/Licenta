@@ -21,7 +21,7 @@ namespace TripService.Repositories
         Task<bool> AddParticipationRequest(Guid tripId, Guid userId);
         Task<bool> RemoveParticipationRequest(Guid tripId, Guid userId);
         Task<bool> RemoveParticipant(Guid tripId, Guid userId);
-        Task<List<Trip>> GetUsersOrganizedTrips(Guid userId);
-        Task<List<Trip>> GetUsersParticipatedTrips(Guid userId);
+        Task<Tuple<List<Trip>, int>> GetUsersOrganizedTrips(Guid userId, int pageNumber);
+        Task<Tuple<List<Trip>, int>> GetUsersParticipatedTrips(Guid userId, int pageNumber);
     }
 }

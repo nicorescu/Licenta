@@ -216,7 +216,7 @@
     "signInRequired": "You need to sign-in first"
   },
   "myAccount": {
-    "editProfile": " Edit profile",
+    "edit": " Edit profile",
     "save": "Save",
     "remove": "Remove",
     "cancel": "Cancel",
@@ -248,9 +248,25 @@
     "Finished": "Finished",
     "Canceled": "Canceled",
     "CanceledByAuthority": "Canceled by Authority",
+    "viewTrip": "View Trip",
+    "noTripsAsOrganizer": "You haven't organized any trip",
+    "noTripsAsParticipant": "You haven't participated to any trip",
     "actions": {
       "changeProfilePicture": "Change profile picture",
       "removeProfilePicture": "Remove profile picture"
+    },
+    "editProfile": {
+      "editProfile": " Edit profile",
+      "profilePicture": "Profile picture",
+      "yourFullName": "Your full name",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "yourCountry": " Your country",
+      "yourPhoneNumber": "Your phone number",
+      "yourBirthdate": "Your birthdate",
+      "edit": "Edit",
+      "information": "Information",
+      "yourEmail": "Your email address"
     }
   }
 }

@@ -231,13 +231,19 @@ namespace TripService.Repositories
             }
         }
 
-        public async Task<List<Trip>> GetUsersOrganizedTrips(Guid userId)
+        public async Task<Tuple<List<Trip>, int>> GetUsersOrganizedTrips(Guid userId, int pageNumber)
         {
             try
             {
-                var result = _collection.Find(trip => trip.OrganizerId.Equals(userId));
+                var tripsCount = await _collection.CountDocumentsAsync(trip => trip.OrganizerId.Equals(userId));
 
-                return await result.ToListAsync();
+                var result = _collection.Find(trip => trip.OrganizerId.Equals(userId))
+                    .Skip(6*(pageNumber-1))
+                    .Limit(6)
+                    .SortBy(x=> x.State);
+
+                var trips = await result.ToListAsync();
+                return Tuple.Create(trips, (int)tripsCount);
             }
             catch (Exception excetion)
             {
@@ -245,13 +251,19 @@ namespace TripService.Repositories
                 return null;
             }
         }
-        public async Task<List<Trip>> GetUsersParticipatedTrips(Guid userId)
+        public async Task<Tuple<List<Trip>,int>> GetUsersParticipatedTrips(Guid userId, int pageNumber)
         {
             try
             {
-                var result = _collection.Find(trip => trip.ParticipantsIds.Contains(userId));
+                var tripsCount = await _collection.CountDocumentsAsync(trip => trip.ParticipantsIds.Contains(userId));
 
-                return await result.ToListAsync();
+                var result = _collection.Find(trip => trip.ParticipantsIds.Contains(userId))
+                    .Skip(6 * (pageNumber - 1))
+                    .Limit(6)
+                    .SortBy(x => x.State);
+
+                var trips = await result.ToListAsync();
+                return Tuple.Create(trips, (int)tripsCount);  
             }
             catch (Exception excetion)
             {

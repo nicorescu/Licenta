@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
@@ -16,6 +17,7 @@ import {
   take,
   takeWhile,
 } from 'rxjs/operators';
+import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-my-account',
@@ -28,12 +30,14 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   sessionToken: SessionToken;
   activeLang: string;
   friends: User[];
+  editDialogRef: MatDialogRef<EditProfileComponent>;
 
   constructor(
     private authFacade: AppAuthenticateFacade,
     private userService: UserService,
     private toastrService: ToastService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -83,8 +87,10 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         this.toastrService.success(
           this.translocoService.translate('myAccount.imageChangedSuccess')
         );
+        this.editDialogRef.componentInstance.data = { user: user };
       });
   }
+
   removeProfilePic() {
     this.userService
       .removeProfilePicture(this.sessionToken.loggedInId)
@@ -110,8 +116,20 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       });
   }
 
-  test() {
-    console.log(this.user.friends);
+  openEditDialog() {
+    this.editDialogRef = this.dialog.open(EditProfileComponent, {
+      minWidth: '500px',
+      width: '60vw',
+      data: {
+        user: this.user,
+      },
+      disableClose: true,
+    });
+    this.editDialogRef.componentInstance.imageSaved
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((image) => {
+        this.saveProfilePicture(image);
+      });
   }
 
   tabChanged(event: MatTabChangeEvent) {

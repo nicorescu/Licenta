@@ -5,6 +5,7 @@ import {
   Trip,
   TripPrivacy,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'hk-trip-card',
@@ -18,9 +19,15 @@ export class TripCardComponent implements OnInit {
   selectTripEmitter = new EventEmitter();
 
   tripPrivacy = TripPrivacy;
-  constructor(private googleService: GooglePlacesService) {}
+  activeLang: string;
+  constructor(
+    private googleService: GooglePlacesService,
+    private translocoService: TranslocoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeLang = this.translocoService.getActiveLang();
+  }
 
   public get thumbnailUrl() {
     return this.detailedTrip.trip?.thumbnailReference

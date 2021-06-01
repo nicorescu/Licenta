@@ -1,0 +1,84 @@
+.edit-profile {
+  .container-heading {
+    display: flex;
+    .title {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .close-btn {
+      display: flex;
+      justify-content: flex-end;
+      width: auto;
+      margin-top: -1rem;
+      margin-right: -1rem;
+      button {
+        border-radius: 100%;
+        background-color: #e6e6e6;
+
+        *:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
+
+    .section-title {
+      white-space: nowrap;
+    }
+
+    .divider {
+      margin-left: 10px !important;
+      width: 100%;
+    }
+  }
+
+  .section-body {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-picture {
+    .section-body {
+      .picture {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .user-information {
+    .section-body {
+      flex-direction: column;
+      mat-icon {
+        margin-right: 5px;
+      }
+
+      .edit-button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+      }
+    }
+    input {
+      background-color: white;
+      cursor: default;
+    }
+
+    #inputGroup-sizing-default {
+      background-color: #f2f2f2;
+    }
+  }
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 9999;
+}

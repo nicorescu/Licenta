@@ -85,7 +85,8 @@ namespace TripService.Setup
                 {
                     builder.AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Count");
                 });
             });
         }

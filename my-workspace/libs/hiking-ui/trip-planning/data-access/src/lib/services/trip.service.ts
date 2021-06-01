@@ -7,6 +7,7 @@ import { SelectedTripResult } from '../models/selected-trip-result.model';
 import { TripFilter } from '../models/trip-filter.model';
 import { TripsResult } from '../models/trip-result.model';
 import { Trip } from '../models/trip.model';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -49,16 +50,25 @@ export class TripService {
     );
   }
 
-  getUsersOrganizedTrips(userId: string): Observable<Trip[]> {
-    return this.httpClient.get<Trip[]>(
-      `${this.baseApiUrl}/trips/user/as-organizer/${userId}`
+  getUsersTrips(
+    userId: string,
+    pageNumber: number,
+    as: string
+  ): Observable<[Trip[], number]> {
+    const queryParams = new HttpParams().set(
+      'pageNumber',
+      pageNumber.toString()
     );
-  }
-
-  getUsersParticipatedTrips(userId: string): Observable<Trip[]> {
-    return this.httpClient.get<Trip[]>(
-      `${this.baseApiUrl}/trips/user/as-participant/${userId}`
-    );
+    return this.httpClient
+      .get<Trip[]>(`${this.baseApiUrl}/trips/user/as-${as}/${userId}`, {
+        params: queryParams,
+        observe: 'response',
+      })
+      .pipe(
+        map((res) => {
+          return [res.body, Number(res.headers.get('X-Count'))];
+        })
+      );
   }
 
   createTrip(trip: Trip) {

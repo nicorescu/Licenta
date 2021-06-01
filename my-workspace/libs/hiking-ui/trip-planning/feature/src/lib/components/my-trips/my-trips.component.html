@@ -1,41 +1,119 @@
 <div class="my-trips" *transloco="let t; read: 'myAccount'">
   <mat-accordion class="w-100">
-    <mat-expansion-panel (opened)="getAsOrganizer()">
+    <mat-expansion-panel
+      (opened)="asOrganizerOpened()"
+      (closed)="panelClosed()"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> {{ t('organizer') }}</mat-panel-title>
         <mat-panel-description>
           {{ t('tripsYouOrganized') }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="row trips">
-        <div
-          class="col-lg-6 col-md-12 mb-2"
-          *ngFor="let trip of organizedTrips"
-        >
-          <div class="trip-container border">
-            <img [src]="buildThumbnailUrl(trip)" class="trip-picture" />
-            <div class="trip-state">{{ t(tripState[trip.state]) }}</div>
-            <div style="display: block">
-              <p class="trip-location">
-                {{ trip.locationName }}, {{ trip.country }}
-              </p>
-              <p>
-                {{ trip.startDate | date }} -
-                {{ trip.endDate | date }}
-              </p>
+      <ng-container *ngIf="trips?.length > 0; else noOrgTripsBlock">
+        <div class="row trips" #test>
+          <div class="col-lg-6 col-md-12 mb-2" *ngFor="let trip of trips">
+            <div class="trip-container border">
+              <img [src]="buildThumbnailUrl(trip)" class="trip-picture" />
+              <div class="trip-state {{ tripState[trip.state] }}">
+                <mat-icon *ngIf="trip.state === tripState.Planning"
+                  >schedule</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.InProgress"
+                  >fast_forward</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.Finished"
+                  >done</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.Canceled"
+                  >cancel</mat-icon
+                >
+                <span *ngIf="trip.state === tripState.CanceledByAuthority">
+                  <mat-icon>cancel</mat-icon>
+                  <mat-icon>admin_panel_settings</mat-icon>
+                </span>
+              </div>
+              <div class="details">
+                <p class="trip-location">
+                  {{ trip.locationName }}, {{ trip.country }}
+                </p>
+                <p>
+                  {{ trip.startDate | date: 'mediumDate':'GMT':activeLang }} -
+                  {{ trip.endDate | date: 'mediumDate':'GMT':activeLang }}
+                </p>
+              </div>
+              <div class="view-trip-btn">
+                <a routerLink="">{{ t('viewTrip') }}</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <hk-account-trips-paginator
+          [count]="tripsCount"
+          (pageChanged)="orgPageChanged($event)"
+        ></hk-account-trips-paginator>
+      </ng-container>
+      <ng-template #noOrgTripsBlock>
+        <div class="text-center h5">{{ t('noTripsAsOrganizer') }}</div>
+      </ng-template>
     </mat-expansion-panel>
-    <mat-expansion-panel (opened)="getAsParticipant()">
+    <mat-expansion-panel
+      (opened)="asParticipantOpened()"
+      (closed)="panelClosed()"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>{{ t('participant') }} </mat-panel-title>
         <mat-panel-description>
           {{ t('tripsYouParticipatedAt') }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>{{ participatedTrips | json }}</p>
+      <ng-container *ngIf="trips?.length > 0; else noPartTripsBlock">
+        <div class="row trips">
+          <div class="col-lg-6 col-md-12 mb-2" *ngFor="let trip of trips">
+            <div class="trip-container border">
+              <img [src]="buildThumbnailUrl(trip)" class="trip-picture" />
+              <div class="trip-state {{ tripState[trip.state] }}">
+                <mat-icon *ngIf="trip.state === tripState.Planning"
+                  >schedule</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.InProgress"
+                  >fast_forward</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.Finished"
+                  >done</mat-icon
+                >
+                <mat-icon *ngIf="trip.state === tripState.Canceled"
+                  >cancel</mat-icon
+                >
+                <span *ngIf="trip.state === tripState.CanceledByAuthority">
+                  <mat-icon>cancel</mat-icon>
+                  <mat-icon>admin_panel_settings</mat-icon>
+                </span>
+              </div>
+              <div class="details">
+                <p class="trip-location">
+                  {{ trip.locationName }}, {{ trip.country }}
+                </p>
+                <p>
+                  {{ trip.startDate | date: 'mediumDate':'GMT':activeLang }} -
+                  {{ trip.endDate | date: 'mediumDate':'GMT':activeLang }}
+                </p>
+              </div>
+              <div class="view-trip-btn">
+                <a routerLink="">{{ t('viewTrip') }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hk-account-trips-paginator
+          [count]="tripsCount"
+          (pageChanged)="PartPageChanged($event)"
+        ></hk-account-trips-paginator>
+      </ng-container>
+
+      <ng-template #noPartTripsBlock>
+        <div class="text-center h5">{{ t('noTripsAsParticipant') }}</div>
+      </ng-template>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

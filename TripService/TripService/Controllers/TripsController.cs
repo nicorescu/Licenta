@@ -175,9 +175,9 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId)
+        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips([FromRoute] Guid userId,[FromQuery] int pageNumber)
         {
-            return await _tripProcessor.GetUsersOrganizedTrips(userId);
+            return await _tripProcessor.GetUsersOrganizedTrips(userId, pageNumber, Response);
         }
 
         [HttpGet("/trips/user/as-participant/{userId}")]
@@ -187,9 +187,9 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId)
+        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips([FromRoute] Guid userId, [FromQuery] int pageNumber)
         {
-            return await _tripProcessor.GetUsersParticipatedTrips(userId);
+            return await _tripProcessor.GetUsersParticipatedTrips(userId, pageNumber, Response);
         }
     }
 }

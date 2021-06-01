@@ -5,8 +5,8 @@
       {{ detailedTrip.trip.country }}</mat-card-title
     >
     <mat-card-subtitle class="mat-card-subtitle">
-      {{ detailedTrip.trip.startDate | date }} -
-      {{ detailedTrip.trip.endDate | date }}
+      {{ detailedTrip.trip.startDate | date: 'mediumDate':'GMT':activeLang }} -
+      {{ detailedTrip.trip.endDate | date: 'mediumDate':'GMT':activeLang }}
     </mat-card-subtitle>
     <mat-card-content>
       {{ t('organizer') }}

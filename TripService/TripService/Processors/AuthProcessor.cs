@@ -25,9 +25,14 @@ namespace TripService.Processors
             credentials.Email = credentials.Email.ToLower();
             var result = await _authRepository.Login(credentials);
             
-            if(result == null)
+            if(result == "wrongCredentials")
             {
                 return new UnauthorizedObjectResult(result);
+            }
+
+            if(result == null)
+            {
+                return new StatusCodeResult(500);
             }
 
             return new OkObjectResult(result);

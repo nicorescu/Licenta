@@ -7,7 +7,7 @@
   width: 100%;
 
   .trip-container {
-    padding: 16px;
+    padding: 9px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -16,15 +16,45 @@
       height: 80px;
       border-radius: 100%;
       margin-right: 10px;
-      &:hover {
-        opacity: 0.8;
-      }
     }
 
     .trip-state {
       position: absolute;
-      top: 0;
+      top: 3px;
       right: 24px;
+
+      &.InProgress {
+        color: #e29810;
+      }
+
+      &.Finished {
+        color: #398839;
+      }
+
+      &.Canceled {
+        color: #b91010;
+      }
+
+      &.CanceledByAuthority {
+        color: #b91010;
+      }
+    }
+
+    .details {
+      display: block;
+
+      p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+      }
+    }
+
+    .view-trip-btn {
+      position: absolute;
+      bottom: 3px;
+      right: 25px;
     }
   }
 }

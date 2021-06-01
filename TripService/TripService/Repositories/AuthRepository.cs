@@ -40,7 +40,7 @@ namespace TripService.Repositories
                     return AuthResources.GenerateToken(result); ;
                 }
 
-                return null;
+                return "wrongCredentials";
             } catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace TripService.Processors
         Task<ActionResult<bool>> AddParticipationRequest(Guid tripId, Guid userId);
         Task<ActionResult<bool>> RemoveParticipationRequest(Guid tripId, Guid userId);
         Task<ActionResult<bool>> RemoveParticipant(Guid tripId, Guid userId);
-        Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId);
-        Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId);
+        Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId, int pageNumber, HttpResponse response);
+        Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId, int pageNumber, HttpResponse response);
     }
 }

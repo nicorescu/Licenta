@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   GooglePlacesService,
   Trip,
@@ -9,8 +9,14 @@ import {
   AppAuthenticateFacade,
   SessionToken,
 } from '@hkworkspace/shared/app-authentication/data-access';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { switchMap, takeWhile } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
+import { AccountTripsPaginatorComponent } from '../account-trips-paginator/account-trips-paginator.component';
+
+export interface PaginatorFilter {
+  requestedPage: number;
+}
 
 @Component({
   selector: 'hk-my-trips',
@@ -18,46 +24,70 @@ import { switchMap, takeWhile } from 'rxjs/operators';
   styleUrls: ['./my-trips.component.scss'],
 })
 export class MyTripsComponent implements OnInit, OnDestroy {
-  organizedTrips: Trip[];
-  participatedTrips: Trip[];
+  @ViewChild(AccountTripsPaginatorComponent, { static: false })
+  paginatorComponent: AccountTripsPaginatorComponent;
+
+  trips: Trip[];
   sessionToken$: Observable<SessionToken>;
   alive = true;
   tripState = TripState;
+  activeLang: string;
+  pageNumber: number;
+  tripsCount: number;
 
   constructor(
     private tripService: TripService,
     private authFacade: AppAuthenticateFacade,
-    private googleService: GooglePlacesService
+    private googleService: GooglePlacesService,
+    private translocoService: TranslocoService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeLang = this.translocoService.getActiveLang();
+  }
+
   ngOnDestroy(): void {
     this.alive = false;
   }
 
-  getAsOrganizer() {
-    this.authFacade.sessionToken$
-      .pipe(
-        takeWhile(() => this.alive),
-        switchMap((token) => {
-          return this.tripService.getUsersOrganizedTrips(token.loggedInId);
-        })
-      )
-      .subscribe((trips) => {
-        this.organizedTrips = trips;
-      });
+  panelClosed() {
+    if (this.paginatorComponent) {
+      this.paginatorComponent.paginator.pageIndex = 0;
+    }
   }
 
-  getAsParticipant() {
+  asOrganizerOpened() {
+    this.trips = [];
+    this.getTrips(1, 'organizer');
+  }
+  asParticipantOpened() {
+    this.trips = [];
+    this.getTrips(1, 'participant');
+  }
+
+  orgPageChanged(page: number) {
+    this.getTrips(page, 'organizer');
+  }
+
+  partPageChanged(page: number) {
+    this.getTrips(page, 'participant');
+  }
+
+  getTrips(pageNumber: number, as: string) {
     this.authFacade.sessionToken$
       .pipe(
-        takeWhile(() => this.alive),
+        take(1),
         switchMap((token) => {
-          return this.tripService.getUsersParticipatedTrips(token.loggedInId);
+          return this.tripService.getUsersTrips(
+            token.loggedInId,
+            pageNumber,
+            as
+          );
         })
       )
-      .subscribe((trips) => {
-        this.participatedTrips = trips;
+      .subscribe((res) => {
+        this.trips = res[0];
+        this.tripsCount = res[1];
       });
   }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -162,27 +163,27 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
-        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId)
+        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId, int pageNumber, HttpResponse response)
         {
-            var result = await _tripRepository.GetUsersOrganizedTrips(userId);
+            var result = await _tripRepository.GetUsersOrganizedTrips(userId, pageNumber);
 
-            if (result == null)
+            if (result == null || result.Item1 == null || result.Item1.Count == 0)
             {
                 return new NoContentResult();
             }
-
-            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+            response.Headers.Add("X-Count", result.Item2.ToString());
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result.Item1));
         }
-        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId)
+        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId, int pageNumber, HttpResponse response)
         {
-            var result = await _tripRepository.GetUsersParticipatedTrips(userId);
+            var result = await _tripRepository.GetUsersParticipatedTrips(userId, pageNumber);
 
-            if (result == null)
+            if (result == null || result.Item1 == null || result.Item1.Count == 0)
             {
                 return new NoContentResult();
             }
-
-            return new OkObjectResult(_mapper.Map<List<TripDto>>(result));
+            response.Headers.Add("X-Count", result.Item2.ToString());
+            return new OkObjectResult(_mapper.Map<List<TripDto>>(result.Item1));
         }
     }
 }

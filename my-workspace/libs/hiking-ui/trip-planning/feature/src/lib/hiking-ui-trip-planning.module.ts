@@ -72,6 +72,8 @@ import 'mousetrap';
 import { AboutUserComponent } from './components/about-user/about-user.component';
 import { FriendsComponent } from './components/friends/friends.component';
 import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { AccountTripsPaginatorComponent } from './components/account-trips-paginator/account-trips-paginator.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   imports: [
@@ -146,6 +148,8 @@ import { MyTripsComponent } from './components/my-trips/my-trips.component';
     AboutUserComponent,
     FriendsComponent,
     MyTripsComponent,
+    AccountTripsPaginatorComponent,
+    EditProfileComponent,
   ],
   providers: [NgxImageCompressService],
 })
