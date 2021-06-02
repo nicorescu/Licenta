@@ -258,11 +258,26 @@
       "firstName": "Prenume",
       "lastName": "Nume de familie",
       "yourCountry": "Țara ta",
+      "country": "Țara",
       "yourPhoneNumber": "Numarul de telefon",
       "yourBirthdate": "Data nasterii",
       "edit": "Editeaza",
       "information": "Informatii",
-      "yourEmail": "Adresa de email"
+      "yourEmail": "Adresa de email",
+      "save": "Salveaza",
+      "cancel": "Anuleaza",
+      "editPhoneNumber": "Schimba numarul de telefon",
+      "editCountry": "Schimba țara actuala",
+      "editName": "Schimba numele",
+      "editEmail": "Schimba email-ul",
+      "editBirthdate": "Schimba data nasterii",
+      "selectCountry": "Selecteaza țara",
+      "editSuccess": "Ti-ai actualizat informatiile cu succes",
+      "errors": {
+        "thisIsRequired": "Acest camp trebuie completat",
+        "invalidInput": "Te rugam sa introduci un input valid",
+        "invalid": "Invalid"
+      }
     }
   }
 }

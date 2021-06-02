@@ -20,10 +20,14 @@ namespace TripService.Models.Mapping
                         DateTime.Today.Year - domain.Birthday.Year))
                 .ForMember(dto => dto.ReviewAverage, opt => opt.MapFrom(domain => domain.Reviews.Count > 0 ? Math.Round(domain.Reviews.Average(x => x.Stars), 2) : 0))
                 .ForMember(dto => dto.ProfilePicUrl, opt => opt.MapFrom(domain => FileResources.ToBase64(domain.ProfilePicturePath)));
-            
+
             CreateMap<UserDto, User>()
                 .ForMember(domain => domain.Email, opt => opt.MapFrom(dto => dto.Email.ToLower()))
-                .ForMember(domain => domain.CountryCode, opt => opt.MapFrom(dto => dto.CountryCode.ToLower()));
+                .ForMember(domain => domain.CountryCode, opt => opt.MapFrom(dto => dto.CountryCode.ToLower()))
+                .ForMember(domain => domain.ProfilePicturePath, opt => opt.MapFrom(dto => $@"Files\ProfilePictures\{dto.Id}.png"));
+
+            CreateMap<PhoneNumber, PhoneNumberDto>();
+            CreateMap<PhoneNumberDto, PhoneNumber>();
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(domain => domain.Id.ToString()))

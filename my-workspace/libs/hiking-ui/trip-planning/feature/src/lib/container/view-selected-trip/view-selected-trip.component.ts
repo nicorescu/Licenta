@@ -345,4 +345,10 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       ) >= 0
     );
   }
+
+  public get organizerImage() {
+    return this.selectedTripResult.organizer.profilePicUrl
+      ? `data:image/png;base64,${this.selectedTripResult.organizer.profilePicUrl}`
+      : '/images/default_profile_picture.png';
+  }
 }

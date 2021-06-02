@@ -2,6 +2,7 @@ import { AccountProvider } from './account-provider.model';
 import { Review } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Role } from './role.model';
 import { Conversation } from './conversation.model';
+import { PhoneNumber } from './phone-number.model';
 
 export interface User {
   id: string;
@@ -12,7 +13,7 @@ export interface User {
   accountProvider: AccountProvider;
   password: string;
   profilePicUrl: string;
-  phoneNumber: string;
+  phoneNumber: PhoneNumber;
   birthday: Date;
   country: string;
   countryCode: string;

@@ -1,0 +1,63 @@
+@import 'theme.scss';
+
+::ng-deep .edit-field-container {
+  .name-field {
+    input {
+      text-transform: capitalize;
+    }
+  }
+
+  #phoneNumberInputContainer {
+    height: 55px;
+    width: 100%;
+    margin-bottom: 18px;
+
+    ngx-intl-tel-input {
+      height: 100%;
+
+      .separate-dial-code {
+        height: 100%;
+        width: 100%;
+
+        .iti__flag-container {
+          height: 100%;
+          width: 100%;
+        }
+        .phone-number {
+          height: 100%;
+          font-size: 16px;
+          width: 100%;
+          border-radius: 5px;
+          border-color: $input_outline_gray;
+          border-width: thin;
+          &:focus {
+            border-width: 2px;
+            border-color: $input_outline_gray;
+            outline-color: $input_outline_gray;
+          }
+          &:hover {
+            border-width: 2px;
+          }
+        }
+      }
+    }
+
+    .country-dropdown {
+      width: 100%;
+    }
+  }
+  .heading {
+    display: flex;
+    justify-content: center;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .actions-with-margin {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 65%;
+  }
+}

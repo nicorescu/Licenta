@@ -50,7 +50,7 @@
       type="text"
       class="form-control"
       readonly
-      [value]="user?.phoneNumber"
+      [value]="user?.phoneNumber.internationalNumber"
     />
     <input
       *ngIf="!user?.phoneNumber"

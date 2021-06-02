@@ -46,44 +46,6 @@
         }}</mat-error>
       </mat-form-field>
 
-      <!-- <div id="countrySelect" #countrySelect>
-        <mat-select-country
-        id="sel"
-          label="{{ t('country') }}"
-          (onCountrySelected)="onCountrySelected($event)"
-          (keydown)="keydown()"
-          formControlName="country"
-        >
-        </mat-select-country>
-      </div> -->
-
-      <!-- <div id="phoneNumberInputContainer">
-        <ngx-intl-tel-input
-          #phoneInput
-          id="phoneInput"
-          formControlName="phone"
-          [cssClass]="'phone-number'"
-          [preferredCountries]="preferredCountries"
-          [enableAutoCountrySelect]="true"
-          [enablePlaceholder]="true"
-          [searchCountryFlag]="true"
-          [searchCountryField]="[
-            searchCountryField.Iso2,
-            searchCountryField.Name
-          ]"
-          [selectFirstCountry]="false"
-          [selectedCountryISO]="countryISO.Romania"
-          [maxLength]="15"
-          [tooltipField]="tooltipLabel.Iso2"
-          [phoneValidation]="true"
-          [separateDialCode]="true"
-          [numberFormat]="phoneNumberFormat.National"
-          formControlName="phoneNumber"
-          type="text"
-        >
-        </ngx-intl-tel-input>
-      </div> -->
-
       <mat-form-field appearance="outline">
         <mat-label>{{ t('password') }}</mat-label>
         <input matInput type="password" formControlName="password" required />
@@ -102,7 +64,7 @@
       </mat-form-field>
 
       <div class="error text-danger text-center mb-2">{{ error$ | async }}</div>
-      
+
       <button type="submit" class="btn btn-primary" style="width: 80%">
         {{ t('createYourAccount') }}
       </button>

@@ -28,6 +28,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {
+  MatSelectCountryLangToken,
+  MatSelectCountryModule,
+} from '@angular-material-extensions/select-country';
 
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
@@ -54,6 +58,12 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
 import { MyAccountComponent } from './container/my-account/my-account.component';
 import { ImageActionsComponent } from './components/image-actions/image-actions.component';
 import { ImageCropperComponent } from './components/image-cropper/image-cropper.component';
+import { AboutUserComponent } from './components/about-user/about-user.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { AccountTripsPaginatorComponent } from './components/account-trips-paginator/account-trips-paginator.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditFieldComponent } from './components/edit-field/edit-field.component';
 
 import { HikingUiUiCommonUiModule } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -67,13 +77,11 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from 'ng-starrating';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
 import 'hammerjs';
 import 'mousetrap';
-import { AboutUserComponent } from './components/about-user/about-user.component';
-import { FriendsComponent } from './components/friends/friends.component';
-import { MyTripsComponent } from './components/my-trips/my-trips.component';
-import { AccountTripsPaginatorComponent } from './components/account-trips-paginator/account-trips-paginator.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditInformationComponent } from './components/edit-information/edit-information.component';
 
 @NgModule({
   imports: [
@@ -113,7 +121,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     MatMenuModule,
     ImageCropperModule,
     MatDialogModule,
+    NgxIntlTelInputModule,
     MatExpansionModule,
+    MatSelectCountryModule.forRoot('en'),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
       libraries: ['places'],
@@ -150,6 +160,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     MyTripsComponent,
     AccountTripsPaginatorComponent,
     EditProfileComponent,
+    EditFieldComponent,
+    EditInformationComponent,
   ],
   providers: [NgxImageCompressService],
 })

@@ -1,0 +1,127 @@
+<div
+  id="informationContainer"
+  *transloco="let t; read: 'myAccount.editProfile'"
+>
+  <div class="user-information">
+    <div class="section-head">
+      <h5 class="section-title">{{ t('information') }}</h5>
+      <mat-divider class="divider"></mat-divider>
+    </div>
+    <div class="section-body">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            {{ t('yourFullName') }}
+          </span>
+        </div>
+        <input
+          style="text-transform: capitalize"
+          type="text"
+          class="form-control"
+          readonly
+          [value]="user.firstName + ' ' + user.lastName"
+        />
+        <button
+          mat-button
+          color="primary"
+          class="edit-button"
+          (click)="openEditFieldDialog(editableField.Name)"
+        >
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>contact_mail</mat-icon>Email
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="user.email | lowercase"
+        />
+        <button
+          mat-button
+          color="primary"
+          class="edit-button"
+          (click)="openEditFieldDialog(editableField.Email)"
+        >
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>location_on</mat-icon>{{ t('yourCountry') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="user.country ? user.country : '- - - - -'"
+        />
+        <button
+          mat-button
+          color="primary"
+          class="edit-button"
+          (click)="openEditFieldDialog(editableField.Country)"
+        >
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>phone</mat-icon>{{ t('yourPhoneNumber') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="
+            user.phoneNumber
+              ? user.phoneNumber.internationalNumber
+              : '- - - - -'
+          "
+        />
+        <button
+          mat-button
+          color="primary"
+          class="edit-button"
+          (click)="openEditFieldDialog(editableField.Phone)"
+        >
+          {{ t('edit') }}
+        </button>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">
+            <mat-icon>date_range</mat-icon>{{ t('yourBirthdate') }}
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          [value]="user.birthday | date: 'mediumDate':'GMT':activeLang"
+        />
+        <button
+          mat-button
+          color="primary"
+          class="edit-button"
+          (click)="openEditFieldDialog(editableField.Birthdate)"
+        >
+          {{ t('edit') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

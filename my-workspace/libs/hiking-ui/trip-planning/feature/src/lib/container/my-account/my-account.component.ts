@@ -43,6 +43,10 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
 
+    this.fetchUser();
+  }
+
+  fetchUser(): void {
     this.authFacade.sessionToken$
       .pipe(
         takeWhile(() => this.alive),
@@ -59,10 +63,6 @@ export class MyAccountComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.alive = false;
-  }
-
-  imgClick() {
-    console.log('clicked');
   }
 
   saveProfilePicture(image: File) {
@@ -87,7 +87,10 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         this.toastrService.success(
           this.translocoService.translate('myAccount.imageChangedSuccess')
         );
-        this.editDialogRef.componentInstance.data = { user: user };
+        this.editDialogRef.componentInstance.data = {
+          user: user,
+          activeLang: this.activeLang,
+        };
       });
   }
 
@@ -122,6 +125,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       width: '60vw',
       data: {
         user: this.user,
+        activeLang: this.activeLang,
       },
       disableClose: true,
     });
@@ -129,6 +133,21 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((image) => {
         this.saveProfilePicture(image);
+      });
+
+    this.editDialogRef.componentInstance.informationSaved
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap(() => {
+          return this.userService.getUserById(this.user.id);
+        })
+      )
+      .subscribe((user) => {
+        this.user = user;
+        this.editDialogRef.componentInstance.data = {
+          user: user,
+          activeLang: this.activeLang,
+        };
       });
   }
 

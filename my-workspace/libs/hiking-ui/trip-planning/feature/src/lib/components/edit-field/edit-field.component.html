@@ -1,0 +1,118 @@
+<div
+  class="edit-field-container"
+  *transloco="let t; read: 'myAccount.editProfile'"
+>
+  <form [formGroup]="editForm">
+    <ng-container *ngIf="data.editingField === editableField.Name">
+      <mat-form-field class="name-field">
+        <mat-label>{{ t('firstName') }}</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error *ngIf="firstName.errors?.pattern">{{
+          t('errors.invalid')
+        }}</mat-error>
+        <mat-error *ngIf="firstName.errors?.required">{{
+          t('errors.thisIsRequired')
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name-field">
+        <mat-label>{{ t('lastName') }}</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error *ngIf="lastName.errors?.pattern">{{
+          t('errors.invalid')
+        }}</mat-error>
+        <mat-error *ngIf="lastName.errors?.required">{{
+          t('errors.thisIsRequired')
+        }}</mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <mat-form-field *ngIf="data.editingField === editableField.Email">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="email.errors?.pattern">{{
+        t('errors.invalid')
+      }}</mat-error>
+      <mat-error *ngIf="email.errors?.required">{{
+        t('errors.thisIsRequired')
+      }}</mat-error>
+    </mat-form-field>
+
+    <div *ngIf="data.editingField === editableField.Country" id="countrySelect">
+      <mat-select-country
+        #countrySelect
+        id="selectCountry"
+        label="{{ t('country') }}"
+        (onCountrySelected)="onCountrySelected($event)"
+      >
+      </mat-select-country>
+      <div class="text-danger" *ngIf="country.errors?.invalid">
+        {{ t('errors.invalid') }}
+      </div>
+    </div>
+
+    <div
+      *ngIf="data.editingField === editableField.Phone"
+      id="phoneNumberInputContainer"
+    >
+      <ngx-intl-tel-input
+        #phoneInput
+        id="phoneInput"
+        [cssClass]="'phone-number'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[
+          searchCountryField.Iso2,
+          searchCountryField.Name
+        ]"
+        [selectFirstCountry]="false"
+        [selectedCountryISO]="countryISO.Romania"
+        [maxLength]="15"
+        [tooltipField]="tooltipLabel.Iso2"
+        [phoneValidation]="true"
+        [separateDialCode]="true"
+        [numberFormat]="phoneNumberFormat.National"
+        formControlName="phone"
+      >
+      </ngx-intl-tel-input>
+    </div>
+
+    <mat-form-field *ngIf="data.editingField === editableField.Birthdate">
+      <mat-label>{{ t('yourBirthdate') }}</mat-label>
+      <input
+        matInput
+        [matDatepicker]="datePicker"
+        (click)="datePicker.open()"
+        formControlName="birthdate"
+        readonly
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+
+    <div
+      mat-dialog-actions
+      class="actions"
+      [style.marginTop]="
+        data.editingField === editableField.Phone ? '65%' : '0'
+      "
+    >
+      <button type="button" mat-button color="primary" mat-dialog-close>
+        {{ t('cancel') }}
+      </button>
+      <button
+        type="submit"
+        mat-button
+        color="primary"
+        mat-dialog-close
+        (click)="onSubmit()"
+      >
+        {{ t('save') }}
+      </button>
+    </div>
+  </form>
+</div>

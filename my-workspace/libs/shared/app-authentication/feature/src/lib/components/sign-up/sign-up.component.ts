@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     email: '',
     accountProvider: AccountProvider.TripPlanning,
     password: '',
-    phoneNumber: '',
+    phoneNumber: null,
     profilePicUrl: '',
     birthday: null,
     country: '',
@@ -63,16 +63,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   isInvalidCountry = true;
   signupForm: FormGroup;
   rendererListener: () => void;
-
-  // searchCountryField = SearchCountryField;
-  // tooltipLabel = TooltipLabel;
-  // countryISO = CountryISO;
-  // phoneNumberFormat = PhoneNumberFormat;
-  // preferredCountries: CountryISO[] = [
-  //   CountryISO.Romania,
-  //   CountryISO.UnitedStates,
-  //   CountryISO.UnitedKingdom,
-  // ];
 
   constructor(
     private formBuilder: FormBuilder,

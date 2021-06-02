@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,17 @@ export class UserService {
   ) {}
 
   getUserById(userId: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.baseApiUrl}/users/${userId}`);
+    return this.httpClient.get<User>(`${this.baseApiUrl}/users/${userId}`).pipe(
+      map((user) => {
+        const birthday = new Date(user.birthday);
+        user.birthday = new Date(
+          birthday.setMinutes(
+            birthday.getMinutes() - birthday.getTimezoneOffset()
+          )
+        );
+        return user;
+      })
+    );
   }
 
   getUsersByIds(usersIds: string[]): Observable<User[]> {
@@ -30,6 +41,10 @@ export class UserService {
     return this.httpClient.get<User[]>(
       `${this.baseApiUrl}/users/friends/${userId}`
     );
+  }
+
+  updateUser(user: User) {
+    return this.httpClient.put(`${this.baseApiUrl}/users/${user.id}`, user);
   }
 
   sendFriendRequest(friendRequest: FriendRequest): Observable<boolean> {

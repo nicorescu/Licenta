@@ -262,11 +262,26 @@
       "firstName": "First name",
       "lastName": "Last name",
       "yourCountry": " Your country",
+      "country": "Country",
       "yourPhoneNumber": "Your phone number",
       "yourBirthdate": "Your birthdate",
       "edit": "Edit",
       "information": "Information",
-      "yourEmail": "Your email address"
+      "yourEmail": "Your email address",
+      "save": "Save",
+      "cancel": "Cancel",
+      "editPhoneNumber": "Edit your phone number",
+      "editCountry": "Edit your country",
+      "editName": "Edit your name",
+      "editEmail": "Edit your email",
+      "editBirthdate": "Edit your birthdate",
+      "selectCountry": "Select country",
+      "editSuccess": "You successfully updated your information",
+      "errors": {
+        "thisIsRequired": "This is required",
+        "invalidInput": "Please, enter a valid input",
+        "invalid": "Invalid"
+      }
     }
   }
 }

@@ -28,3 +28,4 @@ export * from './lib/models/friend-request.model';
 export * from './lib/models/user-id-request.model';
 export * from './lib/models/detailed-trip.model';
 export * from './lib/models/trip-actions.model';
+export * from './lib/models/editable-field.model';

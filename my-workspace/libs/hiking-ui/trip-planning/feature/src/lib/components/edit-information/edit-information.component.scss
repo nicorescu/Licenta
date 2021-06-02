@@ -1,0 +1,47 @@
+::ng-deep #informationContainer {
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
+
+    .section-title {
+      white-space: nowrap;
+    }
+
+    .divider {
+      margin-left: 10px !important;
+      width: 100%;
+    }
+  }
+
+  .section-body {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-information {
+    .section-body {
+      flex-direction: column;
+      mat-icon {
+        margin-right: 5px;
+      }
+
+      .edit-button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+      }
+    }
+    input {
+      background-color: white;
+      cursor: default;
+    }
+
+    #inputGroup-sizing-default {
+      background-color: #f2f2f2;
+    }
+  }
+}
