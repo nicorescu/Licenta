@@ -29,4 +29,11 @@
   .no-value-set {
     text-align: center;
   }
+
+  #passwordStateButton {
+    position: absolute;
+    right: 0;
+    top: -3px;
+    z-index: 1000;
+  }
 }

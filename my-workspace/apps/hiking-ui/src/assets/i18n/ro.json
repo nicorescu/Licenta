@@ -231,6 +231,10 @@
     "country": "Tara actuala",
     "phoneNumber": "Telefon",
     "birthdate": "Data nasterii",
+    "password": "Parola",
+    "changePassword": "Schimba parola",
+    "oldPassword": "Vechea parola",
+    "newPassword": "Noua parola",
     "reviews": "Recenzii",
     "from": "Din",
     "asParticipant": "Ca participant",
@@ -247,9 +251,16 @@
     "viewTrip": "Vezi excursia",
     "noTripsAsOrganizer": "Nu ai organizat nicio excursie",
     "noTripsAsParticipant": "Nu ai participat la nicio excursie",
+    "passwordUpdatedSuccess": "Ti-ai actualizat parola cu succes",
     "actions": {
       "changeProfilePicture": "Schimba poza de profil",
       "removeProfilePicture": "Sterge poza de profil"
+    },
+    "errors": {
+      "oldPasswordIsRequired": "Trebuie sa introduci vechea parola",
+      "newPasswordIsRequired": "Trebuie sa introduci noua parola",
+      "passwordMinLength": "Parola trebuia sa contina cel putin 8 caractere",
+      "wrongPassword": "Parola este gresita"
     },
     "editProfile": {
       "editProfile": "Editează profilul",
@@ -264,6 +275,7 @@
       "edit": "Editeaza",
       "information": "Informatii",
       "yourEmail": "Adresa de email",
+      "yourPassword": "Parola ta",
       "save": "Salveaza",
       "cancel": "Anuleaza",
       "editPhoneNumber": "Schimba numarul de telefon",

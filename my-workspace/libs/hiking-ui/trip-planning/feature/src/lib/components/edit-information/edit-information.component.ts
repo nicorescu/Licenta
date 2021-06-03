@@ -44,7 +44,6 @@ export class EditInformationComponent implements OnInit, OnDestroy {
   editableField = EditableField;
   alive = true;
   obj: userEditableData;
-
   @Output()
   userUpdated = new EventEmitter();
 

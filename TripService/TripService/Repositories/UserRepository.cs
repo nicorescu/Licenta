@@ -39,8 +39,7 @@ namespace TripService.Repositories
         {
             try
             {
-                var projection = Builders<User>.Projection.Exclude(x => x.Password);
-                var result = _collection.Find(user => user.Id == userId).Project<User>(projection);
+                var result = _collection.Find(user => user.Id == userId);
                 return await result.FirstOrDefaultAsync(); ;
             }
             catch (Exception exception)
@@ -284,6 +283,31 @@ namespace TripService.Repositories
                 return null;
             }
         }
+
+        public async Task<string> ChangePassword(Guid userId, PasswordChange passwordChange)
+        {
+            try
+            {
+                var currentUser = await _collection.Find(u => u.Id.Equals(userId) && u.Password.Equals(passwordChange.OldPassword)).FirstOrDefaultAsync();
+
+                if(currentUser == null)
+                {
+                    return StringResources.WrongPassword;
+                }
+
+                var update = Builders<User>.Update.Set(x => x.Password, passwordChange.NewPassword);
+
+                var result = await _collection.UpdateOneAsync(x => x.Id.Equals(userId), update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? StringResources.PasswordUpdated : null;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return null;
+            }
+        }
+
 
     }
 }

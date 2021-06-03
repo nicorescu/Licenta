@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -31,19 +32,62 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   activeLang: string;
   friends: User[];
   editDialogRef: MatDialogRef<EditProfileComponent>;
+  passwordDialogRef: MatDialogRef<any>;
+  passwordForm: FormGroup;
 
   constructor(
     private authFacade: AppAuthenticateFacade,
     private userService: UserService,
     private toastrService: ToastService,
     private translocoService: TranslocoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
 
     this.fetchUser();
+  }
+
+  changePasswordClicked(template) {
+    this.buildPasswordForm();
+    this.passwordDialogRef = this.dialog.open(template, {
+      minWidth: '450px',
+    });
+  }
+
+  buildPasswordForm() {
+    this.passwordForm = this.formBuilder.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+    });
+  }
+
+  tryUpdatePassword() {
+    if (this.passwordForm.invalid) {
+      return;
+    }
+    this.userService
+      .updatePassword(
+        this.sessionToken.loggedInId,
+        this.passwordForm.getRawValue()
+      )
+      .pipe(
+        take(1),
+        catchError((err) => {
+          if (err.status === 401) {
+            this.oldPassword.setErrors({ wrongPassword: true });
+          }
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.passwordDialogRef.close();
+        this.toastrService.success(
+          this.translocoService.translate('myAccount.passwordUpdatedSuccess')
+        );
+      });
   }
 
   fetchUser(): void {
@@ -164,5 +208,13 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       case 2:
         break;
     }
+  }
+
+  public get oldPassword() {
+    return this.passwordForm.controls['oldPassword'];
+  }
+
+  public get newPassword() {
+    return this.passwordForm.controls['newPassword'];
   }
 }

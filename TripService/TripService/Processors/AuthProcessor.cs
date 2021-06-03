@@ -8,6 +8,7 @@ using TripService.Models.ApiModels;
 using TripService.Models.Domain;
 using TripService.Models.Dtos;
 using TripService.Repositories;
+using TripService.Resources;
 
 namespace TripService.Processors
 {
@@ -25,7 +26,7 @@ namespace TripService.Processors
             credentials.Email = credentials.Email.ToLower();
             var result = await _authRepository.Login(credentials);
             
-            if(result == "wrongCredentials")
+            if(result.Equals(StringResources.WrongCredentials))
             {
                 return new UnauthorizedObjectResult(result);
             }
@@ -47,7 +48,7 @@ namespace TripService.Processors
                 return new StatusCodeResult(500);
             }
 
-            if(result == "existing")
+            if (result.Equals(StringResources.ExistingEmail))
             {
                 return new StatusCodeResult(409);
             }

@@ -75,8 +75,6 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
           return this.tripService.getSelectedTrip(tripId);
         }),
         switchMap((res) => {
-          res.trip.endDate = new Date(res.trip.endDate);
-          res.trip.startDate = new Date(res.trip.startDate);
           this.selectedTripResult = res;
           this.isLoadingTrip = false;
           return this.googleService
@@ -295,7 +293,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
         concatMap(() => {
           return this.tripService.getTripById(this.selectedTripResult.trip.id);
         }),
-        switchMap((trip) => {
+        concatMap((trip) => {
           this.selectedTripResult.trip = trip;
           return this.userService.getUsersByIds(trip.participantsIds);
         })

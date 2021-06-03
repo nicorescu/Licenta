@@ -25,7 +25,15 @@ export class TripService {
   }
 
   getTripById(tripId: string): Observable<Trip> {
-    return this.httpClient.get<Trip>(`${this.baseApiUrl}/trips/${tripId}`);
+    return this.httpClient.get<Trip>(`${this.baseApiUrl}/trips/${tripId}`).pipe(
+      map((trip) => {
+        if (trip) {
+          trip.startDate = this.getActualDate(trip.startDate);
+          trip.endDate = this.getActualDate(trip.endDate);
+        }
+        return trip;
+      })
+    );
   }
 
   searchTrips(searchFilter: TripFilter): Observable<TripsResult> {
@@ -39,15 +47,42 @@ export class TripService {
     if (searchFilter.requesterId) {
       params = params.set('requesterId', searchFilter.requesterId);
     }
-    return this.httpClient.get<TripsResult>(`${this.baseApiUrl}/trips/search`, {
-      params: params,
-    });
+    return this.httpClient
+      .get<TripsResult>(`${this.baseApiUrl}/trips/search`, {
+        params: params,
+      })
+      .pipe(
+        map((tripsResult) => {
+          if (tripsResult) {
+            tripsResult.trips = tripsResult.trips.map((tripRes) => {
+              tripRes.trip.startDate = this.getActualDate(
+                tripRes.trip.startDate
+              );
+              tripRes.trip.endDate = this.getActualDate(tripRes.trip.endDate);
+              return tripRes;
+            });
+          }
+          return tripsResult;
+        })
+      );
   }
 
   getSelectedTrip(tripId: string): Observable<SelectedTripResult> {
-    return this.httpClient.get<SelectedTripResult>(
-      `${this.baseApiUrl}/trips/selected/${tripId}`
-    );
+    return this.httpClient
+      .get<SelectedTripResult>(`${this.baseApiUrl}/trips/selected/${tripId}`)
+      .pipe(
+        map((selectedResult) => {
+          if (selectedResult) {
+            selectedResult.trip.startDate = this.getActualDate(
+              selectedResult.trip.startDate
+            );
+            selectedResult.trip.endDate = this.getActualDate(
+              selectedResult.trip.endDate
+            );
+          }
+          return selectedResult;
+        })
+      );
   }
 
   getUsersTrips(
@@ -66,7 +101,16 @@ export class TripService {
       })
       .pipe(
         map((res) => {
-          return [res.body, Number(res.headers.get('X-Count'))];
+          let trips = res.body;
+          if (res.body) {
+            console.log(res);
+            trips = res.body.map((trip) => {
+              trip.startDate = this.getActualDate(trip.startDate);
+              trip.endDate = this.getActualDate(trip.endDate);
+              return trip;
+            });
+          }
+          return [trips, Number(res.headers.get('X-Count'))];
         })
       );
   }
@@ -109,6 +153,13 @@ export class TripService {
     return this.httpClient.delete(
       `${this.baseApiUrl}/trips/${tripId}/participation-requests`,
       { params: httpParams }
+    );
+  }
+
+  private getActualDate(dateAsString): Date {
+    const date = new Date(dateAsString);
+    return new Date(
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset())
     );
   }
 }

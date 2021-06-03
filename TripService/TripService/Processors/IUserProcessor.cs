@@ -27,6 +27,6 @@ namespace TripService.Processors
         Task<ActionResult<bool>> AddProfilePicture(Guid userId, IFormFile image);
         Task<ActionResult<bool>> RemoveProfilePicture(Guid userId);
         Task<ActionResult<List<UserDto>>> GetUserFriends(Guid userId);
-
+        Task<ActionResult<bool>> ChangePassword(Guid userId, PasswordChange passwordChange);
     }
 }

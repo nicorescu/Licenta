@@ -224,5 +224,21 @@ namespace TripService.Processors
             return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
         }
 
+        public async Task<ActionResult<bool>> ChangePassword(Guid userId, PasswordChange passwordChange)
+        {
+            var result = await _userRepository.ChangePassword(userId, passwordChange);
+            if (result.Equals(StringResources.WrongPassword))
+            {
+                return new UnauthorizedObjectResult(false);
+            }
+
+            if (result == null)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(true);
+        }
+
     }
 }

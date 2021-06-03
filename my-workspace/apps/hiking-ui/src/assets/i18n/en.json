@@ -234,6 +234,10 @@
     "country": "Country",
     "phoneNumber": "Phone",
     "birthdate": "Birth date",
+    "password": "Password",
+    "changePassword": "Change password",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
     "reviews": "Reviews",
     "from": "From",
     "asParticipant": "As participant",
@@ -251,9 +255,16 @@
     "viewTrip": "View Trip",
     "noTripsAsOrganizer": "You haven't organized any trip",
     "noTripsAsParticipant": "You haven't participated to any trip",
+    "passwordUpdatedSuccess": "You successfully updated your password",
     "actions": {
       "changeProfilePicture": "Change profile picture",
       "removeProfilePicture": "Remove profile picture"
+    },
+    "errors": {
+      "oldPasswordIsRequired": "Old password is required",
+      "newPasswordIsRequired": "A new password is required",
+      "passwordMinLength": "Password should have at least 8 characters",
+      "wrongPassword": "Your password is wrong"
     },
     "editProfile": {
       "editProfile": " Edit profile",
@@ -268,6 +279,7 @@
       "edit": "Edit",
       "information": "Information",
       "yourEmail": "Your email address",
+      "yourPassword": "Your password",
       "save": "Save",
       "cancel": "Cancel",
       "editPhoneNumber": "Edit your phone number",

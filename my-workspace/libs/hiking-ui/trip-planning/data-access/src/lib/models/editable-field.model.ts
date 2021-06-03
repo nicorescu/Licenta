@@ -4,4 +4,5 @@ export enum EditableField {
   Country,
   Phone,
   Birthdate,
+  Password,
 }

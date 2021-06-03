@@ -5,6 +5,7 @@ import { User } from '@hkworkspace/shared/app-authentication/data-access';
 import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
 import { map } from 'rxjs/operators';
+import { ChangePassword } from '../models/change-password.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,13 @@ export class UserService {
 
   updateUser(user: User) {
     return this.httpClient.put(`${this.baseApiUrl}/users/${user.id}`, user);
+  }
+
+  updatePassword(userId: string, changePasswordModel: ChangePassword) {
+    return this.httpClient.put(
+      `${this.baseApiUrl}/users/password/${userId}`,
+      changePasswordModel
+    );
   }
 
   sendFriendRequest(friendRequest: FriendRequest): Observable<boolean> {

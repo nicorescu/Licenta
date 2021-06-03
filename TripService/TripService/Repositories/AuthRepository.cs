@@ -1,11 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using TripService.Models.ApiModels;
 using TripService.Models.Domain;
@@ -40,7 +34,7 @@ namespace TripService.Repositories
                     return AuthResources.GenerateToken(result); ;
                 }
 
-                return "wrongCredentials";
+                return StringResources.WrongCredentials;
             } catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
@@ -66,7 +60,7 @@ namespace TripService.Repositories
                     return null;
                 }
             }
-            return "existing";
+            return StringResources.ExistingEmail;
         }
     }
 }

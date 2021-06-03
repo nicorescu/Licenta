@@ -197,5 +197,17 @@ namespace TripService.Controllers
         {
             return await _userProcessor.GetUserFriends(userId);
         }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPut("/users/password/{userId}")]
+        public async Task<ActionResult<bool>> ChangeUserPassword([FromRoute] Guid userId, [FromBody] PasswordChange passwordChange)
+        {
+            return await _userProcessor.ChangePassword(userId, passwordChange);
+        }
     }
 }
