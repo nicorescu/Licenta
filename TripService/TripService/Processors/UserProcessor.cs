@@ -240,5 +240,17 @@ namespace TripService.Processors
             return new OkObjectResult(true);
         }
 
+        public async Task<ActionResult<bool>> ChangeProfilePrivacy(Guid userId, bool publicProfile)
+        {
+            var result = await _userRepository.ChangeProfilePrivacy(userId, publicProfile);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
     }
 }

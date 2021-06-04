@@ -144,7 +144,7 @@ namespace TripService.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [HttpPut("/trips/cancel/{tripId}")]
+        [HttpPut("/trips/cancel/authority/{tripId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -153,6 +153,18 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId)
         {
             return await _tripProcessor.CancelTripByAuthority(tripId);
+        }
+
+        [Authorize]
+        [HttpPut("/trips/cancel/{tripId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> CancelTrip([FromRoute] Guid tripId)
+        {
+            return await _tripProcessor.CancelTrip(tripId);
         }
 
         [HttpDelete("/trips/{tripId}")]

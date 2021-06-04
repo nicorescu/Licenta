@@ -51,7 +51,7 @@
         </button>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="isOrganizer">
+    <ng-container *ngIf="isOrganizer && isPlanningOrProgress">
       <div class="separator"></div>
       <button (click)="cancelTrip()" class="btn btn-danger">
         {{ t('cancelTrip') }}

@@ -156,6 +156,10 @@ export class TripService {
     );
   }
 
+  cancelTrip(tripId: string) {
+    return this.httpClient.put(`${this.baseApiUrl}/trips/cancel/${tripId}`, {});
+  }
+
   private getActualDate(dateAsString): Date {
     const date = new Date(dateAsString);
     return new Date(

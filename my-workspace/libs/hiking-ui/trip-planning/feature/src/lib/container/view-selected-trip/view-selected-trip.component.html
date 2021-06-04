@@ -85,6 +85,21 @@
                   {{ t('body.noParticipants') }}
                 </h6>
               </div>
+              <div
+                class="trip-state"
+                *ngIf="selectedTripResult.trip.state === tripState.Canceled"
+              >
+                <h5>{{ t('canceled') }}</h5>
+              </div>
+              <div
+                class="trip-state"
+                *ngIf="
+                  selectedTripResult.trip.state ===
+                  tripState.CanceledByAuthority
+                "
+              >
+                <h5>{{ t('canceledByAuthority') }}</h5>
+              </div>
             </div>
           </ng-template>
         </mat-tab>

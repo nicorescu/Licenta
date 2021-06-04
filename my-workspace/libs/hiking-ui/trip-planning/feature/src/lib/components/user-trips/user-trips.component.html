@@ -43,7 +43,9 @@
                 </p>
               </div>
               <div class="view-trip-btn">
-                <a routerLink="">{{ t('viewTrip') }}</a>
+                <a routerLink="" (click)="viewTrip(trip.id)">{{
+                  t('viewTrip')
+                }}</a>
               </div>
             </div>
           </div>
@@ -100,7 +102,9 @@
                 </p>
               </div>
               <div class="view-trip-btn">
-                <a routerLink="">{{ t('viewTrip') }}</a>
+                <a routerLink="" (click)="viewTrip(trip.id)">{{
+                  t('viewTrip')
+                }}</a>
               </div>
             </div>
           </div>

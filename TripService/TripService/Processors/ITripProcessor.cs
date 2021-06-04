@@ -16,6 +16,7 @@ namespace TripService.Processors
         Task<ActionResult<SelectedTripResultDto>> GetSelectedTrip(Guid tripId);
         Task<ActionResult<bool>> InsertNewTrip(TripDto trip);
         Task<ActionResult<bool>> CancelTripByAuthority(Guid tripId);
+        Task<ActionResult<bool>> CancelTrip(Guid tripId);
         Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto trip);
         Task<ActionResult<bool>> DeleteTrip(Guid tripId);
         Task<ActionResult<bool>> AddParticipant(Guid tripId, Guid participantId);

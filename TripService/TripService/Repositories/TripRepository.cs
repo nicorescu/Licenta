@@ -201,6 +201,23 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> CancelTrip(Guid tripId)
+        {
+            try
+            {
+                var tripFilter = Builders<Trip>.Filter.Eq(trip => trip.Id, tripId);
+                var tripUpdate = Builders<Trip>.Update.Set(trip => trip.State, TripState.Canceled);
+
+                var result = await _collection.UpdateOneAsync(tripFilter, tripUpdate);
+                return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                return false;
+            }
+        }
+
         public async Task<bool> UpdateTrip(Guid tripId, Trip trip)
         {
             try
@@ -282,8 +299,8 @@ namespace TripService.Repositories
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
+                .AppendStage<BsonDocument>(AtlasSearchExtensions.ProjectParticipantsLength())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetSlotsNumberStage())
-                .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectTripStage())
                 .AppendStage<DetailedTrip>(AtlasSearchExtensions.LookupOrganizerStage())
                 .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectFullTripStage())
                 .AppendStage<DetailedTrip>(AtlasSearchExtensions.ProjectWithoutPasswords());

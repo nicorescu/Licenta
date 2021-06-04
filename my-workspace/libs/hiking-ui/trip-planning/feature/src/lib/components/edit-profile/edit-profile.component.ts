@@ -4,6 +4,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditableField } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -25,19 +26,34 @@ export interface DialogData {
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit, OnDestroy {
   imageSaved = new EventEmitter();
   editableField = EditableField;
   informationSaved = new EventEmitter();
+  publicProfile$: BehaviorSubject<boolean>;
+  profilePrivacyChanged = new EventEmitter();
+
+  alive = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialog: MatDialog,
     private toastrService: ToastService,
     private translocoService: TranslocoService
-  ) {}
+  ) {
+    this.publicProfile$ = new BehaviorSubject(data.user.publicProfile);
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.publicProfile$.pipe(takeWhile(() => this.alive)).subscribe((val) => {
+      console.log('val changed', val);
+      this.profilePrivacyChanged.emit(val);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.alive = false;
+  }
 
   imagePicked(event) {
     const dialogRef = this.dialog.open(ImageCropperComponent, {
@@ -64,5 +80,13 @@ export class EditProfileComponent implements OnInit {
     return this.data?.user?.profilePicUrl
       ? `data:image/png;base64,${this.data?.user?.profilePicUrl}`
       : '/images/default_profile_picture.png';
+  }
+
+  public get publicProfile() {
+    return this.publicProfile$.value;
+  }
+
+  public set publicProfile(v: boolean) {
+    this.publicProfile$.next(v);
   }
 }

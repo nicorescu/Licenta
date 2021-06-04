@@ -196,7 +196,7 @@ namespace TripService.Extensions
 
         public static BsonDocument GetSlotsNumberStage()
         {
-            const string stage = "{\"$match\": {\"$expr\": {\"$gt\": [\"SlotsNumber\",\"ParticipantsIds.length\"]}}}";
+            const string stage = "{\"$match\": {\"$expr\": {\"$gt\": [\"$Trip.SlotsNumber\",\"$length\"]}}}";
             return BsonDocument.Parse(stage);
         }
 
@@ -262,6 +262,11 @@ namespace TripService.Extensions
             return BsonDocument.Parse(stage);
         }
 
+        public static BsonDocument ProjectParticipantsLength()
+        {
+            const string stage = "{\"$project\": {\"_id\":0, \"Trip\": \"$$ROOT\", \"length\": {\"$size\": \"$ParticipantsIds\"}}}";
+            return BsonDocument.Parse(stage);
+        }
         public static BsonDocument ProjectFullTripStage()
         {
             const string stage = "{\"$project\": {\"Trip\": \"$Trip\", \"Organizer\": {$arrayElemAt: [\"$Organizer\", 0]}, \"Participants\": \"$Participants\"}}";

@@ -23,4 +23,5 @@ export interface User {
   reviewAverage: number;
   conversations: Conversation[];
   friendRequests: string[];
+  publicProfile: boolean;
 }

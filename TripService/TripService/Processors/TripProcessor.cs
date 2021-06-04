@@ -137,6 +137,19 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
+        public async Task<ActionResult<bool>> CancelTrip(Guid tripId)
+        {
+
+            var result = await _tripRepository.CancelTrip(tripId);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
 
         public async Task<ActionResult<bool>> UpdateTrip(Guid tripId, TripDto tripDto)
         {

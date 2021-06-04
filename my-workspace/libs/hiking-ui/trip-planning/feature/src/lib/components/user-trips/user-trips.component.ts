@@ -1,4 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import {
   GooglePlacesService,
   Trip,
@@ -11,7 +19,7 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap, take, takeWhile } from 'rxjs/operators';
 import { AccountTripsPaginatorComponent } from '../account-trips-paginator/account-trips-paginator.component';
 
 export interface PaginatorFilter {
@@ -19,13 +27,18 @@ export interface PaginatorFilter {
 }
 
 @Component({
-  selector: 'hk-my-trips',
-  templateUrl: './my-trips.component.html',
-  styleUrls: ['./my-trips.component.scss'],
+  selector: 'hk-user-trips',
+  templateUrl: './user-trips.component.html',
+  styleUrls: ['./user-trips.component.scss'],
 })
-export class MyTripsComponent implements OnInit, OnDestroy {
+export class UserTripsComponent implements OnInit, OnDestroy {
   @ViewChild(AccountTripsPaginatorComponent, { static: false })
   paginatorComponent: AccountTripsPaginatorComponent;
+
+  @Input()
+  userId: string;
+  @Output()
+  viewTripClicked = new EventEmitter<string>();
 
   trips: Trip[];
   sessionToken$: Observable<SessionToken>;
@@ -37,7 +50,6 @@ export class MyTripsComponent implements OnInit, OnDestroy {
 
   constructor(
     private tripService: TripService,
-    private authFacade: AppAuthenticateFacade,
     private googleService: GooglePlacesService,
     private translocoService: TranslocoService
   ) {}
@@ -74,21 +86,17 @@ export class MyTripsComponent implements OnInit, OnDestroy {
   }
 
   getTrips(pageNumber: number, as: string) {
-    this.authFacade.sessionToken$
-      .pipe(
-        take(1),
-        switchMap((token) => {
-          return this.tripService.getUsersTrips(
-            token.loggedInId,
-            pageNumber,
-            as
-          );
-        })
-      )
+    this.tripService
+      .getUsersTrips(this.userId, pageNumber, as)
+      .pipe(takeWhile(() => this.alive))
       .subscribe((res) => {
         this.trips = res[0];
         this.tripsCount = res[1];
       });
+  }
+
+  viewTrip(id: string) {
+    this.viewTripClicked.emit(id);
   }
 
   buildThumbnailUrl(trip: Trip) {

@@ -28,6 +28,6 @@ namespace TripService.Models.Dtos
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }
         public List<Guid> FriendRequests { get; set; }
-
+        public bool PublicProfile { get; set; }
     }
 }

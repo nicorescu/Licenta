@@ -12,8 +12,25 @@
     &:active {
       box-shadow: none;
       &:hover {
-        background-color: $col_button_active;
+        background-color: $col_button_active_blue;
         box-shadow: $col_blue_selected;
+      }
+    }
+  }
+
+  .btn-danger {
+    background-color: $col_red_main;
+    border-color: $col_red_main;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+      &:hover {
+        background-color: $col_button_active_red;
+        box-shadow: $col_red_main;
       }
     }
   }

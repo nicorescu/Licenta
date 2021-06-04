@@ -59,6 +59,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     age: 0,
     reviewAverage: 0,
     friendRequests: [],
+    publicProfile: false
   };
   isInvalidCountry = true;
   signupForm: FormGroup;

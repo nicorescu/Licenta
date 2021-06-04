@@ -308,6 +308,24 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> ChangeProfilePrivacy(Guid userId, bool publicProfile)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Set(x => x.PublicProfile, publicProfile);
+
+                var result = await _collection.UpdateOneAsync(filter, update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
 
     }
 }

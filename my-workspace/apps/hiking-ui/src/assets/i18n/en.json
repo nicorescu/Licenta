@@ -209,11 +209,15 @@
       },
       "requestSubmitted": "Your participation request has been submitted",
       "requestCancelled": "Your participation request has been cancelled",
-      "successfullyJoinedTrip": "You successfully joined the trip"
+      "successfullyJoinedTrip": "You successfully joined the trip",
+      "canceled": "Canceled",
+      "canceledByAuthority": "Canceled by authority"
     }
   },
   "toast": {
-    "signInRequired": "You need to sign-in first"
+    "signInRequired": "You need to sign-in first",
+    "successfullyCanceledTrip": "You successfully canceled your trip",
+    "errorCancelingTrip": "We couldn't cancel your trip, try again later"
   },
   "myAccount": {
     "edit": " Edit profile",
@@ -267,6 +271,7 @@
       "wrongPassword": "Your password is wrong"
     },
     "editProfile": {
+      "publicProfile": "Public profile",
       "editProfile": " Edit profile",
       "profilePicture": "Profile picture",
       "yourFullName": "Your full name",

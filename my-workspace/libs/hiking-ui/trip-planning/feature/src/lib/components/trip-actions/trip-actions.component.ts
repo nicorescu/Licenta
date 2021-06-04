@@ -4,6 +4,7 @@ import {
   SelectedTripResult,
   TripActions,
   TripPrivacy,
+  TripState,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { SessionToken } from '@hkworkspace/shared/app-authentication/data-access';
 
@@ -17,6 +18,7 @@ export class TripActionsComponent implements OnInit {
   selectedTripResult: SelectedTripResult;
   @Input()
   sessionToken: SessionToken;
+  tripState = TripState;
 
   @Output()
   actionClicked = new EventEmitter();
@@ -87,6 +89,13 @@ export class TripActionsComponent implements OnInit {
       this.selectedTripResult.trip.requests.indexOf(
         this.sessionToken.loggedInId
       ) >= 0
+    );
+  }
+
+  public get isPlanningOrProgress() {
+    return (
+      this.selectedTripResult.trip.state === this.tripState.Planning ||
+      this.selectedTripResult.trip.state === this.tripState.InProgress
     );
   }
 }

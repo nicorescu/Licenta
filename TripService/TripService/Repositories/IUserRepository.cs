@@ -27,6 +27,6 @@ namespace TripService.Repositories
         Task<bool> RemoveProfilePicture(Guid userId);
         Task<List<User>> GetUserFriends(Guid userId);
         Task<string> ChangePassword(Guid userId, PasswordChange passwordChange);
-
+        Task<bool> ChangeProfilePrivacy(Guid userId, bool publicProfile);
     }
 }

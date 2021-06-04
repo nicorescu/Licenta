@@ -4,9 +4,11 @@ import {
   GooglePlacesService,
   PlanningFacade,
   SelectedTripResult,
+  Trip,
   TripActions,
   TripFilter,
   TripPrivacy,
+  TripState,
   UserIdRequest,
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
@@ -44,6 +46,8 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
   sessionToken$: Observable<SessionToken>;
   sessionToken: SessionToken;
   alive = true;
+  tripState = TripState;
+
   constructor(
     private planningFacade: PlanningFacade,
     private authFacade: AppAuthenticateFacade,
@@ -303,7 +307,26 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       });
   }
 
-  cancelTrip() {}
+  cancelTrip() {
+    this.tripService
+      .cancelTrip(this.selectedTripResult.trip.id)
+      .pipe(
+        take(1),
+        concatMap(() => {
+          return this.tripService.getTripById(this.selectedTripResult.trip.id);
+        }),
+        catchError(() => {
+          this.toastrService.error('toast.errorCancelingTrip');
+          return of();
+        })
+      )
+      .subscribe((trip: Trip) => {
+        this.selectedTripResult.trip = trip;
+        this.toastrService.success(
+          this.translocoService.translate('toast.successfullyCanceledTrip')
+        );
+      });
+  }
 
   actionClicked(action: TripActions) {
     switch (action) {

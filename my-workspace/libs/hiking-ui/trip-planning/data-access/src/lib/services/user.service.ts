@@ -125,6 +125,18 @@ export class UserService {
     );
   }
 
+  changeProfilePrivacy(userId: string, publicProfile: boolean) {
+    const queryParams = new HttpParams().append(
+      'publicProfile',
+      publicProfile ? 'true' : 'false'
+    );
+    return this.httpClient.put(
+      `${this.baseApiUrl}/users/profile-privacy/${userId}`,
+      {},
+      { params: queryParams }
+    );
+  }
+
   private IdsToQueryParam(ids: string[]): string {
     return ids.length > 0 ? `?ids=${ids.join('&ids=')}` : '';
   }

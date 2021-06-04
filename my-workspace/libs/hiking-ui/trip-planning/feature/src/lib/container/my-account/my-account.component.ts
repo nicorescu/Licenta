@@ -2,7 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import {
+  PlanningFacade,
+  UserService,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
   SessionToken,
@@ -10,7 +13,7 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -41,13 +44,17 @@ export class MyAccountComponent implements OnInit, OnDestroy {
     private toastrService: ToastService,
     private translocoService: TranslocoService,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private planningFacade: PlanningFacade
   ) {}
 
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
-
     this.fetchUser();
+  }
+
+  viewTrip(tripId: string) {
+    this.planningFacade.selectTrip(tripId);
   }
 
   changePasswordClicked(template) {
@@ -101,7 +108,6 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       )
       .subscribe((user) => {
         this.user = user;
-        console.log(this.user);
       });
   }
 
@@ -192,6 +198,24 @@ export class MyAccountComponent implements OnInit, OnDestroy {
           user: user,
           activeLang: this.activeLang,
         };
+      });
+
+    this.editDialogRef.componentInstance.profilePrivacyChanged
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap((val) => {
+          console.log('a ajuns si aici', val);
+          return this.userService.changeProfilePrivacy(
+            this.sessionToken.loggedInId,
+            val
+          );
+        }),
+        concatMap(() => {
+          return this.userService.getUserById(this.sessionToken.loggedInId);
+        })
+      )
+      .subscribe((user) => {
+        this.user = user;
       });
   }
 

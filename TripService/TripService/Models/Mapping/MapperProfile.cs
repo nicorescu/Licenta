@@ -48,9 +48,6 @@ namespace TripService.Models.Mapping
             CreateMap<Message, MessageDto>();
             CreateMap<MessageDto, Message>();
 
-            CreateMap<TripRequest, ApprovalRequestDto>();
-            CreateMap<ApprovalRequestDto, TripRequest>();
-
             CreateMap<SelectedTripResult, SelectedTripResultDto>();
             CreateMap<SelectedTripResultDto, SelectedTripResult>();
 

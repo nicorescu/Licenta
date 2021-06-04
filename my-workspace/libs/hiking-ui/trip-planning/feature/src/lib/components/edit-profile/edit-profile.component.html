@@ -1,5 +1,14 @@
 <div class="edit-profile" *transloco="let t; read: 'myAccount.editProfile'">
   <div class="container-heading">
+    <div class="profile-privacy-switcher">
+      <mat-slide-toggle
+        [(ngModel)]="publicProfile"
+        name="publicProfile"
+        color="primary"
+      >
+        {{ t('publicProfile') }}
+      </mat-slide-toggle>
+    </div>
     <div class="title">
       <h5>{{ t('editProfile') }}</h5>
     </div>

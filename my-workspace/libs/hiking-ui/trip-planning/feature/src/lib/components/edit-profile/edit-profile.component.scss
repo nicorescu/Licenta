@@ -1,6 +1,11 @@
 .edit-profile {
   .container-heading {
     display: flex;
+
+    .profile-privacy-switcher {
+      position: absolute;
+    }
+
     .title {
       display: flex;
       justify-content: center;

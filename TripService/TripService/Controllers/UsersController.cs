@@ -209,5 +209,17 @@ namespace TripService.Controllers
         {
             return await _userProcessor.ChangePassword(userId, passwordChange);
         }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpPut("/users/profile-privacy/{userId}")]
+        public async Task<ActionResult<bool>> ChangeProfilePrivacy([FromRoute] Guid userId, [FromQuery] bool publicProfile)
+        {
+            return await _userProcessor.ChangeProfilePrivacy(userId, publicProfile);
+        }
     }
 }

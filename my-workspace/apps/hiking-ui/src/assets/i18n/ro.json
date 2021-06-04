@@ -205,11 +205,15 @@
       },
       "requestSubmitted": "Cererea ta de participare a fost trimisa",
       "requestCancelled": "Cererea de participare a fost anulata",
-      "successfullyJoinedTrip": "Te-ai alaturat cu succes excursiei"
+      "successfullyJoinedTrip": "Te-ai alaturat cu succes excursiei",
+      "canceled": "Anulat",
+      "canceledByAuthority": "Anulat de catre autoritate"
     }
   },
   "toast": {
-    "signInRequired": "Trebuie sa te autentifici"
+    "signInRequired": "Trebuie sa te autentifici",
+    "successfullyCanceledTrip": "Ai anulat excursia cu succes",
+    "errorCancelingTrip": "Nu s-a putut anula excursia. Incearca, din nou, mai tarziu"
   },
   "myAccount": {
     "edit": " Editeaza profilul",
@@ -263,6 +267,7 @@
       "wrongPassword": "Parola este gresita"
     },
     "editProfile": {
+      "publicProfile": "Profil public",
       "editProfile": "Editează profilul",
       "profilePicture": "Fotografie de profil",
       "yourFullName": "Numele tau complet",
