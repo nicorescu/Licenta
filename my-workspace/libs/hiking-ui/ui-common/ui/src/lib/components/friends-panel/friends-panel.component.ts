@@ -1,16 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
-import {
-  RequestState,
-  UserService,
-} from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
   User,
 } from '@hkworkspace/shared/app-authentication/data-access';
-import { ToastService } from '@hkworkspace/utils';
-import { TranslocoService } from '@ngneat/transloco';
 import { mergeMap, switchMap, take, takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 

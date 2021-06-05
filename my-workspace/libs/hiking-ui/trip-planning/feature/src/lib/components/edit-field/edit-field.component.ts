@@ -105,7 +105,7 @@ export class EditFieldComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (this.countrySelect) {
       this.countrySelect.placeHolder = this.translocoService.translate(
-        'myAccount.editProfile.selectCountry'
+        'profile.editProfile.selectCountry'
       );
       this.countrySelect.inputChanged = (val) => {
         if (val != '') {
@@ -118,7 +118,7 @@ export class EditFieldComponent implements OnInit, AfterViewInit {
 
     if (this.phoneInput) {
       this.phoneInput.searchCountryPlaceholder = this.translocoService.translate(
-        'myAccount.editProfile.selectCountry'
+        'profile.editProfile.selectCountry'
       );
 
       this.phoneSelector = document.getElementById(

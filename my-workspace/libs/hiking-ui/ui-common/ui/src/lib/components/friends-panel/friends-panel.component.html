@@ -3,7 +3,7 @@
     id="openMenuButton"
     mat-icon-button
     [matBadge]="requesters?.length"
-    [matBadgeHidden]="!(requesters?.length < 0)"
+    [matBadgeHidden]="!(requesters?.length > 0)"
     matBadgeColor="#00437B"
     [matMenuTriggerFor]="menu"
     (menuOpened)="menuOpened()"
@@ -35,7 +35,7 @@
           <span
             id="friendRequestsLabel"
             [matBadge]="requesters?.length"
-            [matBadgeHidden]="!(requesters?.length < 0)"
+            [matBadgeHidden]="!(requesters?.length > 0)"
             >{{ t('friendRequests') }}</span
           >
         </ng-template>

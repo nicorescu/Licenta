@@ -8,3 +8,4 @@ export * from './lib/container/trip-planning/trip-planning.component';
 export * from './lib/container/trips-list/trips-list.component';
 export * from './lib/container/view-selected-trip/view-selected-trip.component';
 export * from './lib/container/my-account/my-account.component';
+export * from './lib/container/public-profile/public-profile.component';

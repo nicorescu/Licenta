@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 .about-field {
   display: flex;
   justify-content: center;
@@ -6,7 +8,8 @@
 
 .input-group {
   #inputGroup-sizing-default {
-    background-color: #f2f2f2;
+    background-color: $col_blue_main;
+    color: #ffffffd4;
   }
 
   mat-icon {
@@ -35,5 +38,12 @@
     right: 0;
     top: -3px;
     z-index: 1000;
+  }
+
+  .phone-number-hint {
+    margin-left: 6px;
+    color: #848383;
+    position: absolute;
+    bottom: -19px;
   }
 }

@@ -43,7 +43,6 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
   isLoadingTrip = true;
   isLoadingAttractions = true;
   isLoadingHotels = true;
-  sessionToken$: Observable<SessionToken>;
   sessionToken: SessionToken;
   alive = true;
   tripState = TripState;
@@ -61,10 +60,11 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getFullTripDetails();
-    this.sessionToken$ = this.authFacade.sessionToken$;
-    this.sessionToken$.pipe(takeWhile(() => this.alive)).subscribe((token) => {
-      this.sessionToken = token;
-    });
+    this.authFacade.sessionToken$
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((token) => {
+        this.sessionToken = token;
+      });
   }
 
   ngOnDestroy(): void {

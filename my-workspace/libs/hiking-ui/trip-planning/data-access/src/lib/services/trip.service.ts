@@ -38,7 +38,7 @@ export class TripService {
 
   searchTrips(searchFilter: TripFilter): Observable<TripsResult> {
     let params = new HttpParams()
-      .set('startDate', searchFilter.startDate.toISOString())
+      .set('startDate', searchFilter.startDate?.toISOString())
       .set('endDate', searchFilter.endDate.toISOString())
       .set('keywords', searchFilter.keywords)
       .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false')

@@ -1,4 +1,4 @@
-<div class="my-trips" *transloco="let t; read: 'myAccount'">
+<div class="my-trips" *transloco="let t; read: 'profile'">
   <mat-accordion class="w-100">
     <mat-expansion-panel
       (opened)="asOrganizerOpened()"
@@ -7,7 +7,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title> {{ t('organizer') }}</mat-panel-title>
         <mat-panel-description>
-          {{ t('tripsYouOrganized') }}
+          {{ selfInfo ? t('tripsYouOrganized') : tripsOrganizedByString }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <ng-container *ngIf="trips?.length > 0; else noOrgTripsBlock">
@@ -66,7 +66,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>{{ t('participant') }} </mat-panel-title>
         <mat-panel-description>
-          {{ t('tripsYouParticipatedAt') }}
+          {{ selfInfo ? t('tripsYouParticipatedAt') : tripsWhereParticipated }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <ng-container *ngIf="trips?.length > 0; else noPartTripsBlock">

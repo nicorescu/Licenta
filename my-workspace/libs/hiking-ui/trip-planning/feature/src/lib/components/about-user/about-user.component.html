@@ -1,4 +1,4 @@
-<ng-container *transloco="let t; read: 'myAccount'">
+<ng-container *transloco="let t; read: 'profile'">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">
@@ -47,11 +47,14 @@
     </div>
     <input
       *ngIf="user?.phoneNumber"
-      type="text"
+      [type]="selfInfo || isFriend ? 'text' : 'password'"
       class="form-control"
       readonly
       [value]="user?.phoneNumber.internationalNumber"
     />
+    <div *ngIf="!(selfInfo || isFriend)" class="phone-number-hint">
+      {{ t('friendNeededForPhone') }}
+    </div>
     <input
       *ngIf="!user?.phoneNumber"
       type="text"
@@ -61,7 +64,13 @@
     />
   </div>
 
-  <div class="input-group mb-3">
+  <div
+    class="input-group mb-3"
+    [ngStyle]="{
+      'margin-top':
+        !(selfInfo || isFriend) && user?.phoneNumber ? '23px' : '0px'
+    }"
+  >
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">
         <mat-icon>date_range</mat-icon>{{ t('birthdate') }}

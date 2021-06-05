@@ -9,7 +9,8 @@ import { ImageCropperComponent } from '../image-cropper/image-cropper.component'
 export class ImageActionsComponent implements OnInit {
   @Input()
   imageUrl: string;
-
+  @Input()
+  isOwnProfile: boolean;
   @Output()
   imageSaved = new EventEmitter();
   @Output()

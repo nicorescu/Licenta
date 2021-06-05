@@ -1,0 +1,9 @@
+<div id="publicProfile" class="container">
+  <hk-profile
+    [user]="user"
+    [isFriend]="isFriend"
+    [friends]="friends"
+    (selectedTabChanged)="tabChanged($event)"
+    (viewTripClicked)="viewTrip($event)"
+  ></hk-profile>
+</div>

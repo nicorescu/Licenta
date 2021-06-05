@@ -16,6 +16,7 @@ import {
 import {
   AppAuthenticateFacade,
   SessionToken,
+  User,
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
@@ -36,7 +37,10 @@ export class UserTripsComponent implements OnInit, OnDestroy {
   paginatorComponent: AccountTripsPaginatorComponent;
 
   @Input()
-  userId: string;
+  user: User;
+  @Input()
+  selfInfo: boolean;
+
   @Output()
   viewTripClicked = new EventEmitter<string>();
 
@@ -87,7 +91,7 @@ export class UserTripsComponent implements OnInit, OnDestroy {
 
   getTrips(pageNumber: number, as: string) {
     this.tripService
-      .getUsersTrips(this.userId, pageNumber, as)
+      .getUsersTrips(this.user.id, pageNumber, as)
       .pipe(takeWhile(() => this.alive))
       .subscribe((res) => {
         this.trips = res[0];
@@ -103,5 +107,29 @@ export class UserTripsComponent implements OnInit, OnDestroy {
     return trip.thumbnailReference
       ? this.googleService.getPhotoUrl(trip.thumbnailReference, 300)
       : 'https://images.squarespace-cdn.com/content/v1/5cd7858eb2cf79a5a235107d/1565012036882-S1ZN4QGVU9OWILB0YEP4/ke17ZwdGBToddI8pDm48kLFfN1SSJUxHjIWCJVFQai97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmHHRMqniMJbuwH8EZRFFu5dyxLza0FK77aM_A2IHWL5rcoiWpqr8t45NJCDd8WEV-/social+1.jpg';
+  }
+
+  formatString(value: string, params: string[]) {
+    let theString = value;
+    for (let i = 0; i < params.length; i++) {
+      const regEx = new RegExp('\\{' + i + '\\}', 'gm');
+      theString = theString.replace(regEx, params[i]);
+    }
+
+    return theString;
+  }
+
+  public get tripsOrganizedByString() {
+    return this.formatString(
+      this.translocoService.translate('profile.tripsOrganizedBy'),
+      [this.user.firstName]
+    );
+  }
+
+  public get tripsWhereParticipated() {
+    return this.formatString(
+      this.translocoService.translate('profile.tripsWhereParticipated'),
+      [this.user.firstName]
+    );
   }
 }

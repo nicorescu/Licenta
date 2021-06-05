@@ -46,7 +46,6 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.publicProfile$.pipe(takeWhile(() => this.alive)).subscribe((val) => {
-      console.log('val changed', val);
       this.profilePrivacyChanged.emit(val);
     });
   }
@@ -71,7 +70,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   userUpdated() {
     this.toastrService.success(
-      this.translocoService.translate('myAccount.editProfile.editSuccess')
+      this.translocoService.translate('profile.editProfile.editSuccess')
     );
     this.informationSaved.emit();
   }

@@ -82,6 +82,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import 'hammerjs';
 import 'mousetrap';
 import { EditInformationComponent } from './components/edit-information/edit-information.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PublicProfileComponent } from './container/public-profile/public-profile.component';
 
 @NgModule({
   imports: [
@@ -162,6 +164,8 @@ import { EditInformationComponent } from './components/edit-information/edit-inf
     EditProfileComponent,
     EditFieldComponent,
     EditInformationComponent,
+    ProfileComponent,
+    PublicProfileComponent,
   ],
   providers: [NgxImageCompressService],
 })

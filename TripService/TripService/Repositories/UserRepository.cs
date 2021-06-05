@@ -196,11 +196,18 @@ namespace TripService.Repositories
         {
             try
             {
-                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var firstFilter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var secondFilter = Builders<User>.Filter.Eq(x => x.Id, friendToRemoveId);
 
+                var firstUpdate = Builders<User>.Update.PullAll(x => x.Friends, new Guid[] { friendToRemoveId });
+                var secondUpdate = Builders<User>.Update.PullAll(x => x.Friends, new Guid[] { userId });
 
-                var update = Builders<User>.Update.PullAll(x => x.Friends, new Guid[] { friendToRemoveId });
-                var result = await _collection.UpdateOneAsync(filter, update);
+                var requests = new List<UpdateOneModel<User>> {
+                    new UpdateOneModel<User>(firstFilter, firstUpdate),
+                    new UpdateOneModel<User>(secondFilter, secondUpdate)
+                };
+                var result = await _collection.BulkWriteAsync(requests);
+
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)
@@ -290,7 +297,7 @@ namespace TripService.Repositories
             {
                 var currentUser = await _collection.Find(u => u.Id.Equals(userId) && u.Password.Equals(passwordChange.OldPassword)).FirstOrDefaultAsync();
 
-                if(currentUser == null)
+                if (currentUser == null)
                 {
                     return StringResources.WrongPassword;
                 }

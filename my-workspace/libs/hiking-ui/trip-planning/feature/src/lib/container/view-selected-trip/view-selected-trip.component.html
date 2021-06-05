@@ -18,7 +18,9 @@
                     <mat-divider class="divider"></mat-divider>
                     <div class="text-center" style="margin: 10px">
                       <a
-                        routerLink="/user-profile"
+                        routerLink="/public-profile/{{
+                          selectedTripResult.organizer.id
+                        }}"
                         style="margin-right: 5px; text-transform: capitalize"
                         >{{ selectedTripResult.organizer.firstName }}
                         {{ selectedTripResult.organizer.lastName }}</a
@@ -69,7 +71,9 @@
                         class="img-fluid responsive participant-picture"
                         src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
                       />
-                      <a routerLink="/user-profile" style="margin-right: 5px"
+                      <a
+                        routerLink="/public-profile/{{ participant.id }}"
+                        style="margin-right: 5px"
                         >{{ participant.firstName }}
                         {{ participant.lastName }}</a
                       >

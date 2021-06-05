@@ -8,7 +8,7 @@ namespace TripService.Models.Domain
     public class Review
     {
         public Guid Id { get; set; }
-        public User Author { get; set; }
+        public Guid ReviewerId { get; set; }
         public string Message { get; set; }
         public int Stars { get; set; }
     }

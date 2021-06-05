@@ -1,0 +1,77 @@
+<div class="user-profile" *transloco="let t; read: 'profile'">
+  <div class="profile-head">
+    <div class="profile-actions" *ngIf="isOwnProfile">
+      <ng-container>
+        <button
+          mat-icon-button
+          class="more-settings"
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #menu>
+          <button mat-menu-item (click)="changePassword()">
+            {{ t('changePassword') }}
+          </button>
+        </mat-menu>
+      </ng-container>
+
+      <button class="btn btn-primary edit-profile" (click)="editProfile()">
+        <mat-icon>edit</mat-icon>
+        {{ t('edit') }}
+      </button>
+    </div>
+    <ng-container>
+      <hk-image-actions
+        [imageUrl]="user?.profilePicUrl"
+        (imageSaved)="saveProfilePicture($event)"
+        (removeImageConfirmed)="removeProfilePic()"
+        [isOwnProfile]="isOwnProfile"
+      ></hk-image-actions>
+    </ng-container>
+    <div class="text-center h4 user-full-name">
+      {{ user?.firstName }} {{ user?.lastName }}
+      <hk-friend-options
+        *ngIf="!isOwnProfile"
+        [isFriend]="isFriend"
+        [isFriendRequested]="isFriendRequested"
+        (friendRequestedEmitter)="onFriendRequested()"
+        (unfriendEmitter)="onUnfriend()"
+        (cancelRequestEmitter)="onCancelFriendRequest()"
+      ></hk-friend-options>
+    </div>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div class="profile-body">
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
+      <mat-tab [label]="t('about')">
+        <ng-template matTabContent>
+          <div class="about" style="padding: 20px">
+            <hk-about-user
+              [user]="user"
+              [selfInfo]="isOwnProfile"
+              [isFriend]="isFriend"
+              class="w-100"
+            ></hk-about-user>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="t('friends')">
+        <ng-template matTabContent>
+          <div class="friends-container">
+            <hk-friends [friends]="friends"></hk-friends>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="isOwnProfile ? t('myTrips') : t('trips')">
+        <ng-template matTabContent>
+          <hk-user-trips
+            [user]="user"
+            [selfInfo]="isOwnProfile"
+            (viewTripClicked)="viewTrip($event)"
+          ></hk-user-trips>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

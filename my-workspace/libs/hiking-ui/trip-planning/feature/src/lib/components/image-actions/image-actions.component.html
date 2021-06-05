@@ -1,5 +1,19 @@
-<div id="imageActions" *transloco="let t; read: 'myAccount.actions'">
-  <img class="profile-picture" [src]="pictureUrl" [matMenuTriggerFor]="menu" />
+<div id="imageActions" *transloco="let t; read: 'profile.actions'">
+  <img
+    *ngIf="isOwnProfile"
+    class="profile-picture"
+    [ngClass]="{
+      'own-picture': isOwnProfile
+    }"
+    [src]="pictureUrl"
+    [matMenuTriggerFor]="menu"
+  />
+  <img
+    *ngIf="!isOwnProfile"
+    class="profile-picture"
+    [ngClass]="{ 'own-picture': isOwnProfile }"
+    [src]="pictureUrl"
+  />
   <input
     #fileInput
     type="file"
@@ -23,7 +37,7 @@
   </mat-menu>
 </div>
 <ng-template #confirmDeleteTemplate>
-  <ng-container *transloco="let t; read: 'myAccount'">
+  <ng-container *transloco="let t; read: 'profile'">
     <mat-dialog-title>
       <h5>{{ t('confirmRemoveMessage') }}</h5>
     </mat-dialog-title>

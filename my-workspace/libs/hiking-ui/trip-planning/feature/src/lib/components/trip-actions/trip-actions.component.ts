@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {
+  PlanningFacade,
   SelectedTripResult,
   TripActions,
+  TripFilter,
   TripPrivacy,
   TripState,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { SessionToken } from '@hkworkspace/shared/app-authentication/data-access';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hk-trip-actions',
@@ -19,15 +22,18 @@ export class TripActionsComponent implements OnInit {
   @Input()
   sessionToken: SessionToken;
   tripState = TripState;
+  searchFilter$: Observable<TripFilter>;
 
   @Output()
   actionClicked = new EventEmitter();
 
   faArrowLeft = faArrowLeft;
   tripPrivacy = TripPrivacy;
-  constructor() {}
+  constructor(private planningFacade: PlanningFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchFilter$ = this.planningFacade.tripsFilter$;
+  }
 
   askForApproval() {
     this.actionClicked.emit(TripActions.AskForApproval);

@@ -215,7 +215,7 @@
     "successfullyCanceledTrip": "Ai anulat excursia cu succes",
     "errorCancelingTrip": "Nu s-a putut anula excursia. Incearca, din nou, mai tarziu"
   },
-  "myAccount": {
+  "profile": {
     "edit": " Editeaza profilul",
     "save": "Salveaza",
     "remove": "Sterge",
@@ -231,9 +231,12 @@
     "confirmRemoveMessage": "Esti sigur ca vrei sa continui?",
     "friends": "Prieteni",
     "myTrips": "Excursiile mele",
+    "trips": "Excursii",
     "about": "Despre",
     "country": "Tara actuala",
     "phoneNumber": "Telefon",
+    "friendNeededForPhone": "*Trebuie sa fiti prieteni pentru a va vedea numarul",
+    "noFriends": "Niciun prieten",
     "birthdate": "Data nasterii",
     "password": "Parola",
     "changePassword": "Schimba parola",
@@ -256,6 +259,8 @@
     "noTripsAsOrganizer": "Nu ai organizat nicio excursie",
     "noTripsAsParticipant": "Nu ai participat la nicio excursie",
     "passwordUpdatedSuccess": "Ti-ai actualizat parola cu succes",
+    "tripsOrganizedBy": "Excursii organizate de {0} ",
+    "tripsWhereParticipated": "Excursii la care {0} a participat",
     "actions": {
       "changeProfilePicture": "Schimba poza de profil",
       "removeProfilePicture": "Sterge poza de profil"
@@ -264,7 +269,8 @@
       "oldPasswordIsRequired": "Trebuie sa introduci vechea parola",
       "newPasswordIsRequired": "Trebuie sa introduci noua parola",
       "passwordMinLength": "Parola trebuia sa contina cel putin 8 caractere",
-      "wrongPassword": "Parola este gresita"
+      "wrongPassword": "Parola este gresita",
+      "anErrorHasOccured": "An error has occured"
     },
     "editProfile": {
       "publicProfile": "Profil public",

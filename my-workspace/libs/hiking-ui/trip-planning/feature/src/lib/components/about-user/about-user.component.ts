@@ -10,6 +10,11 @@ import { TranslocoService } from '@ngneat/transloco';
 export class AboutUserComponent implements OnInit {
   @Input()
   user: User;
+  @Input()
+  selfInfo: boolean;
+  @Input()
+  isFriend: boolean;
+
   activeLang: string;
   constructor(private translocoService: TranslocoService) {}
 

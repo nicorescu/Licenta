@@ -15,6 +15,7 @@ import {
   CreateAndPreviewTripComponent,
   TripsListComponent,
   ViewSelectedTripComponent,
+  PublicProfileComponent,
 } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import {
   SignInContainerComponent,
@@ -55,6 +56,10 @@ const routes: Routes = [
     path: 'view-selected-trip',
     component: ViewSelectedTripComponent,
     canActivate: [ViewSelectedTripGuard],
+  },
+  {
+    path: 'public-profile/:userId',
+    component: PublicProfileComponent,
   },
   {
     path: 'tasks',

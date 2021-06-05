@@ -8,7 +8,7 @@ namespace TripService.Models.Dtos
     public class ReviewDto
     {
         public Guid Id { get; set; }
-        public UserDto Author { get; set; }
+        public Guid ReviewerId { get; set; }
         public string Message { get; set; }
         public int Stars { get; set; }
     }

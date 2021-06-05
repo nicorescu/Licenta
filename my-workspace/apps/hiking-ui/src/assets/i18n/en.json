@@ -219,7 +219,7 @@
     "successfullyCanceledTrip": "You successfully canceled your trip",
     "errorCancelingTrip": "We couldn't cancel your trip, try again later"
   },
-  "myAccount": {
+  "profile": {
     "edit": " Edit profile",
     "save": "Save",
     "remove": "Remove",
@@ -234,9 +234,12 @@
     "imageRemovedFail": "Your image couldn't be removed",
     "friends": "Friends",
     "myTrips": "My trips",
+    "trips": "Trips",
     "about": "About",
     "country": "Country",
     "phoneNumber": "Phone",
+    "friendNeededForPhone": "*You need to be friends to see the phone number",
+    "noFriends": "No friends",
     "birthdate": "Birth date",
     "password": "Password",
     "changePassword": "Change password",
@@ -260,6 +263,8 @@
     "noTripsAsOrganizer": "You haven't organized any trip",
     "noTripsAsParticipant": "You haven't participated to any trip",
     "passwordUpdatedSuccess": "You successfully updated your password",
+    "tripsOrganizedBy": "Trips organized by {0}",
+    "tripsWhereParticipated": "Trips where {0} participated",
     "actions": {
       "changeProfilePicture": "Change profile picture",
       "removeProfilePicture": "Remove profile picture"
@@ -268,7 +273,8 @@
       "oldPasswordIsRequired": "Old password is required",
       "newPasswordIsRequired": "A new password is required",
       "passwordMinLength": "Password should have at least 8 characters",
-      "wrongPassword": "Your password is wrong"
+      "wrongPassword": "Your password is wrong",
+      "anErrorHasOccured": "An error has occured"
     },
     "editProfile": {
       "publicProfile": "Public profile",

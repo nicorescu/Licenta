@@ -54,6 +54,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   }
 
   viewTrip(tripId: string) {
+    this.planningFacade.clearState();
     this.planningFacade.selectTrip(tripId);
   }
 
@@ -92,7 +93,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.passwordDialogRef.close();
         this.toastrService.success(
-          this.translocoService.translate('myAccount.passwordUpdatedSuccess')
+          this.translocoService.translate('profile.passwordUpdatedSuccess')
         );
       });
   }
@@ -127,7 +128,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         catchError((err) => {
           console.log(err);
           this.toastrService.error(
-            this.translocoService.translate('myAccount.imageChangedFail')
+            this.translocoService.translate('profile.imageChangedFail')
           );
           return of();
         })
@@ -135,7 +136,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       .subscribe((user: User) => {
         this.user = user;
         this.toastrService.success(
-          this.translocoService.translate('myAccount.imageChangedSuccess')
+          this.translocoService.translate('profile.imageChangedSuccess')
         );
         this.editDialogRef.componentInstance.data = {
           user: user,
@@ -156,7 +157,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         catchError((err) => {
           console.log(err);
           this.toastrService.error(
-            this.translocoService.translate('myAccount.imageRemovedFail')
+            this.translocoService.translate('profile.imageRemovedFail')
           );
           return of();
         })
@@ -164,7 +165,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       .subscribe((user: User) => {
         this.user = user;
         this.toastrService.success(
-          this.translocoService.translate('myAccount.imageRemovedSuccess')
+          this.translocoService.translate('profile.imageRemovedSuccess')
         );
       });
   }
@@ -204,7 +205,6 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         switchMap((val) => {
-          console.log('a ajuns si aici', val);
           return this.userService.changeProfilePrivacy(
             this.sessionToken.loggedInId,
             val
@@ -220,17 +220,13 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   }
 
   tabChanged(event: MatTabChangeEvent) {
-    switch (event.index) {
-      case 1:
-        this.userService
-          .getUserFriends(this.sessionToken.loggedInId)
-          .pipe(take(1))
-          .subscribe((users) => {
-            this.friends = users;
-          });
-        break;
-      case 2:
-        break;
+    if (event.index === 1) {
+      this.userService
+        .getUserFriends(this.sessionToken.loggedInId)
+        .pipe(take(1))
+        .subscribe((users) => {
+          this.friends = users;
+        });
     }
   }
 
