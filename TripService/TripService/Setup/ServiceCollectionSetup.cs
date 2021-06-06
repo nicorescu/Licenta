@@ -88,6 +88,15 @@ namespace TripService.Setup
                     .AllowAnyMethod()
                     .WithExposedHeaders("X-Count");
                 });
+
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .WithExposedHeaders("X-Count");
+                });
             });
         }
     }

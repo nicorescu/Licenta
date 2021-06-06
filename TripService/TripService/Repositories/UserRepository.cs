@@ -324,6 +324,8 @@ namespace TripService.Repositories
 
                 var result = await _collection.UpdateOneAsync(filter, update);
 
+              
+
                 return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)

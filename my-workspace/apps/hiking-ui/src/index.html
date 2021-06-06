@@ -41,11 +41,19 @@
       async
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q&libraries=places&language=en"
     ></script> -->
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q&libraries=places&language=en"></script>
+    <script
+      type="text/javascript"
+      src="//maps.googleapis.com/maps/api/js?key=AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q&libraries=places&language=en"
+    ></script>
     <script
       src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      if (global === undefined) {
+        var global = window;
+      }
+    </script>
   </head>
   <body class="dx-viewport">
     <app-root></app-root>

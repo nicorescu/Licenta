@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Config {
@@ -9,4 +9,5 @@ export class Config {
   logoutUrl: string;
   googleApiKey: string;
   pixabayApiKey: string;
+  websocketURI: string;
 }

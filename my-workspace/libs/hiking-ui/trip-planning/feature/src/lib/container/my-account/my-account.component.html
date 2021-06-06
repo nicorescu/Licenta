@@ -10,6 +10,7 @@
     (selectedTabChanged)="tabChanged($event)"
     (viewTripClicked)="viewTrip($event)"
   ></hk-profile>
+  <button (click)="sendMessage()">apasa-ma</button>
   <ng-template #changePasswordTemplate>
     <ng-container *transloco="let t; read: 'profile'">
       <form

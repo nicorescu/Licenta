@@ -31,14 +31,15 @@
     </ng-container>
     <div class="text-center h4 user-full-name">
       {{ user?.firstName }} {{ user?.lastName }}
-      <hk-friend-options
-        *ngIf="!isOwnProfile"
-        [isFriend]="isFriend"
-        [isFriendRequested]="isFriendRequested"
-        (friendRequestedEmitter)="onFriendRequested()"
-        (unfriendEmitter)="onUnfriend()"
-        (cancelRequestEmitter)="onCancelFriendRequest()"
-      ></hk-friend-options>
+      <ng-container *ngIf="!isOwnProfile">
+        <hk-friend-options
+          [isFriend]="isFriend"
+          [isFriendRequested]="isFriendRequested"
+          (friendRequestedEmitter)="onFriendRequested()"
+          (unfriendEmitter)="onUnfriend()"
+          (cancelRequestEmitter)="onCancelFriendRequest()"
+        ></hk-friend-options>
+      </ng-container>
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>

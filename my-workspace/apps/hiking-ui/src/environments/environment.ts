@@ -11,6 +11,7 @@ export const environment = {
   logoutUrl: '/trip-planning',
   googleApiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
   pixabayApiKey: '21324810-8c4b7a10637519665fb72e279',
+  websocketURI: 'wss://localhost:5001',
 };
 
 /*

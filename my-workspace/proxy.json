@@ -1,4 +1,10 @@
 {
+  "/tripsApi": {
+    "target": "https://localhost:5001",
+    "secure": true,
+    "pathRewrite": { "^/tripsApi": "" },
+    "changeOrigin": true
+  },
   "/placesApi": {
     "target": "https://maps.googleapis.com",
     "secure": true,

@@ -1,17 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatMenu } from '@angular/material/menu';
 import {
   faArrowLeft,
   faUserCheck,
   faUserTimes,
   faUserClock,
 } from '@fortawesome/free-solid-svg-icons';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'hk-friend-options',
   templateUrl: './friend-options.component.html',
   styleUrls: ['./friend-options.component.scss'],
 })
-export class FriendOptionsComponent implements OnInit {
+export class FriendOptionsComponent {
   @Input()
   isFriend: boolean;
   @Input()
@@ -27,8 +37,6 @@ export class FriendOptionsComponent implements OnInit {
   faUserTimes = faUserTimes;
   faUserClock = faUserClock;
   constructor() {}
-
-  ngOnInit(): void {}
 
   sendFriendRequest() {
     this.friendRequestedEmitter.emit();

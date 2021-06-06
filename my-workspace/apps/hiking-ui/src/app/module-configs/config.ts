@@ -1,5 +1,5 @@
-import { environment } from "../../environments/environment";
-import { Config } from "@hkworkspace/utils";
+import { environment } from '../../environments/environment';
+import { Config } from '@hkworkspace/utils';
 
 export const config: Config = {
   apiURI: environment.apiUri,
@@ -8,5 +8,6 @@ export const config: Config = {
   redirectUrl: environment.redirectUrl,
   logoutUrl: environment.logoutUrl,
   googleApiKey: environment.googleApiKey,
-  pixabayApiKey: environment.pixabayApiKey
-}
+  pixabayApiKey: environment.pixabayApiKey,
+  websocketURI: environment.websocketURI,
+};

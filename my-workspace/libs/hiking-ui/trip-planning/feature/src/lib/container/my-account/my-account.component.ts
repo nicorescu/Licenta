@@ -5,6 +5,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import {
   PlanningFacade,
   UserService,
+  WebSocketService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
@@ -17,6 +18,8 @@ import { BehaviorSubject, of } from 'rxjs';
 import {
   catchError,
   concatMap,
+  first,
+  map,
   switchMap,
   take,
   takeWhile,
@@ -45,12 +48,20 @@ export class MyAccountComponent implements OnInit, OnDestroy {
     private translocoService: TranslocoService,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private planningFacade: PlanningFacade
+    private planningFacade: PlanningFacade,
+    private socketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
     this.fetchUser();
+  }
+
+  sendMessage() {
+    this.socketService.sendNotification(
+      '/notificationsWs/3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      'mesaj de trimis'
+    );
   }
 
   viewTrip(tripId: string) {
@@ -104,6 +115,12 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         takeWhile(() => this.alive),
         switchMap((token) => {
           this.sessionToken = token;
+          this.socketService.notificationsSocket = new WebSocket(
+            `wss://localhost:5001/notificationsWs/${this.sessionToken.loggedInId}`
+          );
+          this.socketService.notificationsSocket.onmessage = (e) => {
+            console.log('primit', e.data);
+          };
           return this.userService.getUserById(token.loggedInId);
         })
       )
@@ -220,12 +237,14 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   }
 
   tabChanged(event: MatTabChangeEvent) {
+    console.log('event: ', event);
     if (event.index === 1) {
       this.userService
         .getUserFriends(this.sessionToken.loggedInId)
         .pipe(take(1))
         .subscribe((users) => {
           this.friends = users;
+          console.log(this.friends);
         });
     }
   }

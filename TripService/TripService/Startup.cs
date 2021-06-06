@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Text;
+using System.Net.Http;
 
 namespace TripService
 {
@@ -83,8 +84,9 @@ namespace TripService
 
 
             app.UseHttpsRedirection();
-
             app.UseCors("EnableCORS");
+            app.UseCors("CorsPolicy");
+
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -112,50 +114,61 @@ namespace TripService
 
             app.UseDeveloperExceptionPage();
 
-            app.UseWebSockets();
+            var webSocketOptions = new WebSocketOptions();
+            webSocketOptions.AllowedOrigins.Add("*");
+
+            app.UseWebSockets(webSocketOptions);
             app.Use(async (http, next) =>
             {
-                if (http.WebSockets.IsWebSocketRequest && http.Request.Path == "/ws/friendRequestsWs")
+                if (http.WebSockets.IsWebSocketRequest)
                 {
-                    Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
-                    await Task.Run(async () =>
+                    if (http.Request.Path.StartsWithSegments("/notificationsWs"))
                     {
-                        while (Program.FriendRequestsWb.State == WebSocketState.Open)
+                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
+                        await Task.Run(async () =>
                         {
-                            byte[] bt = new byte[1024];
-                            WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
-                            string txt = Encoding.UTF8.GetString(bt);
-                            await Program.FriendRequestsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
-                        }
-                    });
-                }
-                else if (http.WebSockets.IsWebSocketRequest && http.Request.Path == "/ws/notificationsWs")
-                {
-                    Program.NotificationsWb = await http.WebSockets.AcceptWebSocketAsync();
-                    await Task.Run(async () =>
+                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
+                            {
+                                byte[] bt = new byte[1024];
+                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
+                                string txt = Encoding.UTF8.GetString(bt);
+                                await Program.FriendRequestsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
+                            }
+                        });
+                    }
+                    else if (http.Request.Path.Equals("/messagesWs"))
                     {
-                        while (Program.NotificationsWb.State == WebSocketState.Open)
+                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
+                        await Task.Run(async () =>
                         {
-                            byte[] bt = new byte[1024];
-                            WebSocketReceiveResult rc = await Program.NotificationsWb.ReceiveAsync(bt, CancellationToken.None);
-                            string txt = Encoding.UTF8.GetString(bt);
-                            await Program.NotificationsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
-                        }
-                    });
-                }
-                else if (http.WebSockets.IsWebSocketRequest && http.Request.Path == "/ws/messagesWs")
-                {
-                    Program.MessagesWb = await http.WebSockets.AcceptWebSocketAsync();
-                    await Task.Run(async () =>
+                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
+                            {
+                                byte[] bt = new byte[1024];
+                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
+                                string txt = Encoding.UTF8.GetString(bt);
+                                await Program.FriendRequestsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
+                            }
+                        });
+                    }
+                    else if (http.Request.Path.Equals("/friendRequestsWs"))
                     {
-                        while (Program.MessagesWb.State == WebSocketState.Open)
+                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
+                        await Task.Run(async () =>
                         {
-                            byte[] bt = new byte[1024];
-                            WebSocketReceiveResult rc = await Program.MessagesWb.ReceiveAsync(bt, CancellationToken.None);
-                            string txt = Encoding.UTF8.GetString(bt);
-                            await Program.MessagesWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
-                        }
-                    });
+                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
+                            {
+                                byte[] bt = new byte[1024];
+                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
+                                string txt = Encoding.UTF8.GetString(bt);
+                                await Program.FriendRequestsWb.SendAsync(bt, WebSocketMessageType.Text, true, CancellationToken.None);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        http.Response.StatusCode = 400;
+                    }
+
                 }
                 else
                 {

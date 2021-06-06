@@ -1,19 +1,22 @@
 <ng-container *transloco="let t; read: 'profile'">
-  <div class="row friends" *ngIf="friends.length > 0; else noFriendsBlock">
-    <div class="col-lg-6 col-md-12 mb-2" *ngFor="let friend of friends">
-      <div class="friend-container border">
-        <img
-          [src]="buildProfilePicUrl(friend.profilePicUrl)"
-          class="friend-picture"
-          routerLink="/public-profile/{{ friend.id }}"
-        />
-        <a routerLink="/public-profile/{{ friend.id }}" class="friend-name"
-          >{{ friend.firstName }} {{ friend.lastName }}</a
-        >
+  <ng-container *ngIf="friends?.length > 0">
+    <div class="row friends">
+      <div class="col-lg-6 col-md-12 mb-2" *ngFor="let friend of friends">
+        <div class="friend-container border">
+          <img
+            [src]="buildProfilePicUrl(friend.profilePicUrl)"
+            class="friend-picture"
+            routerLink="/public-profile/{{ friend.id }}"
+          />
+          <a routerLink="/public-profile/{{ friend.id }}" class="friend-name"
+            >{{ friend.firstName }} {{ friend.lastName }}</a
+          >
+        </div>
       </div>
     </div>
-  </div>
-  <ng-template #noFriendsBlock>
+  </ng-container>
+
+  <ng-container *ngIf="!(friends?.length > 0)">
     <div class="text-center h5">{{ t('noFriends') }}</div>
-  </ng-template>
+  </ng-container>
 </ng-container>

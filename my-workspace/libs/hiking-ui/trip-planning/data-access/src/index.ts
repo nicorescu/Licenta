@@ -30,3 +30,4 @@ export * from './lib/models/detailed-trip.model';
 export * from './lib/models/trip-actions.model';
 export * from './lib/models/editable-field.model';
 export * from './lib/models/change-password.model';
+export * from './lib/services/web-socket.service';
