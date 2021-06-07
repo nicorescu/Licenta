@@ -97,6 +97,12 @@ namespace TripService.Setup
                     .AllowCredentials()
                     .WithExposedHeaders("X-Count");
                 });
+                options.AddPolicy("AllowAllHeaders", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
             });
         }
     }

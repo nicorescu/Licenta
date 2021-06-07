@@ -53,6 +53,9 @@ namespace TripService.Models.Mapping
 
             CreateMap<DetailedTrip, DetailedTripDto>();
             CreateMap<DetailedTripDto, DetailedTrip>();
+
+            CreateMap<Notification, NotificationDto>();
+            CreateMap<NotificationDto, Notification>();
         }
     }
 }

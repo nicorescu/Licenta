@@ -1,5 +1,6 @@
 export enum NotificationType {
-  Notification,
-  FriendRequest,
-  Message,
+  UserJoinedTrip,
+  UserLeftTrip,
+  UserAskedApproval,
+  OrganizerApprovedRequest,
 }

@@ -16,5 +16,6 @@ namespace TripService.Models.ApiModels
         public int RequestedPage { get; set; }
         public int PageSize { get; set; }
         public string Location { get; set; }
+        public string Country { get; set; }
     }
 }

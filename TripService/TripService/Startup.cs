@@ -24,6 +24,8 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Text;
 using System.Net.Http;
+using TripService.SocketsManager;
+using TripService.SignalR;
 
 namespace TripService
 {
@@ -48,6 +50,8 @@ namespace TripService
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
+            services.AddWebSocketManager();
+
             BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
 
@@ -71,10 +75,15 @@ namespace TripService
             ServiceCollectionSetup.TryAddAllServices(services);
             ServiceCollectionSetup.TryAddMongoConnection(services);
             ServiceCollectionSetup.AddCors(services);
+
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -84,9 +93,11 @@ namespace TripService
 
 
             app.UseHttpsRedirection();
-            app.UseCors("EnableCORS");
             app.UseCors("CorsPolicy");
+            app.UseCors("EnableCORS");
+            app.UseCors("AllowAllHeaders");
 
+            app.UseWebSockets();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -102,6 +113,7 @@ namespace TripService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/signalr/{id}");
             });
 
             app.UseSwagger();
@@ -114,53 +126,29 @@ namespace TripService
 
             app.UseDeveloperExceptionPage();
 
-            var webSocketOptions = new WebSocketOptions();
-            webSocketOptions.AllowedOrigins.Add("*");
 
-            app.UseWebSockets(webSocketOptions);
-            app.Use(async (http, next) =>
+            // app.MapWebSockets("/ws", serviceProvider.GetService<WebSocketMessageHandler>());
+
+            /*app.Use(async (http, next) =>
             {
+
                 if (http.WebSockets.IsWebSocketRequest)
                 {
-                    if (http.Request.Path.StartsWithSegments("/notificationsWs"))
+                    if (http.Request.Path.StartsWithSegments("/ws"))
                     {
-                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
+                        var receivedSocket = await http.WebSockets.AcceptWebSocketAsync();
+                        var added = Program.sockets.GetOrAdd(http.Request.Path, receivedSocket);
+
+                        var x = Program.sockets.FirstOrDefault(x => x.Key.Equals(http.Request.Path));
                         await Task.Run(async () =>
                         {
-                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
+                            var socket = Program.sockets.FirstOrDefault(x => x.Key.Equals(http.Request.Path));
+                            while (socket.Value.State == WebSocketState.Open)
                             {
                                 byte[] bt = new byte[1024];
-                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
+                                WebSocketReceiveResult rc = await socket.Value.ReceiveAsync(bt, CancellationToken.None);
                                 string txt = Encoding.UTF8.GetString(bt);
-                                await Program.FriendRequestsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
-                            }
-                        });
-                    }
-                    else if (http.Request.Path.Equals("/messagesWs"))
-                    {
-                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
-                        await Task.Run(async () =>
-                        {
-                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
-                            {
-                                byte[] bt = new byte[1024];
-                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
-                                string txt = Encoding.UTF8.GetString(bt);
-                                await Program.FriendRequestsWb.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
-                            }
-                        });
-                    }
-                    else if (http.Request.Path.Equals("/friendRequestsWs"))
-                    {
-                        Program.FriendRequestsWb = await http.WebSockets.AcceptWebSocketAsync();
-                        await Task.Run(async () =>
-                        {
-                            while (Program.FriendRequestsWb.State == WebSocketState.Open)
-                            {
-                                byte[] bt = new byte[1024];
-                                WebSocketReceiveResult rc = await Program.FriendRequestsWb.ReceiveAsync(bt, CancellationToken.None);
-                                string txt = Encoding.UTF8.GetString(bt);
-                                await Program.FriendRequestsWb.SendAsync(bt, WebSocketMessageType.Text, true, CancellationToken.None);
+                                await socket.Value.SendAsync(Encoding.UTF8.GetBytes(txt), WebSocketMessageType.Text, true, CancellationToken.None);
                             }
                         });
                     }
@@ -174,7 +162,8 @@ namespace TripService
                 {
                     await next();
                 }
-            });
+            });*/
+
         }
     }
 }

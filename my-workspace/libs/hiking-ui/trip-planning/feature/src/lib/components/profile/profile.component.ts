@@ -8,14 +8,24 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
-import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import {
+  SignalRService,
+  UserService,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
   SessionToken,
   User,
 } from '@hkworkspace/shared/app-authentication/data-access';
+import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
-import { concatMap, take, takeWhile } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  switchMap,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'hk-profile',
@@ -27,8 +37,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   @Input()
   user: User;
-  @Input()
-  isFriend: boolean;
   @Input()
   friends: User[];
 
@@ -49,7 +57,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private authFacade: AppAuthenticateFacade,
-    private userService: UserService
+    private userService: UserService,
+    private signalRService: SignalRService,
+    private toastrService: ToastService,
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +70,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.sessionToken = token;
       });
   }
+
   ngOnDestroy(): void {
     this.alive = false;
   }
@@ -96,9 +108,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
         take(1),
         concatMap(() => {
           return this.userService.getUserById(this.user.id);
+        }),
+        catchError(() => {
+          this.toastrService.error(
+            this.translocoService.translate('toast.couldntProcessYourRequest')
+          );
+          return this.userService.getUserById(this.user.id);
         })
       )
       .subscribe((user) => {
+        this.signalRService.notifyFriendRequest(user.id);
         this.user = user;
       });
   }
@@ -130,6 +149,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((user) => {
+        this.signalRService.notifyFriendRequestCanceled(
+          this.user.id,
+          this.sessionToken.loggedInId
+        );
         this.user = user;
       });
   }
@@ -142,5 +165,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     return (
       this.user?.friendRequests.indexOf(this.sessionToken?.loggedInId) >= 0
     );
+  }
+
+  public get isFriend() {
+    return this.user?.friends.indexOf(this.sessionToken.loggedInId) >= 0;
   }
 }

@@ -11,15 +11,24 @@ namespace TripService.Extensions
 {
     public class AtlasSearchExtensions
     {
-        public static BsonDocument GetMatchingLocationsQuery(string[] keywords)
+        public static BsonDocument GetMatchingLocationsQuery(string[] keywords, string country)
         {
             return new BsonDocument(AtlasStringResources.SearchStage,
             new BsonDocument
                {        {AtlasStringResources.Index, AtlasStringResources.TripIndexName},
-                        { AtlasStringResources.Compound,
-                new BsonDocument
-                {
-                    {AtlasStringResources.Should,  SetSearchCriterias(keywords)}
+                        { AtlasStringResources.Compound,new BsonDocument
+                            {
+                                {AtlasStringResources.Should,  SetSearchCriterias(keywords)},
+                                 {AtlasStringResources.Must, new BsonDocument
+                                     {
+                                         {"text", new BsonDocument
+                                                {
+                                                    { "query", country },
+                                                    {"path", "Country" }
+                                                }
+                                         }
+                                 }
+                        }
                 }
                 },
                });
@@ -33,7 +42,7 @@ namespace TripService.Extensions
                         { AtlasStringResources.Compound,
                 new BsonDocument
                 {
-                    {AtlasStringResources.Should,  GetFriendsSearchCriteria(keyword)}
+                    {AtlasStringResources.Should,  GetFriendsSearchCriteria(keyword)},
                 }
                 },
                });

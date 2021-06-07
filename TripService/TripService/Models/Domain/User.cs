@@ -23,5 +23,6 @@ namespace TripService.Models.Domain
         public List<Review> Reviews { get; set; }
         public List<Guid> FriendRequests { get; set; }
         public bool PublicProfile { get; set; }
+        public List<Notification> Notifications { get; set; }
     }
 }

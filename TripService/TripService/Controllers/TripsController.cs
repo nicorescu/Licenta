@@ -71,6 +71,30 @@ namespace TripService.Controllers
             return await _tripProcessor.GetSelectedTrip(tripId);
         }
 
+        [HttpGet("/trips/user/as-organizer/{userId}")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips([FromRoute] Guid userId, [FromQuery] int pageNumber)
+        {
+            return await _tripProcessor.GetUsersOrganizedTrips(userId, pageNumber, Response);
+        }
+
+        [HttpGet("/trips/user/as-participant/{userId}")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips([FromRoute] Guid userId, [FromQuery] int pageNumber)
+        {
+            return await _tripProcessor.GetUsersParticipatedTrips(userId, pageNumber, Response);
+        }
+
         [HttpPost("/trips")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -95,19 +119,6 @@ namespace TripService.Controllers
             return await _tripProcessor.AddParticipant(tripId, participantIdRequest.UserId);
         }
 
-        [HttpDelete("/trips/{tripId}/participants")]
-        [Authorize]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType(500)]
-
-        public async Task<ActionResult<bool>> RemoveParticipant([FromRoute] Guid tripId, [FromQuery] Guid userId)
-        {
-            return await _tripProcessor.RemoveParticipant(tripId, userId);
-        }
-
         [HttpPost("/trips/{tripId}/participation-requests")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -118,18 +129,6 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> AddParticipationRequest([FromRoute] Guid tripId, [FromBody] UserIdRequest userIdRequest)
         {
             return await _tripProcessor.AddParticipationRequest(tripId, userIdRequest.UserId);
-        }
-
-        [HttpDelete("/trips/{tripId}/participation-requests")]
-        [Authorize]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType(500)]
-        public async Task<ActionResult<bool>> RemoveParticipationRequest([FromRoute] Guid tripId, [FromQuery] Guid userId)
-        {
-            return await _tripProcessor.RemoveParticipationRequest(tripId, userId);
         }
 
         [HttpPut("/trips/{tripId}")]
@@ -179,29 +178,29 @@ namespace TripService.Controllers
             return await _tripProcessor.DeleteTrip(tripId);
         }
 
-
-        [HttpGet("/trips/user/as-organizer/{userId}")]
+        [HttpDelete("/trips/{tripId}/participants")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips([FromRoute] Guid userId,[FromQuery] int pageNumber)
+
+        public async Task<ActionResult<bool>> RemoveParticipant([FromRoute] Guid tripId, [FromQuery] Guid userId)
         {
-            return await _tripProcessor.GetUsersOrganizedTrips(userId, pageNumber, Response);
+            return await _tripProcessor.RemoveParticipant(tripId, userId);
         }
 
-        [HttpGet("/trips/user/as-participant/{userId}")]
+        [HttpDelete("/trips/{tripId}/participation-requests")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips([FromRoute] Guid userId, [FromQuery] int pageNumber)
+        public async Task<ActionResult<bool>> RemoveParticipationRequest([FromRoute] Guid tripId, [FromQuery] Guid userId)
         {
-            return await _tripProcessor.GetUsersParticipatedTrips(userId, pageNumber, Response);
+            return await _tripProcessor.RemoveParticipationRequest(tripId, userId);
         }
     }
 }

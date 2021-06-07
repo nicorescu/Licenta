@@ -4,6 +4,7 @@ import {
   GooglePlacesService,
   PlanningFacade,
   SelectedTripResult,
+  SignalRService,
   Trip,
   TripActions,
   TripFilter,
@@ -11,6 +12,8 @@ import {
   TripState,
   UserIdRequest,
   UserService,
+  Notification,
+  NotificationType,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { TripService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
@@ -55,7 +58,8 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     private googleService: GooglePlacesService,
     private toastrService: ToastService,
     private translocoService: TranslocoService,
-    private router: Router
+    private router: Router,
+    private signalRService: SignalRService
   ) {}
 
   ngOnInit(): void {
@@ -256,6 +260,21 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       )
       .subscribe((res: User[]) => {
         this.selectedTripResult.participants = res;
+
+        const notification: Notification = {
+          notifierId: this.userService.currentUser.id,
+          tripId: this.selectedTripResult.trip.id,
+          userFullName: `${this.userService.currentUser.firstName} ${this.userService.currentUser.lastName}`,
+          tripAddress: this.selectedTripResult.trip.address,
+          notificationType: NotificationType.UserJoinedTrip,
+          seen: false,
+          sentAt: new Date(),
+        };
+
+        this.signalRService.sendNotification(
+          this.selectedTripResult.organizer.id,
+          notification
+        );
         this.toastrService.success(
           this.translocoService.translate(
             'tripPlanning.tripView.successfullyJoinedTrip'

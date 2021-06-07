@@ -1,7 +1,6 @@
 <div id="myAccount" class="container">
   <hk-profile
     [user]="user"
-    [isFriend]="false"
     [friends]="friends"
     (changePasswordClicked)="changePasswordClicked(changePasswordTemplate)"
     (editProfileClicked)="openEditDialog()"
@@ -10,7 +9,6 @@
     (selectedTabChanged)="tabChanged($event)"
     (viewTripClicked)="viewTrip($event)"
   ></hk-profile>
-  <button (click)="sendMessage()">apasa-ma</button>
   <ng-template #changePasswordTemplate>
     <ng-container *transloco="let t; read: 'profile'">
       <form

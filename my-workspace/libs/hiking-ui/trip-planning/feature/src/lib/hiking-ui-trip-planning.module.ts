@@ -84,6 +84,7 @@ import 'mousetrap';
 import { EditInformationComponent } from './components/edit-information/edit-information.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PublicProfileComponent } from './container/public-profile/public-profile.component';
+import { ChatComponent } from './container/chat/chat.component';
 
 @NgModule({
   imports: [
@@ -166,6 +167,7 @@ import { PublicProfileComponent } from './container/public-profile/public-profil
     EditInformationComponent,
     ProfileComponent,
     PublicProfileComponent,
+    ChatComponent,
   ],
   providers: [NgxImageCompressService],
 })

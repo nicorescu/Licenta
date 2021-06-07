@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TripService.NewFolder
+namespace TripService.SocketsManager
 {
     public abstract class SocketHandler
     {
@@ -21,7 +21,7 @@ namespace TripService.NewFolder
         {
             await Task.Run(() =>
             {
-                Connections.AddSOcket(socket);
+                Connections.AddSocket(socket);
             });
         }
 
@@ -32,11 +32,11 @@ namespace TripService.NewFolder
 
         public async Task SendMessage(WebSocket socket, string message)
         {
-            if(socket.State != WebSocketState.Open)
+            if (socket.State != WebSocketState.Open)
             {
                 return;
             }
-            await socket.SendAsync(new ArraySegment<byte>(Encoding.ASCII.GetBytes(message), 0, message.Length), WebSocketMessageType.Text,true, CancellationToken.None);
+            await socket.SendAsync(new ArraySegment<byte>(Encoding.ASCII.GetBytes(message), 0, message.Length), WebSocketMessageType.Text, true, CancellationToken.None);
         }
 
         public async Task SendMessage(string id, string message)
@@ -46,7 +46,7 @@ namespace TripService.NewFolder
 
         public async Task SendMessageToAll(string message)
         {
-            foreach(var con in Connections.GetAllConnections())
+            foreach (var con in Connections.GetAllConnections())
             {
                 await SendMessage(con.Value, message);
             }

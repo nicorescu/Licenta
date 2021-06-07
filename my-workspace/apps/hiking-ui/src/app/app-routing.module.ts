@@ -11,11 +11,12 @@ import {
   MyAccountComponent,
   NotificationsComponent,
   TripPlanningComponent,
-  ConversationsComponent,
   CreateAndPreviewTripComponent,
   TripsListComponent,
   ViewSelectedTripComponent,
   PublicProfileComponent,
+  TripPreviewComponent,
+  ChatComponent,
 } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import {
   SignInContainerComponent,
@@ -25,7 +26,6 @@ import {
   AuthGuard,
   LoginGuard,
 } from '@hkworkspace/shared/app-authentication/data-access';
-import { TripPreviewComponent } from '@hkworkspace/hiking-ui/trip-planning/feature';
 import {
   TripPreviewGuard,
   TripsListGuard,
@@ -87,8 +87,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'conversations',
-    component: ConversationsComponent,
+    path: 'chat',
+    component: ChatComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -60,6 +60,19 @@ export class PublicProfileComponent implements OnInit, OnDestroy {
         this.user = user;
         this.profileComponent.tabGroup.selectedIndex = 0;
       });
+
+    this.userService.friendRequestApproved
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap((id) => {
+          if (id === this.user.id) {
+            return this.userService.getUserById(id);
+          }
+        })
+      )
+      .subscribe((user: User) => {
+        this.user = user;
+      });
   }
 
   ngOnDestroy(): void {
@@ -80,9 +93,5 @@ export class PublicProfileComponent implements OnInit, OnDestroy {
   viewTrip(tripId: string) {
     this.planningFacade.clearState();
     this.planningFacade.selectTrip(tripId);
-  }
-
-  public get isFriend() {
-    return this.user?.friends.indexOf(this.sessionToken.loggedInId) >= 0;
   }
 }

@@ -213,7 +213,9 @@
   "toast": {
     "signInRequired": "Trebuie sa te autentifici",
     "successfullyCanceledTrip": "Ai anulat excursia cu succes",
-    "errorCancelingTrip": "Nu s-a putut anula excursia. Incearca, din nou, mai tarziu"
+    "errorCancelingTrip": "Nu s-a putut anula excursia. Incearca, din nou, mai tarziu",
+    "approvedYourFriendRequest": "ti-a aprobat cererea de prietenie",
+    "couldntProcessYourRequest": "Nu s-a putut procesa cererea ta"
   },
   "profile": {
     "edit": " Editeaza profilul",

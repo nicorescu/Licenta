@@ -6,7 +6,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TripService.NewFolder
+namespace TripService.SocketsManager
 {
     public class ConnectionManager
     {
@@ -16,7 +16,7 @@ namespace TripService.NewFolder
             return _connections.FirstOrDefault(x => x.Key.Equals(id)).Value;
         }
 
-        public ConcurrentDictionary<string,WebSocket> GetAllConnections()
+        public ConcurrentDictionary<string, WebSocket> GetAllConnections()
         {
             return _connections;
         }
@@ -32,7 +32,7 @@ namespace TripService.NewFolder
             await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "socket connection closed", CancellationToken.None);
         }
 
-        public void AddSOcket(WebSocket socket)
+        public void AddSocket(WebSocket socket)
         {
             _connections.TryAdd(GetConnectionId(), socket);
         }

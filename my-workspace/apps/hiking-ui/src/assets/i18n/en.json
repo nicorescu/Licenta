@@ -217,7 +217,9 @@
   "toast": {
     "signInRequired": "You need to sign-in first",
     "successfullyCanceledTrip": "You successfully canceled your trip",
-    "errorCancelingTrip": "We couldn't cancel your trip, try again later"
+    "errorCancelingTrip": "We couldn't cancel your trip, try again later",
+    "approvedYourFriendRequest": "approved your friend request",
+    "couldntProcessYourRequest": "Couldn't process your request"
   },
   "profile": {
     "edit": " Edit profile",

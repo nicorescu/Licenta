@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
-import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import {
+  SignalRService,
+  UserService,
+} from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
   User,
@@ -18,7 +21,8 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
   alive = true;
   constructor(
     private authFacade: AppAuthenticateFacade,
-    private userService: UserService
+    private userService: UserService,
+    private signalRService: SignalRService
   ) {}
 
   requesters: User[];
@@ -29,8 +33,9 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
       .subscribe((users) => {
         this.requesters = users;
       });
-    Observable.interval(60000)
-      .timeInterval()
+    console.log('prieteni afisati');
+
+    this.userService.friendRequestReceived
       .pipe(
         takeWhile(() => this.alive),
         switchMap(() => {
@@ -39,6 +44,19 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
       )
       .subscribe((users) => {
         this.requesters = users;
+      });
+
+    this.userService.friendRequestCanceled
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((id) => {
+        console.log('am sters: ', id);
+        this.requesters = this.requesters.filter((x) => x.id !== id);
+      });
+
+    this.userService.friendRequestApproved
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((id) => {
+        this.requesters = this.requesters.filter((x) => x.id != id);
       });
   }
 

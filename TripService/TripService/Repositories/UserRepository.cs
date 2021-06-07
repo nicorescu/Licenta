@@ -115,13 +115,20 @@ namespace TripService.Repositories
         {
             try
             {
+                var check = await _collection.FindAsync(x => x.Id.Equals(userId) && x.Friends.Contains(requesterId));
 
-                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                if(check.FirstOrDefault() ==null)
+                {
+                    var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
 
+                    var update = Builders<User>.Update.Push(x => x.FriendRequests, requesterId);
+                    var result = await _collection.UpdateOneAsync(filter, update);
 
-                var update = Builders<User>.Update.Push(x => x.FriendRequests, requesterId);
-                var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                    return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+                }
+
+                return false;
+                
             }
             catch (Exception exception)
             {
@@ -183,7 +190,7 @@ namespace TripService.Repositories
 
                 var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[] { requesterUserId });
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)
             {
@@ -335,6 +342,58 @@ namespace TripService.Repositories
             }
         }
 
+        public async Task<bool> AddNewConversation(Guid userId, Conversation conversation)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Push(x => x.Conversations, conversation);
 
+                var result = await _collection.UpdateOneAsync(filter, update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> AddMessageToConversation(Guid conversationId, Message message)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.ElemMatch(x => x.Conversations, c => c.Id.Equals(conversationId));
+                var update = Builders<User>.Update.Push(x => x.Conversations, null);
+
+                var result = await _collection.UpdateOneAsync(filter, update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> AddNotification(Guid userId, Notification notification)
+        {
+            try
+            {
+                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+                var update = Builders<User>.Update.Push(x => x.Notifications, notification);
+
+                var result = await _collection.UpdateOneAsync(filter, update);
+
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return false;
+            }
+        }
     }
 }

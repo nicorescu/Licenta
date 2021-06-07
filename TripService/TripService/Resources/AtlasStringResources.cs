@@ -11,6 +11,7 @@ namespace TripService.Resources
         public const string Text = "text";
         public const string Compound = "compound";
         public const string Should = "should";
+        public const string Must = "must";
         public const string Path = "path";
         public const string Query = "query";
         public const string Index = "index";

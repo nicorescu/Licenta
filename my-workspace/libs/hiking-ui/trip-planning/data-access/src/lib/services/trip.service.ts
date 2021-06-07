@@ -43,7 +43,8 @@ export class TripService {
       .set('keywords', searchFilter.keywords)
       .set('friendsOnly', searchFilter.friendsOnly ? 'true' : 'false')
       .set('pageSize', searchFilter.pageSize.toString())
-      .set('requestedPage', searchFilter.requestedPage.toString());
+      .set('requestedPage', searchFilter.requestedPage.toString())
+      .set('country', searchFilter.country);
     if (searchFilter.requesterId) {
       params = params.set('requesterId', searchFilter.requesterId);
     }

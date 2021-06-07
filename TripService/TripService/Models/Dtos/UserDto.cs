@@ -29,5 +29,6 @@ namespace TripService.Models.Dtos
         public double ReviewAverage { get; set; }
         public List<Guid> FriendRequests { get; set; }
         public bool PublicProfile { get; set; }
+        public List<NotificationDto> Notifications { get; set; }
     }
 }

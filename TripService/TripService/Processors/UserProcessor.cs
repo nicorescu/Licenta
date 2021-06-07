@@ -11,6 +11,7 @@ using TripService.Models.Domain;
 using TripService.Models.Dtos;
 using TripService.Repositories;
 using TripService.Resources;
+using TripService.SignalR;
 
 namespace TripService.Processors
 {
@@ -18,6 +19,7 @@ namespace TripService.Processors
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private SignalRHub signalR = new SignalRHub();
         public UserProcessor(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -252,5 +254,28 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
+        public async Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation)
+        {
+            var result = await _userRepository.AddNewConversation(userId,_mapper.Map<Conversation>(conversation));
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
+
+       public async Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification)
+        {
+            var result = await _userRepository.AddNotification(userId, _mapper.Map<Notification>(notification));
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
     }
 }

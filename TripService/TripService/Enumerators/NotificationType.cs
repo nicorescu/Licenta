@@ -7,8 +7,9 @@ namespace TripService.Enumerators
 {
     public enum NotificationType
     {
-        Notification,
-        FriendRequest,
-        Message
+        UserJoinedTrip,
+        UserLeftTrip,
+        UserAskedApproval,
+        OrganizerApprovedRequest
     }
 }

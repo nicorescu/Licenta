@@ -6,13 +6,20 @@ import { Config } from '@hkworkspace/utils';
 import { FriendRequest } from '../models/friend-request.model';
 import { map } from 'rxjs/operators';
 import { ChangePassword } from '../models/change-password.model';
+import { Notification } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   baseApiUrl: string = this.config.apiURI;
+  friendRequestReceived = new EventEmitter();
+  friendRequestApproved = new EventEmitter();
+  friendRequestCanceled = new EventEmitter();
+  notificationReceived = new EventEmitter();
+
   userChanged = new EventEmitter();
+  currentUser: User;
   constructor(
     @Inject(Config) private config: Config,
     private httpClient: HttpClient
@@ -134,6 +141,13 @@ export class UserService {
       `${this.baseApiUrl}/users/profile-privacy/${userId}`,
       {},
       { params: queryParams }
+    );
+  }
+
+  addNotification(userId: string, notification: Notification) {
+    return this.httpClient.post(
+      `${this.baseApiUrl}/users/${userId}/notifications`,
+      notification
     );
   }
 

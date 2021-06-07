@@ -1,6 +1,4 @@
-import { RequestState } from './request-state.model';
-
-export interface FriendRequest {
+export class FriendRequest {
   requestedUserId: string;
   requesterUserId: string;
 }

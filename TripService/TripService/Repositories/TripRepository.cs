@@ -289,13 +289,11 @@ namespace TripService.Repositories
             }
         }
 
-
-
         private IAggregateFluent<DetailedTrip> GetSearchQuery(SearchFilter searchFilter, List<Guid> requesterFriends)
         {
             string[] keywords = searchFilter.Keywords.Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
             var query = _collection.Aggregate()
-                .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords))
+                .AppendStage<Trip>(AtlasSearchExtensions.GetMatchingLocationsQuery(keywords,searchFilter.Country))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetPrivacyRestriction())
                 .AppendStage<Trip>(AtlasSearchExtensions.GetOwnTripsRestriction(searchFilter.RequesterId))
                 .AppendStage<Trip>(AtlasSearchExtensions.GetDatesRestrictionQuery(searchFilter.StartDate, searchFilter.EndDate))
