@@ -304,5 +304,11 @@
         "invalid": "Invalid"
       }
     }
+  },
+  "notifications": {
+    "hasJoinedYourTrip": " s-a alaturat excursiei tale ",
+    "hasAskedForYourApproval": " ti-a cerut aprobarea pentru ",
+    "hasLeftYourTrip": " a parasit excursia ",
+    "hasApprovedYourTripRequest": " ti-a aprobat cererea de participare pentru "
   }
 }

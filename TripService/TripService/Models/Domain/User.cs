@@ -19,7 +19,6 @@ namespace TripService.Models.Domain
         public DateTime Birthday { get; set; }
         public RoleEnum Role { get; set; }
         public List<Guid> Friends { get; set; }
-        public List<Conversation> Conversations { get; set; }
         public List<Review> Reviews { get; set; }
         public List<Guid> FriendRequests { get; set; }
         public bool PublicProfile { get; set; }

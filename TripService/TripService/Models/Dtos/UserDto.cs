@@ -24,7 +24,6 @@ namespace TripService.Models.Dtos
         public int Age { get; set; }
         public RoleEnum Role { get; set; }
         public List<Guid> Friends { get; set; }
-        public List<ConversationDto> Conversations { get; set; }
         public List<ReviewDto> Reviews { get; set; }
         public double ReviewAverage { get; set; }
         public List<Guid> FriendRequests { get; set; }

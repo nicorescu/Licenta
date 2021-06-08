@@ -131,7 +131,6 @@ namespace TripService
 
             /*app.Use(async (http, next) =>
             {
-
                 if (http.WebSockets.IsWebSocketRequest)
                 {
                     if (http.Request.Path.StartsWithSegments("/ws"))

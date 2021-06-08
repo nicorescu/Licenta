@@ -1,0 +1,13 @@
+<div class="notification border">
+  <div class="notification-message">
+    <a
+      routerLink="/public-profile/{{ notification.notifierId }}"
+      class="user-full-name"
+      >{{ notification.userFullName }}</a
+    >
+    <span class="user-message">{{ message }}</span>
+    <a routerLink="" class="trip-address" (click)="viewTrip()">{{
+      notification.tripAddress
+    }}</a>
+  </div>
+</div>

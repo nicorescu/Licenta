@@ -93,6 +93,18 @@ namespace TripService.Controllers
             return await _userProcessor.SearchFriends(userId, keyword);
         }
 
+       /* [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
+        [HttpGet("/users/{userId}/notifications")]
+        public async Task<ActionResult<List<UserDto>>> GetUserNotifications([FromRoute] Guid userId)
+        {
+            return await _userProcessor.GetUserNotifications(userId);
+        }*/
+
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -128,7 +140,7 @@ namespace TripService.Controllers
             return await _userProcessor.AddProfilePicture(userId, image);
         }
 
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+       /* [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
@@ -138,7 +150,7 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> AddNewConversation([FromRoute] Guid userId,[FromBody] ConversationDto conversation)
         {
             return await _userProcessor.AddNewConversation(userId,conversation);
-        }
+        }*/
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

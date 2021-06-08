@@ -308,5 +308,11 @@
         "invalid": "Invalid"
       }
     }
+  },
+  "notifications": {
+    "hasJoinedYourTrip": " has joined your trip ",
+    "hasAskedForYourApproval": " has asked for your approval on ",
+    "hasLeftYourTrip": " has left your trip ",
+    "hasApprovedYourTripRequest": " has approved your join request for "
   }
 }

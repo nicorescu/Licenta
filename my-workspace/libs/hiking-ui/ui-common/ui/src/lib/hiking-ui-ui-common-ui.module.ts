@@ -17,6 +17,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 
 import { HeaderComponent } from './components/header/header.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
@@ -34,6 +35,7 @@ import { ApprovalRequestsPanelComponent } from './components/approval-requests-p
 import { SearchComponent } from './components/search/search.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
 import { FriendRequestsListComponent } from './components/friend-requests-list/friend-requests-list.component';
+import { NotificationComponent } from './components/notification/notification.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { FriendRequestsListComponent } from './components/friend-requests-list/f
     MatBadgeModule,
     ReactiveFormsModule,
     FormsModule,
+    DxScrollViewModule,
     InlineSVGModule.forRoot(),
   ],
   declarations: [
@@ -70,6 +73,7 @@ import { FriendRequestsListComponent } from './components/friend-requests-list/f
     SearchComponent,
     FriendsListComponent,
     FriendRequestsListComponent,
+    NotificationComponent,
   ],
   exports: [HeaderComponent, LinkImageComponent, FooterComponent],
 })

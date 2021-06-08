@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { UserService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
@@ -6,6 +12,7 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { Notification } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { switchMap, take, takeWhile } from 'rxjs/operators';
+import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 
 @Component({
   selector: 'hk-notifications-panel',
@@ -13,6 +20,9 @@ import { switchMap, take, takeWhile } from 'rxjs/operators';
   styleUrls: ['./notifications-panel.component.scss'],
 })
 export class NotificationsPanelComponent implements OnInit, OnDestroy {
+  @ViewChild(DxScrollViewComponent, { static: false })
+  scrollView: DxScrollViewComponent;
+
   notifications: Notification[];
   sessionToken: SessionToken;
   alive = true;
@@ -52,5 +62,28 @@ export class NotificationsPanelComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.alive = false;
+  }
+
+  onScroll(event) {
+    console.log('element: ', this.scrollView);
+    // const startIndex = Math.floor(
+    //   this.panelContent.nativeElement.scrollTop /
+    //     this.panelContent.nativeElement.rowHeight
+    // );
+    // const endIndex = Math.ceil(
+    //   (this.panelContent.nativeElement.scrollTop +
+    //     this.panelContent.nativeElement.height) /
+    //     this.panelContent.nativeElement.rowHeight
+    // );
+    // console.log('start index: ', startIndex);
+    // console.log('end index: ', endIndex);
+    // console.log(
+    //   'items in view: ',
+    //   this.notifications.slice(startIndex, endIndex)
+    // );
+  }
+
+  public get countUnreadNotifications() {
+    return this.notifications?.map((x) => !x.seen).length;
   }
 }

@@ -254,7 +254,7 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
-        public async Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation)
+       /* public async Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation)
         {
             var result = await _userRepository.AddNewConversation(userId,_mapper.Map<Conversation>(conversation));
 
@@ -264,7 +264,7 @@ namespace TripService.Processors
             }
 
             return new OkObjectResult(result);
-        }
+        }*/
 
        public async Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification)
         {

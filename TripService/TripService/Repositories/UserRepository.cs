@@ -342,7 +342,7 @@ namespace TripService.Repositories
             }
         }
 
-        public async Task<bool> AddNewConversation(Guid userId, Conversation conversation)
+       /* public async Task<bool> AddNewConversation(Guid userId, Conversation conversation)
         {
             try
             {
@@ -358,9 +358,9 @@ namespace TripService.Repositories
                 Console.Write(exception.Message);
                 return false;
             }
-        }
+        }*/
 
-        public async Task<bool> AddMessageToConversation(Guid conversationId, Message message)
+       /* public async Task<bool> AddMessageToConversation(Guid conversationId, Message message)
         {
             try
             {
@@ -376,7 +376,7 @@ namespace TripService.Repositories
                 Console.Write(exception.Message);
                 return false;
             }
-        }
+        }*/
 
         public async Task<bool> AddNotification(Guid userId, Notification notification)
         {

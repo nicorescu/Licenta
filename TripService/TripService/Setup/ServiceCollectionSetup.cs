@@ -25,6 +25,7 @@ namespace TripService.Setup
             services.TryAddSingleton<IRoleRepository, RoleRepository>();
             services.TryAddSingleton<IAuthRepository, AuthRepository>();
             services.TryAddSingleton<IUserUtils, UserUtils>();
+            services.TryAddSingleton<IConversationRepository, ConversationRepository>();
         }
 
         public static void AddAutomapper(IServiceCollection services)

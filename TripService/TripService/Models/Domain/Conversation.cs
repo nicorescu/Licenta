@@ -5,8 +5,8 @@ namespace TripService.Models.Domain
 {
     public class Conversation
     {
-        public Guid Id { get; set; }
-        public Guid FriendId { get; set; }
+        public Guid FirstUserId { get; set; }
+        public Guid SecondUserId { get; set; }
         public List<Message> Messages { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace TripService.Models.Dtos
 {
     public class ConversationDto
     {
-        public Guid Id { get; set; }
-        public Guid FriendId { get; set; }
+        public Guid FirstUserId { get; set; }
+        public Guid SecondUserId { get; set; }
         public List<MessageDto> Messages { get; set; }
     }
 }

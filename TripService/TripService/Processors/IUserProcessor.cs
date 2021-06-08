@@ -29,7 +29,7 @@ namespace TripService.Processors
         Task<ActionResult<List<UserDto>>> GetUserFriends(Guid userId);
         Task<ActionResult<bool>> ChangePassword(Guid userId, PasswordChange passwordChange);
         Task<ActionResult<bool>> ChangeProfilePrivacy(Guid userId, bool publicProfile);
-        Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation);
+       /* Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation);*/
         Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification);
     }
 }

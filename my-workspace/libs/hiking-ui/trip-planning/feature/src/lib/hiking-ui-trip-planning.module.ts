@@ -33,6 +33,8 @@ import {
   MatSelectCountryModule,
 } from '@angular-material-extensions/select-country';
 
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
+
 import { TripPlanningComponent } from './container/trip-planning/trip-planning.component';
 import { SearchTripComponent } from './components/search-trip/search-trip.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
@@ -126,6 +128,7 @@ import { ChatComponent } from './container/chat/chat.component';
     MatDialogModule,
     NgxIntlTelInputModule,
     MatExpansionModule,
+    DxScrollViewModule,
     MatSelectCountryModule.forRoot('en'),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',
