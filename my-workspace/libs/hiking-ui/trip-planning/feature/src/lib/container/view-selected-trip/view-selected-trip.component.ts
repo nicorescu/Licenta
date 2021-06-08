@@ -49,7 +49,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
   sessionToken: SessionToken;
   alive = true;
   tripState = TripState;
-
+  notification: Notification;
   constructor(
     private planningFacade: PlanningFacade,
     private authFacade: AppAuthenticateFacade,
@@ -241,6 +241,21 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       .addParticipant(this.selectedTripResult.trip.id, participantIdRequest)
       .pipe(
         take(1),
+        switchMap(() => {
+          this.notification = {
+            notifierId: this.userService.currentUser.id,
+            tripId: this.selectedTripResult.trip.id,
+            userFullName: `${this.userService.currentUser.firstName} ${this.userService.currentUser.lastName}`,
+            tripAddress: this.selectedTripResult.trip.address,
+            notificationType: NotificationType.UserJoinedTrip,
+            seen: false,
+            sentAt: new Date(),
+          };
+          return this.userService.addNotification(
+            this.selectedTripResult.organizer.id,
+            this.notification
+          );
+        }),
         concatMap(() => {
           return this.tripService.getTripById(this.selectedTripResult.trip.id);
         }),
@@ -261,20 +276,12 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       .subscribe((res: User[]) => {
         this.selectedTripResult.participants = res;
 
-        const notification: Notification = {
-          notifierId: this.userService.currentUser.id,
-          tripId: this.selectedTripResult.trip.id,
-          userFullName: `${this.userService.currentUser.firstName} ${this.userService.currentUser.lastName}`,
-          tripAddress: this.selectedTripResult.trip.address,
-          notificationType: NotificationType.UserJoinedTrip,
-          seen: false,
-          sentAt: new Date(),
-        };
-
         this.signalRService.sendNotification(
           this.selectedTripResult.organizer.id,
-          notification
+          this.notification
         );
+        this.notification = null;
+
         this.toastrService.success(
           this.translocoService.translate(
             'tripPlanning.tripView.successfullyJoinedTrip'
