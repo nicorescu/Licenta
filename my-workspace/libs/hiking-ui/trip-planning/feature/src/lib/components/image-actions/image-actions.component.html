@@ -5,15 +5,16 @@
     [ngClass]="{
       'own-picture': isOwnProfile
     }"
-    [src]="pictureUrl"
+    [src]="imageUrl ? (imageUrl | png) : '/images/default_profile_picture.png'"
     [matMenuTriggerFor]="menu"
   />
   <img
     *ngIf="!isOwnProfile"
     class="profile-picture"
     [ngClass]="{ 'own-picture': isOwnProfile }"
-    [src]="pictureUrl"
+    [src]="imageUrl ? (imageUrl | png) : '/images/default_profile_picture.png'"
   />
+
   <input
     #fileInput
     type="file"

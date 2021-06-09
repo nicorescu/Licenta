@@ -34,3 +34,4 @@ export * from './lib/services/signalr.service';
 export * from './lib/models/notification.model';
 export * from './lib/models/notification-type.model';
 export * from './lib/models/friend-request.model';
+export * from './lib/pipes/png.pipe';

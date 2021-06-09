@@ -45,10 +45,4 @@ export class ImageActionsComponent implements OnInit {
   removeProfilePicture() {
     this.removeImageConfirmed.emit();
   }
-
-  public get pictureUrl() {
-    return this.imageUrl
-      ? `data:image/png;base64,${this.imageUrl}`
-      : '/images/default_profile_picture.png';
-  }
 }

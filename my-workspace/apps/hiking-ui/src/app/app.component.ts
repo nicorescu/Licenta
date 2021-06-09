@@ -62,12 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
         ];
       });
 
-    this.tripService
-      .updateTripsState()
-      .pipe(take(1))
-      .subscribe(() => {
-        console.log('dadadaldaldaldaldaldal');
-      });
+    this.tripService.updateTripsState().pipe(take(1)).subscribe();
   }
   title = 'Hiking';
   ngOnInit(): void {
