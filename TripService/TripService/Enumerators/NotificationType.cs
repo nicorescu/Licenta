@@ -10,6 +10,7 @@ namespace TripService.Enumerators
         UserJoinedTrip,
         UserLeftTrip,
         UserAskedApproval,
-        OrganizerApprovedRequest
+        OrganizerApprovedRequest,
+        OrganizerCanceledTrip
     }
 }

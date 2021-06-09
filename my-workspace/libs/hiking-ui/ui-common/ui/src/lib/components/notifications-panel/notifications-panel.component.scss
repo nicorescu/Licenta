@@ -5,7 +5,7 @@
     height: auto;
     max-width: 350px !important;
     width: auto;
-    max-height: 92vh;
+    max-height: 92vh !important;
     .mat-menu-content {
       height: 100%;
     }
@@ -13,8 +13,11 @@
 
   .notifications-button {
     .mat-badge-content {
-      right: -3px !important;
-      top: -2px !important;
+      right: 8px !important;
+      top: 10px !important;
+      width: 10px;
+      height: 10px;
+      color: transparent;
     }
   }
 }

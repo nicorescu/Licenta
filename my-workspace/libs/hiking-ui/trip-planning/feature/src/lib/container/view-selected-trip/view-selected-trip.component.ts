@@ -243,7 +243,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
         take(1),
         switchMap(() => {
           this.notification = {
-            notifierId: this.userService.currentUser.id,
+            notifierId: this.sessionToken.loggedInId,
             tripId: this.selectedTripResult.trip.id,
             userFullName: `${this.userService.currentUser.firstName} ${this.userService.currentUser.lastName}`,
             tripAddress: this.selectedTripResult.trip.address,
@@ -320,6 +320,21 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       )
       .pipe(
         take(1),
+        switchMap(() => {
+          this.notification = {
+            notifierId: this.sessionToken.loggedInId,
+            tripId: this.selectedTripResult.trip.id,
+            userFullName: `${this.userService.currentUser.firstName} ${this.userService.currentUser.lastName}`,
+            tripAddress: this.selectedTripResult.trip.address,
+            notificationType: NotificationType.UserLeftTrip,
+            seen: false,
+            sentAt: new Date(),
+          };
+          return this.userService.addNotification(
+            this.selectedTripResult.organizer.id,
+            this.notification
+          );
+        }),
         concatMap(() => {
           return this.tripService.getTripById(this.selectedTripResult.trip.id);
         }),
@@ -330,6 +345,11 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       )
       .subscribe((res) => {
         this.selectedTripResult.participants = res;
+        this.signalRService.sendNotification(
+          this.selectedTripResult.organizer.id,
+          this.notification
+        );
+        this.notification = null;
       });
   }
 

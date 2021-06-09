@@ -43,7 +43,10 @@
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>
-  <div class="profile-body">
+  <div
+    class="profile-body"
+    *ngIf="user?.publicProfile || isOwnProfile; else privateProfileBlock"
+  >
     <mat-tab-group (selectedTabChange)="tabChanged($event)">
       <mat-tab [label]="t('about')">
         <ng-template matTabContent>
@@ -75,4 +78,9 @@
       </mat-tab>
     </mat-tab-group>
   </div>
+  <ng-template #privateProfileBlock>
+    <div class="text-center h5">
+      {{ t('privateProfile') }}
+    </div>
+  </ng-template>
 </div>

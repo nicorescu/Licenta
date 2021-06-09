@@ -25,5 +25,7 @@ namespace TripService.Processors
         Task<ActionResult<bool>> RemoveParticipant(Guid tripId, Guid userId);
         Task<ActionResult<List<TripDto>>> GetUsersOrganizedTrips(Guid userId, int pageNumber, HttpResponse response);
         Task<ActionResult<List<TripDto>>> GetUsersParticipatedTrips(Guid userId, int pageNumber, HttpResponse response);
+        Task<ActionResult<bool>> UpdateTripsState();
+
     }
 }

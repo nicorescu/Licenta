@@ -309,5 +309,35 @@ namespace TripService.Repositories
             return query;
         }
 
+        public async Task<bool> UpdateTripsState()
+        {
+            try
+            {
+                var today = DateTime.Today;
+
+                var startDateFilter = Builders<Trip>.Filter.And(
+                    Builders<Trip>.Filter.Lte(t => t.StartDate,today),
+                    Builders<Trip>.Filter.Eq(t=>t.State, TripState.Planning));
+                var startDateUpdate = Builders<Trip>.Update.Set(t => t.State, TripState.InProgress);
+
+                var firstRes = await _collection.UpdateManyAsync(startDateFilter, startDateUpdate);
+
+                var endDateFilter = Builders<Trip>.Filter.And(
+                    Builders<Trip>.Filter.Lte(t => t.EndDate, today),
+                    Builders<Trip>.Filter.Eq(t => t.State, TripState.InProgress));
+
+                var endDateUpdate = Builders<Trip>.Update.Set(t => t.State, TripState.Finished);
+
+
+                var secondRes = await _collection.UpdateManyAsync(endDateFilter, endDateUpdate);
+
+                return true;
+            }
+            catch (Exception excetion)
+            {
+                Console.WriteLine(excetion.ToString());
+                return false;
+            }
+        }
     }
 }

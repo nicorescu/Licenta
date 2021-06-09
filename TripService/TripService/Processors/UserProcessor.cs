@@ -46,6 +46,12 @@ namespace TripService.Processors
                 return new NoContentResult();
             }
 
+            if (result.Notifications?.Count > 0)
+            {
+                result.Notifications = result.Notifications.OrderByDescending(x => x.SentAt).ToList();
+            }
+
+
             return new OkObjectResult(_mapper.Map<UserDto>(result));
         }
         public async Task<ActionResult<bool>> InsertNewUser(UserDto userDto)
@@ -204,7 +210,7 @@ namespace TripService.Processors
                 {
                     return new StatusCodeResult(500);
                 }
-                FileResources.DeleteFilesByPattern(pathToFolder,userId.ToString());
+                FileResources.DeleteFilesByPattern(pathToFolder, userId.ToString());
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
@@ -254,19 +260,19 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
-       /* public async Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation)
-        {
-            var result = await _userRepository.AddNewConversation(userId,_mapper.Map<Conversation>(conversation));
+        /* public async Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation)
+         {
+             var result = await _userRepository.AddNewConversation(userId,_mapper.Map<Conversation>(conversation));
 
-            if (!result)
-            {
-                return new StatusCodeResult(500);
-            }
+             if (!result)
+             {
+                 return new StatusCodeResult(500);
+             }
 
-            return new OkObjectResult(result);
-        }*/
+             return new OkObjectResult(result);
+         }*/
 
-       public async Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification)
+        public async Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification)
         {
             var result = await _userRepository.AddNotification(userId, _mapper.Map<Notification>(notification));
 
@@ -277,5 +283,7 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+       
     }
 }

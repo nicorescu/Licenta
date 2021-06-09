@@ -3,6 +3,8 @@
     class="notifications-button"
     mat-icon-button
     [matMenuTriggerFor]="menu"
+    [matBadge]="0"
+    [matBadgeHidden]="!isNotificationReceived"
     matBadgeColor="#00437B"
   >
     <mat-icon>notifications</mat-icon>

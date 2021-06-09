@@ -166,6 +166,18 @@ namespace TripService.Controllers
             return await _tripProcessor.CancelTrip(tripId);
         }
 
+        [Authorize]
+        [HttpPut("/trips/state")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<bool>> UpdateTripsState()
+        {
+            return await _tripProcessor.UpdateTripsState();
+        }
+
         [HttpDelete("/trips/{tripId}")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]

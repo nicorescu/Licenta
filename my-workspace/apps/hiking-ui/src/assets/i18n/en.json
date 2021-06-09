@@ -222,6 +222,7 @@
     "couldntProcessYourRequest": "Couldn't process your request"
   },
   "profile": {
+    "privateProfile": "Private profile. You can't see details about it.",
     "edit": " Edit profile",
     "save": "Save",
     "remove": "Remove",

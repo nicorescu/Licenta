@@ -8,6 +8,7 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import {
   SignalRService,
+  TripService,
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { ToastService } from '@hkworkspace/utils';
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private signalRService: SignalRService,
     private userService: UserService,
-    private toastrService: ToastService
+    private toastrService: ToastService,
+    private tripService: TripService
   ) {
     this.authFacade.setSessionToken(this.authService.getSessionToken());
     const activeLang = translocoService.getActiveLang();
@@ -58,6 +60,13 @@ export class AppComponent implements OnInit, OnDestroy {
             ],
           },
         ];
+      });
+
+    this.tripService
+      .updateTripsState()
+      .pipe(take(1))
+      .subscribe(() => {
+        console.log('dadadaldaldaldaldaldal');
       });
   }
   title = 'Hiking';

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -13,20 +14,25 @@ import {
 import { Notification } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { switchMap, take, takeWhile } from 'rxjs/operators';
 import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'hk-notifications-panel',
   templateUrl: './notifications-panel.component.html',
   styleUrls: ['./notifications-panel.component.scss'],
 })
-export class NotificationsPanelComponent implements OnInit, OnDestroy {
+export class NotificationsPanelComponent
+  implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DxScrollViewComponent, { static: false })
   scrollView: DxScrollViewComponent;
+  @ViewChild(MatMenu, { static: false }) matMenu: MatMenu;
 
   notifications: Notification[];
   sessionToken: SessionToken;
   alive = true;
   incomingNotification: Notification;
+  isNotificationReceived = false;
+
   constructor(
     private authFacade: AppAuthenticateFacade,
     private userService: UserService
@@ -57,9 +63,17 @@ export class NotificationsPanelComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(() => {
-        this.notifications.push(this.incomingNotification);
+        this.notifications.unshift(this.incomingNotification);
+        this.isNotificationReceived = true;
       });
   }
+
+  ngAfterViewInit(): void {
+    this.matMenu.closed.pipe(takeWhile(() => this.alive)).subscribe(() => {
+      this.isNotificationReceived = false;
+    });
+  }
+
   ngOnDestroy(): void {
     this.alive = false;
   }

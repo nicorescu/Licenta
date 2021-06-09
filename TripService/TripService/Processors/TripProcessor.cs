@@ -198,5 +198,17 @@ namespace TripService.Processors
             response.Headers.Add("X-Count", result.Item2.ToString());
             return new OkObjectResult(_mapper.Map<List<TripDto>>(result.Item1));
         }
+
+        public async Task<ActionResult<bool>> UpdateTripsState()
+        {
+            var result = await _tripRepository.UpdateTripsState();
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
     }
 }

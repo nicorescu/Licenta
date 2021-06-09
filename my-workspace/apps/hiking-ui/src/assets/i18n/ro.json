@@ -218,6 +218,7 @@
     "couldntProcessYourRequest": "Nu s-a putut procesa cererea ta"
   },
   "profile": {
+    "privateProfile": "Profil privat. Nu poti vedea detalii despre acesta.",
     "edit": " Editeaza profilul",
     "save": "Salveaza",
     "remove": "Sterge",
