@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'png',
 })
 export class PngPipe implements PipeTransform {
-  transform(value: string): string {
-    return `data:image/png;base64,${value}`;
+  transform(value: string, defaultPath: string): string {
+    return value ? `data:image/png;base64,${value}` : defaultPath;
   }
 }
