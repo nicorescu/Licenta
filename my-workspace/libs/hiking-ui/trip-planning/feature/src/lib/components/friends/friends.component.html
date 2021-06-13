@@ -4,7 +4,9 @@
       <div class="col-lg-6 col-md-12 mb-2" *ngFor="let friend of friends">
         <div class="friend-container border">
           <img
-            [src]="buildProfilePicUrl(friend.profilePicUrl)"
+            [src]="
+              friend.profilePicUrl | png: '/images/default_profile_picture.png'
+            "
             class="friend-picture"
             routerLink="/public-profile/{{ friend.id }}"
           />

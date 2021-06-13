@@ -13,10 +13,4 @@ export class FriendsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  buildProfilePicUrl(base64: string) {
-    return base64
-      ? `data:image/png;base64,${base64}`
-      : '/images/default_profile_picture.png';
-  }
 }

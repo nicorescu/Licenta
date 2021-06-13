@@ -28,7 +28,6 @@ export class AccountTripsPaginatorComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('opened');
     this.paginator.page.pipe(takeWhile(() => this.alive)).subscribe((page) => {
       this.pageChanged.emit(page.pageIndex + 1);
     });
