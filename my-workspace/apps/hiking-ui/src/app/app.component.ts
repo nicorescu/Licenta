@@ -12,6 +12,7 @@ import {
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { ToastService } from '@hkworkspace/utils';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private signalRService: SignalRService,
     private userService: UserService,
     private toastrService: ToastService,
-    private tripService: TripService
+    private tripService: TripService,
+    private httpClient: HttpClient
   ) {
     this.authFacade.setSessionToken(this.authService.getSessionToken());
     const activeLang = translocoService.getActiveLang();
@@ -66,6 +68,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   title = 'Hiking';
   ngOnInit(): void {
+    this.httpClient
+      .get(
+        '/placesApi/maps/api/place/photo?maxwidth=580&photoreference=ATtYBwKVNm3DEz2r6HtCvcOA9FAqzA1O6nz5UQcf3tl3scs5D1Y1s84omn4Oip5q5SW7XsDnisRlmhBgGOKbVdNEik4X9RzKMhZrxq0_nBR70xVBjVnl4_Cf5PvpnGhIWOmJwRkT8_PqCX9E-SxwggwkHRX2ZaquTvOu3Bv3Zmr_lMrBZrrT&key=AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q'
+      )
+      .subscribe((img) => {
+        console.log('img:', img);
+        console.log('type', typeof img);
+      });
+
     this.authFacade.sessionToken$
       .pipe(
         takeWhile(() => this.alive),
