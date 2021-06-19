@@ -48,19 +48,34 @@ export class AppComponent implements OnInit, OnDestroy {
             icon: 'home',
           },
           {
-            text: 'Examples',
-            icon: 'folder',
-            items: [
-              {
-                text: this.translocoService.translate('navigation.profile'),
-                path: '/profile',
-              },
-              {
-                text: 'Tasks',
-                path: '/tasks',
-              },
-            ],
+            text: this.translocoService.translate('navigation.chat'),
+            path: '/chat',
+            icon: 'comment',
           },
+          {
+            text: this.translocoService.translate('navigation.users'),
+            path: '/users',
+            icon: 'group',
+          },
+          {
+            text: this.translocoService.translate('navigation.contact'),
+            path: '/contact',
+            icon: 'info',
+          },
+          // {
+          //   text: 'Examples',
+          //   icon: 'folder',
+          //   items: [
+          //     {
+          //       text: this.translocoService.translate('navigation.profile'),
+          //       path: '/profile',
+          //     },
+          //     {
+          //       text: 'Tasks',
+          //       path: '/tasks',
+          //     },
+          //   ],
+          // },
         ];
       });
 
@@ -68,15 +83,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   title = 'Hiking';
   ngOnInit(): void {
-    this.httpClient
-      .get(
-        '/placesApi/maps/api/place/photo?maxwidth=580&photoreference=ATtYBwKVNm3DEz2r6HtCvcOA9FAqzA1O6nz5UQcf3tl3scs5D1Y1s84omn4Oip5q5SW7XsDnisRlmhBgGOKbVdNEik4X9RzKMhZrxq0_nBR70xVBjVnl4_Cf5PvpnGhIWOmJwRkT8_PqCX9E-SxwggwkHRX2ZaquTvOu3Bv3Zmr_lMrBZrrT&key=AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q'
-      )
-      .subscribe((img) => {
-        console.log('img:', img);
-        console.log('type', typeof img);
-      });
-
     this.authFacade.sessionToken$
       .pipe(
         takeWhile(() => this.alive),

@@ -1,7 +1,10 @@
 {
   "navigation": {
     "home": "Home",
-    "profile": "Profile"
+    "profile": "Profile",
+    "chat": "Chat",
+    "contact": "Contact",
+    "users": "Users"
   },
 
   "authentication": {

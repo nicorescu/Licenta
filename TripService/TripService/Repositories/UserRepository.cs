@@ -190,7 +190,7 @@ namespace TripService.Repositories
 
                 var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[] { requesterUserId });
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged && result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
             }
             catch (Exception exception)
             {

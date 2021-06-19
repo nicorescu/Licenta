@@ -43,6 +43,7 @@ export class FriendsPanelComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((users) => {
+        console.log('am ajuns aici: ', users);
         this.requesters = users;
       });
 

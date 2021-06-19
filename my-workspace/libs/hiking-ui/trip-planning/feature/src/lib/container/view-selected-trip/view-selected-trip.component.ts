@@ -155,6 +155,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       )
       .subscribe((user: User) => {
         this.selectedTripResult.organizer = user;
+        this.signalRService.notifyFriendRequest(user.id);
       });
   }
 

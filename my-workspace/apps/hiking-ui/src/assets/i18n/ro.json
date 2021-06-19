@@ -1,7 +1,10 @@
 {
   "navigation": {
     "home": "Pagina principala",
-    "profile": "Profil"
+    "profile": "Profil",
+    "chat": "Chat",
+    "contact": "Contact",
+    "users": "Utilizatori"
   },
 
   "authentication": {
