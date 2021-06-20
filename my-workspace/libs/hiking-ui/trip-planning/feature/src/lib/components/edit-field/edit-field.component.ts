@@ -130,6 +130,9 @@ export class EditFieldComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+    if (this.editForm.invalid) {
+      return;
+    }
     this.saveClicked.emit({
       ...this.editForm.getRawValue(),
       country: this.selectedCountry,
