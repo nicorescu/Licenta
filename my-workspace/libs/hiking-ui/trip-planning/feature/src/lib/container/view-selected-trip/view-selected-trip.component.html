@@ -31,13 +31,15 @@
                           selectedTripResult.organizer.countryCode
                         }} flag-icon-squared"
                       ></span>
-                      <hk-friend-options
-                        [isFriend]="isFriend"
-                        [isFriendRequested]="isFriendRequested"
-                        (friendRequestedEmitter)="onFriendRequested()"
-                        (unfriendEmitter)="onUnfriend()"
-                        (cancelRequestEmitter)="onCancelFriendRequest()"
-                      ></hk-friend-options>
+                      <ng-container *ngIf="sessionToken">
+                        <hk-friend-options
+                          [isFriend]="isFriend"
+                          [isFriendRequested]="isFriendRequested"
+                          (friendRequestedEmitter)="onFriendRequested()"
+                          (unfriendEmitter)="onUnfriend()"
+                          (cancelRequestEmitter)="onCancelFriendRequest()"
+                        ></hk-friend-options>
+                      </ng-container>
                     </div>
                   </div>
                   <div class="organizer-picture">
@@ -69,7 +71,10 @@
                     <div class="participant">
                       <img
                         class="img-fluid responsive participant-picture"
-                        src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?size=626&ext=jpg&ga=GA1.2.1879181272.1618704000"
+                        [src]="
+                          participant.profilePicUrl
+                            | png: '/images/default_profile_picture.png'
+                        "
                       />
                       <a
                         routerLink="/public-profile/{{ participant.id }}"
@@ -120,12 +125,12 @@
             </div>
           </ng-template>
         </mat-tab>
-        <mat-tab [label]="t('header.lodging')">
+        <!-- <mat-tab [label]="t('header.lodging')">
           <ng-template matTabContent>
             <div id="tripLodging">
               <hk-places [places]="selectedTripResult.hotels"></hk-places>
             </div> </ng-template
-        ></mat-tab>
+        ></mat-tab> -->
       </mat-tab-group>
     </div>
     <div class="actions-container">

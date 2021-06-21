@@ -198,11 +198,11 @@
         "errorJoiningTrip": "A aparut o eroare, incearca din nou"
       },
       "actions": {
-        "pickAnotherTrip": "Pick another trip",
-        "askForApproval": "Ask for approval",
-        "joinTrip": "Join trip",
-        "cancelTrip": "Cancel trip",
-        "deleteTrip": "Delete trip",
+        "pickAnotherTrip": "Alege alta excursie",
+        "askForApproval": "Cere aprobare",
+        "joinTrip": "Alatura-te excursiei",
+        "cancelTrip": "Anuleaza excursia",
+        "deleteTrip": "Sterge trip",
         "leaveTrip": "Paraseste excursia",
         "cancelRequest": "Anuleaza cererea"
       },

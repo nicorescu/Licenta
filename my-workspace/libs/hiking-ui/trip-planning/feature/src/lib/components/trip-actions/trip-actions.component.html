@@ -1,52 +1,49 @@
-<div *ngIf="selectedTripResult && sessionToken" class="trip-actions">
-  <ng-container *transloco="let t; read: 'tripPlanning.tripView.actions'">
+<div
+  class="trip-actions"
+  *transloco="let t; read: 'tripPlanning.tripView.actions'"
+>
+  <a *ngIf="searchFilter$ | async" (click)="pickAnotherTrip()" [routerLink]="">
+    <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
+    {{ t('pickAnotherTrip') }}</a
+  >
+  <ng-container *ngIf="selectedTripResult && sessionToken">
     <ng-container *ngIf="!isOrganizer">
-      <a
-        *ngIf="searchFilter$ | async"
-        (click)="pickAnotherTrip()"
-        [routerLink]=""
+      <div *ngIf="!(searchFilter$ | async)" class="separator"></div>
+      <button
+        (click)="askForApproval()"
+        class="btn btn-primary"
+        *ngIf="
+          selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired &&
+          !isParticipant &&
+          !isParticipationRequested
+        "
       >
-        <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
-        {{ t('pickAnotherTrip') }}</a
+        {{ t('askForApproval') }}
+      </button>
+      <button
+        (click)="joinTrip()"
+        class="btn btn-primary"
+        *ngIf="
+          selectedTripResult.trip.privacy === tripPrivacy.Public &&
+          !isParticipant
+        "
       >
-      <ng-container *ngIf="sessionToken">
-        <div *ngIf="!(searchFilter$ | async)" class="separator"></div>
-        <button
-          (click)="askForApproval()"
-          class="btn btn-primary"
-          *ngIf="
-            selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired &&
-            !isParticipant &&
-            !isParticipationRequested
-          "
-        >
-          {{ t('askForApproval') }}
-        </button>
-        <button
-          (click)="joinTrip()"
-          class="btn btn-primary"
-          *ngIf="
-            selectedTripResult.trip.privacy === tripPrivacy.Public &&
-            !isParticipant
-          "
-        >
-          {{ t('joinTrip') }}
-        </button>
-        <button
-          (click)="quitTrip()"
-          class="btn btn-primary"
-          *ngIf="isParticipant"
-        >
-          {{ t('leaveTrip') }}
-        </button>
-        <button
-          (click)="cancelRequest()"
-          class="btn btn-primary"
-          *ngIf="isParticipationRequested"
-        >
-          {{ t('cancelRequest') }}
-        </button>
-      </ng-container>
+        {{ t('joinTrip') }}
+      </button>
+      <button
+        (click)="quitTrip()"
+        class="btn btn-primary"
+        *ngIf="isParticipant"
+      >
+        {{ t('leaveTrip') }}
+      </button>
+      <button
+        (click)="cancelRequest()"
+        class="btn btn-primary"
+        *ngIf="isParticipationRequested"
+      >
+        {{ t('cancelRequest') }}
+      </button>
     </ng-container>
     <ng-container *ngIf="isOrganizer && isPlanningOrProgress">
       <div class="separator"></div>

@@ -31,9 +31,8 @@ import {
 } from '@hkworkspace/shared/app-authentication/data-access';
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { Router } from '@angular/router';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'hk-view-selected-trip',
@@ -400,16 +399,16 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
 
   public get isFriend() {
     return (
-      this.selectedTripResult.organizer.friends.indexOf(
-        this.sessionToken.loggedInId
+      this.selectedTripResult?.organizer?.friends.indexOf(
+        this.sessionToken?.loggedInId
       ) >= 0
     );
   }
 
   public get isFriendRequested() {
     return (
-      this.selectedTripResult.organizer.friendRequests.indexOf(
-        this.sessionToken.loggedInId
+      this.selectedTripResult.organizer?.friendRequests.indexOf(
+        this.sessionToken?.loggedInId
       ) >= 0
     );
   }

@@ -12,7 +12,6 @@ import {
   UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { ToastService } from '@hkworkspace/utils';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +21,8 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit, OnDestroy {
   menuItems: navItem[];
   alive = true;
+  title = 'Travel-App';
+
   constructor(
     private translocoService: TranslocoService,
     private authFacade: AppAuthenticateFacade,
@@ -29,8 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private signalRService: SignalRService,
     private userService: UserService,
     private toastrService: ToastService,
-    private tripService: TripService,
-    private httpClient: HttpClient
+    private tripService: TripService
   ) {
     this.authFacade.setSessionToken(this.authService.getSessionToken());
     const activeLang = translocoService.getActiveLang();
@@ -81,7 +81,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.tripService.updateTripsState().pipe(take(1)).subscribe();
   }
-  title = 'Hiking';
   ngOnInit(): void {
     this.authFacade.sessionToken$
       .pipe(
@@ -90,6 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
           if (token) {
             if (!this.signalRService.hubConnection) {
               this.signalRService.startConnection(token.loggedInId);
+              this.addSignalRListeners();
             }
           }
           return this.userService.getUserById(token.loggedInId);
@@ -98,7 +98,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((user) => {
         this.userService.currentUser = user;
       });
-    this.addSignalRListeners();
   }
 
   addSignalRListeners() {
