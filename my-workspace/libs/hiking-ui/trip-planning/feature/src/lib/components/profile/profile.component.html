@@ -78,7 +78,7 @@
     </mat-tab-group>
   </div>
   <ng-template #privateProfileBlock>
-    <div class="text-center h5">
+    <div class="text-center h5" *ngIf="!isOwnProfile">
       {{ t('privateProfile') }}
     </div>
   </ng-template>

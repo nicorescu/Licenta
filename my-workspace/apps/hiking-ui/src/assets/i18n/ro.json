@@ -182,7 +182,9 @@
       "header": {
         "aboutTrip": "Despre excursie",
         "touristAttractions": "Atractii turistice",
-        "lodging": "Cazare"
+        "lodging": "Cazare",
+        "reviews": "Recenzii",
+        "participationRequests": "Cereri de participare"
       },
       "body": {
         "organizer": "Organizator",
@@ -218,7 +220,9 @@
     "successfullyCanceledTrip": "Ai anulat excursia cu succes",
     "errorCancelingTrip": "Nu s-a putut anula excursia. Incearca, din nou, mai tarziu",
     "approvedYourFriendRequest": "ti-a aprobat cererea de prietenie",
-    "couldntProcessYourRequest": "Nu s-a putut procesa cererea ta"
+    "couldntProcessYourRequest": "Nu s-a putut procesa cererea ta",
+    "requestAccepted": "Cerere aprobata",
+    "requestDeclined": "Cerere respinsa"
   },
   "profile": {
     "privateProfile": "Profil privat. Nu poti vedea detalii despre acesta.",

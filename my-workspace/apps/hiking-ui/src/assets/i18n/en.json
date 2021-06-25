@@ -186,7 +186,9 @@
       "header": {
         "aboutTrip": "About trip",
         "touristAttractions": "Tourist attractions",
-        "lodging": "Lodging"
+        "lodging": "Lodging",
+        "reviews": "Reviews",
+        "participationRequests": "Participation requests"
       },
       "body": {
         "organizer": "Organizer",
@@ -222,7 +224,9 @@
     "successfullyCanceledTrip": "You successfully canceled your trip",
     "errorCancelingTrip": "We couldn't cancel your trip, try again later",
     "approvedYourFriendRequest": "approved your friend request",
-    "couldntProcessYourRequest": "Couldn't process your request"
+    "couldntProcessYourRequest": "Couldn't process your request",
+    "requestAccepted": "Request accepted",
+    "requestDeclined": "Request declined"
   },
   "profile": {
     "privateProfile": "Private profile. You can't see details about it.",

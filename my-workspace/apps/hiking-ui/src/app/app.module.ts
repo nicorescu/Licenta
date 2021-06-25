@@ -49,6 +49,7 @@ registerLocaleData(localeRo, 'ro', roExtra);
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     SideNavOuterToolbarModule,
     SideNavInnerToolbarModule,
     SingleCardModule,

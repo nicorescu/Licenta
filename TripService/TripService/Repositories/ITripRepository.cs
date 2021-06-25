@@ -25,5 +25,6 @@ namespace TripService.Repositories
         Task<Tuple<List<Trip>, int>> GetUsersOrganizedTrips(Guid userId, int pageNumber);
         Task<Tuple<List<Trip>, int>> GetUsersParticipatedTrips(Guid userId, int pageNumber);
         Task<bool> UpdateTripsState();
+        Task<List<User>> GetParticipationRequests(Guid tripId);
     }
 }

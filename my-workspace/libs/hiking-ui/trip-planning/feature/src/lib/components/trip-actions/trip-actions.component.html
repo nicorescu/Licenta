@@ -13,7 +13,7 @@
         (click)="askForApproval()"
         class="btn btn-primary"
         *ngIf="
-          selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired &&
+          selectedTripResult.trip?.privacy === tripPrivacy.ApprovalRequired &&
           !isParticipant &&
           !isParticipationRequested
         "
@@ -24,7 +24,7 @@
         (click)="joinTrip()"
         class="btn btn-primary"
         *ngIf="
-          selectedTripResult.trip.privacy === tripPrivacy.Public &&
+          selectedTripResult.trip?.privacy === tripPrivacy.Public &&
           !isParticipant
         "
       >

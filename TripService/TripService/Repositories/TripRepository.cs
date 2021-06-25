@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -337,6 +338,26 @@ namespace TripService.Repositories
             {
                 Console.WriteLine(excetion.ToString());
                 return false;
+            }
+        }
+
+        public async Task<List<User>> GetParticipationRequests(Guid tripId)
+        {
+            try
+            {
+                var result = _collection.Aggregate()
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.GetMatchByIdStage(tripId))
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.GetLookupParticipationRequests())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.ProjectParticipationRequests())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.UnwindParticipationRequests())
+                    .AppendStage<User>(AtlasSearchExtensions.ReplaceRequestsRoot());
+
+                return await result.ToListAsync();
+            }
+            catch (Exception excetion)
+            {
+                Console.WriteLine(excetion.ToString());
+                return null;
             }
         }
     }

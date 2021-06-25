@@ -19,19 +19,19 @@
                     <div class="text-center" style="margin: 10px">
                       <a
                         routerLink="/public-profile/{{
-                          selectedTripResult.organizer.id
+                          selectedTripResult.organizer?.id
                         }}"
                         style="margin-right: 5px; text-transform: capitalize"
-                        >{{ selectedTripResult.organizer.firstName }}
-                        {{ selectedTripResult.organizer.lastName }}</a
+                        >{{ selectedTripResult.organizer?.firstName }}
+                        {{ selectedTripResult.organizer?.lastName }}</a
                       >
                       <span
                         style="margin-right: 5px"
                         class="flag-icon flag-icon-{{
-                          selectedTripResult.organizer.countryCode
+                          selectedTripResult.organizer?.countryCode
                         }} flag-icon-squared"
                       ></span>
-                      <ng-container *ngIf="sessionToken">
+                      <ng-container *ngIf="sessionToken && !isOrganizer">
                         <hk-friend-options
                           [isFriend]="isFriend"
                           [isFriendRequested]="isFriendRequested"
@@ -43,12 +43,18 @@
                     </div>
                   </div>
                   <div class="organizer-picture">
-                    <img class="img-fluid responsive" [src]="organizerImage" />
+                    <img
+                      class="img-fluid responsive"
+                      [src]="
+                        selectedTripResult.organizer?.profilePicUrl
+                          | png: '/images/default_profile_picture.png'
+                      "
+                    />
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12 about-trip">
                   <hk-trip-details
-                    [trip]="selectedTripResult.trip"
+                    [trip]="selectedTripResult?.trip"
                     [slotsText]="t('body.slotsLeft')"
                   ></hk-trip-details>
                 </div>
@@ -61,7 +67,7 @@
               <mat-divider class="divider"></mat-divider>
               <div class="participants">
                 <mat-list
-                  *ngIf="selectedTripResult?.participants.length > 0"
+                  *ngIf="selectedTripResult?.participants?.length > 0"
                   class="participants-list"
                 >
                   <mat-list-item
@@ -90,20 +96,20 @@
                     </div>
                   </mat-list-item>
                 </mat-list>
-                <h6 *ngIf="!(selectedTripResult?.participants.length > 0)">
+                <h6 *ngIf="!(selectedTripResult?.participants?.length > 0)">
                   {{ t('body.noParticipants') }}
                 </h6>
               </div>
               <div
                 class="trip-state"
-                *ngIf="selectedTripResult.trip.state === tripState.Canceled"
+                *ngIf="selectedTripResult.trip?.state === tripState.Canceled"
               >
                 <h5>{{ t('canceled') }}</h5>
               </div>
               <div
                 class="trip-state"
                 *ngIf="
-                  selectedTripResult.trip.state ===
+                  selectedTripResult.trip?.state ===
                   tripState.CanceledByAuthority
                 "
               >
@@ -122,6 +128,52 @@
                   [places]="selectedTripResult.attractions"
                 ></hk-places>
               </ng-container>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab
+          *ngIf="
+            isOrganizer &&
+            selectedTripResult.trip.privacy === tripPrivacy.ApprovalRequired
+          "
+        >
+          <ng-template matTabLabel>
+            <span
+              id="participationRequestsLabel"
+              [matBadge]="selectedTripResult.requesters?.length"
+              [matBadgeHidden]="!(selectedTripResult.requesters?.length > 0)"
+              >{{ t('header.participationRequests') }}</span
+            >
+          </ng-template>
+          <ng-template matTabContent>
+            <div class="participation-requests">
+              <mat-nav-list>
+                <mat-list-item
+                  *ngFor="let requester of selectedTripResult.requesters"
+                >
+                  <span matLine>
+                    <img
+                      class="requester-img"
+                      [src]="
+                        requester.profilePicUrl
+                          | png: '/images/default_profile_picture.png'
+                      "
+                    />
+                    <a routerLink="/public-profile/{{ requester.id }}">
+                      {{ requester.firstName }} {{ requester.lastName }}
+                    </a>
+                  </span>
+                  <button mat-icon-button (click)="acceptRequest(requester.id)">
+                    <mat-icon>done</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    (click)="declineRequest(requester.id)"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-list-item>
+              </mat-nav-list>
             </div>
           </ng-template>
         </mat-tab>

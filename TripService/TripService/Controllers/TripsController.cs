@@ -95,6 +95,18 @@ namespace TripService.Controllers
             return await _tripProcessor.GetUsersParticipatedTrips(userId, pageNumber, Response);
         }
 
+        [HttpGet("/trips/participation-requests/{tripId}")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<List<UserDto>>> GetParticipationRequests([FromRoute] Guid tripId)
+        {
+            return await _tripProcessor.GetParticipationRequests(tripId);
+        }
+
         [HttpPost("/trips")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]

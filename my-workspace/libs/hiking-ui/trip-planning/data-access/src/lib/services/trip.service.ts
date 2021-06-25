@@ -8,6 +8,7 @@ import { TripFilter } from '../models/trip-filter.model';
 import { TripsResult } from '../models/trip-result.model';
 import { Trip } from '../models/trip.model';
 import { map, tap } from 'rxjs/operators';
+import { User } from '@hkworkspace/shared/app-authentication/data-access';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,12 @@ export class TripService {
           return tripsResult;
         })
       );
+  }
+
+  getParticipationRequests(tripId: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      `${this.baseApiUrl}/trips/participation-requests/${tripId}`
+    );
   }
 
   getSelectedTrip(tripId: string): Observable<SelectedTripResult> {

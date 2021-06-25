@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FriendRequest,
   GooglePlacesService,
@@ -41,7 +41,15 @@ import { Router } from '@angular/router';
 })
 export class ViewSelectedTripComponent implements OnInit, OnDestroy {
   tripPrivacy = TripPrivacy;
-  selectedTripResult: SelectedTripResult;
+  selectedTripResult: SelectedTripResult = {
+    trip: null,
+    attractions: [],
+    hotels: [],
+    organizer: null,
+    participants: [],
+    requesters: [],
+  };
+
   isLoadingTrip = true;
   isLoadingAttractions = true;
   isLoadingHotels = true;
@@ -63,6 +71,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getFullTripDetails();
+    this.getParticipationRequests();
     this.authFacade.sessionToken$
       .pipe(takeWhile(() => this.alive))
       .subscribe((token) => {
@@ -74,6 +83,23 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
+  getParticipationRequests() {
+    this.planningFacade.selectedTripId$
+      .pipe(
+        take(1),
+        switchMap((id) => {
+          return this.tripService.getParticipationRequests(id);
+        })
+      )
+      .subscribe((users) => {
+        this.selectedTripResult = {
+          ...this.selectedTripResult,
+          requesters: users,
+        };
+        console.log('requesters: ', this.selectedTripResult);
+      });
+  }
+
   getFullTripDetails() {
     this.planningFacade.selectedTripId$
       .pipe(
@@ -82,7 +108,12 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
           return this.tripService.getSelectedTrip(tripId);
         }),
         switchMap((res) => {
-          this.selectedTripResult = res;
+          this.selectedTripResult = {
+            ...this.selectedTripResult,
+            trip: res.trip,
+            organizer: res.organizer,
+            participants: res.participants,
+          };
           this.isLoadingTrip = false;
           return this.googleService
             .getDetailsByQuery(res.trip.locationName, 'tourist_attraction')
@@ -125,7 +156,12 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
       )
       .subscribe((res: SelectedTripResult) => {
         this.isLoadingHotels = false;
-        this.selectedTripResult = res;
+        this.selectedTripResult = {
+          ...this.selectedTripResult,
+          trip: res.trip,
+          organizer: res.organizer,
+          participants: res.participants,
+        };
       });
   }
 
@@ -397,6 +433,59 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     }
   }
 
+  acceptRequest(userId: string) {
+    this.tripService
+      .addParticipant(this.selectedTripResult.trip.id, {
+        userId,
+      })
+      .pipe(
+        take(1),
+        switchMap(() => {
+          return this.tripService.removeParticipationRequest(
+            this.selectedTripResult.trip.id,
+            userId
+          );
+        }),
+        concatMap(() => {
+          this.selectedTripResult.participants.push(
+            this.selectedTripResult.requesters[
+              this.selectedTripResult.requesters.findIndex(
+                (x) => x.id === userId
+              )
+            ]
+          );
+          return this.tripService.getParticipationRequests(
+            this.selectedTripResult.trip.id
+          );
+        })
+      )
+      .subscribe((users) => {
+        this.selectedTripResult.requesters = users;
+        this.toastrService.success(
+          this.translocoService.translate('toast.requestAccepted')
+        );
+      });
+  }
+
+  declineRequest(userId: string) {
+    this.tripService
+      .removeParticipationRequest(this.selectedTripResult.trip.id, userId)
+      .pipe(
+        take(1),
+        concatMap(() => {
+          return this.tripService.getParticipationRequests(
+            this.selectedTripResult.trip.id
+          );
+        })
+      )
+      .subscribe((users) => {
+        this.selectedTripResult.requesters = users;
+        this.toastrService.success(
+          this.translocoService.translate('toast.requestDeclined')
+        );
+      });
+  }
+
   public get isFriend() {
     return (
       this.selectedTripResult?.organizer?.friends.indexOf(
@@ -417,5 +506,11 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     return this.selectedTripResult.organizer.profilePicUrl
       ? `data:image/png;base64,${this.selectedTripResult.organizer.profilePicUrl}`
       : '/images/default_profile_picture.png';
+  }
+
+  public get isOrganizer() {
+    return (
+      this.selectedTripResult?.organizer?.id === this.sessionToken?.loggedInId
+    );
   }
 }

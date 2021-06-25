@@ -8,4 +8,5 @@ export interface SelectedTripResult {
   hotels: Place[];
   organizer: User;
   participants: User[];
+  requesters: User[];
 }

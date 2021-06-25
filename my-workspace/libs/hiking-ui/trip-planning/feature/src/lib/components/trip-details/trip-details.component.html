@@ -6,17 +6,17 @@
     <div class="background-shape">
       <div class="title">
         {{ numberOfDays }} {{ numberOfDays > 1 ? t('days') : t('day') }} in
-        {{ trip.locationName }}
+        {{ trip?.locationName }}
       </div>
     </div>
     <div class="background-shape">
       <div class="dates">
         <div class="start-date">
-          {{ trip.startDate | date: 'fullDate':'GMT':activeLang }}
+          {{ trip?.startDate | date: 'fullDate':'GMT':activeLang }}
         </div>
         <div class="line"></div>
         <div class="end-date">
-          {{ trip.endDate | date: 'fullDate':'GMT':activeLang }}
+          {{ trip?.endDate | date: 'fullDate':'GMT':activeLang }}
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <div class="slots">{{ slots }} {{ slotsText }}</div>
       <div class="line"></div>
       <div class="privacy">
-        {{ t(tripPrivacy[trip.privacy]) }}
+        {{ t(tripPrivacy[trip?.privacy]) }}
       </div>
     </div>
   </div>

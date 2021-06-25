@@ -210,5 +210,16 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+        public async Task<ActionResult<List<UserDto>>> GetParticipationRequests(Guid tripId)
+        {
+            var result = await _tripRepository.GetParticipationRequests(tripId);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
+        }
     }
 }

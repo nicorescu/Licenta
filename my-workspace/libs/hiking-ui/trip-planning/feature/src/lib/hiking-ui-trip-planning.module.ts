@@ -28,6 +28,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
 import {
   MatSelectCountryLangToken,
   MatSelectCountryModule,
@@ -129,6 +130,7 @@ import { ChatComponent } from './container/chat/chat.component';
     NgxIntlTelInputModule,
     MatExpansionModule,
     DxScrollViewModule,
+    MatBadgeModule,
     MatSelectCountryModule.forRoot('en'),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBPgVrWygCqhFiOdZL3a0ECSPJ7moDHn4Q',

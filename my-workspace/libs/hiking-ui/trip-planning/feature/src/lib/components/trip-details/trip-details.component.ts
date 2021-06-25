@@ -25,12 +25,12 @@ export class TripDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
     this.numberOfDays =
-      (this.trip.endDate.getTime() - this.trip.startDate.getTime()) /
+      (this.trip?.endDate.getTime() - this.trip?.startDate.getTime()) /
         (1000 * 3600 * 24) +
       1;
   }
 
   public get slots() {
-    return this.trip.slotsNumber - this.trip.participantsIds.length;
+    return this.trip?.slotsNumber - this.trip?.participantsIds.length;
   }
 }

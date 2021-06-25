@@ -62,13 +62,13 @@ export class TripActionsComponent implements OnInit {
   public get isOrganizer() {
     return (
       !!this.selectedTripResult &&
-      this.selectedTripResult.organizer.id === this.sessionToken?.loggedInId
+      this.selectedTripResult?.organizer?.id === this.sessionToken?.loggedInId
     );
   }
 
   public get isFriend() {
     return (
-      this.selectedTripResult.organizer.friends.indexOf(
+      this.selectedTripResult?.organizer?.friends.indexOf(
         this.sessionToken.loggedInId
       ) >= 0
     );
@@ -76,7 +76,7 @@ export class TripActionsComponent implements OnInit {
 
   public get isFriendRequested() {
     return (
-      this.selectedTripResult.organizer.friendRequests.indexOf(
+      this.selectedTripResult?.organizer?.friendRequests.indexOf(
         this.sessionToken.loggedInId
       ) >= 0
     );
@@ -84,7 +84,7 @@ export class TripActionsComponent implements OnInit {
 
   public get isParticipant() {
     return (
-      this.selectedTripResult.trip.participantsIds.indexOf(
+      this.selectedTripResult?.trip?.participantsIds.indexOf(
         this.sessionToken.loggedInId
       ) >= 0
     );
@@ -92,7 +92,7 @@ export class TripActionsComponent implements OnInit {
 
   public get isParticipationRequested() {
     return (
-      this.selectedTripResult.trip.requests.indexOf(
+      this.selectedTripResult?.trip?.requests.indexOf(
         this.sessionToken.loggedInId
       ) >= 0
     );
@@ -100,8 +100,8 @@ export class TripActionsComponent implements OnInit {
 
   public get isPlanningOrProgress() {
     return (
-      this.selectedTripResult.trip.state === this.tripState.Planning ||
-      this.selectedTripResult.trip.state === this.tripState.InProgress
+      this.selectedTripResult?.trip?.state === this.tripState.Planning ||
+      this.selectedTripResult?.trip?.state === this.tripState.InProgress
     );
   }
 }

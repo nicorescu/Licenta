@@ -86,6 +86,22 @@
       background-color: white;
       border-radius: 5px;
     }
+
+    .participation-requests {
+      width: 100%;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+
+      mat-list-item {
+        margin-bottom: 10px;
+        .requester-img {
+          width: 3.2rem;
+          height: 3.2rem;
+          border-radius: 100%;
+        }
+      }
+    }
   }
 
   .actions-container {
@@ -117,5 +133,12 @@
         }
       }
     }
+  }
+}
+
+#participationRequestsLabel {
+  .mat-badge-content {
+    top: -12px;
+    right: -18px;
   }
 }

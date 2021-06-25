@@ -231,6 +231,7 @@ namespace TripService.Extensions
             return BsonDocument.Parse(stage);
         }
 
+
         public static BsonDocument GetUsersProjectionStage()
         {
             const string stage = "{\"$project\": {Users: 1, _id: 0}}";
@@ -301,6 +302,30 @@ namespace TripService.Extensions
         public static BsonDocument ProjectFriendsNoPassword()
         {
             return BsonDocument.Parse("{\"$project\": {\"Password\": 0}}");
+        }
+
+        public static BsonDocument GetLookupParticipationRequests()
+        {
+            const string stage = "{\"$lookup\": {from: 'User', localField: 'Requests', foreignField: '_id', as: 'Requests'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectParticipationRequests()
+        {
+            const string stage = "{\"$project\": {_id: 0, Requests: 1}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument UnwindParticipationRequests()
+        {
+            const string stage = "{\"$unwind\":{path:\"$Requests\"}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ReplaceRequestsRoot()
+        {
+            const string stage = "{\"$replaceRoot\":{newRoot:\"$Requests\"}}";
+            return BsonDocument.Parse(stage);
         }
     }
 }
