@@ -13,7 +13,7 @@ namespace TripService.Repositories
         Task<Tuple<List<DetailedTrip>, int>> SearchTrips(SearchFilter searchFilter);
         Task<Trip> GetTripById(Guid tripId);
         Task<SelectedTripResult> GetSelectedTrip(Guid tripId);
-        Task<bool> InsertNewTrip(Trip trip);
+        Task<int> InsertNewTrip(Trip trip);
         Task<bool> CancelTripByAuthority(Guid tripId);
         Task<bool> CancelTrip(Guid tripId);
         Task<bool> UpdateTrip(Guid tripId, Trip trip);

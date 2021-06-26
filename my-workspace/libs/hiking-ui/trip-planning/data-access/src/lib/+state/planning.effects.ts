@@ -91,9 +91,14 @@ export class PlanningEffects {
           }),
           catchError((err) => {
             console.log('eroare', err);
-            const error = this.translocoService.translate(
+            let error = this.translocoService.translate(
               'tripPlanning.tripPreview.errors.errorCreatingTrip'
             );
+            if (err.status === 409) {
+              error = this.translocoService.translate(
+                'tripPlanning.tripPreview.errors.interspersedInterval'
+              );
+            }
             this.toastrService.error(error);
             return of(TripActions.createTripFailure({ error: error }));
           })

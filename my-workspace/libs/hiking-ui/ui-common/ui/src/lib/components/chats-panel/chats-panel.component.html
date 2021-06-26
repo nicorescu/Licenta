@@ -3,10 +3,10 @@
     <fa-icon [icon]="faCommentAlt"></fa-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <ng-container *ngIf="data.length > 0">
+    <ng-container *ngIf="conversations?.length > 0">
       <div class="panel-content">
-        <div mat-menu-item *ngFor="let item of data">
-          {{ item.id + item.string }}
+        <div mat-menu-item *ngFor="let conv of conversations">
+          {{ conv.firstUser.id }}
         </div>
       </div>
       <mat-divider class="mb-2"></mat-divider>
@@ -14,7 +14,7 @@
         <a routerLink="/chat">{{ t('viewAllConversations') }}</a>
       </div>
     </ng-container>
-    <ng-container *ngIf="data.length == 0">
+    <ng-container *ngIf="conversations?.length == 0">
       <div class="no-content-message">
         <p>{{ t('noContentMessage') }}</p>
       </div>

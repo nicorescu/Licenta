@@ -4,7 +4,6 @@ import {
   Notification,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { Role } from './role.model';
-import { Conversation } from './conversation.model';
 import { PhoneNumber } from './phone-number.model';
 
 export interface User {
@@ -24,7 +23,6 @@ export interface User {
   friends: string[];
   reviews: Review[];
   reviewAverage: number;
-  conversations: Conversation[];
   friendRequests: string[];
   publicProfile: boolean;
   notifications: Notification[];

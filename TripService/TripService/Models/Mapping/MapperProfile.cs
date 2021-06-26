@@ -56,6 +56,9 @@ namespace TripService.Models.Mapping
 
             CreateMap<Notification, NotificationDto>();
             CreateMap<NotificationDto, Notification>();
+
+            CreateMap<FullConversation, FullConversationDto>();
+            CreateMap<FullConversationDto, FullConversation>();
         }
     }
 }

@@ -35,3 +35,7 @@ export * from './lib/models/notification.model';
 export * from './lib/models/notification-type.model';
 export * from './lib/models/friend-request.model';
 export * from './lib/pipes/png.pipe';
+export * from './lib/models/conversation.model';
+export * from './lib/models/message.model';
+export * from './lib/models/full-conversation.model';
+export * from './lib/services/conversation.service';

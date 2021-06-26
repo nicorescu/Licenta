@@ -162,7 +162,7 @@ namespace TripService.Controllers
         public async Task<ActionResult<bool>> AddNewNotification([FromRoute] Guid userId, [FromBody] NotificationDto notification)
         {
             return await _userProcessor.AddNotification(userId, notification);
-        }
+        } 
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

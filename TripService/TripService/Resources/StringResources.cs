@@ -11,6 +11,7 @@ namespace TripService.Resources
         public const string UserCollectionName = "User";
         public const string TripCollectionName = "Trip";
         public const string RoleCollectionName = "Role";
+        public const string ConversationCollectionName = "Conversation";
         public const string AccessTokenSecret = "Random_Access_Token_Secret@2021";
         public const string WrongPassword = "WrongPassword";
         public const string WrongCredentials = "WrongCredentials";

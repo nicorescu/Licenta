@@ -55,7 +55,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     role: Role.User,
     friends: [],
     reviews: [],
-    conversations: [],
     age: 0,
     reviewAverage: 0,
     friendRequests: [],

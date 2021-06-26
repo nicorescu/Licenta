@@ -12,6 +12,7 @@ import { PlanningEffects } from './+state/planning.effects';
 import { PlanningFacade } from './+state/planning.facade';
 import { InputWithSelectDirective } from './directives/input-with-select.directive';
 import { PngPipe } from './pipes/png.pipe';
+import { ConversationPipe } from './pipes/conversation.pipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { PngPipe } from './pipes/png.pipe';
     EnumToStringPipe,
     InputWithSelectDirective,
     PngPipe,
+    ConversationPipe,
   ],
   exports: [EnumToArrayPipe, EnumToStringPipe, PngPipe],
 })

@@ -102,18 +102,35 @@ namespace TripService.Repositories
             }
         }
 
-        public async Task<bool> InsertNewTrip(Trip trip)
+        public async Task<int> InsertNewTrip(Trip trip)
         {
             try
             {
-                var x = trip;
+                /* var existingTrip = _collection.FindAsync(x => x.OrganizerId.Equals(trip.OrganizerId) &&
+                 ((DateTime.Compare(trip.StartDate, x.StartDate) == 0 || DateTime.Compare(trip.StartDate, x.StartDate) == 1));*/
+                var res = _collection.Find(x => x.OrganizerId.Equals(trip.OrganizerId) &&
+                (x.State.Equals(TripState.Planning) || x.State.Equals(TripState.InProgress)) &&
+                (
+                 (trip.StartDate >= x.StartDate && trip.StartDate <= x.EndDate) ||
+                 (trip.EndDate >= x.StartDate && trip.EndDate <= x.EndDate) ||
+                 (x.StartDate >= trip.StartDate && x.EndDate <= trip.EndDate)
+                )); ;
+
+                var existingTrip = await res.FirstOrDefaultAsync();
+
+                if(existingTrip != null)
+                {
+                    return 409;
+                }
+
                 await _collection.InsertOneAsync(trip);
-                return true;
+                return 200;
             }
+            
             catch (Exception excetion)
             {
                 Console.WriteLine(excetion.ToString());
-                return false;
+                return 500;
             }
         }
 

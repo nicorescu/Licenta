@@ -39,6 +39,7 @@ namespace TripService.Setup
             services.TryAddScoped<IUserProcessor, UserProcessor>();
             services.TryAddScoped<IRoleProcessor, RoleProcessor>();
             services.TryAddScoped<IAuthProcessor, AuthProcessor>();
+            services.TryAddScoped<IConversationProcessor, ConversationProcessor>();
         }
 
         public static void AddSwagger(IServiceCollection services)

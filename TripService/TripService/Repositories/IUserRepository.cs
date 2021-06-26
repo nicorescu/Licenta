@@ -28,8 +28,6 @@ namespace TripService.Repositories
         Task<List<User>> GetUserFriends(Guid userId);
         Task<string> ChangePassword(Guid userId, PasswordChange passwordChange);
         Task<bool> ChangeProfilePrivacy(Guid userId, bool publicProfile);
-        /*Task<bool> AddNewConversation(Guid userId, Conversation conversation);
-        Task<bool> AddMessageToConversation(Guid conversationId, Message message);*/
         Task<bool> AddNotification(Guid userId, Notification notification);
     }
 }

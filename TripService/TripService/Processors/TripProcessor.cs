@@ -72,12 +72,12 @@ namespace TripService.Processors
             Trip trip = _mapper.Map<Trip>(tripDto);
             var result = await _tripRepository.InsertNewTrip(trip);
 
-            if (!result)
+            if (result != 200)
             {
-                return new StatusCodeResult(500);
+                return new StatusCodeResult(result);
             }
 
-            return new OkObjectResult(result);
+            return new OkObjectResult(true);
         }
 
         public async Task<ActionResult<bool>> AddParticipant(Guid tripId, Guid participantId)

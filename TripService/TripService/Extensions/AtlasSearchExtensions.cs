@@ -327,5 +327,50 @@ namespace TripService.Extensions
             const string stage = "{\"$replaceRoot\":{newRoot:\"$Requests\"}}";
             return BsonDocument.Parse(stage);
         }
+
+        public static BsonDocument MatchUserIdInConversation(Guid userId)
+        {
+            //string stage = $"{{\"$match\": {{\"$or\": [{{FirstUserId: {userId}}},{{SecondUserId: {userId}}}]}}}}";
+
+            return new BsonDocument
+            {
+                {AtlasStringResources.MatchStage, new BsonDocument
+                    {
+                        {"$or", new BsonArray()
+                            .Add(new BsonDocument
+                                    {
+                                        {"FirstUserId",userId }
+                                    }
+                                )
+                            .Add(new BsonDocument
+                                    {
+                                        {"SecondUserId",userId }
+                                    }
+                                )
+                        }
+                    } 
+                }
+            };
+
+            //return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument LookupFirstUser()
+        {
+            const string stage = "{\"$lookup\":{from: 'User', localField: 'FirstUserId', foreignField: '_id', as: 'FirstUser'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument LookupSecondUser()
+        {
+            const string stage = "{\"$lookup\":{from: 'User', localField: 'SecondUserId', foreignField: '_id', as: 'SecondUser'}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectConversation()
+        {
+            const string stage = "{\"$project\":{_id: 0, FirstUser: {\"$arrayElemAt\": [\"$FirstUser\", 0]}, SecondUser: {\"$arrayElemAt\": [\"$SecondUser\", 0]}, Messages: 1}}";
+            return BsonDocument.Parse(stage);
+        }
     }
 }

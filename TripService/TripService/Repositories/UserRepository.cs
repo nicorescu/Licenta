@@ -342,42 +342,6 @@ namespace TripService.Repositories
             }
         }
 
-       /* public async Task<bool> AddNewConversation(Guid userId, Conversation conversation)
-        {
-            try
-            {
-                var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
-                var update = Builders<User>.Update.Push(x => x.Conversations, conversation);
-
-                var result = await _collection.UpdateOneAsync(filter, update);
-
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
-            }
-            catch (Exception exception)
-            {
-                Console.Write(exception.Message);
-                return false;
-            }
-        }*/
-
-       /* public async Task<bool> AddMessageToConversation(Guid conversationId, Message message)
-        {
-            try
-            {
-                var filter = Builders<User>.Filter.ElemMatch(x => x.Conversations, c => c.Id.Equals(conversationId));
-                var update = Builders<User>.Update.Push(x => x.Conversations, null);
-
-                var result = await _collection.UpdateOneAsync(filter, update);
-
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
-            }
-            catch (Exception exception)
-            {
-                Console.Write(exception.Message);
-                return false;
-            }
-        }*/
-
         public async Task<bool> AddNotification(Guid userId, Notification notification)
         {
             try
