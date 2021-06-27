@@ -1,0 +1,54 @@
+<div id="chatBox" *transloco="let t; read: 'tripPlanning.chatPage'">
+  <ng-container *ngIf="conversation; else noConversationSelectedBlock">
+    <div class="messages">
+      <div
+        *ngFor="let message of conversation?.messages"
+        class="message"
+        [ngClass]="{
+          'msg-left': message.userId !== sessionToken?.loggedInId,
+          'msg-right': message.userId === sessionToken?.loggedInId
+        }"
+      >
+        <div>
+          <p class="message-card">
+            {{ message.message }}
+          </p>
+          <p class="sent-at">
+            {{ message.sentAt | date: 'mediumDate':'GMT':activeLang }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider" style="width: 100%"></mat-divider>
+
+    <form class="text-box">
+      <input
+        class="message-input"
+        [(ngModel)]="currentMessage"
+        [placeholder]="t('enterYourMessage')"
+        name="messageToSend"
+      />
+      <button
+        type="submit"
+        mat-icon-button
+        [disabled]="!currentMessage"
+        (click)="sendMessage()"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </ng-container>
+</div>
+
+<ng-template #noConversationSelectedBlock>
+  <div
+    class="no-conversation-container"
+    *transloco="let t; read: 'tripPlanning.chatPage'"
+  >
+    <div class="message-box">
+      <h5 style="font-weight: 500">
+        {{ t('noConversationMessage') }}
+      </h5>
+    </div>
+  </div>
+</ng-template>

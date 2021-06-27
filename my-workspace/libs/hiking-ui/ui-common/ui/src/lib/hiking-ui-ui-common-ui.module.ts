@@ -23,19 +23,22 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { LinkImageComponent } from './components/link-image/link-image.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
-
 import { NotificationsPanelComponent } from './components/notifications-panel/notifications-panel.component';
 import { ChatsPanelComponent } from './components/chats-panel/chats-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { InlineSVGModule } from 'ng-inline-svg';
 import { FriendsPanelComponent } from './components/friends-panel/friends-panel.component';
 import { ApprovalRequestsPanelComponent } from './components/approval-requests-panel/approval-requests-panel.component';
 import { SearchComponent } from './components/search/search.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
 import { FriendRequestsListComponent } from './components/friend-requests-list/friend-requests-list.component';
 import { NotificationComponent } from './components/notification/notification.component';
+
+import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InlineSVGModule } from 'ng-inline-svg';
+import { ConversationComponent } from './components/conversation/conversation.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -59,6 +62,7 @@ import { NotificationComponent } from './components/notification/notification.co
     FormsModule,
     DxScrollViewModule,
     InlineSVGModule.forRoot(),
+    HikingUiTripPlanningDataAccessModule,
   ],
   declarations: [
     HeaderComponent,
@@ -74,7 +78,13 @@ import { NotificationComponent } from './components/notification/notification.co
     FriendsListComponent,
     FriendRequestsListComponent,
     NotificationComponent,
+    ConversationComponent,
   ],
-  exports: [HeaderComponent, LinkImageComponent, FooterComponent],
+  exports: [
+    HeaderComponent,
+    LinkImageComponent,
+    FooterComponent,
+    ConversationComponent,
+  ],
 })
 export class HikingUiUiCommonUiModule {}

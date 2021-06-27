@@ -1,1 +1,28 @@
-<div class="container-fluid"></div>
+<div class="container-fluid" *transloco="let t; read: 'tripPlanning.chatPage'">
+  <div id="chatContainer">
+    <div class="head">
+      <div class="title h4">{{ t('chat') }}</div>
+      <button mat-icon-button class="add-conversation-btn">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="chat-container">
+      <div class="conversations">
+        <hk-conversations
+          [conversations]="conversations"
+          [sessionToken]="sessionToken"
+          (conversationClicked)="selectConversation($event)"
+        ></hk-conversations>
+      </div>
+      <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+      <div class="chat-box">
+        <hk-chat-box
+          [conversation]="selectedConversation"
+          [sessionToken]="sessionToken"
+          (messageSent)="sendMessage($event)"
+        ></hk-chat-box>
+      </div>
+    </div>
+  </div>
+</div>

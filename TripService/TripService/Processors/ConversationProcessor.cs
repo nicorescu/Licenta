@@ -38,7 +38,7 @@ namespace TripService.Processors
         }
         public async Task<ActionResult<ConversationDto>> GetSpecificConversation(Guid firstUserId, Guid secondUserId)
         {
-            var result = _conversationRepository.GetSpecificConversation(firstUserId, secondUserId);
+            var result = await _conversationRepository.GetSpecificConversation(firstUserId, secondUserId);
 
             if(result == null)
             {
@@ -69,9 +69,9 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
-        public async Task<ActionResult<bool>> AddMessageToConversation(MessageDto message, Guid firstUserId, Guid secondUserId)
+        public async Task<ActionResult<bool>> AddMessageToConversation(UserMessageDto message, Guid conversationId)
         {
-            var result = await _conversationRepository.AddMessageToConversation(_mapper.Map<Message>(message),firstUserId,secondUserId);
+            var result = await _conversationRepository.AddMessageToConversation(_mapper.Map<UserMessage>(message), conversationId);
 
             if (!result)
             {

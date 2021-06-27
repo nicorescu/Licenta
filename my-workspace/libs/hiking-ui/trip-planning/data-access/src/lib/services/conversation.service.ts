@@ -4,7 +4,7 @@ import { Conversation } from '../models/conversation.model';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
 import { FullConversation } from '../models/full-conversation.model';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,14 +23,20 @@ export class ConversationService {
     );
   }
 
-  getSpecificConversation(firstUserId: string, secondUserId: string) {
+  getSpecificConversation(
+    firstUserId: string,
+    secondUserId: string
+  ): Observable<Conversation> {
     const queryParams = new HttpParams()
       .set('firstUserId', firstUserId)
       .set('secondUserId', secondUserId);
 
-    return this.httpClient.get(`${this.baseApiUrl}/conversations/`, {
-      params: queryParams,
-    });
+    return this.httpClient.get<Conversation>(
+      `${this.baseApiUrl}/conversations/`,
+      {
+        params: queryParams,
+      }
+    );
   }
 
   addNewConversation(conversation: Conversation) {
@@ -40,21 +46,10 @@ export class ConversationService {
     );
   }
 
-  addMessageToConversation(
-    message: Message,
-    firstUserId: string,
-    secondUserId: string
-  ) {
-    const queryParams = new HttpParams()
-      .set('firstUserId', firstUserId)
-      .set('secondUserId', secondUserId);
-
+  addMessageToConversation(message: Message, conversationId: string) {
     return this.httpClient.post(
-      `${this.baseApiUrl}/conversations/`,
-      { message },
-      {
-        params: queryParams,
-      }
+      `${this.baseApiUrl}/conversations/${conversationId}/messages`,
+      message
     );
   }
 

@@ -5,14 +5,12 @@
   <mat-menu #menu="matMenu">
     <ng-container *ngIf="conversations?.length > 0">
       <div class="panel-content">
-        <div mat-menu-item *ngFor="let conv of conversations">
-          <div class="conversation">
-            <div class="user-img">
-              <img [src]="conv." />
-            </div>
-            <div class="user-name"></div>
-            <div class="last-message"></div>
-          </div>
+        <div class="title h4">{{ t('messenger') }}</div>
+        <div class="menu-item" *ngFor="let conv of conversations">
+          <hk-conversation
+            [conversation]="conv"
+            [sessionToken]="sessionToken"
+          ></hk-conversation>
         </div>
       </div>
       <mat-divider class="mb-2"></mat-divider>

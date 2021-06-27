@@ -15,6 +15,20 @@
 .panel-content {
   overflow-y: scroll;
   max-height: calc(100% - 34px);
+  padding: 0.5rem;
+
+  .menu-item {
+    margin-bottom: 1rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 1rem;
+    border-bottom: solid #d2cfcf 1px;
+    &:hover {
+      background-color: #f2f2f2de;
+    }
+  }
 }
 
 .no-content-message {

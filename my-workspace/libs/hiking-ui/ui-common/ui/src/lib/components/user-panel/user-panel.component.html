@@ -1,6 +1,9 @@
 <ng-container *transloco="let t; read: 'header.userPanel'">
   <button class="btn-user-panel" mat-button [matMenuTriggerFor]="menu">
-    <img id="userProfileImage" [src]="buildPictureUrl(user?.profilePicUrl)" />
+    <img
+      id="userProfileImage"
+      [src]="user?.profilePicUrl | png: '/images/default_profile_picture.png'"
+    />
     {{ user?.firstName }}
     <mat-icon>arrow_drop_down</mat-icon>
   </button>

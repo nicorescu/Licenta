@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace TripService.Models.Dtos
 {
-    public class MessageDto
+    public class UserMessageDto
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public string message { get; set; }
+        public string Message { get; set; }
+        public DateTime SentAt { get; set; }
     }
 }

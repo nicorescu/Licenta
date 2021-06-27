@@ -123,6 +123,10 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('notification: ', notification);
       this.userService.notificationReceived.emit(notification);
     });
+
+    this.signalRService.listenOnMessages((val) => {
+      console.log('val: ', val);
+    });
   }
 
   ngOnDestroy(): void {

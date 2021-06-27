@@ -7,8 +7,9 @@ namespace TripService.Models.Domain
 {
     public class FullConversation
     {
+        public Guid Id { get; set; }
         public User FirstUser { get; set; }
         public User SecondUser { get; set; }
-        public List<Message> Messages { get; set; }
+        public List<UserMessage> Messages { get; set; }
     }
 }

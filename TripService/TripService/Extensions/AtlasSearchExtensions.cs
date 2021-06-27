@@ -369,7 +369,7 @@ namespace TripService.Extensions
 
         public static BsonDocument ProjectConversation()
         {
-            const string stage = "{\"$project\":{_id: 0, FirstUser: {\"$arrayElemAt\": [\"$FirstUser\", 0]}, SecondUser: {\"$arrayElemAt\": [\"$SecondUser\", 0]}, Messages: 1}}";
+            const string stage = "{\"$project\":{FirstUser: {\"$arrayElemAt\": [\"$FirstUser\", 0]}, SecondUser: {\"$arrayElemAt\": [\"$SecondUser\", 0]}, Messages: 1}}";
             return BsonDocument.Parse(stage);
         }
     }

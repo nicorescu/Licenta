@@ -46,6 +46,15 @@ namespace TripService.SignalR
             }
         }
 
+        public async Task SendMessage(string userId, string conversationId, UserMessageDto message)
+        {
+            var connectionId = _connections.FirstOrDefault(x => x.Key.Equals(userId)).Value;
+            if(connectionId != null)
+            {
+                await Clients.Client(connectionId).SendAsync("MessageSent", conversationId, message);
+            }
+        }
+
         public override async Task OnConnectedAsync()
         {
             var requestPath = Context.GetHttpContext().Request.Path;

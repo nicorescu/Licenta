@@ -12,6 +12,6 @@ namespace TripService.Repositories
         Task<Conversation> GetSpecificConversation(Guid firstUserId, Guid secondUserId);
         Task<bool> AddConversation(Conversation conversation);
         Task<bool> DeleteConversation(Guid firstUserId, Guid secondUserId);
-        Task<bool> AddMessageToConversation(Message message, Guid firstUserId, Guid secondUserId);
+        Task<bool> AddMessageToConversation(UserMessage message, Guid conversationId);
     }
 }

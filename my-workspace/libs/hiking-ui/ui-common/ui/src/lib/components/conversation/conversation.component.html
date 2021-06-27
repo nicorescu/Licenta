@@ -1,0 +1,19 @@
+<div class="conversation">
+  <div class="user-img">
+    <img
+      [src]="
+        conversationUser.profilePicUrl
+          | png: 'images/default_profile_picture.png'
+      "
+    />
+  </div>
+  <div class="conversation-details">
+    <div class="user-name">
+      {{ conversationUser.firstName }}
+      {{ conversationUser.lastName }}
+    </div>
+    <div class="last-message text-muted">
+      {{ conversation.messages[0].message }}
+    </div>
+  </div>
+</div>

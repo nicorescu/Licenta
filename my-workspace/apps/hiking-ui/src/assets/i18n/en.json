@@ -68,7 +68,8 @@
     },
     "chatPanel": {
       "noContentMessage": "You don't have any conversation",
-      "viewAllConversations": "View all conversations"
+      "viewAllConversations": "View all conversations",
+      "messenger": "Messenger"
     },
     "notificationsPanel": {
       "noContentMessage": "You don't have any notification",
@@ -218,6 +219,11 @@
       "successfullyJoinedTrip": "You successfully joined the trip",
       "canceled": "Canceled",
       "canceledByAuthority": "Canceled by authority"
+    },
+    "chatPage": {
+      "chat": "Chat",
+      "noConversationMessage": "Select a conversation from the left panel or start a new one",
+      "enterYourMessage": "Enter your message.."
     }
   },
   "toast": {

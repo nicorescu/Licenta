@@ -1,1 +1,15 @@
-<div class="conversations-container"></div>
+<div
+  class="conversations-container"
+  *transloco="let t; read: 'tripPlanning.chatPage'"
+>
+  <div
+    class="conversation-item"
+    *ngFor="let conv of conversations"
+    (click)="selectConversation(conv)"
+  >
+    <hk-conversation
+      [conversation]="conv"
+      [sessionToken]="sessionToken"
+    ></hk-conversation>
+  </div>
+</div>

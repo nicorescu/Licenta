@@ -502,12 +502,6 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     );
   }
 
-  public get organizerImage() {
-    return this.selectedTripResult.organizer.profilePicUrl
-      ? `data:image/png;base64,${this.selectedTripResult.organizer.profilePicUrl}`
-      : '/images/default_profile_picture.png';
-  }
-
   public get isOrganizer() {
     return (
       this.selectedTripResult?.organizer?.id === this.sessionToken?.loggedInId

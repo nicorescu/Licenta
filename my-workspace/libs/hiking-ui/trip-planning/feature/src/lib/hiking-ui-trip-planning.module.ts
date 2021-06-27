@@ -88,6 +88,7 @@ import { EditInformationComponent } from './components/edit-information/edit-inf
 import { ProfileComponent } from './components/profile/profile.component';
 import { PublicProfileComponent } from './container/public-profile/public-profile.component';
 import { ChatComponent } from './container/chat/chat.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 
 @NgModule({
   imports: [
@@ -173,6 +174,7 @@ import { ChatComponent } from './container/chat/chat.component';
     ProfileComponent,
     PublicProfileComponent,
     ChatComponent,
+    ChatBoxComponent,
   ],
   providers: [NgxImageCompressService],
 })

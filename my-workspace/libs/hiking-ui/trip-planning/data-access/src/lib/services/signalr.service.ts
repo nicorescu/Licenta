@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Config } from '@hkworkspace/utils';
 import { Notification } from '../models/notification.model';
 import * as signalR from '@aspnet/signalr';
+import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 
 @Injectable({
   providedIn: 'root',
@@ -63,6 +64,14 @@ export class SignalRService {
       });
   }
 
+  notifyMessageSent(userId: string, conversationId: string, message: Message) {
+    this.hubConnection
+      .invoke('SendMessage', userId, conversationId, message)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   sendNotification(userId: string, notification: Notification) {
     this.hubConnection
       .invoke('SendNotification', userId, notification)
@@ -85,5 +94,9 @@ export class SignalRService {
 
   listenOnNotifications(func) {
     this.hubConnection.on('NotificationReceived', func);
+  }
+
+  listenOnMessages(func) {
+    this.hubConnection.on('MessageSent', func);
   }
 }

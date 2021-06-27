@@ -68,7 +68,8 @@
     },
     "chatPanel": {
       "noContentMessage": "Nu ai nicio conversatie",
-      "viewAllConversations": "Vezi toate conversatiile"
+      "viewAllConversations": "Vezi toate conversatiile",
+      "messenger": "Messenger"
     },
     "notificationsPanel": {
       "noContentMessage": "Nu ai nicio notificare",
@@ -214,6 +215,11 @@
       "successfullyJoinedTrip": "Te-ai alaturat cu succes excursiei",
       "canceled": "Anulat",
       "canceledByAuthority": "Anulat de catre autoritate"
+    },
+    "chatPage": {
+      "chat": "Chat",
+      "noConversationMessage": "Selecteaza o conversatie din panoul din stanga sau incepe una noua",
+      "enterYourMessage": "Introdu mesajul tau.."
     }
   },
   "toast": {

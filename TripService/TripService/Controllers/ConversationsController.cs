@@ -63,10 +63,10 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
-        [HttpPost("/conversations/messages")]
-        public async Task<ActionResult<bool>> AddMessageToConversation([FromBody] MessageDto message, [FromQuery] Guid firstUserId, [FromQuery] Guid secondUserId)
+        [HttpPost("/conversations/{conversationId}/messages")]
+        public async Task<ActionResult<bool>> AddMessageToConversation([FromBody] UserMessageDto message, [FromRoute] Guid conversationId)
         {
-            return await _conversationProcessor.AddMessageToConversation(message,firstUserId, secondUserId);
+            return await _conversationProcessor.AddMessageToConversation(message, conversationId);
         }
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
