@@ -75,6 +75,18 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
+        [HttpPut("/conversations/{conversationId}/seen")]
+        public async Task<ActionResult<bool>> SetConversationSeenStatus([FromRoute] Guid conversationId, [FromQuery] bool seen)
+        {
+            return await _conversationProcessor.SetConversationSeenStatus(conversationId, seen);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
         [HttpDelete("/conversations")]
         public async Task<ActionResult<bool>> DeleteConversation([FromQuery] Guid firstUserId, [FromQuery] Guid secondUserId)
         {

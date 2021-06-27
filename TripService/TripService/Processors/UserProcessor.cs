@@ -19,7 +19,6 @@ namespace TripService.Processors
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private SignalRHub signalR = new SignalRHub();
         public UserProcessor(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;

@@ -3,12 +3,18 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using TripService.Models.Dtos;
+using TripService.Processors;
 
 namespace TripService.SignalR
 {
     public class SignalRHub : Hub
     {
         private static ConcurrentDictionary<string, string> _connections = new ConcurrentDictionary<string, string>();
+        private IConversationProcessor _conversationProcessor;
+        public SignalRHub(IConversationProcessor conversationProcessor)
+        {
+            _conversationProcessor = conversationProcessor;
+        }
 
         public async Task NotifyFriendRequest(string userId)
         {
@@ -46,12 +52,12 @@ namespace TripService.SignalR
             }
         }
 
-        public async Task SendMessage(string userId, string conversationId, UserMessageDto message)
+        public async Task SendMessage(string userId, UserMessageDto message)
         {
             var connectionId = _connections.FirstOrDefault(x => x.Key.Equals(userId)).Value;
             if(connectionId != null)
             {
-                await Clients.Client(connectionId).SendAsync("MessageSent", conversationId, message);
+                await Clients.Client(connectionId).SendAsync("MessageSent", message);
             }
         }
 

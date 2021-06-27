@@ -7,6 +7,7 @@ import {
   AuthService,
 } from '@hkworkspace/shared/app-authentication/data-access';
 import {
+  ConversationService,
   SignalRService,
   TripService,
   UserService,
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private signalRService: SignalRService,
     private userService: UserService,
     private toastrService: ToastService,
-    private tripService: TripService
+    private tripService: TripService,
+    private conversationservice: ConversationService
   ) {
     this.authFacade.setSessionToken(this.authService.getSessionToken());
     const activeLang = translocoService.getActiveLang();
@@ -124,8 +126,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.userService.notificationReceived.emit(notification);
     });
 
-    this.signalRService.listenOnMessages((val) => {
-      console.log('val: ', val);
+    this.signalRService.listenOnMessages((msg) => {
+      this.conversationservice.messageReceived.emit(msg);
     });
   }
 

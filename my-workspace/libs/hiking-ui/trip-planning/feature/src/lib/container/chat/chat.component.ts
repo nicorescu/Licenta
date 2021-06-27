@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
+  Conversation,
   ConversationService,
   FullConversation,
   SignalRService,
@@ -8,8 +9,9 @@ import {
   AppAuthenticateFacade,
   SessionToken,
 } from '@hkworkspace/shared/app-authentication/data-access';
-import { switchMap, take, takeWhile } from 'rxjs/operators';
+import { concatMap, switchMap, take, takeWhile } from 'rxjs/operators';
 import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'hk-chat',
@@ -48,6 +50,29 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log(conversations);
         this.conversations = conversations;
       });
+
+    this.conversationService.messageReceived
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap((msg: Message) => {
+          const index = this.conversations.findIndex(
+            (x) =>
+              (x.firstUser.id === this.sessionToken.loggedInId &&
+                x.secondUser.id === msg.userId) ||
+              (x.firstUser.id === msg.userId &&
+                x.secondUser.id === this.sessionToken.loggedInId)
+          );
+          const conv = this.conversations[index];
+          conv.messages.push(msg);
+          this.conversations.splice(index, 1);
+          this.conversations.unshift(conv);
+          if (this.conversations[index]?.id === this.selectedConversation?.id) {
+            this.selectedConversation.messages.push(msg);
+          }
+          return of();
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {
@@ -71,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(message: string) {
     const msg: Message = {
-      id: '',
+      id: undefined,
       userId: this.sessionToken.loggedInId,
       message: message,
       sentAt: new Date(),
@@ -80,11 +105,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.conversationService
       .addMessageToConversation(msg, this.selectedConversation.id)
       .subscribe(() => {
-        this.signalRService.notifyMessageSent(
-          this.conversationUserId,
-          this.selectedConversation.id,
-          msg
-        );
+        this.selectedConversation.messages.push(msg);
+        this.signalRService.notifyMessageSent(this.conversationUserId, msg);
       });
   }
 

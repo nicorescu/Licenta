@@ -80,5 +80,17 @@ namespace TripService.Processors
 
             return new OkObjectResult(result);
         }
+
+        public async Task<ActionResult<bool>> SetConversationSeenStatus(Guid conversationId,bool seenStatus)
+        {
+            var result = await _conversationRepository.SetConversationSeenStatus(conversationId, seenStatus);
+
+            if (!result)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return new OkObjectResult(result);
+        }
     }
 }

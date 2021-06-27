@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { Conversation } from '../models/conversation.model';
 import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { Message } from '../models/message.model';
 })
 export class ConversationService {
   baseApiUrl: string = this.config.apiURI;
+  messageReceived = new EventEmitter();
 
   constructor(
     @Inject(Config) private config: Config,
@@ -50,6 +51,15 @@ export class ConversationService {
     return this.httpClient.post(
       `${this.baseApiUrl}/conversations/${conversationId}/messages`,
       message
+    );
+  }
+
+  setSeenStatus(conversationId: string, seen: boolean) {
+    const queryParams = new HttpParams().set('seen', seen ? 'true' : 'false');
+    return this.httpClient.put(
+      `${this.baseApiUrl}/conversations/${conversationId}/seen`,
+      {},
+      { params: queryParams }
     );
   }
 

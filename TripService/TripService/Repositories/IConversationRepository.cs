@@ -13,5 +13,6 @@ namespace TripService.Repositories
         Task<bool> AddConversation(Conversation conversation);
         Task<bool> DeleteConversation(Guid firstUserId, Guid secondUserId);
         Task<bool> AddMessageToConversation(UserMessage message, Guid conversationId);
+        Task<bool> SetConversationSeenStatus(Guid conversationId, bool seenStatus);
     }
 }

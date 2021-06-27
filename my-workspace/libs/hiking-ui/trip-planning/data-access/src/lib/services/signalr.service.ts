@@ -3,6 +3,7 @@ import { Config } from '@hkworkspace/utils';
 import { Notification } from '../models/notification.model';
 import * as signalR from '@aspnet/signalr';
 import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
+import { FullConversation } from '../models/full-conversation.model';
 
 @Injectable({
   providedIn: 'root',
@@ -64,12 +65,10 @@ export class SignalRService {
       });
   }
 
-  notifyMessageSent(userId: string, conversationId: string, message: Message) {
-    this.hubConnection
-      .invoke('SendMessage', userId, conversationId, message)
-      .catch((err) => {
-        console.log(err);
-      });
+  notifyMessageSent(userId: string, message: Message) {
+    this.hubConnection.invoke('SendMessage', userId, message).catch((err) => {
+      console.log(err);
+    });
   }
 
   sendNotification(userId: string, notification: Notification) {

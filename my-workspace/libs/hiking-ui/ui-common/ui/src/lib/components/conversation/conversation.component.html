@@ -13,7 +13,7 @@
       {{ conversationUser.lastName }}
     </div>
     <div class="last-message text-muted">
-      {{ conversation.messages[0].message }}
+      {{ conversation.messages[conversation.messages.length - 1].message }}
     </div>
   </div>
 </div>

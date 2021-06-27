@@ -11,5 +11,6 @@ namespace TripService.Models.Dtos
         public UserDto FirstUser { get; set; }
         public UserDto SecondUser { get; set; }
         public List<UserMessageDto> Messages { get; set; }
+        public bool Seen { get; set; }
     }
 }

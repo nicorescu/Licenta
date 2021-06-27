@@ -6,4 +6,5 @@ export interface FullConversation {
   firstUser: User;
   secondUser: User;
   messages: Message[];
+  seen: boolean;
 }

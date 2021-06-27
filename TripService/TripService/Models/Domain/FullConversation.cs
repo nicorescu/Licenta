@@ -11,5 +11,6 @@ namespace TripService.Models.Domain
         public User FirstUser { get; set; }
         public User SecondUser { get; set; }
         public List<UserMessage> Messages { get; set; }
+        public bool Seen { get; set; }
     }
 }

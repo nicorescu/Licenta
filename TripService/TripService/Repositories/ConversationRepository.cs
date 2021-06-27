@@ -112,7 +112,23 @@ namespace TripService.Repositories
                 message.Id = Guid.NewGuid();
                 var update = Builders<Conversation>.Update.Push(x => x.Messages, message);
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return (result.IsAcknowledged || result.ModifiedCount > 0) ? true : false; ;
+                return (result.IsAcknowledged || result.ModifiedCount > 0);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> SetConversationSeenStatus(Guid conversationId, bool seenStatus)
+        {
+            try
+            {
+                var filter = Builders<Conversation>.Filter.Eq(x => x.Id, conversationId);
+                var update = Builders<Conversation>.Update.Set(x => x.Seen, seenStatus);
+                var result = await _collection.UpdateOneAsync(filter, update);
+                return (result.IsAcknowledged || result.ModifiedCount > 0);
             }
             catch (Exception exception)
             {

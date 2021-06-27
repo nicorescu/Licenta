@@ -28,6 +28,7 @@ export class ChatBoxComponent implements OnInit {
   sendMessage() {
     if (this.currentMessage) {
       this.messageSent.emit(this.currentMessage);
+      this.currentMessage = '';
     }
   }
 }
