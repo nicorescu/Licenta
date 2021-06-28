@@ -51,6 +51,14 @@ export class UserService {
     );
   }
 
+  searchUser(keyword: string): Observable<User[]> {
+    const queryParams = new HttpParams().set('keyword', keyword);
+
+    return this.httpClient.get<User[]>(`${this.baseApiUrl}/users/search`, {
+      params: queryParams,
+    });
+  }
+
   updateUser(user: User) {
     return this.httpClient.put(`${this.baseApiUrl}/users/${user.id}`, user);
   }

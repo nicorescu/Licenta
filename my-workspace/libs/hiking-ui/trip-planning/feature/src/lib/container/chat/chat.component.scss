@@ -42,3 +42,14 @@
     }
   }
 }
+.search-users {
+  .search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .search-form-field {
+      width: 90%;
+    }
+  }
+}

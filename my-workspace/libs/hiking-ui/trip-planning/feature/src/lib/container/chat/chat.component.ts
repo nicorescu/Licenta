@@ -11,10 +11,12 @@ import {
   ConversationService,
   FullConversation,
   SignalRService,
+  UserService,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
   AppAuthenticateFacade,
   SessionToken,
+  User,
 } from '@hkworkspace/shared/app-authentication/data-access';
 import {
   catchError,
@@ -24,7 +26,7 @@ import {
   takeWhile,
 } from 'rxjs/operators';
 import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { ChatBoxComponent } from '../../components/chat-box/chat-box.component';
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
@@ -43,13 +45,16 @@ export class ChatComponent implements OnInit, OnDestroy {
   sessionToken: SessionToken;
   selectedConversation: FullConversation;
   messagesLimit = 10;
+  searchKeyword$ = new BehaviorSubject('');
+  searchResults: User[];
 
   constructor(
     private conversationService: ConversationService,
     private authFacade: AppAuthenticateFacade,
     private signalRService: SignalRService,
     private toastrService: ToastService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -95,10 +100,25 @@ export class ChatComponent implements OnInit, OnDestroy {
       .subscribe((conversations) => {
         this.conversations = conversations;
       });
+
+    this.searchKeyword$
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap((val) => {
+          return this.userService.searchUser(val);
+        })
+      )
+      .subscribe((users) => {
+        this.searchResults = users;
+      });
   }
 
   ngOnDestroy(): void {
     this.alive = false;
+  }
+
+  clearSearchKeyword(): void {
+    this.searchKeyword = '';
   }
 
   selectConversation(conversation: FullConversation) {
@@ -164,5 +184,13 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.sessionToken.loggedInId
       ? this.selectedConversation.firstUser.id
       : this.selectedConversation.secondUser.id;
+  }
+
+  public get searchKeyword() {
+    return this.searchKeyword$.value;
+  }
+
+  public set searchKeyword(v: string) {
+    this.searchKeyword$.next(v);
   }
 }

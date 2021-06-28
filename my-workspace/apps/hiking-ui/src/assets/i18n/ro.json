@@ -220,6 +220,7 @@
       "chat": "Chat",
       "noConversationMessage": "Selecteaza o conversatie din panoul din stanga sau incepe una noua",
       "enterYourMessage": "Introdu mesajul tau..",
+      "searchUsers": "Cauta utilizatori..",
       "errors": {
         "couldntSendMessage": "Mesajul nu a putut fi trimis"
       }

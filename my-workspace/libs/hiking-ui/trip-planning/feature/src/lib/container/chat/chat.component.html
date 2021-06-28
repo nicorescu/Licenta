@@ -2,9 +2,31 @@
   <div id="chatContainer">
     <div class="head">
       <div class="title h4">{{ t('chat') }}</div>
-      <button mat-icon-button class="add-conversation-btn">
+      <button
+        mat-icon-button
+        class="add-conversation-btn"
+        [matMenuTriggerFor]="menu"
+      >
         <mat-icon>add</mat-icon>
       </button>
+      <mat-menu #menu>
+        <div class="search-users">
+          <form (click)="$event.stopPropagation()" class="search-form">
+            <mat-form-field class="search-form-field">
+              <input
+                matInput
+                [(ngModel)]="searchKeyword"
+                name="keyword"
+                [placeholder]="t('searchUsers')"
+              />
+              <button matSuffix mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+          </form>
+          <mat-list> < </mat-list>
+        </div>
+      </mat-menu>
     </div>
     <mat-divider></mat-divider>
     <div class="chat-container">
