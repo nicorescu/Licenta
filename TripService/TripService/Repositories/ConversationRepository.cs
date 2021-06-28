@@ -27,6 +27,7 @@ namespace TripService.Repositories
                     .AppendStage<BsonDocument>(AtlasSearchExtensions.MatchUserIdInConversation(userId))
                     .AppendStage<BsonDocument>(AtlasSearchExtensions.LookupFirstUser())
                     .AppendStage<BsonDocument>(AtlasSearchExtensions.LookupSecondUser())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.SortConversations())
                     .AppendStage<FullConversation>(AtlasSearchExtensions.ProjectConversation());
                 var x = await result.ToListAsync();
                 return await result.ToListAsync();
@@ -98,19 +99,32 @@ namespace TripService.Repositories
         {
             try
             {
-                /*var filter = Builders<Conversation>.Filter.Or(
-                    Builders<Conversation>.Filter.And(
-                        Builders<Conversation>.Filter.Eq(x => x.FirstUserId, firstUserId),
-                        Builders<Conversation>.Filter.Eq(x => x.SecondUserId, secondUserId)
-                        ),
-                    Builders<Conversation>.Filter.And(
-                        Builders<Conversation>.Filter.Eq(x => x.FirstUserId, secondUserId),
-                        Builders<Conversation>.Filter.Eq(x => x.SecondUserId, firstUserId)
-                        )
-                    );*/
                 var filter = Builders<Conversation>.Filter.Eq(x => x.Id, conversationId);
                 message.Id = Guid.NewGuid();
-                var update = Builders<Conversation>.Update.Push(x => x.Messages, message);
+                var firstUpdate = Builders<Conversation>.Update.Push(x => x.Messages, message);
+                var secondUpdate = Builders<Conversation>.Update.Set(x => x.SeenBy, new List<Guid> { message.UserId});
+
+                var requests = new List<UpdateOneModel<Conversation>> {
+                    new UpdateOneModel<Conversation>(filter, firstUpdate),
+                    new UpdateOneModel<Conversation>(filter, secondUpdate)
+                };
+                var result = await _collection.BulkWriteAsync(requests);
+
+                return (result.IsAcknowledged || result.ModifiedCount > 0);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateConversationSeenStatus(Guid conversationId, Guid userId)
+        {
+            try
+            {
+                var filter = Builders<Conversation>.Filter.Eq(x => x.Id, conversationId);
+                var update = Builders<Conversation>.Update.Push(x => x.SeenBy, userId);
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return (result.IsAcknowledged || result.ModifiedCount > 0);
             }
@@ -121,19 +135,26 @@ namespace TripService.Repositories
             }
         }
 
-        public async Task<bool> SetConversationSeenStatus(Guid conversationId, bool seenStatus)
+        public async Task<List<UserMessage>> GetMessages(Guid conversationId, int limit)
         {
             try
             {
                 var filter = Builders<Conversation>.Filter.Eq(x => x.Id, conversationId);
-                var update = Builders<Conversation>.Update.Set(x => x.Seen, seenStatus);
-                var result = await _collection.UpdateOneAsync(filter, update);
-                return (result.IsAcknowledged || result.ModifiedCount > 0);
+
+                var result = _collection.Aggregate()
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.GetMatchByIdStage(conversationId))
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.ProjectMessages())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.UnwindMessages())
+                    .AppendStage<UserMessage>(AtlasSearchExtensions.ReplaceRootMessages())
+                    .SortByDescending(x => x.SentAt)
+                    .Limit(limit);
+
+                return await result.ToListAsync();
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
-                return false;
+                return null;
             }
         }
     }

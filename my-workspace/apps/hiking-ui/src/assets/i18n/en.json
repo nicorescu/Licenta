@@ -223,7 +223,10 @@
     "chatPage": {
       "chat": "Chat",
       "noConversationMessage": "Select a conversation from the left panel or start a new one",
-      "enterYourMessage": "Enter your message.."
+      "enterYourMessage": "Enter your message..",
+      "errors": {
+        "couldntSendMessage": "Couldn't send message"
+      }
     }
   },
   "toast": {

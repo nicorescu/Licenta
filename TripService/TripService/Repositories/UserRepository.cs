@@ -172,7 +172,7 @@ namespace TripService.Repositories
                     new UpdateOneModel<User>(secondFilter, secondUpdate)
                 };
                 var result = await _collection.BulkWriteAsync(requests);
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0;
             }
             catch (Exception exception)
             {
@@ -190,7 +190,7 @@ namespace TripService.Repositories
 
                 var update = Builders<User>.Update.PullAll(x => x.FriendRequests, new Guid[] { requesterUserId });
                 var result = await _collection.UpdateOneAsync(filter, update);
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0;
             }
             catch (Exception exception)
             {
@@ -215,7 +215,7 @@ namespace TripService.Repositories
                 };
                 var result = await _collection.BulkWriteAsync(requests);
 
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0;
             }
             catch (Exception exception)
             {
@@ -250,7 +250,7 @@ namespace TripService.Repositories
 
                 var result = await _collection.UpdateOneAsync(filter, update);
 
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0;
             }
             catch (Exception exception)
             {
@@ -268,7 +268,7 @@ namespace TripService.Repositories
 
                 var result = await _collection.UpdateOneAsync(filter, update);
 
-                return result.IsAcknowledged || result.ModifiedCount > 0 ? true : false;
+                return result.IsAcknowledged || result.ModifiedCount > 0;
             }
             catch (Exception exception)
             {
@@ -357,6 +357,25 @@ namespace TripService.Repositories
             {
                 Console.Write(exception.Message);
                 return false;
+            }
+        }
+
+        public async Task<List<User>> SearchUser(string keyword)
+        {
+            try
+            {
+                var result = _collection.Aggregate()
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.ProjectTolowerFullName())
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.MatchUserNameByKeyword(keyword))
+                    .AppendStage<BsonDocument>(AtlasSearchExtensions.ProjectUserFromSearch())
+                    .AppendStage<User>(AtlasSearchExtensions.ReplaceRootUserSearch());
+
+                return await result.ToListAsync();
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception.Message);
+                return null;
             }
         }
     }

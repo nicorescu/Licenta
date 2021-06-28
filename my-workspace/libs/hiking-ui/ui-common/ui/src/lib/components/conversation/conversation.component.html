@@ -1,4 +1,9 @@
-<div class="conversation">
+<div
+  class="conversation"
+  [matBadge]="0"
+  [matBadgeHidden]="isSeen"
+  [matBadgePosition]="'before'"
+>
   <div class="user-img">
     <img
       [src]="
@@ -12,7 +17,10 @@
       {{ conversationUser.firstName }}
       {{ conversationUser.lastName }}
     </div>
-    <div class="last-message text-muted">
+    <div
+      class="last-message text-muted"
+      [ngStyle]="{ 'font-weight': isSeen ? 'initial' : '500' }"
+    >
       {{ conversation.messages[conversation.messages.length - 1].message }}
     </div>
   </div>

@@ -126,8 +126,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.userService.notificationReceived.emit(notification);
     });
 
-    this.signalRService.listenOnMessages((msg) => {
-      this.conversationservice.messageReceived.emit(msg);
+    this.signalRService.listenOnMessages((tuple) => {
+      this.conversationservice.messageReceived.emit(tuple);
     });
   }
 

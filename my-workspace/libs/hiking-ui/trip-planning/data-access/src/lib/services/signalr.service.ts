@@ -65,10 +65,12 @@ export class SignalRService {
       });
   }
 
-  notifyMessageSent(userId: string, message: Message) {
-    this.hubConnection.invoke('SendMessage', userId, message).catch((err) => {
-      console.log(err);
-    });
+  notifyMessageSent(userId: string, conversationId: string, message: Message) {
+    this.hubConnection
+      .invoke('SendMessage', userId, conversationId, message)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   sendNotification(userId: string, notification: Notification) {

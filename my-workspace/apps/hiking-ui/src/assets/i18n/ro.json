@@ -219,7 +219,10 @@
     "chatPage": {
       "chat": "Chat",
       "noConversationMessage": "Selecteaza o conversatie din panoul din stanga sau incepe una noua",
-      "enterYourMessage": "Introdu mesajul tau.."
+      "enterYourMessage": "Introdu mesajul tau..",
+      "errors": {
+        "couldntSendMessage": "Mesajul nu a putut fi trimis"
+      }
     }
   },
   "toast": {

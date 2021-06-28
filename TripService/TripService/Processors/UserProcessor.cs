@@ -283,6 +283,16 @@ namespace TripService.Processors
             return new OkObjectResult(result);
         }
 
-       
+        public async Task<ActionResult<List<UserDto>>> SearchUser(string keyword)
+        {
+            var result = await _userRepository.SearchUser(keyword);
+
+            if (result == null)
+            {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(result);
+        }
     }
 }

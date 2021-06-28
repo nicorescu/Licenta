@@ -14,6 +14,7 @@ namespace TripService.Processors
         Task<ActionResult<bool>> AddConversation(ConversationDto conversation);
         Task<ActionResult<bool>> AddMessageToConversation(UserMessageDto message, Guid conversationId);
         Task<ActionResult<bool>> DeleteConversation(Guid firstUserId, Guid secondUserId);
-        Task<ActionResult<bool>> SetConversationSeenStatus(Guid conversationId, bool seenStatus);
+        Task<ActionResult<bool>> UpdateConversationSeenStatus(Guid conversationId, Guid userId);
+        Task<ActionResult<List<UserMessageDto>>> GetMessages(Guid conversationId, int limit);
     }
 }

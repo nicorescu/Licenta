@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   Conversation,
   ConversationService,
@@ -9,9 +16,18 @@ import {
   AppAuthenticateFacade,
   SessionToken,
 } from '@hkworkspace/shared/app-authentication/data-access';
-import { concatMap, switchMap, take, takeWhile } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  switchMap,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { of } from 'rxjs';
+import { ChatBoxComponent } from '../../components/chat-box/chat-box.component';
+import { ToastService } from '@hkworkspace/utils';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'hk-chat',
@@ -19,15 +35,21 @@ import { of } from 'rxjs';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit, OnDestroy {
+  @ViewChild(ChatBoxComponent, { static: false })
+  chatBoxComponent: ChatBoxComponent;
+
   alive = true;
   conversations: FullConversation[];
   sessionToken: SessionToken;
   selectedConversation: FullConversation;
+  messagesLimit = 10;
 
   constructor(
     private conversationService: ConversationService,
     private authFacade: AppAuthenticateFacade,
-    private signalRService: SignalRService
+    private signalRService: SignalRService,
+    private toastrService: ToastService,
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -54,25 +76,25 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.conversationService.messageReceived
       .pipe(
         takeWhile(() => this.alive),
-        switchMap((msg: Message) => {
-          const index = this.conversations.findIndex(
-            (x) =>
-              (x.firstUser.id === this.sessionToken.loggedInId &&
-                x.secondUser.id === msg.userId) ||
-              (x.firstUser.id === msg.userId &&
-                x.secondUser.id === this.sessionToken.loggedInId)
-          );
-          const conv = this.conversations[index];
-          conv.messages.push(msg);
-          this.conversations.splice(index, 1);
-          this.conversations.unshift(conv);
-          if (this.conversations[index]?.id === this.selectedConversation?.id) {
-            this.selectedConversation.messages.push(msg);
+        switchMap((tuple) => {
+          if (this.selectedConversation?.id === tuple.item1) {
+            this.selectedConversation.messages.push(tuple.item2);
+            return this.conversationService.updateSeenStatus(
+              tuple.item1,
+              this.sessionToken.loggedInId
+            );
           }
-          return of();
+          return of(true);
+        }),
+        concatMap(() => {
+          return this.conversationService.getUsersConversations(
+            this.sessionToken.loggedInId
+          );
         })
       )
-      .subscribe();
+      .subscribe((conversations) => {
+        this.conversations = conversations;
+      });
   }
 
   ngOnDestroy(): void {
@@ -81,15 +103,21 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   selectConversation(conversation: FullConversation) {
     this.conversationService
-      .getSpecificConversation(
-        conversation.firstUser.id,
-        conversation.secondUser.id
+      .updateSeenStatus(conversation.id, this.sessionToken.loggedInId)
+      .pipe(
+        take(1),
+        concatMap(() => {
+          conversation.seenBy.push(this.sessionToken.loggedInId);
+          return this.conversationService.getMessages(
+            conversation.id,
+            this.messagesLimit
+          );
+        })
       )
-      .pipe(take(1))
-      .subscribe((conv) => {
+      .subscribe((messages) => {
         this.selectedConversation = {
           ...conversation,
-          messages: conv.messages,
+          messages: messages.reverse(),
         };
       });
   }
@@ -104,9 +132,30 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.conversationService
       .addMessageToConversation(msg, this.selectedConversation.id)
-      .subscribe(() => {
-        this.selectedConversation.messages.push(msg);
-        this.signalRService.notifyMessageSent(this.conversationUserId, msg);
+      .pipe(
+        take(1),
+        switchMap(() => {
+          this.selectedConversation.messages.push(msg);
+          this.signalRService.notifyMessageSent(
+            this.conversationUserId,
+            this.selectedConversation.id,
+            msg
+          );
+          return this.conversationService.getUsersConversations(
+            this.sessionToken.loggedInId
+          );
+        }),
+        catchError(() => {
+          this.toastrService.error(
+            this.translocoService.translate(
+              'tripPlanning.chatPage.errors.couldntSendMessage'
+            )
+          );
+          return of();
+        })
+      )
+      .subscribe((conversations: FullConversation[]) => {
+        this.conversations = conversations;
       });
   }
 

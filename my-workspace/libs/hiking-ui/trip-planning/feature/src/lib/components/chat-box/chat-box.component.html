@@ -1,7 +1,8 @@
-<div id="chatBox" *transloco="let t; read: 'tripPlanning.chatPage'">
-  <ng-container *ngIf="conversation; else noConversationSelectedBlock">
-    <div class="messages">
+<ng-container *ngIf="conversation; else noConversationSelectedBlock">
+  <div id="chatBox" *transloco="let t; read: 'tripPlanning.chatPage'">
+    <div class="messages" #messagesContainer>
       <div
+        #msg
         *ngFor="let message of conversation?.messages"
         class="message"
         [ngClass]="{
@@ -37,9 +38,8 @@
         <mat-icon>send</mat-icon>
       </button>
     </form>
-  </ng-container>
-</div>
-
+  </div>
+</ng-container>
 <ng-template #noConversationSelectedBlock>
   <div
     class="no-conversation-container"

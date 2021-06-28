@@ -31,5 +31,6 @@ namespace TripService.Processors
         Task<ActionResult<bool>> ChangeProfilePrivacy(Guid userId, bool publicProfile);
        /* Task<ActionResult<bool>> AddNewConversation(Guid userId, ConversationDto conversation);*/
         Task<ActionResult<bool>> AddNotification(Guid userId, NotificationDto notification);
+        Task<ActionResult<List<UserDto>>> SearchUser(string keyword);
     }
 }

@@ -40,6 +40,17 @@ export class ConversationService {
     );
   }
 
+  getMessages(conversationId: string, limit: number): Observable<Message[]> {
+    const queryParams = new HttpParams().set('limit', limit.toString());
+
+    return this.httpClient.get<Message[]>(
+      `${this.baseApiUrl}/conversations/${conversationId}/messages`,
+      {
+        params: queryParams,
+      }
+    );
+  }
+
   addNewConversation(conversation: Conversation) {
     return this.httpClient.post(
       `${this.baseApiUrl}/conversations/`,
@@ -54,8 +65,8 @@ export class ConversationService {
     );
   }
 
-  setSeenStatus(conversationId: string, seen: boolean) {
-    const queryParams = new HttpParams().set('seen', seen ? 'true' : 'false');
+  updateSeenStatus(conversationId: string, userId: string) {
+    const queryParams = new HttpParams().set('userId', userId);
     return this.httpClient.put(
       `${this.baseApiUrl}/conversations/${conversationId}/seen`,
       {},

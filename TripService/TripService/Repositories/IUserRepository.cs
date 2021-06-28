@@ -29,5 +29,6 @@ namespace TripService.Repositories
         Task<string> ChangePassword(Guid userId, PasswordChange passwordChange);
         Task<bool> ChangeProfilePrivacy(Guid userId, bool publicProfile);
         Task<bool> AddNotification(Guid userId, Notification notification);
+        Task<List<User>> SearchUser(string keyword);
     }
 }

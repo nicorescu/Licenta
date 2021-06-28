@@ -369,7 +369,55 @@ namespace TripService.Extensions
 
         public static BsonDocument ProjectConversation()
         {
-            const string stage = "{\"$project\":{FirstUser: {\"$arrayElemAt\": [\"$FirstUser\", 0]}, SecondUser: {\"$arrayElemAt\": [\"$SecondUser\", 0]}, Messages: 1}}";
+            const string stage = "{\"$project\":{FirstUser: {\"$arrayElemAt\": [\"$FirstUser\", 0]}, SecondUser: {\"$arrayElemAt\": [\"$SecondUser\", 0]}, Messages: {$slice: [\"$Messages\",-1]}, SeenBy: 1}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument SortConversations()
+        {
+            const string stage = "{\"$sort\": {\"Messages.SentAt\": -1}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectMessages()
+        {
+            const string stage = "{\"$project\": {Messages: 1, _id: 0}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument UnwindMessages()
+        {
+            const string stage = "{\"$unwind\": {path: \"$Messages\"}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ReplaceRootMessages()
+        {
+            const string stage = "{\"$replaceRoot\": {newRoot: \"$Messages\"}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectTolowerFullName()
+        {
+            //const string stage = "{\"$project\":{user: \"$$ROOT\",\"fullName\": {\"$toLower\": {\"$concat\": [\"$FirstName\", \" \", \"$LastName\"]}}}}";
+            const string stage = "{\"$project\": {user: \"$$ROOT\", fullName: {\"$toLower\": {\"$concat\": [\"$FirstName\",\" \",\"$LastName\"]}}}}";
+            return BsonDocument.Parse(stage);
+        }
+        public static BsonDocument MatchUserNameByKeyword(string keyword)
+        {
+            string stage = $"{{\"$match\": {{\"fullName\": {{\"$regex\": \".*{keyword}.*\"}}}}}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ProjectUserFromSearch()
+        {
+            const string stage = "{\"$project\":{user: 1}}";
+            return BsonDocument.Parse(stage);
+        }
+
+        public static BsonDocument ReplaceRootUserSearch()
+        {
+            const string stage = "{\"$replaceRoot\": {newRoot: \"$user\"}}";
             return BsonDocument.Parse(stage);
         }
     }

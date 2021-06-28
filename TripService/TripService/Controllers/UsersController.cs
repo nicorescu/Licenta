@@ -93,17 +93,29 @@ namespace TripService.Controllers
             return await _userProcessor.SearchFriends(userId, keyword);
         }
 
-       /* [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
-        [HttpGet("/users/{userId}/notifications")]
-        public async Task<ActionResult<List<UserDto>>> GetUserNotifications([FromRoute] Guid userId)
+        [HttpGet("/users/search")]
+        public async Task<ActionResult<List<UserDto>>> SearchUser([FromQuery] string keyword)
         {
-            return await _userProcessor.GetUserNotifications(userId);
-        }*/
+            return await _userProcessor.SearchUser(keyword);
+        }
+
+        /* [ProducesResponseType((int)HttpStatusCode.OK)]
+         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+         [ProducesResponseType(500)]
+         [Authorize]
+         [HttpGet("/users/{userId}/notifications")]
+         public async Task<ActionResult<List<UserDto>>> GetUserNotifications([FromRoute] Guid userId)
+         {
+             return await _userProcessor.GetUserNotifications(userId);
+         }*/
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

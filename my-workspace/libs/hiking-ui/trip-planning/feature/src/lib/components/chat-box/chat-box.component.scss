@@ -7,9 +7,6 @@
   .messages {
     height: calc(100% - 2rem);
     overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
 
     .msg-left {
       padding: 10px;

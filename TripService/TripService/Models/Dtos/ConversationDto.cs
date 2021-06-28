@@ -13,6 +13,7 @@ namespace TripService.Models.Dtos
         public Guid FirstUserId { get; set; }
         public Guid SecondUserId { get; set; }
         public List<UserMessageDto> Messages { get; set; }
-        public bool Seen { get; set; }
+        public List<Guid> SeenBy { get; set; }
+
     }
 }

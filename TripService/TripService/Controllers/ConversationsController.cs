@@ -51,6 +51,18 @@ namespace TripService.Controllers
         [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(500)]
         [Authorize]
+        [HttpGet("/conversations/{conversationId}/messages")]
+        public async Task<ActionResult<List<UserMessageDto>>> GetMessages([FromRoute] Guid conversationId, [FromQuery] int limit)
+        {
+            return await _conversationProcessor.GetMessages(conversationId, limit);
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(500)]
+        [Authorize]
         [HttpPost("/conversations")]
         public async Task<ActionResult<bool>> AddNewConversation([FromBody] ConversationDto conversation)
         {
@@ -76,9 +88,9 @@ namespace TripService.Controllers
         [ProducesResponseType(500)]
         [Authorize]
         [HttpPut("/conversations/{conversationId}/seen")]
-        public async Task<ActionResult<bool>> SetConversationSeenStatus([FromRoute] Guid conversationId, [FromQuery] bool seen)
+        public async Task<ActionResult<bool>> UpdateConversationSeenStatus([FromRoute] Guid conversationId, [FromQuery] Guid userId)
         {
-            return await _conversationProcessor.SetConversationSeenStatus(conversationId, seen);
+            return await _conversationProcessor.UpdateConversationSeenStatus(conversationId, userId);
         }
 
         [ProducesResponseType((int)HttpStatusCode.OK)]

@@ -22,4 +22,10 @@ export class ConversationComponent implements OnInit {
       ? this.conversation?.firstUser
       : this.conversation?.secondUser;
   }
+
+  public get isSeen() {
+    return (
+      this.conversation?.seenBy.indexOf(this.sessionToken?.loggedInId) >= 0
+    );
+  }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,12 +53,12 @@ namespace TripService.SignalR
             }
         }
 
-        public async Task SendMessage(string userId, UserMessageDto message)
+        public async Task SendMessage(string userId, Guid conversationId, UserMessageDto message)
         {
             var connectionId = _connections.FirstOrDefault(x => x.Key.Equals(userId)).Value;
             if(connectionId != null)
             {
-                await Clients.Client(connectionId).SendAsync("MessageSent", message);
+                await Clients.Client(connectionId).SendAsync("MessageSent", new Tuple<Guid, UserMessageDto>(conversationId,message));
             }
         }
 
