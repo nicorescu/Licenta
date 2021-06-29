@@ -21,7 +21,7 @@
       class="last-message text-muted"
       [ngStyle]="{ 'font-weight': isSeen ? 'initial' : '500' }"
     >
-      {{ conversation.messages[conversation.messages.length - 1].message }}
+      {{ conversation?.messages[conversation?.messages?.length - 1]?.message }}
     </div>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { Config } from '@hkworkspace/utils';
 import { Observable } from 'rxjs';
 import { FullConversation } from '../models/full-conversation.model';
 import { Message } from '../models/message.model';
+import { User } from '@hkworkspace/shared/app-authentication/data-access';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class ConversationService {
     const queryParams = new HttpParams()
       .set('firstUserId', firstUserId)
       .set('secondUserId', secondUserId);
-
+    console.log('am ajuns si aici');
     return this.httpClient.get<Conversation>(
       `${this.baseApiUrl}/conversations/`,
       {

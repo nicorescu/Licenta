@@ -292,7 +292,7 @@ namespace TripService.Processors
                 return new NoContentResult();
             }
 
-            return new OkObjectResult(result);
+            return new OkObjectResult(_mapper.Map<List<UserDto>>(result));
         }
     }
 }

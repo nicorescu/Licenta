@@ -55,6 +55,7 @@ namespace TripService.Repositories
                         )
                     );
                 var result = _collection.Find(filter);
+                var x = await result.FirstOrDefaultAsync();
                 return await result.FirstOrDefaultAsync();
 
             }

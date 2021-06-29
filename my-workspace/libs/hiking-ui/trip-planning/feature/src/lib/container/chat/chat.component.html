@@ -19,12 +19,32 @@
                 name="keyword"
                 [placeholder]="t('searchUsers')"
               />
-              <button matSuffix mat-icon-button>
+              <button matSuffix mat-icon-button (click)="searchKeyword = ''">
                 <mat-icon>clear</mat-icon>
               </button>
             </mat-form-field>
           </form>
-          <mat-list> < </mat-list>
+          <mat-list style="padding: 0.5rem">
+            <mat-list-item
+              *ngFor="let user of searchResults"
+              class="user"
+              (click)="openConversation(user)"
+            >
+              <div class="image">
+                <img
+                  [src]="
+                    user.profilePicUrl
+                      | png: '/images/default_profile_picture.png'
+                  "
+                />
+              </div>
+              <div class="user-name">
+                <div class="user-full-name" style="text-transform: capitalize">
+                  {{ user.firstName }} {{ user.lastName }}
+                </div>
+              </div>
+            </mat-list-item>
+          </mat-list>
         </div>
       </mat-menu>
     </div>

@@ -48,10 +48,10 @@
         *ngIf="showFooter"
       >
         <hk-footer
-        style="height: 100%; width: 100%;"
+          style="height: 100%; width: 100%"
           [routerLink]="'/create-trip'"
-          [leftText]="'edit'"
-          [rightText]="'finalize'"
+          [leftText]="'tripPlanning.tripPreview.edit' | transloco"
+          [rightText]="'tripPlanning.tripPreview.finalize' | transloco"
         ></hk-footer>
       </div>
     </dx-scroll-view>

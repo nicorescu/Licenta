@@ -1,22 +1,28 @@
 <ng-container *ngIf="conversation; else noConversationSelectedBlock">
-  <div id="chatBox" *transloco="let t; read: 'tripPlanning.chatPage'">
-    <div class="messages" #messagesContainer>
-      <div
-        #msg
-        *ngFor="let message of conversation?.messages"
-        class="message"
-        [ngClass]="{
-          'msg-left': message.userId !== sessionToken?.loggedInId,
-          'msg-right': message.userId === sessionToken?.loggedInId
-        }"
-      >
-        <div>
-          <p class="message-card">
-            {{ message.message }}
-          </p>
-          <p class="sent-at">
-            {{ message.sentAt | date: 'mediumDate':'GMT':activeLang }}
-          </p>
+  <ng-container *transloco="let t; read: 'tripPlanning.chatPage'">
+    <div class="flex-parent">
+      <div id="chatBox">
+        <div class="messages">
+          <div #messagesContainer>
+            <div
+              #msg
+              *ngFor="let message of conversation?.messages"
+              class="message"
+              [ngClass]="{
+                'msg-left': message.userId !== sessionToken?.loggedInId,
+                'msg-right': message.userId === sessionToken?.loggedInId
+              }"
+            >
+              <div>
+                <p class="message-card">
+                  {{ message.message }}
+                </p>
+                <p class="sent-at">
+                  {{ message.sentAt | date: 'mediumDate':'GMT':activeLang }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -38,7 +44,7 @@
         <mat-icon>send</mat-icon>
       </button>
     </form>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #noConversationSelectedBlock>
   <div
