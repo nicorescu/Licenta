@@ -24,23 +24,37 @@
         padding: 10px;
         border-radius: 2rem;
         justify-content: flex-start;
+
+        .to-flex {
+          flex-direction: column;
+          align-items: flex-start;
+          display: flex;
+        }
+
         .message-card {
           background-color: #525252;
         }
         .sent-at {
-          left: 1rem;
+          left: 0.5rem;
         }
       }
       .msg-right {
         padding: 10px;
         border-radius: 2rem;
         justify-content: flex-end;
+
+        .to-flex {
+          flex-direction: column;
+          align-items: flex-end;
+          display: flex;
+        }
+
         .message-card {
           background-color: $col_blue_main;
         }
 
         .sent-at {
-          right: -5rem;
+          right: 1rem;
         }
       }
 
@@ -48,9 +62,10 @@
         width: 100%;
         display: flex;
         color: white;
+        overflow-wrap: break-word;
 
         .message-card {
-          max-width: 25%;
+          max-width: 60%;
           min-width: 10rem;
           padding: 10px;
           border-radius: 2rem;

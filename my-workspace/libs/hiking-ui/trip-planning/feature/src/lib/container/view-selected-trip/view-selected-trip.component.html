@@ -147,7 +147,12 @@
           </ng-template>
           <ng-template matTabContent>
             <div class="participation-requests">
-              <mat-nav-list>
+              <mat-nav-list
+                *ngIf="
+                  selectedTripResult?.requesters.length > 0;
+                  else noRequestsBlock
+                "
+              >
                 <mat-list-item
                   *ngFor="let requester of selectedTripResult.requesters"
                 >
@@ -209,5 +214,16 @@
     "
   >
     <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noRequestsBlock>
+  <div
+    class="no-requesters-container"
+    *transloco="let t; read: 'tripPlanning.tripPreview'"
+  >
+    <div class="no-requesters">
+      <div class="no-requesters-message">{{ t('noRequests') }}</div>
+    </div>
   </div>
 </ng-template>

@@ -1,52 +1,55 @@
 <div id="myAccount" class="container">
-  <hk-profile
-    [user]="user"
-    [friends]="friends"
-    (changePasswordClicked)="changePasswordClicked(changePasswordTemplate)"
-    (editProfileClicked)="openEditDialog()"
-    (removeImageConfirmed)="removeProfilePic()"
-    (imageSaved)="saveProfilePicture($event)"
-    (selectedTabChanged)="tabChanged($event)"
-    (viewTripClicked)="viewTrip($event)"
-  ></hk-profile>
-  <ng-template #changePasswordTemplate>
-    <ng-container *transloco="let t; read: 'profile'">
-      <form
-        class="edit-password-form"
-        [formGroup]="passwordForm"
-        (ngSubmit)="tryUpdatePassword()"
-      >
-        <div class="fields">
-          <mat-form-field class="name-field">
-            <mat-label>{{ t('oldPassword') }}</mat-label>
-            <input type="password" matInput formControlName="oldPassword" />
-            <mat-error *ngIf="oldPassword.errors?.required">{{
-              t('errors.oldPasswordIsRequired')
-            }}</mat-error>
-            <mat-error *ngIf="oldPassword.errors?.wrongPassword">{{
-              t('errors.wrongPassword')
-            }}</mat-error>
-          </mat-form-field>
-          <mat-form-field class="name-field">
-            <mat-label>{{ t('newPassword') }}</mat-label>
-            <input type="password" matInput formControlName="newPassword" />
-            <mat-error *ngIf="newPassword.errors?.required">{{
-              t('errors.newPasswordIsRequired')
-            }}</mat-error>
-            <mat-error *ngIf="newPassword.errors?.minlength">{{
-              t('errors.passwordMinLength')
-            }}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="actions" mat-dialog-actions>
-          <button type="button" mat-button color="primary" mat-dialog-close>
-            {{ t('cancel') }}
-          </button>
-          <button type="submit" mat-button color="primary">
-            {{ t('save') }}
-          </button>
-        </div>
-      </form>
-    </ng-container>
-  </ng-template>
+  <ng-container *ngIf="!isLoading">
+    <hk-profile
+      [user]="user"
+      [friends]="friends"
+      (changePasswordClicked)="changePasswordClicked(changePasswordTemplate)"
+      (editProfileClicked)="openEditDialog()"
+      (removeImageConfirmed)="removeProfilePic()"
+      (imageSaved)="saveProfilePicture($event)"
+      (selectedTabChanged)="tabChanged($event)"
+      (viewTripClicked)="viewTrip($event)"
+    ></hk-profile>
+    <ng-template #changePasswordTemplate>
+      <ng-container *transloco="let t; read: 'profile'">
+        <form
+          class="edit-password-form"
+          [formGroup]="passwordForm"
+          (ngSubmit)="tryUpdatePassword()"
+        >
+          <div class="fields">
+            <mat-form-field class="name-field">
+              <mat-label>{{ t('oldPassword') }}</mat-label>
+              <input type="password" matInput formControlName="oldPassword" />
+              <mat-error *ngIf="oldPassword.errors?.required">{{
+                t('errors.oldPasswordIsRequired')
+              }}</mat-error>
+              <mat-error *ngIf="oldPassword.errors?.wrongPassword">{{
+                t('errors.wrongPassword')
+              }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="name-field">
+              <mat-label>{{ t('newPassword') }}</mat-label>
+              <input type="password" matInput formControlName="newPassword" />
+              <mat-error *ngIf="newPassword.errors?.required">{{
+                t('errors.newPasswordIsRequired')
+              }}</mat-error>
+              <mat-error *ngIf="newPassword.errors?.minlength">{{
+                t('errors.passwordMinLength')
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="actions" mat-dialog-actions>
+            <button type="button" mat-button color="primary" mat-dialog-close>
+              {{ t('cancel') }}
+            </button>
+            <button type="submit" mat-button color="primary">
+              {{ t('save') }}
+            </button>
+          </div>
+        </form>
+      </ng-container>
+    </ng-template>
+  </ng-container>
+  <hk-loading *ngIf="isLoading"></hk-loading>
 </div>

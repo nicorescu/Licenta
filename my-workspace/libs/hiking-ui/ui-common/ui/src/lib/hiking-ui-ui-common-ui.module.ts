@@ -38,6 +38,8 @@ import { HikingUiTripPlanningDataAccessModule } from '@hkworkspace/hiking-ui/tri
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { ConversationComponent } from './components/conversation/conversation.component';
+import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 
 @NgModule({
   imports: [
@@ -79,12 +81,15 @@ import { ConversationComponent } from './components/conversation/conversation.co
     FriendRequestsListComponent,
     NotificationComponent,
     ConversationComponent,
+    ChatThreadComponent,
+    ChatBoxComponent,
   ],
   exports: [
     HeaderComponent,
     LinkImageComponent,
     FooterComponent,
     ConversationComponent,
+    ChatBoxComponent,
   ],
 })
 export class HikingUiUiCommonUiModule {}

@@ -27,7 +27,7 @@ import {
 } from 'rxjs/operators';
 import { Message } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { BehaviorSubject, of } from 'rxjs';
-import { ChatBoxComponent } from '../../components/chat-box/chat-box.component';
+import { ChatBoxComponent } from '@hkworkspace/hiking-ui/ui-common/ui';
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
 

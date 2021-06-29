@@ -53,7 +53,11 @@
           id="dateRange"
         >
           <mat-label>{{ t('enterDateRange') }}</mat-label>
-          <mat-date-range-input (click)="picker.open()" [rangePicker]="picker">
+          <mat-date-range-input
+            (click)="picker.open()"
+            [rangePicker]="picker"
+            [min]="currentDate"
+          >
             <input
               class="theme-input"
               matInput

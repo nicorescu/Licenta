@@ -114,6 +114,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
             organizer: res.organizer,
             participants: res.participants,
           };
+          console.log(this.selectedTripResult);
           this.isLoadingTrip = false;
           return this.googleService
             .getDetailsByQuery(res.trip.locationName, 'tourist_attraction')

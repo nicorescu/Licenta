@@ -1,0 +1,29 @@
+<div class="chat-thread">
+  <div class="head">
+    <div class="user-details">
+      <img
+        [src]="
+          conversationUser?.profilePicUrl
+            | png: '/images/default_profile_picture.png'
+        "
+      />
+      <p style="text-transform: capitalize">
+        {{ conversationUser?.firstName }} {{ conversationUser?.lastName }}
+      </p>
+    </div>
+    <div class="close-btn">
+      <button mat-icon-button (click)="closeConversation()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div class="chat-content">
+    <hk-chat-box
+      [conversation]="selectedConversation"
+      [sessionToken]="sessionToken"
+      (messageSent)="sendMessage($event)"
+      [isThread]="true"
+    ></hk-chat-box>
+  </div>
+</div>

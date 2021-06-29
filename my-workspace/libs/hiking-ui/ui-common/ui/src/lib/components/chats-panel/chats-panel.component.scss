@@ -41,3 +41,14 @@
   font-weight: 550;
   font-size: 17px;
 }
+
+.bullet-chat {
+  width: 29rem;
+  height: 32rem;
+  background-color: white;
+  position: absolute;
+  bottom: 0px;
+  right: 2px;
+  z-index: 9999;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 8px;
+}

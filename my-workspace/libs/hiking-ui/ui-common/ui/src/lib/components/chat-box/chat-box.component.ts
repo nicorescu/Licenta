@@ -30,11 +30,11 @@ export class ChatBoxComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
   sessionToken: SessionToken;
 
-  @Input()
-  shouldScroll: boolean;
-
   @Output()
   messageSent = new EventEmitter();
+
+  @Input()
+  isThread: boolean;
 
   currentMessage: string;
   activeLang: string;

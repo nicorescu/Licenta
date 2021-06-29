@@ -17,17 +17,20 @@ export class TripDetailsComponent implements OnInit {
   trip: Trip;
   @Input()
   slotsText: string;
-  numberOfDays: number;
   tripPrivacy = TripPrivacy;
   activeLang: string;
   constructor(private translocoService: TranslocoService) {}
 
   ngOnInit(): void {
     this.activeLang = this.translocoService.getActiveLang();
-    this.numberOfDays =
+  }
+
+  public get numberOfDays() {
+    return (
       (this.trip?.endDate.getTime() - this.trip?.startDate.getTime()) /
         (1000 * 3600 * 24) +
-      1;
+      1
+    );
   }
 
   public get slots() {

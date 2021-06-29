@@ -41,7 +41,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   editDialogRef: MatDialogRef<EditProfileComponent>;
   passwordDialogRef: MatDialogRef<any>;
   passwordForm: FormGroup;
-
+  isLoading = true;
   constructor(
     private authFacade: AppAuthenticateFacade,
     private userService: UserService,
@@ -109,10 +109,15 @@ export class MyAccountComponent implements OnInit, OnDestroy {
         switchMap((token) => {
           this.sessionToken = token;
           return this.userService.getUserById(token.loggedInId);
+        }),
+        catchError(() => {
+          this.isLoading = false;
+          return of();
         })
       )
-      .subscribe((user) => {
+      .subscribe((user: User) => {
         this.user = user;
+        this.isLoading = false;
       });
   }
 
@@ -130,7 +135,6 @@ export class MyAccountComponent implements OnInit, OnDestroy {
           return this.userService.getUserById(this.sessionToken.loggedInId);
         }),
         catchError((err) => {
-          console.log(err);
           this.toastrService.error(
             this.translocoService.translate('profile.imageChangedFail')
           );

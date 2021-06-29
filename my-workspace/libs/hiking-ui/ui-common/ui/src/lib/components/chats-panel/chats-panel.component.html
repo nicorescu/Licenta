@@ -6,7 +6,11 @@
     <ng-container *ngIf="conversations?.length > 0">
       <div class="panel-content">
         <div class="title h4">{{ t('messenger') }}</div>
-        <div class="menu-item" *ngFor="let conv of conversations">
+        <div
+          class="menu-item"
+          *ngFor="let conv of conversations"
+          (click)="openConversation(conv)"
+        >
           <hk-conversation
             [conversation]="conv"
             [sessionToken]="sessionToken"
@@ -24,4 +28,11 @@
       </div>
     </ng-container>
   </mat-menu>
+  <div class="bullet-chat" *ngIf="selectedConversation">
+    <hk-chat-thread
+      [conversation]="selectedConversation"
+      [sessionToken]="sessionToken"
+      (conversationClosed)="conversationClosed()"
+    ></hk-chat-thread>
+  </div>
 </ng-container>

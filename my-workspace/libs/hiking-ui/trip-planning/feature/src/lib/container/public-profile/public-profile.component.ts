@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -21,15 +27,16 @@ import { ProfileComponent } from '../../components/profile/profile.component';
   templateUrl: './public-profile.component.html',
   styleUrls: ['./public-profile.component.scss'],
 })
-export class PublicProfileComponent implements OnInit, OnDestroy {
-  @ViewChild(ProfileComponent, { static: true })
+export class PublicProfileComponent
+  implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(ProfileComponent, { static: false })
   profileComponent: ProfileComponent;
 
   user: User;
   sessionToken: SessionToken;
   alive = true;
   friends: User[];
-
+  isLoading = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -53,12 +60,14 @@ export class PublicProfileComponent implements OnInit, OnDestroy {
         }),
         catchError(() => {
           this.translocoService.translate('profile.errors.anErrorHasOccured');
+          this.isLoading = false;
+          console.log(this.isLoading);
           return of();
         })
       )
       .subscribe((user: User) => {
         this.user = user;
-        this.profileComponent.tabGroup.selectedIndex = 0;
+        this.isLoading = false;
       });
 
     this.userService.friendRequestApproved
@@ -73,6 +82,10 @@ export class PublicProfileComponent implements OnInit, OnDestroy {
       .subscribe((user: User) => {
         this.user = user;
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.profileComponent.tabGroup.selectedIndex = 0;
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,5 @@
 <ng-container *ngIf="conversation; else noConversationSelectedBlock">
-  <ng-container *transloco="let t; read: 'tripPlanning.chatPage'">
+  <div style="height: 100%" *transloco="let t; read: 'tripPlanning.chatPage'">
     <div class="flex-parent">
       <div id="chatBox">
         <div class="messages">
@@ -13,7 +13,7 @@
                 'msg-right': message.userId === sessionToken?.loggedInId
               }"
             >
-              <div>
+              <div class="to-flex">
                 <p class="message-card">
                   {{ message.message }}
                 </p>
@@ -44,17 +44,19 @@
         <mat-icon>send</mat-icon>
       </button>
     </form>
-  </ng-container>
+  </div>
 </ng-container>
 <ng-template #noConversationSelectedBlock>
-  <div
-    class="no-conversation-container"
-    *transloco="let t; read: 'tripPlanning.chatPage'"
-  >
-    <div class="message-box">
-      <h5 style="font-weight: 500">
-        {{ t('noConversationMessage') }}
-      </h5>
+  <ng-container *ngIf="!isThread">
+    <div
+      class="no-conversation-container"
+      *transloco="let t; read: 'tripPlanning.chatPage'"
+    >
+      <div class="message-box">
+        <h5 style="font-weight: 500">
+          {{ t('noConversationMessage') }}
+        </h5>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-template>

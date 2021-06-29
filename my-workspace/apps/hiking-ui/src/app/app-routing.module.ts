@@ -62,16 +62,6 @@ const routes: Routes = [
     component: PublicProfileComponent,
   },
   {
-    path: 'tasks',
-    component: TasksComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
     path: 'signup',
     component: SignUpContainerComponent,
     canActivate: [LoginGuard],
@@ -88,6 +78,12 @@ const routes: Routes = [
   },
   {
     path: 'chat',
+    component: ChatComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'chat/{conversationId}',
     component: ChatComponent,
     canActivate: [AuthGuard],
   },

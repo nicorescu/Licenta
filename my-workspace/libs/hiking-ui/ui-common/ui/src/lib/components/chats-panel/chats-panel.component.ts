@@ -21,6 +21,7 @@ export class ChatsPanelComponent implements OnInit, OnDestroy {
   conversations: FullConversation[];
   sessionToken: SessionToken;
   alive = true;
+  selectedConversation: FullConversation;
   constructor(
     private conversationService: ConversationService,
     private authFacade: AppAuthenticateFacade
@@ -50,5 +51,19 @@ export class ChatsPanelComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.alive = false;
+  }
+
+  openConversation(conversation: FullConversation) {
+    this.selectedConversation = conversation;
+    this.conversationService
+      .updateSeenStatus(conversation.id, this.sessionToken.loggedInId)
+      .pipe(take(1))
+      .subscribe(() => {
+        conversation.seenBy.push(this.sessionToken.loggedInId);
+      });
+  }
+
+  conversationClosed() {
+    this.selectedConversation = null;
   }
 }
