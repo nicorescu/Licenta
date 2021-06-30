@@ -124,9 +124,7 @@
               <ng-container
                 *ngIf="selectedTripResult.attractions; else loadingBlock"
               >
-                <hk-places
-                  [places]="selectedTripResult.attractions"
-                ></hk-places>
+                <hk-places [places]="places"></hk-places>
               </ng-container>
             </div>
           </ng-template>

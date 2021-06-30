@@ -30,8 +30,15 @@ namespace TripService.Resources
         public static string ToBase64(string imagePath)
         {
             string fullPath = Path.Combine(Directory.GetCurrentDirectory(), imagePath);
-            byte[] imageArray = File.ReadAllBytes(fullPath);
-            return Convert.ToBase64String(imageArray);
+            try
+            {
+                byte[] imageArray = File.ReadAllBytes(fullPath);
+                return Convert.ToBase64String(imageArray);
+            }catch (Exception ex)
+            {
+                return null;
+            }
+           
         }
     }
 }

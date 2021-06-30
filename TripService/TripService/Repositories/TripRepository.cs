@@ -114,7 +114,7 @@ namespace TripService.Repositories
                  (trip.StartDate >= x.StartDate && trip.StartDate <= x.EndDate) ||
                  (trip.EndDate >= x.StartDate && trip.EndDate <= x.EndDate) ||
                  (x.StartDate >= trip.StartDate && x.EndDate <= trip.EndDate)
-                )); ;
+                ));
 
                 var existingTrip = await res.FirstOrDefaultAsync();
 

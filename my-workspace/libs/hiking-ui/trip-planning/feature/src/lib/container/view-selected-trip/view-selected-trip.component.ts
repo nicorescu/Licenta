@@ -14,6 +14,7 @@ import {
   UserService,
   Notification,
   NotificationType,
+  Place,
 } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import { TripService } from '@hkworkspace/hiking-ui/trip-planning/data-access';
 import {
@@ -49,7 +50,7 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
     participants: [],
     requesters: [],
   };
-
+  places: Place[];
   isLoadingTrip = true;
   isLoadingAttractions = true;
   isLoadingHotels = true;
@@ -120,9 +121,12 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
             .getDetailsByQuery(res.trip.locationName, 'tourist_attraction')
             .pipe(
               map((attractions: any) => {
+                console.log(attractions, 'att');
                 const finalResult: SelectedTripResult = {
                   ...res,
-                  attractions: attractions.results.filter((x) => !!x.photos),
+                  attractions: attractions.results.filter(
+                    (x) => x.photos?.length > 0
+                  ),
                 };
                 return finalResult;
               })
@@ -156,6 +160,8 @@ export class ViewSelectedTripComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res: SelectedTripResult) => {
+        console.log('res: ', res);
+        this.places = res.attractions;
         this.isLoadingHotels = false;
         this.selectedTripResult = {
           ...this.selectedTripResult,

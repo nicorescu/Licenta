@@ -51,6 +51,7 @@ namespace TripService.Repositories
             {
                 try
                 {
+                    user.PublicProfile = true;
                     await _collection.InsertOneAsync(user);
                     return AuthResources.GenerateToken(user);
                 }
