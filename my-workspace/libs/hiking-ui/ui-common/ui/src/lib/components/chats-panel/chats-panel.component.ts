@@ -47,6 +47,19 @@ export class ChatsPanelComponent implements OnInit, OnDestroy {
       .subscribe((conversations) => {
         this.conversations = conversations;
       });
+
+    this.conversationService.messageReceived
+      .pipe(
+        takeWhile(() => this.alive),
+        switchMap(() => {
+          return this.conversationService.getUsersConversations(
+            this.sessionToken.loggedInId
+          );
+        })
+      )
+      .subscribe((conversations) => {
+        this.conversations = conversations;
+      });
   }
 
   ngOnDestroy(): void {
@@ -65,5 +78,13 @@ export class ChatsPanelComponent implements OnInit, OnDestroy {
 
   conversationClosed() {
     this.selectedConversation = null;
+  }
+
+  public get isUnseenConversation() {
+    return (
+      this.conversations?.findIndex(
+        (c) => c.seenBy.findIndex((x) => x === this.sessionToken.loggedInId) < 0
+      ) < 0
+    );
   }
 }

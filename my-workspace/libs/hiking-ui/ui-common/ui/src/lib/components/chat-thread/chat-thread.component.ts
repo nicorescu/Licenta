@@ -20,7 +20,13 @@ import {
 import { ToastService } from '@hkworkspace/utils';
 import { TranslocoService } from '@ngneat/transloco';
 import { of } from 'rxjs';
-import { catchError, switchMap, take, takeWhile } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  switchMap,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'hk-chat-thread',
@@ -66,14 +72,14 @@ export class ChatThreadComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         switchMap((tuple) => {
-          if (this.conversation?.id === tuple.item1) {
+          if (this.selectedConversation?.id === tuple.item1) {
             this.selectedConversation.messages.push(tuple.item2);
             return this.conversationService.updateSeenStatus(
               tuple.item1,
               this.sessionToken.loggedInId
             );
           }
-          return of();
+          return of(true);
         })
       )
       .subscribe();

@@ -11,5 +11,10 @@
       [conversation]="conv"
       [sessionToken]="sessionToken"
     ></hk-conversation>
+    <div class="view-profile-link">
+      <a routerLink="/public-profile/{{ getConversationUserId(conv) }}">{{
+        t('viewProfile')
+      }}</a>
+    </div>
   </div>
 </div>

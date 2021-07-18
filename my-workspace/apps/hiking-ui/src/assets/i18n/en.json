@@ -226,6 +226,7 @@
       "noConversationMessage": "Select a conversation from the left panel or start a new one",
       "enterYourMessage": "Enter your message..",
       "searchUsers": "Search users..",
+      "viewProfile": "View profile",
       "errors": {
         "couldntSendMessage": "Couldn't send message"
       }

@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 .conversations-container {
   .conversation-item {
     margin-bottom: 1rem;
@@ -9,6 +11,15 @@
     border-bottom: solid #d2cfcf 1px;
     &:hover {
       background-color: #e8e8e8;
+    }
+
+    .view-profile-link {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      padding: 5px;
+      height: 100%;
+      align-items: flex-end;
     }
   }
 }

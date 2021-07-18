@@ -125,7 +125,7 @@ namespace TripService.Repositories
             try
             {
                 var filter = Builders<Conversation>.Filter.Eq(x => x.Id, conversationId);
-                var update = Builders<Conversation>.Update.Push(x => x.SeenBy, userId);
+                var update = Builders<Conversation>.Update.AddToSet(x => x.SeenBy, userId);
                 var result = await _collection.UpdateOneAsync(filter, update);
                 return (result.IsAcknowledged || result.ModifiedCount > 0);
             }

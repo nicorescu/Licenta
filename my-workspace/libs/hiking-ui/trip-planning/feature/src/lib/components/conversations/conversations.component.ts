@@ -22,4 +22,10 @@ export class ConversationsComponent implements OnInit {
   selectConversation(conversation: FullConversation) {
     this.conversationClicked.emit(conversation);
   }
+
+  getConversationUserId(conversation: FullConversation) {
+    return conversation.firstUser.id === this.sessionToken.loggedInId
+      ? conversation.secondUser.id
+      : conversation.firstUser.id;
+  }
 }

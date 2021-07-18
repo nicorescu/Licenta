@@ -43,6 +43,11 @@
                   {{ user.firstName }} {{ user.lastName }}
                 </div>
               </div>
+              <div class="view-profile-link">
+                <a routerLink="/public-profile/{{ user.id }}">{{
+                  t('viewProfile')
+                }}</a>
+              </div>
             </mat-list-item>
           </mat-list>
         </div>
